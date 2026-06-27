@@ -1,0 +1,41 @@
+{
+    "date": "June 26, 2026",
+    "hero_story": {
+        "headline": "Today's Biggest Entertainment Story",
+        "summary": "Lead entertainment story of the day.",
+        "category": "Entertainment",
+        "image_search": "Hollywood red carpet"
+    },
+    "top_stories": [
+        {
+            "headline": "New Urban Gardens Bring Fresh Food to City Neighborhoods",
+            "summary": "Community-led gardening projects are transforming vacant lots into productive green spaces that provide local residents with fresh produce and outdoor gathering areas.",
+            "category": "Lifestyle",
+            "image_search": "urban community garden fresh vegetables city"
+        },
+        {
+            "headline": "Researchers Develop Faster Method for Battery Recycling",
+            "summary": "A new recycling process could help recover valuable materials from used batteries more efficiently, supporting cleaner technology supply chains.",
+            "category": "Technology",
+            "image_search": "battery recycling facility lithium batteries"
+        },
+        {
+            "headline": "Local Schools Expand After-Class Arts Programs",
+            "summary": "Schools are adding more music, theater, and visual arts activities to give students creative outlets and additional learning opportunities beyond the classroom.",
+            "category": "Education",
+            "image_search": "students painting classroom arts program"
+        },
+        {
+            "headline": "Small Businesses Adopt Digital Tools to Reach New Customers",
+            "summary": "Independent retailers and service providers are using online ordering, social media, and customer management platforms to grow their audiences.",
+            "category": "Business",
+            "image_search": "small business owner using tablet shop"
+        },
+        {
+            "headline": "Hikers Encouraged to Prepare as Trail Season Begins",
+            "summary": "Outdoor safety groups are reminding hikers to check weather conditions, carry proper supplies, and follow marked routes as more people return to trails.",
+            "category": "Travel",
+            "image_search": "hikers mountain trail backpacks"
+        }
+    ]
+}
