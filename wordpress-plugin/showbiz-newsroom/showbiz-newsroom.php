@@ -3,7 +3,7 @@
  * Plugin Name: ShowBiz Newsroom
  * Plugin URI: https://showbiz.com
  * Description: Dynamic newsroom components for ShowBiz.com.
- * Version: 1.1.0
+ * Version: 1.4.0
  * Author: ShowBiz Enterprises
  */
 
@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('SHOWBIZ_NEWSROOM_VERSION', '1.1.0');
+define('SHOWBIZ_NEWSROOM_VERSION', '1.4.0');
 define('SHOWBIZ_NEWSROOM_PATH', plugin_dir_path(__FILE__));
 
 require_once SHOWBIZ_NEWSROOM_PATH . 'includes/shortcode-winners.php';
