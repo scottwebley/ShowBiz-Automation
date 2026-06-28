@@ -1,76 +1,65 @@
-from openai import OpenAI
+from eventregistry import *
 from dotenv import load_dotenv
 import os
-import json
 
 load_dotenv()
 
-client = OpenAI(
-    api_key=os.environ["OPENAI_API_KEY"]
-)
+API_KEY = os.getenv("NEWSAPI_AI_KEY")
+
+er = EventRegistry(apiKey=API_KEY)
 
 
-def get_top_stories():
+def get_top_stories(max_items=50):
+    """
+    Fetch the latest entertainment-related news.
+    """
 
-    prompt = """
-Generate today's five biggest entertainment stories.
+    query = QueryArticlesIter(
+        keywords=QueryItems.OR([
+            "movies",
+            "television",
+            "streaming",
+            "Netflix",
+            "music",
+            "celebrity",
+            "Hollywood",
+            "gaming",
+            "Broadway",
+            "awards"
+        ]),
+        lang="eng"
+    )
 
-Return ONLY valid JSON.
+    stories = []
 
-Format:
+    try:
 
-[
-  {
-    "headline":"",
-    "summary":"",
-    "category":"",
-    "image_search":""
-  }
-]
+        for article in query.execQuery(
+            er,
+            sortBy="date",
+            maxItems=max_items
+        ):
 
-Rules:
+            stories.append({
+                "headline": article.get("title", ""),
+                "summary": article.get("body", "")[:500],
+                "url": article.get("url", ""),
+                "source": article.get("source", {}).get("title", ""),
+                "published": article.get("dateTime", "")
+            })
 
-- Categories must be one of:
-Movies
-Television
-Music
-Streaming
-Awards
-Celebrity
-Theatre
+    except Exception as e:
+        print("\nERROR")
+        print(e)
 
-- summary should be 25-40 words.
+    return stories
 
-- image_search should describe the ideal news image.
 
-- Do not use markdown.
+if __name__ == "__main__":
 
-- Do not explain anything.
+    stories = get_top_stories()
 
-Return JSON only.
-"""
+    print(f"\nFound {len(stories)} stories\n")
 
-    response = client.responses.create(
-        model="gpt-5.5",
-        input="""
-Return ONLY valid JSON.
-
-Return an array of exactly 5 objects.
-
-Each object must contain:
-
-headline
-summary
-category
-image_search
-
-Do not explain anything.
-Do not use markdown.
-Do not wrap the JSON in code fences.
-"""
-
-)
-
-    print(response.output_text)
-
-    return json.loads(response.output_text)
+    for story in stories:
+        print(story["headline"])

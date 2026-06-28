@@ -1,59 +1,35 @@
-import os
-import requests
-from dotenv import load_dotenv
-
-load_dotenv()
-
-API_KEY = os.getenv("NEWSAPI_AI_KEY")
-
-API_URL = "https://eventregistry.org/api/v1/article/getArticles"
+from engine.ai_news import fetch_news
 
 
-def fetch_news():
+CATEGORY_MAP = {
+    "Movies": 7,
+    "TV & Streaming": 15,
+    "Music": 8,
+    "Gaming": 5,
+    "Celebrity News": 3,
+    "Entertainment Industry": 4,
+    "Style": 12,
+    "ShowBiz Originals": 11
+}
+
+
+def fetch_story():
     """
-    Fetch today's entertainment news from NewsAPI.ai (Event Registry).
-    Returns a list of stories in the format expected by the newsroom.
+    Fetch today's top entertainment story.
     """
 
-    if not API_KEY:
-        raise Exception("NEWSAPI_AI_KEY not found in .env")
+    story = fetch_news()
 
-    payload = {
-        "apiKey": API_KEY,
-        "query": {
-            "$query": {
-                "$and": [
-                    {
-                        "categoryUri": "dmoz/Arts/Entertainment"
-                    },
-                    {
-                        "lang": "eng"
-                    }
-                ]
-            }
-        },
-        "resultType": "articles",
-        "articlesSortBy": "date",
-        "articlesCount": 10,
-        "includeArticleBody": False
-    }
+    category = story.get("category", "Entertainment Industry")
 
-    response = requests.post(API_URL, json=payload, timeout=30)
+    story["category"] = category
+    story["category_id"] = CATEGORY_MAP.get(
+        category,
+        CATEGORY_MAP["Entertainment Industry"]
+    )
 
-    response.raise_for_status()
+    # Temporary image location.
+    # Later this will be generated automatically.
+    story["image"] = "images/latest_story.png"
 
-    data = response.json()
-
-    results = []
-
-    for article in data.get("articles", {}).get("results", []):
-
-        results.append({
-            "headline": article.get("title", ""),
-            "summary": article.get("body", "")[:400] if article.get("body") else "",
-            "category": "Entertainment",
-            "url": article.get("url", ""),
-            "source": article.get("source", {}).get("title", "")
-        })
-
-    return results
+    return story

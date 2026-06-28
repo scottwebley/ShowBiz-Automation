@@ -1,18 +1,104 @@
-from engine.news_selector import select_story
+from engine.ai_news import get_top_stories
+from engine.story_selector import select_top_story
+from engine.editor import should_publish
 from engine.ai_writer import write_article
+from engine.image_generator import generate_image
 from engine.wordpress import publish_post
 
 
 def main():
-    print("\n🎬 ShowBiz AI Newsroom\n")
 
-    story = select_story()
+    print("\n==============================")
+    print("   SHOWBIZ AI NEWSROOM")
+    print("==============================\n")
+
+    # -------------------------------------------------
+    # STEP 1
+    # -------------------------------------------------
+
+    print("STEP 1: Fetching live entertainment news...")
+
+    stories = get_top_stories()
+
+    if not stories:
+        print("No stories found.")
+        return
+
+    print(f"✓ {len(stories)} stories downloaded.\n")
+
+    # -------------------------------------------------
+    # STEP 2
+    # -------------------------------------------------
+
+    print("STEP 2: Selecting today's Top Story...")
+
+    story = select_top_story(stories)
+
+    print(f"✓ {story['headline']}")
+    print(f"Category: {story['category']}\n")
+
+    # -------------------------------------------------
+    # STEP 3
+    # -------------------------------------------------
+
+    print("STEP 3: Editorial review...")
+
+    if not should_publish(story):
+
+        print("\nCurrent Top Story remains the best story.")
+        print("Nothing will be published.\n")
+
+        return
+
+    print("✓ Editorial approval granted.\n")
+
+    # -------------------------------------------------
+    # STEP 4
+    # -------------------------------------------------
+
+    print("STEP 4: Writing article...")
 
     article = write_article(story)
 
-    publish_post(article)
+    print("✓ Article complete.\n")
 
-    print("\n✅ Today's Top Story Published")
+    # -------------------------------------------------
+    # STEP 5
+    # -------------------------------------------------
+
+    print("STEP 5: Generating featured image...")
+
+    image_path = generate_image(story)
+
+    article["image"] = image_path
+
+    print("✓ Featured image generated.\n")
+
+    # -------------------------------------------------
+    # STEP 6
+    # -------------------------------------------------
+
+    print("STEP 6: Publishing to WordPress...")
+
+    post = publish_post(article)
+
+    if not post:
+
+        print("\nPublishing failed.\n")
+
+        return
+
+    # -------------------------------------------------
+    # DONE
+    # -------------------------------------------------
+
+    print("\n==============================")
+    print("      SUCCESS")
+    print("==============================")
+    print(f"Post ID : {post['id']}")
+    print(f"Title   : {post['title']['rendered']}")
+    print(f"URL     : {post['link']}")
+    print("==============================\n")
 
 
 if __name__ == "__main__":

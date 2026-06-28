@@ -1,4 +1,3 @@
-import os
 from openai import OpenAI
 from dotenv import load_dotenv
 
@@ -7,57 +6,68 @@ load_dotenv()
 client = OpenAI()
 
 
+# WordPress Category IDs
+CATEGORY_IDS = {
+    "Movies": 3,
+    "TV & Streaming": 4,
+    "Music": 6,
+    "Gaming": 7,
+    "Celebrity News": 55,
+    "Entertainment Industry": 56,
+    "Style": 59,
+    "ShowBiz Originals": 60,
+}
+
+
 def write_article(story):
 
     prompt = f"""
-You are the senior entertainment editor for ShowBiz.com.
+You are a senior entertainment journalist writing for ShowBiz.com.
 
-Your job is to write an ORIGINAL entertainment news article based on verified facts.
+Write a completely original entertainment news article.
 
-IMPORTANT:
+Do NOT copy wording from any publication.
 
-• The WordPress title already exists.
-• NEVER repeat the headline inside the article.
-• Begin immediately with the opening paragraph.
-• Return VALID HTML ONLY.
-• Do NOT use Markdown.
-• Do NOT use # headings.
-• Do NOT wrap your answer in ```html.
-• Use only <p> and <h3> tags.
+Write in a professional entertainment news style similar in quality to
+Variety, Deadline or The Hollywood Reporter, while maintaining a unique voice.
 
-Style:
+Return HTML ONLY.
 
-• Professional entertainment journalism
-• Similar quality to Variety, Entertainment Weekly and The Hollywood Reporter
-• Original writing
-• Short readable paragraphs
-• Explain why the story matters
-• Add useful industry context
-• Never speculate or invent facts
-• If information has not been confirmed, clearly say so.
+Do NOT use Markdown.
 
-Length:
-
-600–900 words.
-
-Use these section headings exactly:
+Structure exactly like this:
 
 <h3>Why This Matters</h3>
 
+<p>...</p>
+
 <h3>Industry Context</h3>
+
+<p>...</p>
 
 <h3>What Happens Next?</h3>
 
-Story headline:
+<p>...</p>
 
+Requirements:
+
+- 600-900 words
+- Short readable paragraphs
+- Explain why the story matters
+- Add industry context
+- End with What Happens Next
+- Do NOT include a title in the article
+- Do NOT repeat the headline
+- Do NOT use # headings
+- Do NOT wrap the HTML in code fences
+
+Headline:
 {story["headline"]}
 
-Verified summary:
-
+Summary:
 {story["summary"]}
 
 Category:
-
 {story["category"]}
 """
 
@@ -66,13 +76,27 @@ Category:
         input=prompt
     )
 
-    article_html = response.output_text.strip()
+    html = response.output_text.strip()
 
     return {
         "title": story["headline"],
-        "content": article_html,
+        "content": html,
         "excerpt": story["summary"],
         "category": story["category"],
-        "source": story.get("source", ""),
-        "source_url": story.get("url", "")
+        "category_id": CATEGORY_IDS[story["category"]],
     }
+
+
+if __name__ == "__main__":
+
+    test_story = {
+        "headline": "Test Headline",
+        "summary": "Test summary.",
+        "category": "Movies"
+    }
+
+    article = write_article(test_story)
+
+    print(article["title"])
+    print(article["category"])
+    print(article["category_id"])

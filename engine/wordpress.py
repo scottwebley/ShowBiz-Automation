@@ -1,112 +1,93 @@
 import requests
 from requests.auth import HTTPBasicAuth
 
-from config import WP_URL, WP_USERNAME, WP_APP_PASSWORD
+from config import (
+    WP_URL,
+    WP_USERNAME,
+    WP_APP_PASSWORD,
+)
+
+from engine.media import upload_image
+
 
 HEADERS = {
     "User-Agent": "ShowBiz-Automation/1.0"
 }
 
-# True = Publish immediately
-# False = Save as Draft
-PUBLISH_IMMEDIATELY = True
-
-
-def get_category_id(category_name):
-    """
-    Look up a WordPress category by its name.
-    """
-
-    response = requests.get(
-        f"{WP_URL}/wp-json/wp/v2/categories",
-        auth=HTTPBasicAuth(WP_USERNAME, WP_APP_PASSWORD),
-        headers=HEADERS,
-        params={"search": category_name},
-    )
-
-    if response.status_code != 200:
-        return None
-
-    for category in response.json():
-        if category["name"].lower() == category_name.lower():
-            return category["id"]
-
-    return None
-
-
-def normalize_category(ai_category):
-    """
-    Convert AI-generated categories into your WordPress categories.
-    """
-
-    if not ai_category:
-        return "Entertainment Industry"
-
-    mapping = {
-        "Movie": "Movies",
-        "Movies": "Movies",
-        "Film": "Movies",
-
-        "TV": "TV & Streaming",
-        "Television": "TV & Streaming",
-        "Streaming": "TV & Streaming",
-        "TV & Streaming": "TV & Streaming",
-
-        "Music": "Music",
-
-        "Celebrity": "Celebrity News",
-        "Celebrity News": "Celebrity News",
-
-        "Gaming": "Gaming",
-
-        "Style": "Style",
-
-        "Entertainment": "Entertainment Industry",
-        "Industry": "Entertainment Industry",
-    }
-
-    return mapping.get(ai_category, "Entertainment Industry")
-
-
 def publish_post(article):
+    """
+    Publish a ShowBiz article to WordPress.
+    """
 
-    wp_category = normalize_category(article.get("category", ""))
+    featured_media = None
 
-    category_id = get_category_id(wp_category)
+    # -----------------------------------------
+    # Upload featured image (if supplied)
+    # -----------------------------------------
+
+    image_path = article.get("image")
+
+    if image_path:
+
+        print("\nUploading featured image...")
+
+        featured_media = upload_image(image_path)
+
+    # -----------------------------------------
+    # Build WordPress post
+    # -----------------------------------------
 
     data = {
         "title": article["title"],
         "content": article["content"],
         "excerpt": article["excerpt"],
-        "status": "publish" if PUBLISH_IMMEDIATELY else "draft",
+        "status": "publish",
     }
 
-    if category_id:
-        data["categories"] = [category_id]
+    if article.get("category_id"):
+        data["categories"] = [article["category_id"]]
+
+    if featured_media:
+        data["featured_media"] = featured_media
+
+    # -----------------------------------------
+    # Publish
+    # -----------------------------------------
 
     response = requests.post(
         f"{WP_URL}/wp-json/wp/v2/posts",
-        auth=HTTPBasicAuth(WP_USERNAME, WP_APP_PASSWORD),
+        auth=HTTPBasicAuth(
+            WP_USERNAME,
+            WP_APP_PASSWORD
+        ),
         headers=HEADERS,
         json=data,
+        timeout=60
     )
 
-    print("\nStatus:", response.status_code)
+    print("\nPublish Status:", response.status_code)
 
-    if response.status_code == 201:
+    if response.status_code not in (200, 201):
 
-        post = response.json()
+        print(response.text)
 
-        print("\n✅ SUCCESS")
-        print("Post ID:", post["id"])
-        print("Title:", post["title"]["rendered"])
-        print("Category:", wp_category)
-        print("Status:", post["status"])
-        print("Link:", post["link"])
+        return None
 
-        return post
+    post = response.json()
 
-    print("\n❌ FAILED")
-    print(response.text)
+    print("\n✅ ARTICLE PUBLISHED")
+    print("----------------------------")
+    print("Post ID :", post["id"])
+    print("Title   :", post["title"]["rendered"])
+    print("Status  :", post["status"])
+    print("URL     :", post["link"])
 
-    return None
+    if featured_media:
+        print("Featured Image :", featured_media)
+
+    return post
+
+
+if __name__ == "__main__":
+
+    print("wordpress.py is ready.")
