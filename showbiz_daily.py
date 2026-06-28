@@ -1,8 +1,7 @@
 # ============================================
 # SHOWBIZ DAILY AUTOMATION ENGINE
-# Version 2.0
+# Version 3.0
 # ============================================
-from engine.homepage import build_homepage
 
 import subprocess
 from datetime import datetime
@@ -25,7 +24,7 @@ def run_step(name, script):
         print(f"✓ {name} completed")
     else:
         print(f"✗ {name} failed")
-        exit()
+        raise SystemExit(1)
 
 
 def main():
@@ -36,13 +35,14 @@ def main():
 
     print("\nStarting automation...\n")
 
-    homepage = build_homepage()
+    run_step("Publish Top Story", "newsroom.py")
 
-    run_step("Generate Content", "generate_content.py")
+    run_step("Update Winners & Losers", "newsroom_daily.py")
 
     print("\n===================================")
-    print("✓ ALL TASKS COMPLETED SUCCESSFULLY")
+    print("✓ SHOWBIZ DAILY COMPLETE")
     print("===================================")
+
 
 if __name__ == "__main__":
     main()
