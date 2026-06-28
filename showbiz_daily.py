@@ -1,6 +1,6 @@
 # ============================================
 # SHOWBIZ DAILY AUTOMATION ENGINE
-# Version 3.0
+# Version 3.1
 # ============================================
 
 import subprocess
@@ -35,9 +35,23 @@ def main():
 
     print("\nStarting automation...\n")
 
+    # -----------------------------------------
+    # Publish today's Top Story
+    # -----------------------------------------
+
     run_step("Publish Top Story", "newsroom.py")
 
+    # -----------------------------------------
+    # Update Winners & Losers page
+    # -----------------------------------------
+
     run_step("Update Winners & Losers", "newsroom_daily.py")
+
+    # -----------------------------------------
+    # Update Homepage Winners teaser
+    # -----------------------------------------
+
+    run_step("Update Homepage Winners", "upload_daily_report.py")
 
     print("\n===================================")
     print("✓ SHOWBIZ DAILY COMPLETE")
