@@ -1,51 +1,148 @@
 """
+===========================================
 ShowBiz Image Engine
 finder.py
+Version 2.0
+===========================================
 
-Version 1.0
+Converts the AI Editor's decision into
+search requests for different image sources.
 
-This module determines the best search phrase
-for finding an editorial-quality image.
+This module NEVER downloads images.
+
+It only decides HOW to search.
 """
 
 from dataclasses import dataclass
 
 
+# ============================================
+# Search Request
+# ============================================
+
 @dataclass
-class Story:
+class SearchRequest:
 
-    headline: str
-    category: str
-    summary: str = ""
+    source: str
+    query: str
 
 
-def build_search_query(story: Story) -> str:
-    """
-    Build the best search query for an image.
-    """
+# ============================================
+# Finder
+# ============================================
 
-    headline = story.headline.strip()
+def build_requests(editor_result):
 
-    if story.category.lower() == "movies":
-        return f"{headline} official promotional image"
+    subject = editor_result["subject"]
 
-    if story.category.lower() == "television":
-        return f"{headline} publicity photo"
+    photo_type = editor_result["preferred_photo"]
 
-    if story.category.lower() == "streaming":
-        return f"{headline} promotional image"
+    requests = []
 
-    if story.category.lower() == "music":
-        return f"{headline} publicity photo"
+    # ----------------------------------------
+    # Official Press
+    # ----------------------------------------
 
-    return headline
+    if photo_type == "performance":
 
+        requests.append(
+            SearchRequest(
+                "official_press",
+                f"{subject} performance publicity photo"
+            )
+        )
+
+    elif photo_type == "portrait":
+
+        requests.append(
+            SearchRequest(
+                "official_press",
+                f"{subject} publicity portrait"
+            )
+        )
+
+    elif photo_type == "movie_still":
+
+        requests.append(
+            SearchRequest(
+                "official_press",
+                f"{subject} official promotional still"
+            )
+        )
+
+    else:
+
+        requests.append(
+            SearchRequest(
+                "official_press",
+                subject
+            )
+        )
+
+    # ----------------------------------------
+    # Wikimedia Commons
+    # ----------------------------------------
+
+    requests.append(
+
+        SearchRequest(
+            "wikimedia",
+            subject
+        )
+
+    )
+
+    # ----------------------------------------
+    # Unsplash
+    # ----------------------------------------
+
+    requests.append(
+
+        SearchRequest(
+            "unsplash",
+            subject
+        )
+
+    )
+
+    # ----------------------------------------
+    # Pexels
+    # ----------------------------------------
+
+    requests.append(
+
+        SearchRequest(
+            "pexels",
+            subject
+        )
+
+    )
+
+    return requests
+
+
+# ============================================
+# Test
+# ============================================
 
 if __name__ == "__main__":
 
-    story = Story(
-        headline="Toy Story 5",
-        category="Movies"
-    )
+    sample = {
 
-    print(build_search_query(story))
+        "subject": "Taylor Swift",
+
+        "preferred_photo": "performance"
+
+    }
+
+    searches = build_requests(sample)
+
+    print()
+
+    print("SEARCH REQUESTS")
+
+    print("--------------------------")
+
+    for search in searches:
+
+        print(f"{search.source:15} {search.query}")
