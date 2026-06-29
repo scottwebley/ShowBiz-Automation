@@ -2,7 +2,7 @@ from engine.ai_news import get_top_stories
 from engine.story_selector import select_top_story
 from engine.editor import should_publish
 from engine.ai_writer import write_article
-from engine.image_generator import generate_image
+from engine.image_selector import get_featured_image
 from engine.wordpress import publish_post
 
 
@@ -68,9 +68,7 @@ def main():
 
     print("STEP 5: Generating featured image...")
 
-    image_path = generate_image(story)
-
-    article["image"] = image_path
+    article["image"] = get_featured_image(story)
 
     print("✓ Featured image generated.\n")
 

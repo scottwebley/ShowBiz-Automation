@@ -14,24 +14,48 @@ HEADERS = {
     "User-Agent": "ShowBiz-Automation/1.0"
 }
 
+
 def publish_post(article):
     """
     Publish a ShowBiz article to WordPress.
+
+    Supports two image formats:
+
+        media:<id>
+            Uses an existing WordPress Media Library item.
+
+        images/example.png
+            Uploads a new image and uses it as the featured image.
     """
 
     featured_media = None
 
     # -----------------------------------------
-    # Upload featured image (if supplied)
+    # Featured Image
     # -----------------------------------------
 
-    image_path = article.get("image")
+    image = article.get("image")
 
-    if image_path:
+    if image:
 
-        print("\nUploading featured image...")
+        # Existing WordPress Media Library image
 
-        featured_media = upload_image(image_path)
+        if isinstance(image, str) and image.startswith("media:"):
+
+            featured_media = int(image.split(":")[1])
+
+            print(
+                f"\nUsing existing Media Library image "
+                f"(ID {featured_media})"
+            )
+
+        # Upload newly generated image
+
+        else:
+
+            print("\nUploading featured image...")
+
+            featured_media = upload_image(image)
 
     # -----------------------------------------
     # Build WordPress post

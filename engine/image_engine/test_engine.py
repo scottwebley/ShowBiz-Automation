@@ -1,69 +1,106 @@
 """
 ===========================================
-ShowBiz Image Engine
+ShowBiz Media Engine
 test_engine.py
-Version 1.0
+Version 3.0
 ===========================================
 
-Tests the Image Engine without touching
-production.
-
-Pipeline:
+Complete Media Engine test.
 
 Story
    ↓
 AI Editor
    ↓
-Finder
+Media Router
    ↓
-Display search requests
+Finder
 """
 
+from story import Story
 from ai_editor import analyze_story
+from media_router import MediaRouter
 from finder import build_requests
 
 
 def main():
 
-    headline = "Taylor Swift draws cheers and boos during surprise appearance at Alan Jackson's farewell concert"
+    story = Story(
 
-    summary = (
-        "Swift surprised fans with an unexpected appearance "
-        "during Alan Jackson's farewell concert."
+        headline="Taylor Swift draws cheers and boos during surprise appearance at Alan Jackson's farewell concert",
+
+        summary="Swift surprised fans during Alan Jackson's farewell concert.",
+
+        category="Music"
+
     )
-
-    category = "Music"
 
     print()
+
     print("=" * 60)
-    print("SHOWBIZ IMAGE ENGINE TEST")
+    print("SHOWBIZ MEDIA ENGINE")
     print("=" * 60)
 
-    print("\nAnalyzing story...\n")
+    print()
 
-    decision = analyze_story(
-        headline=headline,
-        summary=summary,
-        category=category
-    )
+    print("Story")
 
-    print("EDITORIAL DECISION")
-    print("------------------------------")
+    print("----------------------------------------")
 
-    for key, value in decision.items():
-        print(f"{key:20} {value}")
+    print(story)
 
-    print("\nBuilding search requests...\n")
+    #
+    # AI Editor
+    #
+
+    decision = analyze_story(story)
+
+    print()
+
+    print("Editorial Decision")
+
+    print("----------------------------------------")
+
+    print(decision)
+
+    #
+    # Media Router
+    #
+
+    router = MediaRouter()
+
+    provider = router.choose_provider(decision)
+
+    print()
+
+    print("Chosen Provider")
+
+    print("----------------------------------------")
+
+    print(provider)
+
+    #
+    # Finder
+    #
 
     requests = build_requests(decision)
 
-    print("SEARCH REQUESTS")
-    print("------------------------------")
+    print()
+
+    print("Search Requests")
+
+    print("----------------------------------------")
 
     for request in requests:
+
         print(f"{request.source:18} {request.query}")
 
-    print("\n✓ Image Engine test completed.")
+    print()
+
+    print("=" * 60)
+
+    print("MEDIA ENGINE TEST COMPLETE")
+
+    print("=" * 60)
 
 
 if __name__ == "__main__":

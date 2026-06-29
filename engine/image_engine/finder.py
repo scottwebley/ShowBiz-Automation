@@ -2,23 +2,17 @@
 ===========================================
 ShowBiz Image Engine
 finder.py
-Version 2.0
+Version 2.2
 ===========================================
 
-Converts the AI Editor's decision into
-search requests for different image sources.
-
-This module NEVER downloads images.
-
-It only decides HOW to search.
+Builds search requests from an
+EditorialDecision.
 """
 
 from dataclasses import dataclass
 
+from editorial_decision import EditorialDecision
 
-# ============================================
-# Search Request
-# ============================================
 
 @dataclass
 class SearchRequest:
@@ -27,15 +21,10 @@ class SearchRequest:
     query: str
 
 
-# ============================================
-# Finder
-# ============================================
+def build_requests(decision: EditorialDecision):
 
-def build_requests(editor_result):
-
-    subject = editor_result["subject"]
-
-    photo_type = editor_result["preferred_photo"]
+    subject = decision.subject
+    photo = decision.preferred_photo
 
     requests = []
 
@@ -43,77 +32,55 @@ def build_requests(editor_result):
     # Official Press
     # ----------------------------------------
 
-    if photo_type == "performance":
+    official_queries = {
 
-        requests.append(
-            SearchRequest(
-                "official_press",
-                f"{subject} performance publicity photo"
-            )
-        )
+        "performance":
+            f"{subject} performance publicity photo",
 
-    elif photo_type == "portrait":
+        "portrait":
+            f"{subject} publicity portrait",
 
-        requests.append(
-            SearchRequest(
-                "official_press",
-                f"{subject} publicity portrait"
-            )
-        )
+        "movie_still":
+            f"{subject} official movie still",
 
-    elif photo_type == "movie_still":
+        "tv_still":
+            f"{subject} official television still",
 
-        requests.append(
-            SearchRequest(
-                "official_press",
-                f"{subject} official promotional still"
-            )
-        )
+        "logo":
+            f"{subject} official logo",
 
-    else:
+        "venue":
+            f"{subject} venue publicity photo",
 
-        requests.append(
-            SearchRequest(
-                "official_press",
-                subject
-            )
-        )
+        "general":
+            subject
 
-    # ----------------------------------------
-    # Wikimedia Commons
-    # ----------------------------------------
+    }
 
     requests.append(
 
         SearchRequest(
-            "wikimedia",
-            subject
+
+            source="official_press",
+
+            query=official_queries.get(photo, subject)
+
         )
 
     )
 
     # ----------------------------------------
-    # Unsplash
+    # Wikimedia
     # ----------------------------------------
 
     requests.append(
 
         SearchRequest(
-            "unsplash",
-            subject
-        )
 
-    )
+            source="wikimedia",
 
-    # ----------------------------------------
-    # Pexels
-    # ----------------------------------------
+            query=subject
 
-    requests.append(
-
-        SearchRequest(
-            "pexels",
-            subject
         )
 
     )
@@ -121,28 +88,36 @@ def build_requests(editor_result):
     return requests
 
 
-# ============================================
-# Test
-# ============================================
+def main():
 
-if __name__ == "__main__":
+    decision = EditorialDecision(
 
-    sample = {
+        subject="Taylor Swift",
 
-        "subject": "Taylor Swift",
+        subject_type="person",
 
-        "preferred_photo": "performance"
+        story_type="concert appearance",
 
-    }
+        preferred_photo="performance",
 
-    searches = build_requests(sample)
+        preferred_source="editorial_photo",
+
+        reasoning="Taylor Swift is the primary visual subject."
+
+    )
 
     print()
 
-    print("SEARCH REQUESTS")
+    print("=" * 60)
+    print("SEARCH REQUEST TEST")
+    print("=" * 60)
 
-    print("--------------------------")
+    searches = build_requests(decision)
 
     for search in searches:
 
-        print(f"{search.source:15} {search.query}")
+        print(f"{search.source:18} {search.query}")
+
+
+if __name__ == "__main__":
+    main()

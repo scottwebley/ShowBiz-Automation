@@ -1,0 +1,26 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+
+# VS Code
+.vscode/
+
+# Environment
+.env
+
+# Generated data
+data/*.json
+
+# Generated images
+images/*.png
+images/*.jpg
+images/*.jpeg
+images/*.webp
+
+# ZIP archives
+*.zip

@@ -2,16 +2,10 @@
 ===========================================
 ShowBiz Image Engine
 ai_editor.py
-Version 2.0
+Version 2.2
 ===========================================
 
-Uses GPT-5.5 to determine the best
-editorial image for a story.
-
-This module NEVER downloads images.
-
-It simply thinks like a professional
-entertainment photo editor.
+Uses GPT to make editorial image decisions.
 """
 
 import json
@@ -19,35 +13,31 @@ import json
 from openai import OpenAI
 from dotenv import load_dotenv
 
+from story import Story
+from editorial_decision import EditorialDecision
+
 load_dotenv()
 
 client = OpenAI()
 
 
-def analyze_story(headline, summary="", category=""):
+def analyze_story(story: Story) -> EditorialDecision:
 
     prompt = f"""
 You are the Senior Photo Editor for ShowBiz.com.
 
-Analyze the entertainment news story below.
-
-Do NOT write an article.
-
-Decide what IMAGE a professional entertainment
-publication should use.
-
-Return ONLY valid JSON.
+Analyze this entertainment story.
 
 Headline:
-{headline}
+{story.headline}
 
 Summary:
-{summary}
+{story.summary}
 
 Category:
-{category}
+{story.category}
 
-Return EXACTLY this structure:
+Return ONLY valid JSON.
 
 {{
     "subject": "",
@@ -60,42 +50,33 @@ Return EXACTLY this structure:
 
 Rules
 
-subject_type must be ONE of:
+subject_type must be one of:
 
 person
 movie
 television
 music
 company
-broadway
 event
 place
 general
 
-preferred_photo must be ONE of:
+preferred_photo must be one of:
 
 portrait
 performance
 movie_still
 tv_still
-production_photo
-red_carpet
 logo
 venue
 general
 
-preferred_source must be ONE of:
+preferred_source must be one of:
 
 official_press
 editorial_photo
 licensed_stock
-ai_illustration
-
-Do NOT invent new values.
-
-Keep story_type short.
-
-Keep reasoning to one sentence.
+wikimedia
 
 Return ONLY JSON.
 """
@@ -105,12 +86,28 @@ Return ONLY JSON.
         input=prompt
     )
 
-    return json.loads(response.output_text)
+    data = json.loads(response.output_text)
+
+    return EditorialDecision(
+
+        subject=data["subject"],
+
+        subject_type=data["subject_type"],
+
+        story_type=data["story_type"],
+
+        preferred_photo=data["preferred_photo"],
+
+        preferred_source=data["preferred_source"],
+
+        reasoning=data["reasoning"]
+
+    )
 
 
-if __name__ == "__main__":
+def main():
 
-    result = analyze_story(
+    story = Story(
 
         headline="Taylor Swift draws cheers and boos during surprise appearance at Alan Jackson's farewell concert",
 
@@ -120,4 +117,16 @@ if __name__ == "__main__":
 
     )
 
-    print(json.dumps(result, indent=4))
+    decision = analyze_story(story)
+
+    print()
+
+    print("=" * 60)
+    print("EDITORIAL DECISION")
+    print("=" * 60)
+
+    print(decision)
+
+
+if __name__ == "__main__":
+    main()

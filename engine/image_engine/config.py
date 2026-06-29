@@ -1,80 +1,61 @@
 """
 ===========================================
-ShowBiz Image Engine
+ShowBiz Media Engine
 config.py
-Version 1.0
 ===========================================
 
-Central configuration for Image Engine 2.0.
-
-Nothing in production uses this yet.
-
-This file exists so every Image Engine
-module shares the same settings.
+Configuration for external services.
 """
 
-# ============================================
-# Image Providers
-# ============================================
+import os
 
-IMAGE_PROVIDERS = [
+from dotenv import load_dotenv
 
-    "wikimedia",
+load_dotenv()
 
-]
+# --------------------------------------------------
+# WordPress
+# --------------------------------------------------
 
-# ============================================
-# Search Settings
-# ============================================
+WP_URL = os.getenv("WP_URL")
+WP_USERNAME = os.getenv("WP_USERNAME")
+WP_APP_PASSWORD = os.getenv("WP_APP_PASSWORD")
 
-MAX_RESULTS = 10
+# --------------------------------------------------
+# OpenAI
+# --------------------------------------------------
 
-# ============================================
-# Minimum Acceptable Image Size
-# ============================================
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-MIN_WIDTH = 1200
+# --------------------------------------------------
+# NewsAPI
+# --------------------------------------------------
 
-MIN_HEIGHT = 800
+NEWSAPI_API_KEY = os.getenv("NEWSAPI_API_KEY")
 
-# ============================================
-# Preferred Download Size
-# ============================================
+# --------------------------------------------------
+# TMDb
+# --------------------------------------------------
 
-TARGET_WIDTH = 1600
+TMDB_API_KEY = os.getenv("TMDB_API_KEY")
+TMDB_BASE_URL = "https://api.themoviedb.org/3"
+TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p/original"
 
-TARGET_HEIGHT = 900
 
-# ============================================
-# Image Quality
-# ============================================
+def verify():
 
-MIN_SCORE = 80
+    print()
+    print("=" * 60)
+    print("SHOWBIZ CONFIG")
+    print("=" * 60)
 
-# ============================================
-# Local Folders
-# ============================================
+    print(f"WordPress URL      : {'✓' if WP_URL else '✗'}")
+    print(f"WordPress Username : {'✓' if WP_USERNAME else '✗'}")
+    print(f"WordPress Password : {'✓' if WP_APP_PASSWORD else '✗'}")
+    print(f"OpenAI API Key     : {'✓' if OPENAI_API_KEY else '✗'}")
+    print(f"NewsAPI Key        : {'✓' if NEWSAPI_API_KEY else '✗'}")
+    print(f"TMDb API Key       : {'✓' if TMDB_API_KEY else '✗'}")
 
-TEST_IMAGE_FOLDER = "engine/image_engine/test_images"
 
-CACHE_FOLDER = "engine/image_engine/cache"
-
-# ============================================
-# Future API Keys
-# ============================================
-
-WIKIMEDIA_API = ""
-
-PEXELS_API_KEY = ""
-
-UNSPLASH_ACCESS_KEY = ""
-
-GETTY_API_KEY = ""
-
-SHUTTERSTOCK_API_KEY = ""
-
-# ============================================
-# Logging
-# ============================================
-
-VERBOSE = True
+if __name__ == "__main__":
+    verify()
