@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 
 from openai import OpenAI
 from dotenv import load_dotenv
@@ -78,7 +79,12 @@ Today's News:
         input=prompt
     )
 
-    return json.loads(response.output_text)
+    report = json.loads(response.output_text)
+
+    # Add today's date for the newsroom pipeline.
+    report["date"] = datetime.now().strftime("%B %d, %Y").replace(" 0", " ")
+
+    return report
 
 
 if __name__ == "__main__":

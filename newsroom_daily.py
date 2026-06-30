@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 from pathlib import Path
 
 from engine.ai_news import get_top_stories
@@ -35,11 +36,44 @@ def save_daily_report(report):
     print("✓ daily_report.json updated")
 
 
+def already_published_today():
+    """
+    Return True if today's Winners & Losers
+    has already been published.
+    """
+
+    if not REPORT_JSON.exists():
+        return False
+
+    try:
+
+        with open(REPORT_JSON, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        today = datetime.now().strftime("%B %d, %Y").replace(" 0", " ")
+
+        return data.get("date", "") == today
+
+    except Exception:
+        return False
+
+
 def main():
 
     print("\n==============================")
     print(" SHOWBIZ DAILY REPORT")
     print("==============================\n")
+
+    # ------------------------------------------------
+    # Skip if today's Winners & Losers already exists
+    # ------------------------------------------------
+
+    if already_published_today():
+
+        print("Today's Winners & Losers has already been published.")
+        print("Skipping update.\n")
+
+        return
 
     print("STEP 1: Downloading today's entertainment news...")
 
@@ -57,8 +91,6 @@ def main():
 
     print("✓ Daily report generated.\n")
 
-    save_daily_report(report)
-
     print("STEP 3: Writing HTML article...")
 
     article = write_daily_report(report)
@@ -75,6 +107,11 @@ def main():
     if not page:
         print("\nPage update failed.\n")
         return
+
+    # Only save today's report AFTER a successful
+    # WordPress update.
+
+    save_daily_report(report)
 
     print("\n==============================")
     print(" DAILY REPORT UPDATED")
