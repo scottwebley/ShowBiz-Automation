@@ -1,16 +1,16 @@
 """
 ===========================================
 ShowBiz Image Selector
-Version 1.1
+Version 2.0
 ===========================================
 
 Purpose:
     Select the best featured image for a story.
 
 Workflow:
-    1. Build intelligent search queries.
-    2. Search the local Media Library cache.
-    3. If a strong match exists, return its Media ID.
+    1. Extract meaningful search terms.
+    2. Search the local Media Library.
+    3. Select the highest-confidence image.
     4. Otherwise generate a new editorial image.
 
 Author:
@@ -23,91 +23,178 @@ from engine.media_library.search import find_best_image
 from engine.image_generator import generate_image
 
 
+# Minimum acceptable Media Library score.
+# Images below this score will be rejected.
 MINIMUM_SCORE = 1000
 
+# Words that should never influence image selection.
 STOP_WORDS = {
-    "the",
     "a",
     "an",
     "and",
-    "or",
-    "for",
-    "to",
-    "of",
-    "in",
-    "on",
-    "with",
-    "by",
-    "from",
-    "at",
-    "is",
     "are",
-    "was",
-    "were",
+    "as",
+    "at",
     "be",
     "been",
     "being",
+    "before",
+    "behind",
+    "by",
+    "during",
+    "for",
+    "from",
+    "how",
+    "in",
+    "into",
+    "is",
+    "it",
+    "its",
+    "like",
+    "new",
+    "of",
+    "on",
+    "or",
+    "over",
     "returns",
     "return",
     "returned",
-    "announces",
-    "announce",
     "reveals",
     "reveal",
     "revealed",
+    "announces",
+    "announce",
+    "announced",
     "confirms",
     "confirm",
-    "behind",
+    "confirmed",
+    "that",
+    "the",
+    "their",
+    "this",
+    "to",
     "today",
-    "new",
-    "after",
-    "before",
-    "during",
-    "over",
     "under",
-    "into",
-    "like",
+    "was",
+    "were",
+    "what",
+    "when",
+    "where",
+    "which",
+    "who",
+    "why",
+    "with",
 }
+
+
+def extract_keywords(headline):
+    """
+    Extract meaningful keywords from a headline.
+
+    Removes punctuation, stop words and
+    very short words.
+    """
+
+    words = re.findall(r"[A-Za-z0-9']+", headline)
+
+    keywords = []
+
+    for word in words:
+
+        clean = word.strip()
+
+        if len(clean) < 3:
+            continue
+
+        if clean.lower() in STOP_WORDS:
+            continue
+
+        keywords.append(clean)
+
+    return keywords
 
 
 def build_search_queries(story):
     """
-    Build progressively simpler search queries.
+    Build progressively broader search queries.
+
+    Example:
+
+        Why Supergirl Crashed at the Box Office
+
+    becomes
+
+        Supergirl Crashed Box Office
+        Supergirl Crashed
+        Supergirl
+        Box Office
+        Supergirl
+        Crashed
+        Box
+        Office
     """
 
     headline = story.get("headline", "")
 
-    words = re.findall(r"[A-Za-z0-9']+", headline)
-
-    keywords = [
-        w
-        for w in words
-        if len(w) > 2 and w.lower() not in STOP_WORDS
-    ]
+    keywords = extract_keywords(headline)
 
     queries = []
+
+    #
+    # Full cleaned headline
+    #
 
     if keywords:
         queries.append(" ".join(keywords))
 
-    if len(keywords) >= 2:
-        queries.append(" ".join(keywords[:2]))
+    #
+    # First three keywords
+    #
 
     if len(keywords) >= 3:
         queries.append(" ".join(keywords[:3]))
 
-    for word in keywords:
-        queries.append(word)
+    #
+    # First two keywords
+    #
+
+    if len(keywords) >= 2:
+        queries.append(" ".join(keywords[:2]))
+
+    #
+    # Last two keywords
+    #
+
+    if len(keywords) >= 2:
+        queries.append(" ".join(keywords[-2:]))
+
+    #
+    # Individual keywords
+    #
+
+    queries.extend(keywords)
+
+    #
+    # Remove duplicates while preserving order
+    #
 
     seen = set()
     final_queries = []
 
     for query in queries:
+
         query = query.strip()
 
-        if query and query not in seen:
-            final_queries.append(query)
-            seen.add(query)
+        if not query:
+            continue
+
+        key = query.lower()
+
+        if key in seen:
+            continue
+
+        seen.add(key)
+        final_queries.append(query)
 
     return final_queries
 
@@ -127,18 +214,32 @@ def get_featured_image(story):
 
     best_result = None
 
-    print("Searching Media Library...\n")
+    print("\n========================================")
+    print("IMAGE SEARCH")
+    print("========================================")
+
+    print(f"\nHeadline:\n{story.get('headline', '')}")
+
+    print("\nSearch Queries:")
+
+    for query in queries:
+        print(f"  • {query}")
+
+    print()
 
     for query in queries:
 
-        print(f"Trying: {query}")
+        print(f"Searching: {query}")
 
         result = find_best_image(query)
 
         if not result:
             continue
 
-        print(f"Score: {result.score}")
+        print(
+            f"   Match: {result.title} "
+            f"(Score {result.score})"
+        )
 
         if (
             best_result is None
@@ -148,23 +249,33 @@ def get_featured_image(story):
 
         if result.score >= MINIMUM_SCORE:
 
-            print(
-                f"\n✓ Using Media Library image "
-                f"(Media ID {result.media_id})"
-            )
+            print("\n========================================")
+            print("MEDIA LIBRARY MATCH")
+            print("========================================")
+            print(f"Title      : {result.title}")
+            print(f"Media ID   : {result.media_id}")
+            print(f"Score      : {result.score}")
+            print(f"Reason     : {result.reason}")
+
+            print("\n✓ Using Media Library image.\n")
 
             return f"media:{result.media_id}"
 
+    print("\n========================================")
+
     if best_result:
 
-        print(
-            f"\nBest score found: "
-            f"{best_result.score}"
-        )
+        print("BEST MATCH FOUND")
+        print("----------------------------------------")
+        print(f"Title    : {best_result.title}")
+        print(f"Score    : {best_result.score}")
+        print(f"Required : {MINIMUM_SCORE}")
 
-    print("\nNo suitable Media Library image found.")
+    else:
 
-    print("Generating new image...")
+        print("No Media Library matches found.")
+
+    print("\nGenerating new editorial image...\n")
 
     return generate_image(story)
 
@@ -176,10 +287,9 @@ def main():
     print("=" * 60)
 
     story = {
-        "headline": "Tom Cruise Returns for Mission Impossible",
+        "headline": "Why Supergirl Crashed at the Box Office",
         "summary": (
-            "Tom Cruise returns for another "
-            "Mission Impossible film."
+            "Analysis of the film's opening weekend."
         ),
         "category": "Movies",
     }

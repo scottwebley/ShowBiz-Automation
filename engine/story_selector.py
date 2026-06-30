@@ -9,17 +9,42 @@ client = OpenAI()
 
 def select_top_story(stories):
     """
-    Select the single best entertainment story for the ShowBiz homepage.
+    Select the single best entertainment story
+    for the ShowBiz homepage.
+
+    Returns the ORIGINAL story object so that
+    score, URL, source, published date and all
+    metadata are preserved.
     """
+
+    if not stories:
+        return None
+
+    #
+    # Build a simplified list for the AI.
+    # The AI only needs enough information
+    # to choose the winning story.
+    #
+
+    choices = []
+
+    for i, story in enumerate(stories):
+
+        choices.append({
+            "index": i,
+            "headline": story.get("headline", ""),
+            "summary": story.get("summary", ""),
+            "category": story.get("category", ""),
+            "score": story.get("score", 0)
+        })
 
     prompt = f"""
 You are the Editor-in-Chief of ShowBiz.com.
 
-Below is a list of today's entertainment headlines.
+Below is today's approved entertainment news.
 
-Your job is NOT to summarize them.
-
-Your job is to choose the ONE story that deserves the homepage lead.
+Choose the ONE story that deserves to become
+the homepage Top Story.
 
 Prioritize:
 
@@ -33,41 +58,25 @@ Prioritize:
 • Awards
 • Major television news
 
-Reject:
+Avoid:
 
-• Sports
-• Crime
-• Politics
-• Generic listicles
+• Duplicate stories
+• Minor updates
 • Opinion pieces
-• Evergreen articles
-• Old stories
-• Stories that are not primarily about entertainment
+• Evergreen stories
+• Generic listicles
 
 Return ONLY valid JSON.
 
-Format:
+Example:
 
 {{
-    "headline":"",
-    "summary":"",
-    "category":""
+    "selected_index": 7
 }}
-
-Categories must be exactly one of:
-
-Movies
-TV & Streaming
-Music
-Celebrity News
-Gaming
-Entertainment Industry
-Style
-ShowBiz Originals
 
 Stories:
 
-{json.dumps(stories, indent=2)}
+{json.dumps(choices, indent=2)}
 """
 
     response = client.responses.create(
@@ -77,21 +86,39 @@ Stories:
 
     result = response.output_text.strip()
 
-    # Remove accidental markdown fences if the model adds them
+    #
+    # Remove markdown fences if present
+    #
+
     if result.startswith("```"):
+
         result = result.split("\n", 1)[1]
         result = result.rsplit("```", 1)[0]
 
-    return json.loads(result)
+    data = json.loads(result)
+
+    index = data["selected_index"]
+
+    if index < 0 or index >= len(stories):
+        raise ValueError(
+            f"AI returned invalid story index: {index}"
+        )
+
+    #
+    # Return the ORIGINAL story.
+    #
+
+    return stories[index]
 
 
 if __name__ == "__main__":
 
-    from ai_news import get_top_stories
+    from engine.ai_news import get_top_stories
 
     stories = get_top_stories()
 
     winner = select_top_story(stories)
 
     print("\nTOP STORY\n")
+
     print(json.dumps(winner, indent=4))

@@ -5,11 +5,11 @@ load_dotenv()
 
 client = OpenAI()
 
-
 # WordPress Category IDs
 CATEGORY_IDS = {
     "Movies": 3,
     "TV & Streaming": 4,
+    "Television": 4,          # Backward compatibility
     "Music": 6,
     "Gaming": 7,
     "Celebrity News": 55,
@@ -18,8 +18,24 @@ CATEGORY_IDS = {
     "ShowBiz Originals": 60,
 }
 
+# WordPress Top Story category
+TOP_STORY_CATEGORY_ID = 64
+
 
 def write_article(story):
+    """
+    Write a ShowBiz article and return everything
+    needed for WordPress publishing.
+    """
+
+    category = story.get("category", "Entertainment Industry")
+
+    #
+    # Normalize category names
+    #
+
+    if category == "Television":
+        category = "TV & Streaming"
 
     prompt = f"""
 You are a senior entertainment journalist writing for ShowBiz.com.
@@ -68,7 +84,7 @@ Summary:
 {story["summary"]}
 
 Category:
-{story["category"]}
+{category}
 """
 
     response = client.responses.create(
@@ -78,12 +94,26 @@ Category:
 
     html = response.output_text.strip()
 
+    #
+    # Build category list.
+    #
+    # Every Top Story belongs to:
+    #
+    #   1. Top Story
+    #   2. Its editorial category
+    #
+
+    category_ids = [
+        TOP_STORY_CATEGORY_ID,
+        CATEGORY_IDS[category],
+    ]
+
     return {
         "title": story["headline"],
         "content": html,
         "excerpt": story["summary"],
-        "category": story["category"],
-        "category_id": CATEGORY_IDS[story["category"]],
+        "category": category,
+        "category_ids": category_ids,
     }
 
 
@@ -92,11 +122,11 @@ if __name__ == "__main__":
     test_story = {
         "headline": "Test Headline",
         "summary": "Test summary.",
-        "category": "Movies"
+        "category": "Television",
     }
 
     article = write_article(test_story)
 
     print(article["title"])
     print(article["category"])
-    print(article["category_id"])
+    print(article["category_ids"])
