@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz Media Library Search
-Version 3.0
+Version 3.1
 ===========================================
 
 Purpose:
@@ -12,6 +12,7 @@ Uses:
 
 Public Functions:
     find_best_image(query)
+    find_best_images(query, limit=10)
     search(query)
 
 Author:
@@ -102,7 +103,9 @@ def score_item(item, query, words):
         "alt": 60,
     }
 
-    # Exact phrase match
+    #
+    # Exact phrase
+    #
 
     for name, value in fields.items():
 
@@ -111,7 +114,9 @@ def score_item(item, query, words):
             score += weights[name] * 20
             reasons.append(f"{name}:exact")
 
-    # All words present
+    #
+    # All words
+    #
 
     for name, value in fields.items():
 
@@ -120,7 +125,9 @@ def score_item(item, query, words):
             score += weights[name] * 8
             reasons.append(f"{name}:all_words")
 
+    #
     # Individual words
+    #
 
     for word in words:
 
@@ -131,13 +138,19 @@ def score_item(item, query, words):
                 score += weights[name]
                 reasons.append(f"{name}:{word}")
 
+
     return score, reasons
-def find_best_image(query: str) -> Optional[MediaResult]:
+
+
+def find_best_images(
+    query: str,
+    limit: int = 10,
+) -> List[MediaResult]:
 
     query = normalize(query)
 
     if not query:
-        return None
+        return []
 
     words = query.split()
 
@@ -177,9 +190,6 @@ def find_best_image(query: str) -> Optional[MediaResult]:
             )
         )
 
-    if not results:
-        return None
-
     results.sort(
         key=lambda r: (
             r.score,
@@ -188,14 +198,35 @@ def find_best_image(query: str) -> Optional[MediaResult]:
         reverse=True,
     )
 
+    return results[:limit]
+def find_best_image(query: str) -> Optional[MediaResult]:
+    """
+    Backward-compatible wrapper.
+
+    Returns only the highest-scoring image.
+    Existing production code can continue
+    calling this function unchanged.
+    """
+
+    results = find_best_images(
+        query=query,
+        limit=1,
+    )
+
+    if not results:
+        return None
+
     return results[0]
 
 
 def search(query: str):
 
-    result = find_best_image(query)
+    results = find_best_images(
+        query=query,
+        limit=10,
+    )
 
-    if result is None:
+    if not results:
 
         print("\nNo matching image found.")
 
@@ -203,16 +234,20 @@ def search(query: str):
 
     print()
     print("=" * 60)
-    print("BEST MEDIA MATCH")
+    print("TOP MEDIA MATCHES")
     print("=" * 60)
 
-    print(f"Query      : {query}")
-    print(f"Media ID   : {result.media_id}")
-    print(f"Score      : {result.score}")
-    print(f"Title      : {result.title}")
-    print(f"Filename   : {result.filename}")
-    print(f"URL        : {result.url}")
-    print(f"Matched On : {result.reason}")
+    for i, result in enumerate(results, start=1):
+
+        print()
+        print(f"#{i}")
+        print("-" * 60)
+        print(f"Media ID   : {result.media_id}")
+        print(f"Score      : {result.score}")
+        print(f"Title      : {result.title}")
+        print(f"Filename   : {result.filename}")
+        print(f"URL        : {result.url}")
+        print(f"Matched On : {result.reason}")
 
 
 def main():

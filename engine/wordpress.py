@@ -112,6 +112,8 @@ def publish_post(article):
         return None
 
     post = response.json()
+    print("\nWordPress returned featured_media:",
+      post.get("featured_media"))
 
     print("\n✅ ARTICLE PUBLISHED")
     print("----------------------------")
