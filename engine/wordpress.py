@@ -68,8 +68,22 @@ def publish_post(article):
         "status": "publish",
     }
 
-    if article.get("category_id"):
+    #
+    # Categories
+    #
+    # Supports BOTH the new category_ids list and
+    # the older single category_id.
+    #
+
+    if article.get("category_ids"):
+        data["categories"] = article["category_ids"]
+
+    elif article.get("category_id"):
         data["categories"] = [article["category_id"]]
+
+    #
+    # Featured image
+    #
 
     if featured_media:
         data["featured_media"] = featured_media
@@ -105,6 +119,9 @@ def publish_post(article):
     print("Title   :", post["title"]["rendered"])
     print("Status  :", post["status"])
     print("URL     :", post["link"])
+
+    if "categories" in data:
+        print("Categories :", data["categories"])
 
     if featured_media:
         print("Featured Image :", featured_media)
