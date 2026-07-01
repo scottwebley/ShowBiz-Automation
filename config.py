@@ -1,5 +1,5 @@
 WP_URL = "https://showbiz.com"
 
-WP_USERNAME = "admin"
+WP_USERNAME = "showbizstaff"
 
-WP_APP_PASSWORD = "Kunl lvwF ZLim o8Vl iDg4 pawH"
+WP_APP_PASSWORD = "tebc 8BB0 lcUq nnqA 9XBs jcsz"

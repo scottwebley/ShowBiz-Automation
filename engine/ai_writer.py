@@ -10,6 +10,7 @@ CATEGORY_IDS = {
     "Movies": 3,
     "TV & Streaming": 4,
     "Television": 4,          # Backward compatibility
+    "Streaming": 4,           # NEW
     "Music": 6,
     "Gaming": 7,
     "Celebrity News": 55,
@@ -34,7 +35,7 @@ def write_article(story):
     # Normalize category names
     #
 
-    if category == "Television":
+    if category in ("Television", "Streaming"):
         category = "TV & Streaming"
 
     prompt = f"""
@@ -122,7 +123,7 @@ if __name__ == "__main__":
     test_story = {
         "headline": "Test Headline",
         "summary": "Test summary.",
-        "category": "Television",
+        "category": "Streaming",
     }
 
     article = write_article(test_story)
