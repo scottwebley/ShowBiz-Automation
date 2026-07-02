@@ -1,10 +1,9 @@
-import os
 import re
 import base64
 from pathlib import Path
 
 from dotenv import load_dotenv
-from openai import OpenAI
+from openai import OpenAI, BadRequestError
 
 load_dotenv()
 
@@ -62,7 +61,8 @@ def generate_image(story):
     Generates an editorial image and saves it locally.
 
     Returns:
-        Path to the saved image.
+        str: Path to the saved image.
+        None: If image generation fails.
     """
 
     prompt = build_prompt(story)
@@ -70,20 +70,33 @@ def generate_image(story):
     filename = slugify(story["headline"]) + ".png"
     filepath = IMAGE_DIR / filename
 
-    result = client.images.generate(
-        model="gpt-image-1",
-        prompt=prompt,
-        size="1536x1024"
-    )
+    try:
+        result = client.images.generate(
+            model="gpt-image-1",
+            prompt=prompt,
+            size="1536x1024"
+        )
 
-    image_bytes = base64.b64decode(result.data[0].b64_json)
+        image_bytes = base64.b64decode(result.data[0].b64_json)
 
-    with open(filepath, "wb") as f:
-        f.write(image_bytes)
+        with open(filepath, "wb") as f:
+            f.write(image_bytes)
 
-    print(f"✓ Image saved: {filepath}")
+        print(f"✓ Image saved: {filepath}")
 
-    return str(filepath)
+        return str(filepath)
+
+    except BadRequestError as e:
+        print("\n⚠ AI image generation blocked.")
+        print(e)
+        print("Continuing without a generated image.\n")
+        return None
+
+    except Exception as e:
+        print("\n⚠ Image generation failed.")
+        print(e)
+        print("Continuing without a generated image.\n")
+        return None
 
 
 if __name__ == "__main__":
