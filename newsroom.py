@@ -1,5 +1,6 @@
 from engine.ai_news import get_top_stories
 from engine.story_selector import select_top_story
+from engine.local_story_selector import select_local_story
 from engine.homepage_ranker import rank_homepage
 from engine.editor import should_publish
 from engine.ai_writer import write_article
@@ -59,9 +60,24 @@ def main():
     except Exception as e:
 
         print(f"⚠ Homepage Ranker failed: {e}")
-        print("⚠ Falling back to Story Selector.\n")
 
-        story = select_top_story(stories)
+        try:
+
+            print("⚠ Falling back to AI Story Selector.\n")
+
+            story = select_top_story(stories)
+
+        except Exception as e:
+
+            print(f"⚠ AI Story Selector failed: {e}")
+            print("⚠ Falling back to Local Story Selector.\n")
+
+            story = select_local_story(stories)
+
+            if story is None:
+
+                print("No valid stories available.")
+                return
 
     print(f"Top Story: {story['headline']}")
     print(f"Category: {story['category']}\n")
@@ -89,9 +105,18 @@ def main():
 
     article = write_article(story)
 
-    print("✓ Article complete.\n")
+    if article is None:
 
-    # -------------------------------------------------
+        print("\n========================================")
+        print("NEWSROOM")
+        print("========================================")
+        print("Article generation failed.")
+        print("Publishing skipped.\n")
+
+        return
+
+    print("✓ Article complete.\n")
+        # -------------------------------------------------
     # STEP 5
     # -------------------------------------------------
 

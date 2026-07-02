@@ -22,9 +22,6 @@ CATEGORY_IDS = {
 
 # ==========================================================
 # AI Category Aliases
-#
-# GPT occasionally invents category names.
-# Convert them to valid ShowBiz categories.
 # ==========================================================
 
 CATEGORY_ALIASES = {
@@ -74,6 +71,10 @@ def write_article(story):
     """
     Write a ShowBiz article and return everything
     needed for WordPress publishing.
+
+    Returns:
+        dict on success
+        None if article generation fails
     """
 
     category = story.get(
@@ -92,8 +93,6 @@ def write_article(story):
 
     #
     # Final safety net.
-    # Never allow an unknown category
-    # to crash production.
     #
 
     if category not in CATEGORY_IDS:
@@ -155,12 +154,34 @@ Category:
 {category}
 """
 
-    response = client.responses.create(
-        model="gpt-5.5",
-        input=prompt,
-    )
+    #
+    # Gracefully handle OpenAI failures.
+    #
+
+    try:
+
+        response = client.responses.create(
+            model="gpt-5.5",
+            input=prompt,
+        )
+
+    except Exception as e:
+
+        print("\n========================================")
+        print("AI WRITER")
+        print("========================================")
+        print(f"Unable to generate article:\n{e}")
+        print("Skipping publication.\n")
+
+        return None
 
     html = response.output_text.strip()
+
+    if not html:
+
+        print("\nAI Writer returned an empty article.\n")
+
+        return None
 
     #
     # Every Top Story belongs to:
@@ -181,7 +202,9 @@ Category:
         "category": category,
         "category_ids": category_ids,
     }
-
+#
+# Test
+#
 
 if __name__ == "__main__":
 
@@ -193,6 +216,12 @@ if __name__ == "__main__":
 
     article = write_article(test_story)
 
-    print(article["title"])
-    print(article["category"])
-    print(article["category_ids"])
+    if article is None:
+
+        print("\nArticle generation failed.")
+
+    else:
+
+        print(article["title"])
+        print(article["category"])
+        print(article["category_ids"])
