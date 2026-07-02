@@ -1,17 +1,18 @@
 """
 ===========================================
 ShowBiz Editorial Filter
-Version 2.1
+Version 3.0
 ===========================================
 
 Determines whether a story belongs on ShowBiz
-using weighted editorial scoring.
+using editorial rules plus weighted scoring.
 
-Version 2.1
+Version 3.0
 -----------
-• Uses whole-word regex matching.
-• Eliminates substring bugs such as:
-      Netflix -> ETF
+• Whole-word regex matching
+• Hard rejection of wrapper articles
+• Penalties for low-value content
+• Editorial rejection reasons
 """
 
 import re
@@ -161,26 +162,71 @@ NEGATIVE = {
 }
 
 
+# ------------------------------------------------
+# Immediate editorial rejection patterns
+# ------------------------------------------------
+
+HARD_REJECT_PATTERNS = [
+
+    r"^AP Trending SummaryBrief",
+    r"\bSummaryBrief\b",
+    r"\bMorning Brief\b",
+    r"\bEvening Brief\b",
+    r"\bRoundup\b",
+    r"\bLive Updates?\b",
+    r"\bLive Blog\b",
+    r"\bArchive\b",
+    r"\bTag\b",
+]
+
+
+# ------------------------------------------------
+# Low-value content penalties
+# ------------------------------------------------
+
+LOW_VALUE_PATTERNS = {
+
+    r"\bTop\s+\d+\b": -40,
+    r"\bBest\b": -20,
+    r"\bEverything You Need To Know\b": -40,
+    r"\bExplained\b": -20,
+    r"\bHow To\b": -35,
+    r"\bVPN\b": -60,
+    r"\bBuying Guide\b": -50,
+    r"\bCoupon\b": -50,
+    r"\bDeal\b": -30,
+}
+
 MINIMUM_SCORE = 20
 
 
 def keyword_found(keyword, text):
     """
     Match complete words or phrases only.
-
-    Prevents:
-        Netflix -> ETF
-
-    while still matching:
-
-        Netflix
-        Supreme Court
-        Prime Video
     """
 
     pattern = r"\b" + re.escape(keyword) + r"\b"
 
-    return re.search(pattern, text, flags=re.IGNORECASE) is not None
+    return re.search(
+        pattern,
+        text,
+        flags=re.IGNORECASE
+    ) is not None
+
+
+def matches_hard_reject(text):
+    """
+    Returns (True, reason) if the story should
+    immediately be rejected.
+    """
+
+    for pattern in HARD_REJECT_PATTERNS:
+
+        if re.search(pattern, text, flags=re.IGNORECASE):
+
+            return True, pattern
+
+    return False, ""
 
 
 def analyze_story(story):
@@ -196,12 +242,20 @@ def analyze_story(story):
     positives = []
     negatives = []
 
+    #
+    # Positive signals
+    #
+
     for keyword, value in POSITIVE.items():
 
         if keyword_found(keyword, text):
 
             score += value
             positives.append((keyword, value))
+
+    #
+    # Negative signals
+    #
 
     for keyword, value in NEGATIVE.items():
 
@@ -210,12 +264,49 @@ def analyze_story(story):
             score += value
             negatives.append((keyword, value))
 
-    return score, positives, negatives
+    #
+    # Low-value penalties
+    #
+
+    penalties = []
+
+    for pattern, value in LOW_VALUE_PATTERNS.items():
+
+        if re.search(pattern, text, flags=re.IGNORECASE):
+
+            score += value
+            penalties.append((pattern, value))
+
+    return score, positives, negatives, penalties
 
 
 def keep_story(story):
+    """
+    Returns True if the story should
+    continue through the pipeline.
+    """
 
-    score, _, _ = analyze_story(story)
+    text = (
+        story.get("headline", "")
+        + " "
+        + story.get("summary", "")
+    )
+
+    rejected, reason = matches_hard_reject(text)
+
+    if rejected:
+
+        print(f"REJECT: Hard rule matched ({reason})")
+
+        return False
+
+    score, _, _, penalties = analyze_story(story)
+
+    if penalties:
+
+        for pattern, value in penalties:
+
+            print(f"PENALTY: {pattern} ({value})")
 
     return score >= MINIMUM_SCORE
 
@@ -238,7 +329,14 @@ if __name__ == "__main__":
 
         {
             "headline":
-            "Supreme Court Issues New Decision",
+            "AP Trending SummaryBrief at 6:28 p.m. EDT",
+            "summary":
+            "Actor Danny Glover reveals Alzheimer's diagnosis."
+        },
+
+        {
+            "headline":
+            "How To Watch Netflix Using A VPN",
             "summary": ""
         },
 
@@ -246,23 +344,17 @@ if __name__ == "__main__":
             "headline":
             "Taylor Swift Announces New Tour",
             "summary": ""
-        },
-
-        {
-            "headline":
-            "World Cup Final Ends In Penalty Shootout",
-            "summary": ""
         }
 
     ]
 
     print("=" * 60)
-    print("SHOWBIZ EDITORIAL FILTER 2.1")
+    print("SHOWBIZ EDITORIAL FILTER 3.0")
     print("=" * 60)
 
     for story in tests:
 
-        score, pos, neg = analyze_story(story)
+        score, pos, neg, penalties = analyze_story(story)
 
         print()
         print(story["headline"])
@@ -284,3 +376,11 @@ if __name__ == "__main__":
             for item in neg:
 
                 print(f"   - {item[0]:20} {item[1]}")
+
+        if penalties:
+
+            print("Penalties:")
+
+            for item in penalties:
+
+                print(f"   * {item[0]:20} {item[1]}")
