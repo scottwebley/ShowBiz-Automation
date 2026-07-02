@@ -1,26 +1,22 @@
 """
 ===========================================
 ShowBiz Entity Extractor
-Version 1.0
+Version 2.0
 ===========================================
 
-Extracts entertainment entities from news headlines.
+Extracts entertainment entities from news
+headlines for the Image Engine.
 
-This module does NOT perform searching.
+This module performs NO searching.
 
-It simply identifies the important entities so that
-other modules (Media Library Search, Image Verifier,
-External Search, etc.) can make better decisions.
+Author:
+    ShowBiz Automation
 """
 
 from __future__ import annotations
 
 import re
 
-
-# ----------------------------------------
-# Known entertainment aliases
-# ----------------------------------------
 
 ALIASES = {
     "The Rock": "Dwayne Johnson",
@@ -29,35 +25,152 @@ ALIASES = {
 }
 
 
-# ----------------------------------------
-# Helper
-# ----------------------------------------
+ORGANIZATIONS = {
+    "Netflix",
+    "Disney",
+    "Pixar",
+    "Marvel",
+    "Lucasfilm",
+    "Apple",
+    "Amazon",
+    "Prime Video",
+    "HBO",
+    "Max",
+    "Paramount",
+    "NBC",
+    "CBS",
+    "ABC",
+    "FOX",
+    "Sony",
+    "Universal",
+    "Warner Bros",
+}
 
-def normalize(name: str) -> str:
-    return ALIASES.get(name, name)
+
+STOP_NAME_WORDS = {
+    "Is",
+    "Are",
+    "Was",
+    "Were",
+    "Announces",
+    "Announced",
+    "Reveal",
+    "Reveals",
+    "Revealed",
+    "Confirms",
+    "Confirmed",
+    "Says",
+    "Say",
+    "After",
+    "Before",
+    "With",
+    "Without",
+    "From",
+    "Into",
+    "For",
+    "In",
+    "On",
+    "At",
+    "Of",
+    "To",
+    "And",
+    "Or",
+    "Big",
+    "New",
+    "More",
+    "Also",
+    "Star",
+    "News",
+}
 
 
-# ----------------------------------------
-# Main extractor
-# ----------------------------------------
+IGNORE_KEYWORDS = {
+    "the",
+    "and",
+    "with",
+    "from",
+    "this",
+    "that",
+    "after",
+    "before",
+    "more",
+    "also",
+    "news",
+    "show",
+    "movie",
+    "today",
+}
 
-def extract_entities(headline: str) -> dict:
-    """
-    Extract entertainment entities from a headline.
 
-    Returns:
+def normalize(text: str) -> str:
+    return ALIASES.get(text, text)
 
-    {
-        "people": [],
-        "movies": [],
-        "tv_shows": [],
-        "music_artists": [],
-        "organizations": [],
-        "events": [],
-        "franchises": [],
-        "generic_keywords": []
-    }
-    """
+
+def _extract_people(headline: str):
+
+    people = []
+
+    tokens = re.findall(r"[A-Z][A-Za-z0-9']*", headline)
+
+    i = 0
+
+    while i < len(tokens):
+
+        current = tokens[i]
+
+        #
+        # The Rock
+        #
+
+        if (
+            current == "The"
+            and i + 1 < len(tokens)
+            and tokens[i + 1] == "Rock"
+        ):
+
+            people.append(normalize("The Rock"))
+            i += 2
+            continue
+
+        #
+        # First Last
+        #
+
+        if i + 1 < len(tokens):
+
+            first = tokens[i]
+            second = tokens[i + 1]
+
+            if (
+                first not in STOP_NAME_WORDS
+                and second not in STOP_NAME_WORDS
+            ):
+
+                people.append(normalize(f"{first} {second}"))
+                i += 2
+                continue
+
+        i += 1
+
+    #
+    # Remove duplicates preserving order.
+    #
+
+    seen = set()
+    final = []
+
+    for person in people:
+
+        if person in seen:
+            continue
+
+        seen.add(person)
+        final.append(person)
+
+    return final
+
+
+def extract_entities(headline: str):
 
     entities = {
         "people": [],
@@ -71,58 +184,48 @@ def extract_entities(headline: str) -> dict:
     }
 
     #
-    # Very first version.
-    #
-    # Find quoted titles.
+    # Quoted titles.
     #
 
-    quoted = re.findall(r"[\"']([^\"']+)[\"']", headline)
-
-    for title in quoted:
+    for title in re.findall(r"[\"']([^\"']+)[\"']", headline):
 
         if len(title) > 2:
+
             entities["movies"].append(title)
 
     #
-    # Capitalized name sequences.
+    # Organizations.
     #
 
-    names = re.findall(
-        r"\b([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)\b",
-        headline,
-    )
+    for org in ORGANIZATIONS:
 
-    for name in names:
+        if org.lower() in headline.lower():
 
-        name = normalize(name)
+            entities["organizations"].append(org)
 
-        if name not in entities["people"]:
-            entities["people"].append(name)
+    #
+    # People.
+    #
+
+    entities["people"] = _extract_people(headline)
 
     #
     # Generic keywords.
     #
 
-    ignore = {
-        "The",
-        "A",
-        "An",
-        "And",
-        "For",
-        "Of",
-        "In",
-        "On",
-        "With",
-    }
-
     words = re.findall(r"[A-Za-z0-9']+", headline)
 
     for word in words:
 
-        if len(word) < 4:
+        lower = word.lower()
+
+        if len(lower) < 4:
             continue
 
-        if word in ignore:
+        if lower in IGNORE_KEYWORDS:
+            continue
+
+        if word in entities["people"]:
             continue
 
         if word not in entities["generic_keywords"]:
@@ -131,17 +234,21 @@ def extract_entities(headline: str) -> dict:
     return entities
 
 
-# ----------------------------------------
-# Test
-# ----------------------------------------
-
 if __name__ == "__main__":
-
-    headline = (
-        "Taylor Swift and Travis Kelce's expected "
-        "wedding celebrations approach"
-    )
 
     from pprint import pprint
 
-    pprint(extract_entities(headline))
+    tests = [
+        "The Rock Announces Big 'Moana 3' News",
+        "Ashley Tisdale Is a Toxic Mom in New Netflix TV Show, Ali Wong & 1 More Also Star",
+        "Taylor Swift and Travis Kelce's expected wedding celebrations approach",
+    ]
+
+    for headline in tests:
+
+        print()
+        print("=" * 60)
+        print(headline)
+        print("=" * 60)
+
+        pprint(extract_entities(headline))

@@ -46,7 +46,7 @@ HEADERS = {
 }
 
 
-TOP_STORY_CATEGORY = 999   # <-- replace with your real category ID
+TOP_STORY_CATEGORY = 64   # <-- replace with your real category ID
 
 
 def get_current_top_story():
