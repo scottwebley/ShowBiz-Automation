@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz Image Search
-Version 1.0
+Version 2.0
 ===========================================
 
 Purpose:
@@ -9,10 +9,11 @@ Purpose:
     best matching featured image.
 
 Workflow:
-    1. Extract meaningful search terms.
-    2. Build progressively broader queries.
-    3. Search the Media Library.
-    4. Return qualifying image candidates.
+    1. Extract entertainment entities.
+    2. Search people first.
+    3. Search movies / TV / music.
+    4. Fall back to keyword search.
+    5. Return qualifying image candidates.
 
 Author:
     ShowBiz Automation
@@ -20,15 +21,13 @@ Author:
 
 import re
 
+from engine.entity_extractor import extract_entities
 from engine.media_library.search import find_best_images
 
 
-# Minimum acceptable Media Library score.
-# Images below this score will be rejected.
 MINIMUM_SCORE = 1000
 
 
-# Words that should never influence image selection.
 STOP_WORDS = {
     "a",
     "an",
@@ -89,12 +88,6 @@ STOP_WORDS = {
 
 
 def extract_keywords(headline):
-    """
-    Extract meaningful keywords from a headline.
-
-    Removes punctuation, stop words and
-    very short words.
-    """
 
     words = re.findall(r"[A-Za-z0-9']+", headline)
 
@@ -117,14 +110,61 @@ def extract_keywords(headline):
 
 def build_search_queries(story):
     """
-    Build progressively broader search queries.
+    Build prioritized search queries.
+
+    Entity searches are performed first.
+    Existing keyword strategy is retained
+    as a fallback.
     """
 
     headline = story.get("headline", "")
 
-    keywords = extract_keywords(headline)
+    entities = extract_entities(headline)
 
     queries = []
+
+    #
+    # Highest priority:
+    # People
+    #
+
+    queries.extend(entities["people"])
+
+    #
+    # Movies
+    #
+
+    queries.extend(entities["movies"])
+
+    #
+    # TV
+    #
+
+    queries.extend(entities["tv_shows"])
+
+    #
+    # Music
+    #
+
+    queries.extend(entities["music_artists"])
+
+    #
+    # Organizations
+    #
+
+    queries.extend(entities["organizations"])
+
+    #
+    # Events
+    #
+
+    queries.extend(entities["events"])
+
+    #
+    # Existing keyword fallback
+    #
+
+    keywords = extract_keywords(headline)
 
     if keywords:
         queries.append(" ".join(keywords))
@@ -140,8 +180,12 @@ def build_search_queries(story):
 
     queries.extend(keywords)
 
+    #
+    # Remove duplicates
+    #
+
     seen = set()
-    final_queries = []
+    final = []
 
     for query in queries:
 
@@ -156,23 +200,12 @@ def build_search_queries(story):
             continue
 
         seen.add(key)
-        final_queries.append(query)
+        final.append(query)
 
-    return final_queries
+    return final
 
 
 def search_media_library(story):
-    """
-    Search the Media Library.
-
-    Returns:
-
-        list[dict]
-            Qualifying image candidates.
-
-        []
-            If no qualifying images are found.
-    """
 
     queries = build_search_queries(story)
 
@@ -186,6 +219,22 @@ def search_media_library(story):
 
     print(f"\nHeadline:\n{story.get('headline', '')}")
 
+    entities = extract_entities(
+        story.get("headline", "")
+    )
+
+    print("\nEntities:")
+
+    if entities["people"]:
+        print("  People:")
+        for person in entities["people"]:
+            print(f"    • {person}")
+
+    if entities["movies"]:
+        print("  Movies:")
+        for movie in entities["movies"]:
+            print(f"    • {movie}")
+
     print("\nSearch Queries:")
 
     for query in queries:
@@ -197,7 +246,10 @@ def search_media_library(story):
 
         print(f"Searching: {query}")
 
-        results = find_best_images(query, limit=10)
+        results = find_best_images(
+            query,
+            limit=10,
+        )
 
         if not results:
             continue
@@ -237,7 +289,10 @@ def search_media_library(story):
                 {
                     "media_id": result.media_id,
                     "title": result.title,
-                    "caption": result.raw.get("caption", ""),
+                    "caption": result.raw.get(
+                        "caption",
+                        "",
+                    ),
                     "filename": result.filename,
                 }
             )
@@ -262,9 +317,13 @@ def search_media_library(story):
 def main():
 
     story = {
-        "headline": "Why Supergirl Crashed at the Box Office",
-        "summary": "Analysis of the film's opening weekend.",
-        "category": "Movies",
+        "headline": (
+            "Taylor Swift and Travis Kelce's "
+            "expected wedding celebrations "
+            "approach"
+        ),
+        "summary": "",
+        "category": "Celebrity",
     }
 
     results = search_media_library(story)

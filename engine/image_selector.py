@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz Image Selector
-Version 3.1
+Version 3.2
 ===========================================
 
 Purpose:
@@ -12,7 +12,9 @@ Workflow:
     2. Ask the AI Image Verifier to choose
        the best candidate.
     3. Use the approved Media Library image.
-    4. Otherwise generate a new editorial image.
+    4. Try AI image generation.
+    5. If AI generation fails, fall back to
+       the highest-scoring Media Library image.
 
 Author:
     ShowBiz Automation
@@ -36,6 +38,11 @@ def get_featured_image(story):
 
     candidates = search_media_library(story)
 
+    #
+    # First choice:
+    # AI-approved Media Library image.
+    #
+
     if candidates:
 
         print("\n========================================")
@@ -55,9 +62,39 @@ def get_featured_image(story):
 
         print("\nImage rejected by verifier.")
 
+    #
+    # Second choice:
+    # Generate editorial artwork.
+    #
+
     print("\nGenerating new editorial image...\n")
 
-    return generate_image(story)
+    generated = generate_image(story)
+
+    if generated:
+        return generated
+
+    #
+    # Final fallback:
+    # Never publish without an image if we
+    # already have Media Library candidates.
+    #
+
+    if candidates:
+
+        fallback = candidates[0]
+
+        print("\n⚠ Falling back to best Media Library image.")
+        print(f"Media ID : {fallback['media_id']}")
+        print(f"Title    : {fallback['title']}")
+
+        return f"media:{fallback['media_id']}"
+
+    #
+    # Last resort.
+    #
+
+    return None
 
 
 def main():
