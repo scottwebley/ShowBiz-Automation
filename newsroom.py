@@ -1,5 +1,6 @@
 from engine.ai_news import get_top_stories
 from engine.story_selector import select_top_story
+from engine.homepage_ranker import rank_homepage
 from engine.editor import should_publish
 from engine.ai_writer import write_article
 from engine.image_selector import get_featured_image
@@ -30,11 +31,39 @@ def main():
     # STEP 2
     # -------------------------------------------------
 
-    print("STEP 2: Selecting today's Top Story...")
+    print("STEP 2: Ranking homepage stories...")
 
-    story = select_top_story(stories)
+    try:
 
-    print(f"✓ {story['headline']}")
+        ranked = rank_homepage(stories)
+
+        if not ranked:
+            raise ValueError("Homepage Ranker returned no stories.")
+
+        print("✓ Homepage Ranker completed.\n")
+
+        print("Top Homepage Rankings:")
+
+        for story in ranked[:11]:
+
+            print(
+                f"#{story['homepage_rank']:>2} "
+                f"[{story.get('category', 'Unknown')}] "
+                f"{story.get('headline', '')}"
+            )
+
+        print()
+
+        story = ranked[0]
+
+    except Exception as e:
+
+        print(f"⚠ Homepage Ranker failed: {e}")
+        print("⚠ Falling back to Story Selector.\n")
+
+        story = select_top_story(stories)
+
+    print(f"Top Story: {story['headline']}")
     print(f"Category: {story['category']}\n")
 
     # -------------------------------------------------
