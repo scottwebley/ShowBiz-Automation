@@ -89,6 +89,13 @@ def main():
 
     report = generate_daily_report(stories)
 
+    if report is None:
+
+        print("⚠ Daily report unavailable.")
+        print("Skipping Winners & Losers update.\n")
+
+        return
+
     print("✓ Daily report generated.\n")
 
     print("STEP 3: Writing HTML article...")

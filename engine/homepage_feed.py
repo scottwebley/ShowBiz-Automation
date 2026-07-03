@@ -1,14 +1,14 @@
 """
 ===========================================
 ShowBiz Homepage Feed
-Version 1.0
+Version 2.0
 ===========================================
 
-Builds the editorial homepage feed used by the
-ShowBiz front page.
+Builds the editorial homepage feed from
+published WordPress posts.
 
-Input:
-    ranked_stories
+Source of truth:
+    WordPress
 
 Output:
     data/front_page.json
@@ -18,18 +18,14 @@ import json
 from datetime import datetime
 from pathlib import Path
 
+from engine.wordpress_homepage import build_homepage_feed
 
 OUTPUT_FILE = Path("data/front_page.json")
 
 
-def build_front_page_feed(ranked_stories):
+def build_front_page_feed():
     """
-    Build the homepage editorial feed.
-
-    Parameters
-    ----------
-    ranked_stories : list
-        Stories returned by Homepage Ranker.
+    Build the homepage feed from WordPress.
 
     Returns
     -------
@@ -37,15 +33,14 @@ def build_front_page_feed(ranked_stories):
         Homepage feed dictionary.
     """
 
-    if not ranked_stories:
-        raise ValueError("No ranked stories supplied.")
-
     OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
+
+    homepage = build_homepage_feed()
 
     feed = {
         "generated_at": datetime.utcnow().isoformat(),
-        "top_story": ranked_stories[0],
-        "latest_news": ranked_stories[1:11],
+        "top_story": homepage["top_story"],
+        "latest_news": homepage["latest_news"],
     }
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
@@ -57,10 +52,20 @@ def build_front_page_feed(ranked_stories):
 
 
 def main():
-    print(
-        "This module is intended to be imported by newsroom.py.\n"
-        "No standalone action performed."
-    )
+    feed = build_front_page_feed()
+
+    print()
+
+    if feed["top_story"]:
+        print("Top Story:")
+        print(feed["top_story"]["title"]["rendered"])
+
+    print()
+
+    print("Latest Stories:")
+
+    for post in feed["latest_news"]:
+        print("-", post["title"]["rendered"])
 
 
 if __name__ == "__main__":

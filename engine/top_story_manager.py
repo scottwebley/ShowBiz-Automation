@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz Top Story Manager
-Version 1.0
+Version 2.1
 ===========================================
 
 Purpose:
@@ -9,26 +9,12 @@ Purpose:
     story should replace the current
     ShowBiz Top Story.
 
-Version 1.0
+New in Version 2.1
 
-Rules:
-
-- If there is no current Top Story:
-      REPLACE
-
-- If today's #1 headline matches the
-  current Top Story:
-      KEEP
-
-- Otherwise:
-      REPLACE
-
-Future versions can add:
-
-- age weighting
-- editorial score thresholds
-- breaking-news bonus
-- AI comparison
+- Keeps existing replacement logic.
+- Removes the Top Story category from
+  previous Top Stories.
+- Preserves the newly published Top Story.
 """
 
 import requests
@@ -40,40 +26,43 @@ from config import (
     WP_APP_PASSWORD,
 )
 
-
 HEADERS = {
     "User-Agent": "ShowBiz-Automation/1.0"
 }
 
+TOP_STORY_CATEGORY = 64
 
-TOP_STORY_CATEGORY = 64   # <-- replace with your real category ID
+
+def _auth():
+    return HTTPBasicAuth(
+        WP_USERNAME,
+        WP_APP_PASSWORD,
+    )
 
 
-def get_current_top_story():
-    """
-    Return the current Top Story post
-    or None.
-    """
-
+def get_top_story_posts():
     response = requests.get(
         f"{WP_URL}/wp-json/wp/v2/posts",
         params={
             "categories": TOP_STORY_CATEGORY,
-            "per_page": 1,
+            "per_page": 100,
             "orderby": "date",
             "order": "desc",
+            "status": "publish",
         },
-        auth=HTTPBasicAuth(
-            WP_USERNAME,
-            WP_APP_PASSWORD,
-        ),
+        auth=_auth(),
         headers=HEADERS,
         timeout=30,
     )
 
     response.raise_for_status()
 
-    posts = response.json()
+    return response.json()
+
+
+def get_current_top_story():
+
+    posts = get_top_story_posts()
 
     if not posts:
         return None
@@ -82,22 +71,12 @@ def get_current_top_story():
 
 
 def should_replace_top_story(candidate_story):
-    """
-    Returns:
-
-        True
-            Publish new Top Story
-
-        False
-            Keep current Top Story
-    """
 
     current = get_current_top_story()
 
     if current is None:
 
         print("\nNo current Top Story.")
-
         return True
 
     current_title = (
@@ -121,14 +100,75 @@ def should_replace_top_story(candidate_story):
     if current_title == candidate_title:
 
         print("\nDecision: KEEP")
-
         return False
 
     print("\nDecision: REPLACE")
-
     return True
+
+
+def retire_previous_top_stories(keep_post_id):
+    """
+    Remove the Top Story category from every
+    Top Story except the newly published one.
+
+    Parameters
+    ----------
+    keep_post_id : int
+        The WordPress post ID that should
+        remain the current Top Story.
+    """
+
+    posts = get_top_story_posts()
+
+    if not posts:
+        return
+
+    print(f"\nChecking {len(posts)} Top Story post(s)...")
+
+    for post in posts:
+
+        if post["id"] == keep_post_id:
+            print(
+                f"✓ Keeping Top Story: "
+                f"{post['title']['rendered']}"
+            )
+            continue
+
+        categories = post.get("categories", [])
+
+        new_categories = [
+            c for c in categories
+            if c != TOP_STORY_CATEGORY
+        ]
+
+        if new_categories == categories:
+            continue
+
+        response = requests.post(
+            f"{WP_URL}/wp-json/wp/v2/posts/{post['id']}",
+            auth=_auth(),
+            headers=HEADERS,
+            json={
+                "categories": new_categories
+            },
+            timeout=30,
+        )
+
+        response.raise_for_status()
+
+        print(
+            f"✓ Retired Top Story: "
+            f"{post['title']['rendered']}"
+        )
+
+    print("\nTop Story cleanup complete.")
 
 
 if __name__ == "__main__":
 
-    print("Top Story Manager ready.")
+    posts = get_top_story_posts()
+
+    print(f"\nCurrent Top Story posts: {len(posts)}")
+
+    for post in posts:
+        print("-", post["title"]["rendered"])

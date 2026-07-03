@@ -13,7 +13,7 @@ def generate_daily_report(stories):
     """
     Generates the ShowBiz Entertainment Winners & Losers report.
 
-    Returns a Python dictionary.
+    Returns a Python dictionary, or None if generation fails.
     """
 
     stories_json = json.dumps(stories, indent=2)
@@ -74,12 +74,25 @@ Today's News:
 {stories_json}
 """
 
-    response = client.responses.create(
-        model="gpt-5.5",
-        input=prompt
-    )
+    try:
 
-    report = json.loads(response.output_text)
+        response = client.responses.create(
+            model="gpt-5.5",
+            input=prompt
+        )
+
+        report = json.loads(response.output_text)
+
+    except Exception as e:
+
+        print("\n========================================")
+        print("DAILY REPORT")
+        print("========================================")
+        print("Unable to generate daily report:")
+        print(e)
+        print("Skipping Winners & Losers generation.\n")
+
+        return None
 
     # Add today's date for the newsroom pipeline.
     report["date"] = datetime.now().strftime("%B %d, %Y").replace(" 0", " ")
@@ -104,4 +117,5 @@ if __name__ == "__main__":
 
     report = generate_daily_report(sample)
 
-    print(json.dumps(report, indent=4))
+    if report is not None:
+        print(json.dumps(report, indent=4))

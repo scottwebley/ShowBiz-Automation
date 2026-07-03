@@ -6,6 +6,10 @@ from engine.editor import should_publish
 from engine.ai_writer import write_article
 from engine.image_selector import get_featured_image
 from engine.wordpress import publish_post
+from engine.top_story_manager import (
+    should_replace_top_story,
+    retire_previous_top_stories,
+)
 
 
 def main():
@@ -97,6 +101,15 @@ def main():
 
     print("✓ Editorial approval granted.\n")
 
+    if not should_replace_top_story(story):
+
+        print("\nCurrent published Top Story remains the best story.")
+        print("Publishing skipped.\n")
+
+        return
+
+    print("✓ Top Story Manager approved replacement.\n")
+
     # -------------------------------------------------
     # STEP 4
     # -------------------------------------------------
@@ -116,7 +129,8 @@ def main():
         return
 
     print("✓ Article complete.\n")
-        # -------------------------------------------------
+
+    # -------------------------------------------------
     # STEP 5
     # -------------------------------------------------
 
@@ -139,6 +153,8 @@ def main():
         print("\nPublishing failed.\n")
 
         return
+
+    retire_previous_top_stories(post["id"])
 
     # -------------------------------------------------
     # DONE
