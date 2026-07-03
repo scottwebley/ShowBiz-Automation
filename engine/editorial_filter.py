@@ -1,13 +1,13 @@
 """
 ===========================================
 ShowBiz Editorial Filter
-Version 3.0
+Version 3.1
 ===========================================
 
 Determines whether a story belongs on ShowBiz
 using editorial rules plus weighted scoring.
 
-Version 3.0
+Version 3.1
 -----------
 • Whole-word regex matching
 • Hard rejection of wrapper articles
@@ -55,6 +55,9 @@ POSITIVE = {
     "sony pictures": 25,
     "nbcuniversal": 30,
     "comcast": 25,
+    "amazon mgm": 25,
+    "apple tv+": 25,
+    "a24": 25,
 
     # Music
     "album": 20,
@@ -63,6 +66,43 @@ POSITIVE = {
     "tour": 25,
     "grammy": 30,
     "billboard": 20,
+
+    "singer": 20,
+    "songwriter": 20,
+    "musician": 20,
+    "vocalist": 20,
+    "recording artist": 20,
+    "band": 15,
+    "pop star": 20,
+    "rock star": 20,
+
+    # Celebrity News
+    "wedding": 30,
+    "married": 30,
+    "marriage": 30,
+    "engagement": 25,
+    "engaged": 25,
+    "dating": 15,
+    "relationship": 15,
+    "couple": 15,
+    "romance": 15,
+    "baby": 15,
+    "pregnancy": 15,
+    "pregnant": 15,
+    "family": 10,
+    "red carpet": 20,
+    "premiere": 20,
+    "gala": 20,
+    "fashion": 15,
+
+    # Major Franchises
+    "marvel": 25,
+    "dc": 20,
+    "pixar": 25,
+    "lucasfilm": 25,
+    "star wars": 30,
+    "avatar": 25,
+    "harry potter": 25,
 
     # Broadway
     "broadway": 30,
@@ -77,10 +117,10 @@ POSITIVE = {
     "festival": 20,
 
     # Entertainment people
-    "actor": 15,
-    "actress": 15,
-    "director": 15,
-    "producer": 15,
+    "actor": 20,
+    "actress": 20,
+    "director": 20,
+    "producer": 20,
     "celebrity": 15,
     "hollywood": 20,
 
