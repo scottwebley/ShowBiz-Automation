@@ -25,7 +25,7 @@ from engine.entity_extractor import extract_entities
 from engine.media_library.search import find_best_images
 
 
-MINIMUM_SCORE = 1000
+MINIMUM_SCORE = 175
 
 
 STOP_WORDS = {

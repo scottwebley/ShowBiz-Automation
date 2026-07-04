@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz Image Selector
-Version 3.2
+Version 3.3
 ===========================================
 
 Purpose:
@@ -12,9 +12,10 @@ Workflow:
     2. Ask the AI Image Verifier to choose
        the best candidate.
     3. Use the approved Media Library image.
-    4. Try AI image generation.
-    5. If AI generation fails, fall back to
-       the highest-scoring Media Library image.
+    4. If the verifier rejects the candidates,
+       use the highest-ranked Media Library image.
+    5. Only generate an AI image when the
+       Media Library has no candidates.
 
 Author:
     ShowBiz Automation
@@ -60,35 +61,32 @@ def get_featured_image(story):
 
             return f"media:{decision['media_id']}"
 
-        print("\nImage rejected by verifier.")
+        #
+        # New policy:
+        # Trust the Media Library before generating AI.
+        #
+
+        fallback = candidates[0]
+
+        print("\n⚠ Verifier did not approve a candidate.")
+        print("Using highest-ranked Media Library image.")
+        print(f"Media ID : {fallback['media_id']}")
+        print(f"Title    : {fallback['title']}")
+
+        return f"media:{fallback['media_id']}"
 
     #
-    # Second choice:
-    # Generate editorial artwork.
+    # No Media Library candidates.
+    # AI generation is now the true last resort.
     #
 
-    print("\nGenerating new editorial image...\n")
+    print("\nNo Media Library candidates found.")
+    print("Generating new editorial image...\n")
 
     generated = generate_image(story)
 
     if generated:
         return generated
-
-    #
-    # Final fallback:
-    # Never publish without an image if we
-    # already have Media Library candidates.
-    #
-
-    if candidates:
-
-        fallback = candidates[0]
-
-        print("\n⚠ Falling back to best Media Library image.")
-        print(f"Media ID : {fallback['media_id']}")
-        print(f"Title    : {fallback['title']}")
-
-        return f"media:{fallback['media_id']}"
 
     #
     # Last resort.
