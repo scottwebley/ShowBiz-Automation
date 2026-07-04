@@ -91,7 +91,14 @@ def publish_post(article):
     # -----------------------------------------
     # Publish
     # -----------------------------------------
-
+    print("\n========================================")
+    print("WORDPRESS PUBLISH PAYLOAD")
+    print("========================================")
+    print("Title           :", data.get("title"))
+    print("Image field     :", article.get("image"))
+    print("Featured Media  :", featured_media)
+    print("Categories      :", data.get("categories"))
+    print("========================================")
     response = requests.post(
         f"{WP_URL}/wp-json/wp/v2/posts",
         auth=HTTPBasicAuth(

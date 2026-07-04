@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz Image Search
-Version 2.0
+Version 2.1
 ===========================================
 
 Purpose:
@@ -12,7 +12,7 @@ Workflow:
     1. Extract entertainment entities.
     2. Search people first.
     3. Search movies / TV / music.
-    4. Fall back to keyword search.
+    4. Fall back to keyword phrases.
     5. Return qualifying image candidates.
 
 Author:
@@ -113,8 +113,15 @@ def build_search_queries(story):
     Build prioritized search queries.
 
     Entity searches are performed first.
-    Existing keyword strategy is retained
-    as a fallback.
+
+    Keyword fallback intentionally uses only
+    meaningful multi-word phrases to avoid
+    noisy searches such as:
+        Mad
+        star
+        dies
+        known
+        AOL
     """
 
     headline = story.get("headline", "")
@@ -161,7 +168,7 @@ def build_search_queries(story):
     queries.extend(entities["events"])
 
     #
-    # Existing keyword fallback
+    # Keyword phrase fallback
     #
 
     keywords = extract_keywords(headline)
@@ -178,7 +185,23 @@ def build_search_queries(story):
     if len(keywords) >= 2:
         queries.append(" ".join(keywords[-2:]))
 
-    queries.extend(keywords)
+    #
+    # NOTE:
+    #
+    # We intentionally DO NOT search every
+    # individual keyword anymore.
+    #
+    # This prevents searches such as:
+    #
+    #   Mad
+    #   star
+    #   dies
+    #   known
+    #   AOL
+    #
+    # which produced many irrelevant Media
+    # Library matches.
+    #
 
     #
     # Remove duplicates
@@ -203,8 +226,6 @@ def build_search_queries(story):
         final.append(query)
 
     return final
-
-
 def search_media_library(story):
 
     queries = build_search_queries(story)
