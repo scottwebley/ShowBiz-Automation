@@ -74,30 +74,47 @@ Today's News:
 {stories_json}
 """
 
-    try:
+    last_error = None
 
-        response = client.responses.create(
-            model="gpt-5.5",
-            input=prompt
-        )
+    for attempt in range(1, 4):
 
-        report = json.loads(response.output_text)
+        try:
 
-    except Exception as e:
+            if attempt > 1:
+                print(
+                    f"Retrying Daily Report "
+                    f"(attempt {attempt}/3)..."
+                )
 
-        print("\n========================================")
-        print("DAILY REPORT")
-        print("========================================")
-        print("Unable to generate daily report:")
-        print(e)
-        print("Skipping Winners & Losers generation.\n")
+            response = client.responses.create(
+                model="gpt-5.5",
+                input=prompt
+            )
 
-        return None
+            report = json.loads(
+                response.output_text
+            )
 
-    # Add today's date for the newsroom pipeline.
-    report["date"] = datetime.now().strftime("%B %d, %Y").replace(" 0", " ")
+            report["date"] = (
+                datetime.now()
+                .strftime("%B %d, %Y")
+                .replace(" 0", " ")
+            )
 
-    return report
+            return report
+
+        except Exception as e:
+
+            last_error = e
+
+    print("\n========================================")
+    print("DAILY REPORT")
+    print("========================================")
+    print("Unable to generate daily report:")
+    print(last_error)
+    print("Skipping Winners & Losers generation.\n")
+
+    return None
 
 
 if __name__ == "__main__":
