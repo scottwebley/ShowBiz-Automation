@@ -1,6 +1,6 @@
 # ============================================
 # SHOWBIZ DAILY AUTOMATION ENGINE
-# Version 3.1
+# Version 3.2
 # ============================================
 
 import subprocess
@@ -52,6 +52,17 @@ def main():
     # -----------------------------------------
 
     run_step("Update Homepage Winners", "upload_daily_report.py")
+
+    # -----------------------------------------
+    # Publish Featured Entertainer of the Week
+    # (Runs every day but safely skips if this
+    # week's feature has already been published.)
+    # -----------------------------------------
+
+    run_step(
+        "Publish Featured Entertainer",
+        "publish_featured_entertainer.py",
+    )
 
     print("\n===================================")
     print("✓ SHOWBIZ DAILY COMPLETE")

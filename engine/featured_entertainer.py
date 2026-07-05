@@ -1,5 +1,5 @@
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from openai import OpenAI
 from dotenv import load_dotenv
@@ -9,101 +9,138 @@ load_dotenv()
 client = OpenAI()
 
 
+def _week_label():
+    """
+    Return the editorial week beginning on Monday.
+    """
+
+    today = datetime.now()
+    monday = today - timedelta(days=today.weekday())
+
+    return (
+        f"Week of "
+        f"{monday.strftime('%B')} "
+        f"{monday.day}, "
+        f"{monday.year}"
+    )
+
+
+def _build_story_list(stories):
+    """
+    Build a numbered story list for GPT.
+    """
+
+    lines = []
+
+    for i, story in enumerate(stories, start=1):
+
+        lines.append(
+            f"""
+Story {i}
+
+Headline:
+{story.get("headline", "")}
+
+Summary:
+{story.get("summary", "")}
+
+Category:
+{story.get("category", "")}
+"""
+        )
+
+    return "\n".join(lines)
+
+
 def generate_featured_entertainer(stories):
     """
     Generates the ShowBiz Featured Entertainer of the Week.
 
-    Returns a Python dictionary, or None if generation fails.
+    Returns a Python dictionary or None.
     """
 
-    stories_json = json.dumps(stories, indent=2)
+    if not stories:
+        return None
 
     current_date = datetime.now()
-    week_label = (
-        f"Week of {current_date.strftime('%B')} "
-        f"{current_date.day}, {current_date.year}"
-    )
+
+    story_text = _build_story_list(stories)
 
     prompt = f"""
-You are the senior editorial team for ShowBiz.com.
+You are the senior editorial board for ShowBiz.com.
 
-Analyze this week's entertainment news.
+Analyze the supplied entertainment news.
 
-Return ONLY valid JSON.
-
-Select the ONE entertainer who most deserves to be named
+Choose ONE entertainer who most deserves to be named
 Featured Entertainer of the Week.
 
-The entertainer may be an actor, actress, musician, singer,
-director, producer, comedian, television personality, athlete
-working in entertainment, or any other entertainment figure.
-
-Choose based ONLY on the supplied news.
+Use ONLY the supplied stories.
 
 Do not invent facts.
 
-Do not speculate.
+Return ONLY valid JSON.
 
-If multiple people qualify, choose the one with the greatest
-overall impact across the week's news.
-
-Return this structure exactly:
+Return EXACTLY this structure:
 
 {{
-  "name": "",
-  "profession": "",
-  "headline": "",
-  "summary": "",
-  "why_selected": "",
-  "career_highlights": [
-    "",
-    "",
-    ""
-  ],
-  "recent_projects": [
-    "",
-    "",
-    ""
-  ],
-  "fun_fact": "",
-  "quote": "",
-  "watch_next": [
-    "",
-    "",
-    ""
-  ]
+    "story_number": 1,
+    "name": "",
+    "profession": "",
+    "headline": "",
+    "summary": "",
+    "why_selected": "",
+    "career_highlights": [
+        "",
+        "",
+        ""
+    ],
+    "recent_projects": [
+        "",
+        "",
+        ""
+    ],
+    "fun_fact": "",
+    "quote": "",
+    "watch_next": [
+        "",
+        "",
+        ""
+    ]
 }}
 
-Editorial Rules
+Rules:
 
-• Base every decision ONLY on the supplied news.
-• Keep summary factual.
-• Keep why_selected focused on this week's news.
-• Career highlights should be concise.
-• Recent projects should be real projects when available.
-• If no verified quote is supported by widely known public information,
-  return an empty string.
-• Never fabricate information.
-• Return ONLY valid JSON.
+- story_number MUST be the selected story number.
+- story_number must be an integer.
+- summary should be concise.
+- why_selected should focus on THIS WEEK.
+- Do not fabricate quotes.
+- If no quote is appropriate return "".
+- Return ONLY JSON.
 
-Entertainment News:
+Stories:
 
-{stories_json}
+{story_text}
 """
 
     try:
 
         response = client.responses.create(
             model="gpt-5.5",
-            input=prompt
+            input=prompt,
         )
 
-        entertainer = json.loads(response.output_text)
+        entertainer = json.loads(
+            response.output_text
+        )
 
         if not isinstance(entertainer, dict):
-            raise ValueError("Response is not a JSON object.")
+            raise ValueError(
+                "Response is not an object."
+            )
 
-        required_fields = [
+        required = [
+            "story_number",
             "name",
             "profession",
             "headline",
@@ -116,18 +153,78 @@ Entertainment News:
             "watch_next",
         ]
 
-        for field in required_fields:
+        for field in required:
+
             if field not in entertainer:
-                raise ValueError(f"Missing required field: {field}")
+                raise ValueError(
+                    f"Missing field: {field}"
+                )
 
-        if not isinstance(entertainer["career_highlights"], list):
-            raise ValueError("career_highlights must be a list.")
+        if not isinstance(
+            entertainer["story_number"],
+            int,
+        ):
+            raise ValueError(
+                "story_number must be an integer."
+            )
 
-        if not isinstance(entertainer["recent_projects"], list):
-            raise ValueError("recent_projects must be a list.")
+        if (
+            entertainer["story_number"] < 1
+            or entertainer["story_number"] > len(stories)
+        ):
+            raise ValueError(
+                "story_number out of range."
+            )
 
-        if not isinstance(entertainer["watch_next"], list):
-            raise ValueError("watch_next must be a list.")
+        if not isinstance(
+            entertainer["career_highlights"],
+            list,
+        ):
+            raise ValueError(
+                "career_highlights must be a list."
+            )
+
+        if not isinstance(
+            entertainer["recent_projects"],
+            list,
+        ):
+            raise ValueError(
+                "recent_projects must be a list."
+            )
+
+        if not isinstance(
+            entertainer["watch_next"],
+            list,
+        ):
+            raise ValueError(
+                "watch_next must be a list."
+            )
+                #
+        # Attach the exact source story selected by GPT.
+        #
+
+        story_index = entertainer["story_number"] - 1
+
+        entertainer["source_story"] = stories[story_index]
+
+        #
+        # Future-proof the image pipeline.
+        #
+
+        entertainer["image_query"] = entertainer["name"]
+
+        #
+        # Metadata.
+        #
+
+        entertainer["week"] = _week_label()
+
+        entertainer["generated_date"] = (
+            current_date.strftime("%B %d, %Y")
+            .replace(" 0", " ")
+        )
+
+        return entertainer
 
     except Exception as e:
 
@@ -140,35 +237,47 @@ Entertainment News:
 
         return None
 
-    entertainer["week"] = week_label
-    entertainer["generated_date"] = current_date.strftime("%B %d, %Y").replace(
-        " 0", " "
-    )
-
-    return entertainer
-
 
 if __name__ == "__main__":
 
     sample = [
         {
-            "headline": "Christopher Nolan announces new film",
-            "summary": "Major studio announcement.",
-            "category": "Movies"
+            "headline": (
+                "Christopher Nolan announces new film"
+            ),
+            "summary": (
+                "Major studio announcement."
+            ),
+            "category": "Movies",
         },
         {
-            "headline": "Taylor Swift announces surprise tour dates",
-            "summary": "Fans react to new stadium tour.",
-            "category": "Music"
+            "headline": (
+                "Taylor Swift announces surprise tour dates"
+            ),
+            "summary": (
+                "Fans react to new stadium tour."
+            ),
+            "category": "Music",
         },
         {
-            "headline": "Zendaya signs new starring role",
-            "summary": "Upcoming feature film announced.",
-            "category": "Movies"
-        }
+            "headline": (
+                "Zendaya signs new starring role"
+            ),
+            "summary": (
+                "Upcoming feature film announced."
+            ),
+            "category": "Movies",
+        },
     ]
 
     report = generate_featured_entertainer(sample)
 
     if report is not None:
-        print(json.dumps(report, indent=4))
+
+        print(
+            json.dumps(
+                report,
+                indent=4,
+                ensure_ascii=False,
+            )
+        )

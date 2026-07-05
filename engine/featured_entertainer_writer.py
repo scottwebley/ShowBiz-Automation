@@ -7,70 +7,81 @@ def write_featured_entertainer(report):
     a complete HTML article for ShowBiz.com.
     """
 
-    week = report.get("week", "")
-    generated_date = report.get(
-        "generated_date",
-        datetime.now().strftime("%B %d, %Y")
-    )
+    today = datetime.now().strftime("%B %d, %Y")
+
+    highlights = report.get("career_highlights", [])
+    projects = report.get("recent_projects", [])
+    watch_next = report.get("watch_next", [])
 
     html = f"""
-<p><strong>{week}</strong></p>
+<p><strong>{today}</strong></p>
 
 <p>
-Each week, the ShowBiz.com editorial team recognizes one performer
-whose work, accomplishments, or headline-making news had the biggest
-impact across the entertainment industry.
+Every week, ShowBiz.com recognizes one performer whose work,
+achievements and news coverage made the biggest impact across
+the entertainment industry.
 </p>
 
-<h2>⭐ Featured Entertainer: {report["name"]}</h2>
+<h2>⭐ Featured Entertainer of the Week</h2>
 
-<p><strong>{report["profession"]}</strong></p>
+<p>
+<strong>{report["name"]}</strong> has been selected as this week's
+Featured Entertainer.
+</p>
 
-<h2>📰 This Week's Headline</h2>
+<p>
+{report["why_selected"]}
+</p>
 
-<p>{report["headline"]}</p>
+<h2>About {report["name"]}</h2>
 
-<h2>🎭 Why They Were Selected</h2>
+<p>
+{report["summary"]}
+</p>
 
-<p>{report["why_selected"]}</p>
+<h2>Profession</h2>
 
-<h2>📖 Weekly Summary</h2>
+<p>
+{report["profession"]}
+</p>
 
-<p>{report["summary"]}</p>
-
-<h2>🏆 Career Highlights</h2>
+<h2>Career Highlights</h2>
 
 <ul>
 """
 
-    for item in report["career_highlights"]:
+    for item in highlights:
         html += f"<li>{item}</li>\n"
 
     html += """
 </ul>
 
-<h2>🎬 Recent Projects</h2>
+<h2>Recent Projects</h2>
 
 <ul>
 """
 
-    for item in report["recent_projects"]:
+    for item in projects:
         html += f"<li>{item}</li>\n"
 
     html += """
 </ul>
 """
 
-    if report.get("fun_fact", "").strip():
-        html += f"""
-<h2>🎉 Fun Fact</h2>
+    if report.get("fun_fact"):
 
-<p>{report["fun_fact"]}</p>
+        html += f"""
+<h2>Fun Fact</h2>
+
+<p>
+{report["fun_fact"]}
+</p>
 """
 
-    if report.get("quote", "").strip():
+    if report.get("quote"):
+
         html += f"""
-<h2>💬 Quote</h2>
+<h2>Quote</h2>
 
 <blockquote>
 {report["quote"]}
@@ -78,37 +89,50 @@ impact across the entertainment industry.
 """
 
     html += """
-<h2>👀 Watch Next</h2>
+<h2>Watch Next</h2>
 
 <ul>
 """
 
-    for item in report["watch_next"]:
+    for item in watch_next:
         html += f"<li>{item}</li>\n"
 
     html += f"""
 </ul>
 
+<h2>Why They Were Chosen</h2>
+
 <p>
-Published: {generated_date}
+{report["why_selected"]}
 </p>
 
 <p>
-Check back next week for another edition of
-<strong>Featured Entertainer of the Week.</strong>
+This selection is based on ShowBiz.com's editorial analysis of
+the week's biggest entertainment stories.
+</p>
+
+<p>
+Visit ShowBiz.com every week for a new
+<strong>Featured Entertainer of the Week</strong>.
 </p>
 """
 
+    title = (
+        f"⭐ Featured Entertainer of the Week: "
+        f"{report['name']}"
+    )
+
+    excerpt = (
+        f"{report['name']} is ShowBiz.com's "
+        f"Featured Entertainer of the Week."
+    )
+
     return {
-        "title": f"⭐ Featured Entertainer of the Week - {week}",
+        "title": title,
         "content": html,
-        "excerpt": (
-            f"This week's Featured Entertainer is "
-            f'{report["name"]}, recognized for making the biggest impact '
-            "across entertainment."
-        ),
-        "category": "Entertainment Industry",
-        "category_id": 56,
+        "excerpt": excerpt,
+        "category": "Featured Entertainer",
+        "category_id": 55,
     }
 
 
@@ -116,42 +140,39 @@ if __name__ == "__main__":
 
     sample = {
         "name": "Taylor Swift",
-        "profession": "Singer-songwriter",
-        "headline": "Taylor Swift announces surprise stadium tour dates",
+        "profession": "Singer-Songwriter",
+        "headline": "Taylor Swift dominates entertainment headlines",
         "summary": (
-            "Taylor Swift generated major entertainment headlines after "
-            "announcing surprise stadium tour dates."
+            "Taylor Swift captured worldwide attention this week "
+            "following major entertainment news."
         ),
         "why_selected": (
-            "Her announcement dominated entertainment conversation and "
-            "generated widespread fan excitement."
+            "She dominated entertainment coverage throughout the week."
         ),
         "career_highlights": [
             "Multiple Grammy Award winner",
-            "Record-breaking global touring artist",
-            "One of the world's best-selling recording artists"
+            "Record-breaking world tours",
+            "One of the world's best-selling artists",
         ],
         "recent_projects": [
-            "Surprise stadium tour announcement",
-            "The Eras Tour",
-            "Taylor Swift: The Eras Tour"
+            "International concert tour",
+            "New music releases",
+            "High-profile public appearances",
         ],
         "fun_fact": (
-            "Taylor Swift has repeatedly broken concert attendance "
-            "and touring revenue records."
+            "She is the first artist to occupy the entire Top 10 "
+            "of the Billboard Hot 100."
         ),
         "quote": "",
         "watch_next": [
-            "Upcoming stadium tour dates",
-            "New music announcements",
-            "Future live performances"
+            "Upcoming tour announcements",
+            "Future music releases",
+            "Award season appearances",
         ],
-        "week": "Week of July 4, 2026",
-        "generated_date": "July 4, 2026"
     }
 
     article = write_featured_entertainer(sample)
 
     print(article["title"])
     print()
-    print(article["content"][:800])
+    print(article["content"][:1200])

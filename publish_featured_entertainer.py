@@ -23,14 +23,9 @@ FEATURED_JSON = Path(
 def current_editorial_week():
     """
     Return the Monday of the current editorial week.
-
-    Example:
-
-        Week of June 29, 2026
     """
 
     today = datetime.now()
-
     monday = today - timedelta(days=today.weekday())
 
     return (
@@ -43,7 +38,7 @@ def current_editorial_week():
 
 def save_featured_entertainer(report, post):
     """
-    Save a compact JSON file for homepage use.
+    Save homepage data.
     """
 
     FEATURED_JSON.parent.mkdir(
@@ -78,9 +73,6 @@ def save_featured_entertainer(report, post):
 
 
 def already_published_this_week():
-    """
-    Prevent duplicate publication.
-    """
 
     if not FEATURED_JSON.exists():
         return False
@@ -110,10 +102,6 @@ def main():
     print("\n==============================")
     print(" FEATURED ENTERTAINER")
     print("==============================\n")
-
-    #
-    # Skip duplicate publication
-    #
 
     if already_published_this_week():
 
@@ -177,38 +165,18 @@ def main():
     )
 
     #
-    # Select the story that best matches
-    # the Featured Entertainer headline.
+    # Use the exact story selected
+    # by the AI engine.
     #
 
-    image_story = None
-
-    headline = (
-        report.get("headline", "")
-        .strip()
-        .lower()
+    image_story = report.get(
+        "source_story"
     )
-
-    for story in stories:
-
-        if (
-            story["headline"]
-            .strip()
-            .lower()
-            == headline
-        ):
-
-            image_story = story
-
-            break
-
-    #
-    # Fall back to highest-ranked story.
-    #
 
     if image_story is None:
 
         image_story = stories[0]
+
     print(
         "STEP 4: Selecting featured image..."
     )
@@ -216,7 +184,6 @@ def main():
     image = get_featured_image(
         image_story
     )
-
     if image:
 
         article["image"] = image
@@ -253,7 +220,7 @@ def main():
         return
 
     #
-    # Save homepage JSON
+    # Save homepage JSON.
     #
 
     save_featured_entertainer(
