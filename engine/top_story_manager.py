@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz Top Story Manager
-Version 2.1
+Version 2.3
 ===========================================
 
 Purpose:
@@ -9,13 +9,17 @@ Purpose:
     story should replace the current
     ShowBiz Top Story.
 
-New in Version 2.1
+New in Version 2.3
 
-- Keeps existing replacement logic.
-- Removes the Top Story category from
-  previous Top Stories.
-- Preserves the newly published Top Story.
+- Decodes HTML entities.
+- Normalizes smart punctuation before
+  comparing titles.
+- Prevents duplicate Top Story
+  publications caused by punctuation
+  differences.
 """
+
+from html import unescape
 
 import requests
 from requests.auth import HTTPBasicAuth
@@ -37,6 +41,22 @@ def _auth():
     return HTTPBasicAuth(
         WP_USERNAME,
         WP_APP_PASSWORD,
+    )
+
+
+def _normalize_title(title):
+    """
+    Normalize titles before comparison.
+    """
+
+    return (
+        unescape(title)
+        .replace("’", "'")
+        .replace("‘", "'")
+        .replace("“", '"')
+        .replace("”", '"')
+        .strip()
+        .lower()
     )
 
 
@@ -79,20 +99,16 @@ def should_replace_top_story(candidate_story):
         print("\nNo current Top Story.")
         return True
 
-    current_title = (
+    current_title = _normalize_title(
         current["title"]["rendered"]
-        .strip()
-        .lower()
     )
 
-    candidate_title = (
+    candidate_title = _normalize_title(
         candidate_story["headline"]
-        .strip()
-        .lower()
     )
 
     print("\nCurrent Top Story:")
-    print(current["title"]["rendered"])
+    print(unescape(current["title"]["rendered"]))
 
     print("\nCandidate:")
     print(candidate_story["headline"])
@@ -110,12 +126,6 @@ def retire_previous_top_stories(keep_post_id):
     """
     Remove the Top Story category from every
     Top Story except the newly published one.
-
-    Parameters
-    ----------
-    keep_post_id : int
-        The WordPress post ID that should
-        remain the current Top Story.
     """
 
     posts = get_top_story_posts()
@@ -171,4 +181,4 @@ if __name__ == "__main__":
     print(f"\nCurrent Top Story posts: {len(posts)}")
 
     for post in posts:
-        print("-", post["title"]["rendered"])
+        print("-", unescape(post["title"]["rendered"]))
