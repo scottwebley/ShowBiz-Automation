@@ -64,6 +64,15 @@ def main():
         "publish_featured_entertainer.py",
     )
 
+    # -----------------------------------------
+    # Update Homepage Featured Entertainer
+    # -----------------------------------------
+
+    run_step(
+        "Update Homepage Featured Entertainer",
+        "update_featured_entertainer_homepage.py",
+    )
+
     print("\n===================================")
     print("✓ SHOWBIZ DAILY COMPLETE")
     print("===================================")
