@@ -19,213 +19,15 @@ Author:
     ShowBiz Automation
 """
 
-import re
-
 from engine.entity_extractor import extract_entities
+from engine.image_query_builder import build_search_queries
+from engine.image_candidate_ranker import rank_candidates
 from engine.media_library.search import find_best_images
 
 
 MINIMUM_SCORE = 175
 
 
-STOP_WORDS = {
-    "a",
-    "an",
-    "and",
-    "are",
-    "as",
-    "at",
-    "be",
-    "been",
-    "being",
-    "before",
-    "behind",
-    "by",
-    "during",
-    "for",
-    "from",
-    "how",
-    "in",
-    "into",
-    "is",
-    "it",
-    "its",
-    "like",
-    "new",
-    "of",
-    "on",
-    "or",
-    "over",
-    "returns",
-    "return",
-    "returned",
-    "reveals",
-    "reveal",
-    "revealed",
-    "announces",
-    "announce",
-    "announced",
-    "confirms",
-    "confirm",
-    "confirmed",
-    "that",
-    "the",
-    "their",
-    "this",
-    "to",
-    "today",
-    "under",
-    "was",
-    "were",
-    "what",
-    "when",
-    "where",
-    "which",
-    "who",
-    "why",
-    "with",
-}
-
-
-def extract_keywords(headline):
-
-    words = re.findall(r"[A-Za-z0-9']+", headline)
-
-    keywords = []
-
-    for word in words:
-
-        clean = word.strip()
-
-        if len(clean) < 3:
-            continue
-
-        if clean.lower() in STOP_WORDS:
-            continue
-
-        keywords.append(clean)
-
-    return keywords
-
-
-def build_search_queries(story):
-    """
-    Build prioritized search queries.
-
-    Entity searches are performed first.
-
-    Keyword fallback intentionally uses only
-    meaningful multi-word phrases to avoid
-    noisy searches such as:
-        Mad
-        star
-        dies
-        known
-        AOL
-    """
-
-    headline = story.get("headline", "")
-
-    entities = extract_entities(headline)
-
-    queries = []
-
-    #
-    # Highest priority:
-    # People
-    #
-
-    queries.extend(entities["people"])
-
-    #
-    # Movies
-    #
-
-    queries.extend(entities["movies"])
-
-    #
-    # TV
-    #
-
-    queries.extend(entities["tv_shows"])
-
-    #
-    # Music
-    #
-
-    queries.extend(entities["music_artists"])
-
-    #
-    # Organizations
-    #
-
-    queries.extend(entities["organizations"])
-
-    #
-    # Events
-    #
-
-    queries.extend(entities["events"])
-
-    #
-    # Keyword phrase fallback
-    #
-
-    keywords = extract_keywords(headline)
-
-    if keywords:
-        queries.append(" ".join(keywords))
-
-    if len(keywords) >= 3:
-        queries.append(" ".join(keywords[:3]))
-
-    if len(keywords) >= 2:
-        queries.append(" ".join(keywords[:2]))
-
-    if len(keywords) >= 2:
-        queries.append(" ".join(keywords[-2:]))
-
-    #
-    # NOTE:
-    #
-    # We intentionally DO NOT search every
-    # individual keyword anymore.
-    #
-    # This prevents searches such as:
-    #
-    #   Mad
-    #   star
-    #   dies
-    #   known
-    #   AOL
-    #
-    # which produced many irrelevant Media
-    # Library matches.
-    #
-
-    #
-    # Remove duplicates
-    #
-
-    seen = set()
-    final = []
-
-    for query in queries:
-
-        query = query.strip()
-
-        if not query:
-            continue
-
-        key = query.lower()
-
-        if key in seen:
-            continue
-
-        seen.add(key)
-        final.append(query)
-
-    return final
 def search_media_library(story):
 
     queries = build_search_queries(story)
@@ -331,6 +133,11 @@ def search_media_library(story):
     else:
 
         print("No Media Library matches found.")
+
+        candidates = rank_candidates(
+        story,
+        candidates,
+    )
 
     return candidates
 
