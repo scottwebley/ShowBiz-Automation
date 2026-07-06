@@ -44,6 +44,14 @@ ORGANIZATIONS = {
     "Sony",
     "Universal",
     "Warner Bros",
+    "Sky",
+    "ITV",
+    "BBC",
+    "CNN",
+    "MSNBC",
+    "ESPN",
+    "Hulu",
+    "Peacock",
 }
 
 
@@ -81,6 +89,22 @@ STOP_NAME_WORDS = {
     "Also",
     "Star",
     "News",
+    "TV",
+    "Show",
+    "Movie",
+    "Film",
+    "Series",
+    "Season",
+    "Episode",
+    "Netflix",
+    "HBO",
+    "Disney",
+    "Amazon",
+    "Prime",
+    "Video",
+    "Mom",
+    "Dad",
+    "Britain",
 }
 
 
@@ -106,6 +130,19 @@ def normalize(text: str) -> str:
     return ALIASES.get(text, text)
 
 
+def _clean_person_token(token: str) -> str:
+
+    token = token.strip(".,:;!?()[]{}\"'")
+
+    if token.endswith("'s"):
+        token = token[:-2]
+
+    elif token.endswith("’s"):
+        token = token[:-2]
+
+    return token
+
+
 def _extract_people(headline: str):
 
     people = []
@@ -116,7 +153,7 @@ def _extract_people(headline: str):
 
     while i < len(tokens):
 
-        current = tokens[i]
+        current = _clean_person_token(tokens[i])
 
         #
         # The Rock
@@ -138,13 +175,18 @@ def _extract_people(headline: str):
 
         if i + 1 < len(tokens):
 
-            first = tokens[i]
-            second = tokens[i + 1]
+            first = current
+            second = _clean_person_token(tokens[i + 1])
+            if len(first) < 2 or len(second) < 2:
+                i += 1
+                continue
 
             if (
                 first not in STOP_NAME_WORDS
                 and second not in STOP_NAME_WORDS
-            ):
+                and first not in ORGANIZATIONS
+                and second not in ORGANIZATIONS
+     ):
 
                 people.append(normalize(f"{first} {second}"))
                 i += 2
@@ -242,6 +284,8 @@ if __name__ == "__main__":
         "The Rock Announces Big 'Moana 3' News",
         "Ashley Tisdale Is a Toxic Mom in New Netflix TV Show, Ali Wong & 1 More Also Star",
         "Taylor Swift and Travis Kelce's expected wedding celebrations approach",
+        "Sky ITV announces new programming",
+        "Sky to buy ITV Britain's oldest commercial television network for $2.1B",
     ]
 
     for headline in tests:
