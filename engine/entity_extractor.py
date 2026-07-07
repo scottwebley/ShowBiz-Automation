@@ -263,7 +263,7 @@ def _extract_people(headline: str):
     Extract likely person or performer names.
 
     Strategy:
-      • Look for 2-4 consecutive capitalized words.
+      • Look for 2-word names.
       • Reject common verbs/connectors.
       • Preserve aliases.
     """
@@ -327,7 +327,7 @@ def _extract_people(headline: str):
         i += 1
 
     #
-    # Remove duplicates
+    # Remove duplicates.
     #
 
     seen = set()
@@ -439,11 +439,6 @@ def extract_entities(headline: str):
     #
     # Single-word music artist detection.
     #
-    # Example:
-    #   RIIZE
-    #   BTS
-    #   BLACKPINK
-    #
 
     for word in re.findall(
         r"\b[A-Z][A-Za-z0-9']+\b",
@@ -462,7 +457,7 @@ def extract_entities(headline: str):
                 clean
             )
 
-        #
+    #
     # Generic keywords
     #
 
@@ -472,7 +467,8 @@ def extract_entities(headline: str):
     )
 
     #
-    # Don't duplicate people or organizations.
+    # Don't duplicate people, organizations,
+    # or music artists.
     #
 
     excluded = {
@@ -484,7 +480,7 @@ def extract_entities(headline: str):
         )
         for w in re.findall(
             r"[A-Za-z0-9']+",
-            name
+            name,
         )
     }
 
@@ -511,7 +507,6 @@ def extract_entities(headline: str):
         )
 
     return entities
-
 
 # --------------------------------------------------
 # TESTING
