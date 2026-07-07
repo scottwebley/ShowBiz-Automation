@@ -191,17 +191,28 @@ def _clean_person_token(token: str) -> str:
         token = token[:-2]
 
     return token
+
 def _is_valid_person(first: str, second: str) -> bool:
     """
     Return True if two consecutive capitalized words
     are likely to represent a real person.
     """
 
+    first = _clean_person_token(first)
+    second = _clean_person_token(second)
+
     #
     # Basic length check.
     #
 
     if len(first) < 2 or len(second) < 2:
+        return False
+
+    #
+    # Reject repeated words.
+    #
+
+    if first == second:
         return False
 
     #
@@ -215,7 +226,17 @@ def _is_valid_person(first: str, second: str) -> bool:
         return False
 
     #
-    # Reject common headline words.
+    # Reject organizations.
+    #
+
+    if first in ORGANIZATIONS:
+        return False
+
+    if second in ORGANIZATIONS:
+        return False
+
+    #
+    # Reject obvious headline words.
     #
 
     if first in {
@@ -229,27 +250,17 @@ def _is_valid_person(first: str, second: str) -> bool:
         return False
 
     if second in {
-        "Out",
         "News",
         "Era",
+        "Out",
     }:
         return False
 
     #
-    # Reject organizations.
+    # Reject numbers.
     #
 
-    if first in ORGANIZATIONS:
-        return False
-
-    if second in ORGANIZATIONS:
-        return False
-
-    #
-    # Reject repeated words.
-    #
-
-    if first == second:
+    if first.isdigit() or second.isdigit():
         return False
 
     return True
