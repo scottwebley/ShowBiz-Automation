@@ -6,7 +6,10 @@ from engine.ai_news import get_top_stories
 from engine.featured_entertainer import (
     generate_featured_entertainer,
 )
-from engine.featured_entertainer_writer import (
+from engine.featured_entertainer_profile import (
+    generate_featured_entertainer_profile,
+)
+from engine.featured_entertainer_writer_v3 import (
     write_featured_entertainer,
 )
 from engine.image_selector import get_featured_image
@@ -73,8 +76,57 @@ def save_featured_entertainer(report, post):
 
 
 def already_published_this_week():
+   def already_published_this_week():
+
+    return False
 
     if not FEATURED_JSON.exists():
+        return False
+
+    try:
+
+        with open(
+            FEATURED_JSON,
+            "r",
+            encoding="utf-8"
+        ) as f:
+
+            data = json.load(f)
+
+        return (
+            data.get("week")
+            == current_editorial_week()
+        )
+
+    except Exception:
+
+        return False
+
+    return False
+
+    # Temporary test override.
+    # Remove this line after testing.
+
+    if not FEATURED_JSON.exists():
+        return False
+
+    try:
+
+        with open(
+            FEATURED_JSON,
+            "r",
+            encoding="utf-8"
+        ) as f:
+
+            data = json.load(f)
+
+        return (
+            data.get("week")
+            == current_editorial_week()
+        )
+
+    except Exception:
+
         return False
 
     try:
@@ -147,6 +199,19 @@ def main():
         )
 
         return
+    
+    profile = generate_featured_entertainer_profile(
+    report
+)
+
+    if profile is None:
+
+        print(
+        "\nFeatured profile "
+        "generation failed.\n"
+    )
+
+        return
 
     print(
         "✓ Featured Entertainer selected.\n"
@@ -157,8 +222,8 @@ def main():
     )
 
     article = write_featured_entertainer(
-        report
-    )
+    profile
+  ) 
 
     print(
         "✓ HTML article created.\n"
