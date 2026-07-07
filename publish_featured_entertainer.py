@@ -22,6 +22,10 @@ FEATURED_JSON = Path(
     "data/featured_entertainer.json"
 )
 
+ARCHIVE_DIR = Path(
+    "data/featured_entertainers"
+)
+
 
 def current_editorial_week():
     """
@@ -75,8 +79,72 @@ def save_featured_entertainer(report, post):
     )
 
 
+def archive_featured_entertainer(
+    profile,
+    article,
+):
+    """
+    Save a permanent archive copy.
+    """
+
+    ARCHIVE_DIR.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    slug = (
+        profile.get("name", "")
+        .lower()
+        .replace(" ", "-")
+        .replace("/", "-")
+    )
+
+    date = datetime.now().strftime(
+        "%Y-%m-%d"
+    )
+
+    json_file = (
+        ARCHIVE_DIR /
+        f"{date}-{slug}.json"
+    )
+
+    html_file = (
+        ARCHIVE_DIR /
+        f"{date}-{slug}.html"
+    )
+
+    with open(
+        json_file,
+        "w",
+        encoding="utf-8",
+    ) as f:
+
+        json.dump(
+            profile,
+            f,
+            indent=4,
+            ensure_ascii=False,
+        )
+
+    with open(
+        html_file,
+        "w",
+        encoding="utf-8",
+    ) as f:
+
+        f.write(
+            article.get(
+                "content",
+                "",
+            )
+        )
+
+    print(
+        f"✓ Archived: {json_file.name}"
+    )
+
+
 def already_published_this_week():
-   def already_published_this_week():
 
     return False
 
@@ -101,8 +169,7 @@ def already_published_this_week():
     except Exception:
 
         return False
-
-    return False
+        return False
 
     # Temporary test override.
     # Remove this line after testing.
@@ -199,17 +266,17 @@ def main():
         )
 
         return
-    
+
     profile = generate_featured_entertainer_profile(
-    report
-)
+        report
+    )
 
     if profile is None:
 
         print(
-        "\nFeatured profile "
-        "generation failed.\n"
-    )
+            "\nFeatured profile "
+            "generation failed.\n"
+        )
 
         return
 
@@ -222,17 +289,12 @@ def main():
     )
 
     article = write_featured_entertainer(
-    profile
-  ) 
+        profile
+    )
 
     print(
         "✓ HTML article created.\n"
     )
-
-    #
-    # Use the exact story selected
-    # by the AI engine.
-    #
 
     image_story = report.get(
         "source_story"
@@ -249,6 +311,7 @@ def main():
     image = get_featured_image(
         image_story
     )
+
     if image:
 
         article["image"] = image
@@ -262,11 +325,6 @@ def main():
         print(
             "⚠ No featured image available."
         )
-
-    #
-    # Publish into the Featured
-    # Entertainer category.
-    #
 
     article["category_id"] = CATEGORY_ID
 
@@ -283,14 +341,14 @@ def main():
         )
 
         return
-
-    #
-    # Save homepage JSON.
-    #
-
-    save_featured_entertainer(
+        save_featured_entertainer(
         report,
         post
+    )
+
+    archive_featured_entertainer(
+        profile,
+        article,
     )
 
     print("\n==============================")

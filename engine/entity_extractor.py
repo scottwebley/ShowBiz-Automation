@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz Entity Extractor
-Version 2.0
+Version 3.0
 ===========================================
 
 Extracts entertainment entities from news
@@ -18,12 +18,20 @@ from __future__ import annotations
 import re
 
 
+# --------------------------------------------------
+# ALIASES
+# --------------------------------------------------
+
 ALIASES = {
     "The Rock": "Dwayne Johnson",
     "MCU": "Marvel Cinematic Universe",
     "LOTR": "The Lord of the Rings",
 }
 
+
+# --------------------------------------------------
+# ORGANIZATIONS
+# --------------------------------------------------
 
 ORGANIZATIONS = {
     "Netflix",
@@ -55,11 +63,21 @@ ORGANIZATIONS = {
 }
 
 
+# --------------------------------------------------
+# STOP WORDS
+# --------------------------------------------------
+
 STOP_NAME_WORDS = {
     "Is",
     "Are",
     "Was",
     "Were",
+    "Has",
+    "Have",
+    "Had",
+    "Do",
+    "Does",
+    "Did",
     "Announces",
     "Announced",
     "Reveal",
@@ -85,6 +103,8 @@ STOP_NAME_WORDS = {
     "Or",
     "Big",
     "New",
+    "Latest",
+    "Breaking",
     "More",
     "Also",
     "Star",
@@ -96,6 +116,14 @@ STOP_NAME_WORDS = {
     "Series",
     "Season",
     "Episode",
+    "Challenge",
+    "Challenges",
+    "Listeners",
+    "Listener",
+    "Views",
+    "View",
+    "Decoding",
+    "Surpasses",
     "Netflix",
     "HBO",
     "Disney",
@@ -105,6 +133,14 @@ STOP_NAME_WORDS = {
     "Mom",
     "Dad",
     "Britain",
+    "Your",
+    "My",
+    "Our",
+    "Their",
+    "His",
+    "Her",
+    "Its",
+    "Era",
 }
 
 
@@ -126,13 +162,27 @@ IGNORE_KEYWORDS = {
 }
 
 
+# --------------------------------------------------
+# HELPERS
+# --------------------------------------------------
+
+
 def normalize(text: str) -> str:
+    """
+    Apply alias normalization.
+    """
+
     return ALIASES.get(text, text)
 
 
 def _clean_person_token(token: str) -> str:
+    """
+    Clean punctuation and possessives.
+    """
 
-    token = token.strip(".,:;!?()[]{}\"'")
+    token = token.strip(
+        ".,:;!?()[]{}\"'"
+    )
 
     if token.endswith("'s"):
         token = token[:-2]
@@ -141,21 +191,38 @@ def _clean_person_token(token: str) -> str:
         token = token[:-2]
 
     return token
+# --------------------------------------------------
+# PEOPLE
+# --------------------------------------------------
 
 
 def _extract_people(headline: str):
+    """
+    Extract likely person or performer names.
+
+    Strategy:
+      • Look for 2-4 consecutive capitalized words.
+      • Reject common verbs/connectors.
+      • Preserve aliases.
+    """
 
     people = []
 
-    tokens = re.findall(r"[A-Z][A-Za-z0-9']*", headline)
+    tokens = re.findall(
+        r"[A-Z][A-Za-z0-9']*",
+        headline,
+    )
 
     i = 0
 
     while i < len(tokens):
 
-        current = _clean_person_token(tokens[i])
+        current = _clean_person_token(
+            tokens[i]
+        )
 
         #
+        # Special case:
         # The Rock
         #
 
@@ -165,7 +232,10 @@ def _extract_people(headline: str):
             and tokens[i + 1] == "Rock"
         ):
 
-            people.append(normalize("The Rock"))
+            people.append(
+                normalize("The Rock")
+            )
+
             i += 2
             continue
 
@@ -176,29 +246,37 @@ def _extract_people(headline: str):
         if i + 1 < len(tokens):
 
             first = current
-            second = _clean_person_token(tokens[i + 1])
-            if len(first) < 2 or len(second) < 2:
-                i += 1
-                continue
+
+            second = _clean_person_token(
+                tokens[i + 1]
+            )
 
             if (
-                first not in STOP_NAME_WORDS
+                len(first) >= 2
+                and len(second) >= 2
+                and first not in STOP_NAME_WORDS
                 and second not in STOP_NAME_WORDS
                 and first not in ORGANIZATIONS
                 and second not in ORGANIZATIONS
-     ):
+            ):
 
-                people.append(normalize(f"{first} {second}"))
+                people.append(
+                    normalize(
+                        f"{first} {second}"
+                    )
+                )
+
                 i += 2
                 continue
 
         i += 1
 
     #
-    # Remove duplicates preserving order.
+    # Remove duplicates
     #
 
     seen = set()
+
     final = []
 
     for person in people:
@@ -207,12 +285,58 @@ def _extract_people(headline: str):
             continue
 
         seen.add(person)
+
         final.append(person)
 
     return final
 
 
+# --------------------------------------------------
+# QUOTED TITLES
+# --------------------------------------------------
+
+
+def _extract_quoted_titles(
+    headline: str,
+):
+    """
+    Extract quoted titles.
+
+    Example:
+
+        RIIZE's 'Do Your Dance'
+
+    becomes
+
+        Do Your Dance
+    """
+
+    titles = []
+
+    for title in re.findall(
+        r"[\"']([^\"']+)[\"']",
+        headline,
+    ):
+
+        title = title.strip()
+
+        if len(title) < 2:
+            continue
+
+        if title not in titles:
+
+            titles.append(title)
+
+    return titles
+# --------------------------------------------------
+# ENTITY EXTRACTION
+# --------------------------------------------------
+
+
 def extract_entities(headline: str):
+    """
+    Extract entertainment entities from a headline.
+    """
 
     entities = {
         "people": [],
@@ -226,36 +350,71 @@ def extract_entities(headline: str):
     }
 
     #
-    # Quoted titles.
+    # Quoted titles
     #
 
-    for title in re.findall(r"[\"']([^\"']+)[\"']", headline):
-
-        if len(title) > 2:
-
-            entities["movies"].append(title)
+    entities["movies"] = _extract_quoted_titles(
+        headline
+    )
 
     #
-    # Organizations.
+    # Organizations
     #
 
-    for org in ORGANIZATIONS:
+    for org in sorted(
+        ORGANIZATIONS,
+        key=len,
+        reverse=True,
+    ):
 
         if org.lower() in headline.lower():
 
-            entities["organizations"].append(org)
+            entities["organizations"].append(
+                org
+            )
 
     #
-    # People.
+    # People
     #
 
-    entities["people"] = _extract_people(headline)
+    entities["people"] = _extract_people(
+        headline
+    )
 
     #
-    # Generic keywords.
+    # Single-word music artist detection.
+    #
+    # Example:
+    #   RIIZE
+    #   BTS
+    #   BLACKPINK
     #
 
-    words = re.findall(r"[A-Za-z0-9']+", headline)
+    for word in re.findall(
+        r"\b[A-Z][A-Za-z0-9']+\b",
+        headline,
+    ):
+
+        clean = _clean_person_token(word)
+
+        if (
+            clean.isupper()
+            and len(clean) >= 3
+            and clean not in entities["music_artists"]
+        ):
+
+            entities["music_artists"].append(
+                clean
+            )
+
+    #
+    # Generic keywords
+    #
+
+    words = re.findall(
+        r"[A-Za-z0-9']+",
+        headline,
+    )
 
     for word in words:
 
@@ -267,13 +426,19 @@ def extract_entities(headline: str):
         if lower in IGNORE_KEYWORDS:
             continue
 
-        if word in entities["people"]:
+        if word in entities["generic_keywords"]:
             continue
 
-        if word not in entities["generic_keywords"]:
-            entities["generic_keywords"].append(word)
+        entities["generic_keywords"].append(
+            word
+        )
 
     return entities
+
+
+# --------------------------------------------------
+# TESTING
+# --------------------------------------------------
 
 
 if __name__ == "__main__":
@@ -281,11 +446,10 @@ if __name__ == "__main__":
     from pprint import pprint
 
     tests = [
-        "The Rock Announces Big 'Moana 3' News",
-        "Ashley Tisdale Is a Toxic Mom in New Netflix TV Show, Ali Wong & 1 More Also Star",
+        "Tiger in Your Sheets Has Kacey Musgraves Listeners Decoding a New Era",
+        "RIIZE's 'Do Your Dance' Dance Challenge Surpasses 100M TikTok Views",
         "Taylor Swift and Travis Kelce's expected wedding celebrations approach",
-        "Sky ITV announces new programming",
-        "Sky to buy ITV Britain's oldest commercial television network for $2.1B",
+        "The Rock Announces Big 'Moana 3' News",
     ]
 
     for headline in tests:
@@ -295,4 +459,6 @@ if __name__ == "__main__":
         print(headline)
         print("=" * 60)
 
-        pprint(extract_entities(headline))
+        pprint(
+            extract_entities(headline)
+        )

@@ -116,11 +116,21 @@ def _field(label: str, value) -> str:
 
 def render_hero(profile: dict) -> str:
     """
-    Render the page hero.
+    Render the article hero.
     """
 
     today = datetime.now().strftime(
         "%B %d, %Y"
+    )
+
+    name = profile.get(
+        "name",
+        ""
+    )
+
+    profession = profile.get(
+        "profession",
+        ""
     )
 
     headline = profile.get(
@@ -133,21 +143,22 @@ def render_hero(profile: dict) -> str:
         ""
     )
 
-    name = profile.get(
-        "name",
-        ""
-    )
-
     return f"""
+<div class="showbiz-hero">
+
+<p><strong>FEATURED ENTERTAINER OF THE WEEK</strong></p>
+
+<h1>{name}</h1>
+
+<p><em>{profession}</em></p>
+
 <p><strong>{today}</strong></p>
 
-<h1>{headline}</h1>
-
-<p>
-<strong>{name}</strong>
-</p>
+<h2>{headline}</h2>
 
 {_paragraph(intro)}
+
+</div>
 """
 # --------------------------------------------------
 # QUICK FACTS
