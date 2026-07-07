@@ -210,11 +210,11 @@ def _is_valid_person(first: str, second: str) -> bool:
 
     if first in STOP_NAME_WORDS:
         return False
-    #
-    # Reject obvious headline fragments.
-    #
 
-        #
+    if second in STOP_NAME_WORDS:
+        return False
+
+    #
     # Reject common headline words.
     #
 
@@ -234,18 +234,12 @@ def _is_valid_person(first: str, second: str) -> bool:
         "Era",
     }:
         return False
-    
-    if second in STOP_NAME_WORDS:
-        return False
 
     #
     # Reject organizations.
     #
 
     if first in ORGANIZATIONS:
-        return False
-
-    if second in ORGANIZATIONS:
         return False
 
     if second in ORGANIZATIONS:
@@ -468,7 +462,7 @@ def extract_entities(headline: str):
                 clean
             )
 
-    #
+        #
     # Generic keywords
     #
 
@@ -477,9 +471,28 @@ def extract_entities(headline: str):
         headline,
     )
 
+    #
+    # Don't duplicate people or organizations.
+    #
+
+    excluded = {
+        w.lower()
+        for name in (
+            entities["people"]
+            + entities["organizations"]
+            + entities["music_artists"]
+        )
+        for w in re.findall(
+            r"[A-Za-z0-9']+",
+            name
+        )
+    }
+
     for word in words:
 
-        lower = word.lower()
+        clean = _clean_person_token(word)
+
+        lower = clean.lower()
 
         if len(lower) < 4:
             continue
@@ -487,11 +500,14 @@ def extract_entities(headline: str):
         if lower in IGNORE_KEYWORDS:
             continue
 
-        if word in entities["generic_keywords"]:
+        if lower in excluded:
+            continue
+
+        if clean in entities["generic_keywords"]:
             continue
 
         entities["generic_keywords"].append(
-            word
+            clean
         )
 
     return entities
