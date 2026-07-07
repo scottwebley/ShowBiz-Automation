@@ -191,6 +191,74 @@ def _clean_person_token(token: str) -> str:
         token = token[:-2]
 
     return token
+def _is_valid_person(first: str, second: str) -> bool:
+    """
+    Return True if two consecutive capitalized words
+    are likely to represent a real person.
+    """
+
+    #
+    # Basic length check.
+    #
+
+    if len(first) < 2 or len(second) < 2:
+        return False
+
+    #
+    # Reject stop words.
+    #
+
+    if first in STOP_NAME_WORDS:
+        return False
+    #
+    # Reject obvious headline fragments.
+    #
+
+        #
+    # Reject common headline words.
+    #
+
+    if first in {
+        "An",
+        "Big",
+        "Breaking",
+        "Latest",
+        "New",
+        "Close",
+    }:
+        return False
+
+    if second in {
+        "Out",
+        "News",
+        "Era",
+    }:
+        return False
+    
+    if second in STOP_NAME_WORDS:
+        return False
+
+    #
+    # Reject organizations.
+    #
+
+    if first in ORGANIZATIONS:
+        return False
+
+    if second in ORGANIZATIONS:
+        return False
+
+    if second in ORGANIZATIONS:
+        return False
+
+    #
+    # Reject repeated words.
+    #
+
+    if first == second:
+        return False
+
+    return True
 # --------------------------------------------------
 # PEOPLE
 # --------------------------------------------------
@@ -251,14 +319,7 @@ def _extract_people(headline: str):
                 tokens[i + 1]
             )
 
-            if (
-                len(first) >= 2
-                and len(second) >= 2
-                and first not in STOP_NAME_WORDS
-                and second not in STOP_NAME_WORDS
-                and first not in ORGANIZATIONS
-                and second not in ORGANIZATIONS
-            ):
+            if _is_valid_person(first, second):
 
                 people.append(
                     normalize(
