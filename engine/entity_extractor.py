@@ -419,37 +419,38 @@ def extract_entities(headline: str):
     # Quoted titles
     #
 
-    entities["movies"] = _extract_quoted_titles(
-        headline
-    )
+    quoted_titles = _extract_quoted_titles(headline)
+    entities["movies"] = list(quoted_titles)
 
     #
     # Organizations
     #
+
+    headline_lower = headline.lower()
 
     for org in sorted(
         ORGANIZATIONS,
         key=len,
         reverse=True,
     ):
-
-        if org.lower() in headline.lower():
-
-            entities["organizations"].append(
-                org
-            )
+        if org.lower() in headline_lower:
+            entities["organizations"].append(org)
 
     #
     # People
     #
 
-    entities["people"] = _extract_people(
-        headline
-    )
+    entities["people"] = _extract_people(headline)
 
     #
-    # Single-word music artist detection.
+    # Single-word music artists
     #
+
+    excluded_music = {
+        token.lower()
+        for value in entities["organizations"]
+        for token in re.findall(r"[A-Za-z0-9']+", value)
+    }
 
     for word in re.findall(
         r"\b[A-Z][A-Za-z0-9']+\b",
@@ -461,61 +462,82 @@ def extract_entities(headline: str):
         if (
             clean.isupper()
             and len(clean) >= 3
+            and clean.lower() not in excluded_music
             and clean not in entities["music_artists"]
         ):
-
-            entities["music_artists"].append(
-                clean
-            )
+            entities["music_artists"].append(clean)
 
     #
-    # Generic keywords
+    # Build exclusion list
     #
 
-    words = re.findall(
-        r"[A-Za-z0-9']+",
-        headline,
-    )
+    excluded = set()
 
-    #
-    # Don't duplicate people, organizations,
-    # or music artists.
-    #
-
-    excluded = {
-        w.lower()
-        for name in (
-            entities["people"]
-            + entities["organizations"]
-            + entities["music_artists"]
-        )
-        for w in re.findall(
+    for value in (
+        entities["people"]
+        + entities["organizations"]
+        + entities["music_artists"]
+        + quoted_titles
+    ):
+        for token in re.findall(
             r"[A-Za-z0-9']+",
-            name,
-        )
+            value,
+        ):
+            excluded.add(token.lower())
+
+    #
+    # Better generic keywords
+    #
+
+    skip_words = {
+        *IGNORE_KEYWORDS,
+        "your",
+        "their",
+        "listeners",
+        "listener",
+        "surpasses",
+        "decoding",
+        "views",
+        "view",
+        "challenge",
+        "challenges",
+        "announces",
+        "announced",
+        "expected",
+        "breaking",
+        "latest",
+        "more",
+        "also",
+        "has",
+        "have",
+        "had",
     }
 
-    for word in words:
+    for word in re.findall(
+        r"[A-Za-z0-9']+",
+        headline,
+    ):
 
         clean = _clean_person_token(word)
+
+        if not clean:
+            continue
 
         lower = clean.lower()
 
         if len(lower) < 4:
             continue
 
-        if lower in IGNORE_KEYWORDS:
+        if lower in excluded:
             continue
 
-        if lower in excluded:
+        if lower in skip_words:
             continue
 
         if clean in entities["generic_keywords"]:
             continue
 
-        entities["generic_keywords"].append(
-            clean
-        )
+        entities["generic_keywords"].append(clean)
 
     return entities
 
