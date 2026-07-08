@@ -1,29 +1,26 @@
 """
 ===========================================
 ShowBiz Homepage Ranker
-Version 1.0
+Version 2.0
 ===========================================
 
 Purpose:
     Rank today's approved entertainment
     stories for the ShowBiz homepage.
 
-Responsibilities:
-
-    • Receive approved stories
-    • Ask GPT to rank every story
-    • Validate the returned ranking
-    • Assign homepage_rank
-    • Return ranked stories
-
 Author:
     ShowBiz Automation
 """
 
-import json
-
 from dotenv import load_dotenv
 from openai import OpenAI
+
+from engine.homepage_prompt import (
+    build_homepage_prompt,
+)
+from engine.homepage_validator import (
+    validate_homepage_ranking,
+)
 
 load_dotenv()
 
@@ -47,196 +44,75 @@ def rank_homepage(stories):
         return []
 
     #
-    # Build simplified list
+    # Build simplified list.
     #
 
     choices = []
 
     for index, story in enumerate(stories):
 
-        choices.append({
-
-            "index": index,
-
-            "headline":
-                story.get("headline", ""),
-
-            "summary":
-                story.get("summary", ""),
-
-            "category":
-                story.get("category", ""),
-
-            "score":
-                story.get("score", 0)
-
-        })
+        choices.append(
+            {
+                "index": index,
+                "headline": story.get(
+                    "headline",
+                    "",
+                ),
+                "summary": story.get(
+                    "summary",
+                    "",
+                ),
+                "category": story.get(
+                    "category",
+                    "",
+                ),
+                "score": story.get(
+                    "score",
+                    0,
+                ),
+            }
+        )
 
     #
-    # GPT Prompt
+    # Build GPT prompt.
     #
 
-    prompt = f"""
-You are the Editor-in-Chief of ShowBiz.com.
+    prompt = build_homepage_prompt(
+        choices
+    )
 
-Below is today's approved entertainment news.
-
-Your job is to rank EVERY story in the
-order it should appear on the homepage.
-
-Rank #1 should be the single most
-important entertainment story.
-
-Rank the remaining stories in descending
-editorial importance.
-
-Prioritize:
-
-• Breaking entertainment news
-• Major celebrities
-• Movie announcements
-• Television
-• Streaming
-• Box office
-• Awards
-• Music
-• Broadway
-• Gaming
-
-Avoid promoting:
-
-• Roundups
-• SummaryBrief articles
-• Tag pages
-• Archive pages
-• Evergreen articles
-• Generic listicles
-• Minor updates
-
-Return ONLY valid JSON.
-
-Example:
-
-{{
-    "homepage_ranking":
-    [
-        4,
-        7,
-        2,
-        1,
-        5,
-        0,
-        3,
-        6
-    ]
-}}
-
-Stories:
-
-{json.dumps(choices, indent=2)}
-"""
+    #
+    # Ask GPT.
+    #
 
     response = client.responses.create(
 
         model="gpt-5.5",
 
-        input=prompt
+        input=prompt,
 
     )
 
     result = response.output_text.strip()
 
     #
-    # Remove markdown fences
+    # Validate AI response.
     #
 
-    if result.startswith("```"):
-
-        result = result.split("\n", 1)[1]
-        result = result.rsplit("```", 1)[0]
-            #
-    # Parse JSON
-    #
-
-    data = json.loads(result)
-
-    if "homepage_ranking" not in data:
-
-        raise ValueError(
-            "AI response missing 'homepage_ranking'"
-        )
-
-    ranking = data["homepage_ranking"]
-
-    if not isinstance(ranking, list):
-
-        raise ValueError(
-            "'homepage_ranking' must be a list."
-        )
+    ranking = validate_homepage_ranking(
+        result,
+        len(stories),
+    )
 
     #
-    # Validate size
-    #
-
-    if len(ranking) != len(stories):
-
-        raise ValueError(
-            f"Expected {len(stories)} ranked stories, "
-            f"received {len(ranking)}."
-        )
-
-    #
-    # Validate indices
-    #
-
-    seen = set()
-
-    for index in ranking:
-
-        if not isinstance(index, int):
-
-            raise ValueError(
-                f"Invalid index type: {index}"
-            )
-
-        if index < 0 or index >= len(stories):
-
-            raise ValueError(
-                f"Invalid story index: {index}"
-            )
-
-        if index in seen:
-
-            raise ValueError(
-                f"Duplicate story index: {index}"
-            )
-
-        seen.add(index)
-
-    #
-    # Check for missing stories
-    #
-
-    expected = set(range(len(stories)))
-
-    missing = expected - seen
-
-    if missing:
-
-        raise ValueError(
-            f"Missing story indices: "
-            f"{sorted(missing)}"
-        )
-
-    #
-    # Build ranked list
+    # Build ranked list.
     #
 
     ranked = []
 
     for rank, index in enumerate(
         ranking,
-        start=1
+        start=1,
     ):
 
         story = stories[index]
