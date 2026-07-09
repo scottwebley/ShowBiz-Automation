@@ -1,207 +1,34 @@
-from openai import OpenAI
-from dotenv import load_dotenv
+"""
+===========================================
+ShowBiz AI Writer
+Version 2.0
+===========================================
 
-load_dotenv()
+Public API for article generation.
 
-client = OpenAI()
+The implementation lives in
+engine.ai_writer_core.
 
-# ==========================================================
-# WordPress Category IDs
-# ==========================================================
+This file intentionally stays small and
+stable so production callers never change.
+"""
 
-CATEGORY_IDS = {
-    "Movies": 3,
-    "TV & Streaming": 4,
-    "Music": 6,
-    "Gaming": 7,
-    "Celebrity News": 55,
-    "Entertainment Industry": 56,
-    "Style": 59,
-    "ShowBiz Originals": 60,
-}
-
-# ==========================================================
-# AI Category Aliases
-# ==========================================================
-
-CATEGORY_ALIASES = {
-
-    # TV
-
-    "Television": "TV & Streaming",
-    "TV": "TV & Streaming",
-    "Streaming": "TV & Streaming",
-
-    # Celebrity
-
-    "Celebrity": "Celebrity News",
-    "Celebrities": "Celebrity News",
-    "Stars": "Celebrity News",
-
-    # Movies
-
-    "Movie": "Movies",
-    "Film": "Movies",
-
-    # Awards
-
-    "Awards": "Entertainment Industry",
-    "Award": "Entertainment Industry",
-    "Award Show": "Entertainment Industry",
-
-    # Music
-
-    "Concert": "Music",
-    "Tours": "Music",
-
-    # Default entertainment bucket
-
-    "Broadway": "Entertainment Industry",
-    "Festival": "Entertainment Industry",
-}
-
-# ==========================================================
-# WordPress Top Story category
-# ==========================================================
-
-TOP_STORY_CATEGORY_ID = 64
+from engine.ai_writer_core import write_article_core
 
 
 def write_article(story):
     """
-    Write a ShowBiz article and return everything
-    needed for WordPress publishing.
+    Generate a publishable article.
+
+    Args:
+        story (dict): Selected Top Story.
 
     Returns:
-        dict on success
-        None if article generation fails
+        dict | None
     """
+    return write_article_core(story)
 
-    category = story.get(
-        "category",
-        "Entertainment Industry",
-    )
 
-    #
-    # Normalize category names
-    #
-
-    category = CATEGORY_ALIASES.get(
-        category,
-        category,
-    )
-
-    #
-    # Final safety net.
-    #
-
-    if category not in CATEGORY_IDS:
-
-        print(
-            f"Unknown category '{category}' "
-            "-> Entertainment Industry"
-        )
-
-        category = "Entertainment Industry"
-
-    prompt = f"""
-You are a senior entertainment journalist writing for ShowBiz.com.
-
-Write a completely original entertainment news article.
-
-Do NOT copy wording from any publication.
-
-Write in a professional entertainment news style similar in quality to
-Variety, Deadline or The Hollywood Reporter while maintaining a unique voice.
-
-Return HTML ONLY.
-
-Do NOT use Markdown.
-
-Structure exactly like this:
-
-<h3>Why This Matters</h3>
-
-<p>...</p>
-
-<h3>Industry Context</h3>
-
-<p>...</p>
-
-<h3>What Happens Next?</h3>
-
-<p>...</p>
-
-Requirements:
-
-- 600-900 words
-- Short readable paragraphs
-- Explain why the story matters
-- Add industry context
-- End with What Happens Next
-- Do NOT include a title in the article
-- Do NOT repeat the headline
-- Do NOT use # headings
-- Do NOT wrap the HTML in code fences
-
-Headline:
-{story["headline"]}
-
-Summary:
-{story["summary"]}
-
-Category:
-{category}
-"""
-
-    #
-    # Gracefully handle OpenAI failures.
-    #
-
-    try:
-
-        response = client.responses.create(
-            model="gpt-5.5",
-            input=prompt,
-        )
-
-    except Exception as e:
-
-        print("\n========================================")
-        print("AI WRITER")
-        print("========================================")
-        print(f"Unable to generate article:\n{e}")
-        print("Skipping publication.\n")
-
-        return None
-
-    html = response.output_text.strip()
-
-    if not html:
-
-        print("\nAI Writer returned an empty article.\n")
-
-        return None
-
-    #
-    # Every Top Story belongs to:
-    #
-    #   Top Story
-    #   Editorial Category
-    #
-
-    category_ids = [
-        TOP_STORY_CATEGORY_ID,
-        CATEGORY_IDS[category],
-    ]
-
-    return {
-        "title": story["headline"],
-        "content": html,
-        "excerpt": story["summary"],
-        "category": category,
-        "category_ids": category_ids,
-    }
 #
 # Test
 #
