@@ -1,10 +1,9 @@
-from openai import OpenAI
-from dotenv import load_dotenv
 import json
 
-load_dotenv()
-
-client = OpenAI()
+from engine.openai_helper import (
+    client,
+    create_response,
+)
 
 
 def select_top_story(stories):
@@ -79,9 +78,9 @@ Stories:
 {json.dumps(choices, indent=2)}
 """
 
-    response = client.responses.create(
+    response = create_response(
         model="gpt-5.5",
-        input=prompt
+        input=prompt,
     )
 
     result = response.output_text.strip()

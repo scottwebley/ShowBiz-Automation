@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz Image Query Builder
-Version 1.0
+Version 1.1
 ===========================================
 
 Builds prioritized Media Library search
@@ -19,10 +19,12 @@ from engine.entity_extractor import extract_entities
 
 
 def _unique(items):
+
     seen = set()
     result = []
 
     for item in items:
+
         item = item.strip()
 
         if not item:
@@ -39,7 +41,10 @@ def _unique(items):
     return result
 
 
-def build_search_queries(story, keyword_queries=None):
+def build_search_queries(
+    story,
+    keyword_queries=None,
+):
     """
     Returns a prioritized list of search queries.
 
@@ -48,80 +53,128 @@ def build_search_queries(story, keyword_queries=None):
         1. Individual people
         2. Person pairs
         3. Three-person combination
-        4. Movies
-        5. TV
-        6. Music
+        4. Movies (only when no people)
+        5. TV (only when no people)
+        6. Music (only when no people)
         7. Organizations
         8. Events
         9. Keyword fallback
     """
 
-    headline = story.get("headline", "")
+    headline = story.get(
+        "headline",
+        "",
+    )
 
-    entities = extract_entities(headline)
+    entities = extract_entities(
+        headline
+    )
 
     queries = []
 
-    #
-    # Individual people
-    #
 
-    people = entities["people"]
+    people = [
+        person.strip()
+        for person in entities["people"]
+        if person.strip()
+    ]
 
-    queries.extend(people)
-
-    #
-    # Person pairs
-    #
-
-    for pair in combinations(people, 2):
-        queries.append(" ".join(pair))
 
     #
-    # Three-person combination
+    # People always win.
+    #
+
+    queries.extend(
+        people
+    )
+
+
+    #
+    # Person pairs.
+    #
+
+    for pair in combinations(
+        people,
+        2,
+    ):
+
+        queries.append(
+            " ".join(pair)
+        )
+
+
+    #
+    # Three-person combination.
     #
 
     if len(people) >= 3:
-        queries.append(" ".join(people[:3]))
+
+        queries.append(
+            " ".join(
+                people[:3]
+            )
+        )
+
 
     #
-    # Movies
+    # Only use title searches when
+    # no people were found.
+    #
+    # Prevents:
+    #
+    # Bonnie Tyler
+    # Total Eclipse of the Heart
+    #
+    # from becoming a movie search.
     #
 
-    queries.extend(entities["movies"])
+    if not people:
+
+        queries.extend(
+            entities["movies"]
+        )
+
+        queries.extend(
+            entities["tv_shows"]
+        )
+
+        queries.extend(
+            entities["music_artists"]
+        )
+
 
     #
-    # TV
+    # Organizations remain useful.
     #
 
-    queries.extend(entities["tv_shows"])
+    queries.extend(
+        entities["organizations"]
+    )
+
 
     #
-    # Music
+    # Events remain useful.
     #
 
-    queries.extend(entities["music_artists"])
+    queries.extend(
+        entities["events"]
+    )
+
 
     #
-    # Organizations
-    #
-
-    queries.extend(entities["organizations"])
-
-    #
-    # Events
-    #
-
-    queries.extend(entities["events"])
-
-    #
-    # Keyword fallback
+    # Keyword fallback.
     #
 
     if keyword_queries:
-        queries.extend(keyword_queries)
 
-    return _unique(queries)
+        queries.extend(
+            keyword_queries
+        )
+
+
+    return _unique(
+        queries
+    )
 
 
 if __name__ == "__main__":
@@ -132,6 +185,7 @@ if __name__ == "__main__":
             "expected wedding celebrations approach"
     }
 
+
     print()
 
     for query in build_search_queries(
@@ -140,4 +194,5 @@ if __name__ == "__main__":
             "Taylor Swift Travis Kelce wedding"
         ],
     ):
+
         print(query)

@@ -10,15 +10,17 @@ Uses GPT to make editorial image decisions.
 
 import json
 
-from openai import OpenAI
 from dotenv import load_dotenv
+
+from engine.openai_helper import (
+    client,
+    create_response,
+)
 
 from story import Story
 from editorial_decision import EditorialDecision
 
 load_dotenv()
-
-client = OpenAI()
 
 
 def analyze_story(story: Story) -> EditorialDecision:
@@ -81,9 +83,9 @@ wikimedia
 Return ONLY JSON.
 """
 
-    response = client.responses.create(
+    response = create_response(
         model="gpt-5.5",
-        input=prompt
+        input=prompt,
     )
 
     data = json.loads(response.output_text)

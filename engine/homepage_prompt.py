@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz Homepage Prompt
-Version 1.0
+Version 1.1
 ===========================================
 
 Purpose:
@@ -40,15 +40,27 @@ important entertainment story.
 Rank the remaining stories in descending
 editorial importance.
 
+The homepage should prioritize stories
+that matter most to readers RIGHT NOW.
+
+Top Story Editorial Rules:
+
+• Favor fresh developments over routine recurring events.
+• Do not automatically rank awards nominations above major entertainment industry news.
+• Major company announcements, studio moves, streaming platform changes, franchise developments, and historic entertainment events can outrank awards coverage.
+• Consider cultural impact, reader interest, and industry significance.
+• A major business or creative announcement may be more important than a standard annual event.
+• Breaking news should generally outrank older or expected announcements.
+
 Prioritize:
 
 • Breaking entertainment news
-• Major celebrities
-• Movie announcements
-• Television
-• Streaming
-• Box office
-• Awards
+• Major celebrity developments
+• Major movie announcements
+• Significant television and streaming developments
+• Industry-changing announcements
+• Box office stories
+• Awards (especially winners, controversies, historic moments, and major announcements)
 • Music
 • Broadway
 • Gaming

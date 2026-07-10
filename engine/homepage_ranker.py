@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz Homepage Ranker
-Version 2.0
+Version 2.1
 ===========================================
 
 Purpose:
@@ -12,8 +12,11 @@ Author:
     ShowBiz Automation
 """
 
-from dotenv import load_dotenv
-from openai import OpenAI
+from engine.openai_helper import (
+    client,
+    create_response,
+    ai_available,
+)
 
 from engine.homepage_prompt import (
     build_homepage_prompt,
@@ -21,10 +24,6 @@ from engine.homepage_prompt import (
 from engine.homepage_validator import (
     validate_homepage_ranking,
 )
-
-load_dotenv()
-
-client = OpenAI()
 
 
 def rank_homepage(stories):
@@ -41,6 +40,14 @@ def rank_homepage(stories):
     """
 
     if not stories:
+        return []
+
+    #
+    # Skip immediately if AI has already
+    # been disabled for this run.
+    #
+
+    if not ai_available():
         return []
 
     #
@@ -85,13 +92,20 @@ def rank_homepage(stories):
     # Ask GPT.
     #
 
-    response = client.responses.create(
-
+    response = create_response(
         model="gpt-5.5",
-
         input=prompt,
-
     )
+
+    #
+    # If AI became unavailable while
+    # processing the request, return an
+    # empty ranking so the caller can
+    # fall back naturally.
+    #
+
+    if response is None:
+        return []
 
     result = response.output_text.strip()
 
@@ -122,6 +136,8 @@ def rank_homepage(stories):
         ranked.append(story)
 
     return ranked
+
+
 if __name__ == "__main__":
 
     from engine.ai_news import get_top_stories

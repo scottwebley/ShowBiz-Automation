@@ -1,12 +1,10 @@
 import json
 from datetime import datetime, timedelta
 
-from openai import OpenAI
-from dotenv import load_dotenv
-
-load_dotenv()
-
-client = OpenAI()
+from engine.openai_helper import (
+    client,
+    create_response,
+)
 
 
 def _week_label():
@@ -125,7 +123,7 @@ Stories:
 
     try:
 
-        response = client.responses.create(
+        response = create_response(
             model="gpt-5.5",
             input=prompt,
         )
@@ -199,24 +197,11 @@ Stories:
             raise ValueError(
                 "watch_next must be a list."
             )
-                #
-        # Attach the exact source story selected by GPT.
-        #
 
         story_index = entertainer["story_number"] - 1
 
         entertainer["source_story"] = stories[story_index]
-
-        #
-        # Future-proof the image pipeline.
-        #
-
         entertainer["image_query"] = entertainer["name"]
-
-        #
-        # Metadata.
-        #
-
         entertainer["week"] = _week_label()
 
         entertainer["generated_date"] = (

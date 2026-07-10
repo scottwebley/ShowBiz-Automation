@@ -6,6 +6,11 @@ from engine.editor import should_publish
 from engine.ai_writer import write_article
 from engine.image_selector import get_featured_image
 from engine.wordpress import publish_post
+from engine.pending_story import (
+    save_pending_story,
+    load_pending_story,
+    clear_pending_story,
+)
 from engine.top_story_manager import (
     should_replace_top_story,
     retire_previous_top_stories,
@@ -18,101 +23,103 @@ def main():
     print("   SHOWBIZ AI NEWSROOM")
     print("==============================\n")
 
-    # -------------------------------------------------
-    # STEP 1
-    # -------------------------------------------------
+    pending_story = load_pending_story()
+    is_pending_story = pending_story is not None
 
-    print("STEP 1: Fetching live entertainment news...")
+    if is_pending_story:
 
-    stories = get_top_stories()
+        print("Pending Top Story found.")
+        print("Retrying previous article generation.\n")
 
-    if not stories:
-        print("No stories found.")
-        return
+        story = pending_story
 
-    print(f"✓ {len(stories)} stories downloaded.\n")
+    else:
 
-    # -------------------------------------------------
-    # STEP 2
-    # -------------------------------------------------
+        print("STEP 1: Fetching live entertainment news...")
 
-    print("STEP 2: Ranking homepage stories...")
+        stories = get_top_stories()
 
-    try:
+        if not stories:
+            print("No stories found.")
+            return
 
-        ranked = rank_homepage(stories)
+        print(f"✓ {len(stories)} stories downloaded.\n")
 
-        if not ranked:
-            raise ValueError("Homepage Ranker returned no stories.")
-
-        print("✓ Homepage Ranker completed.\n")
-
-        print("Top Homepage Rankings:")
-
-        for story in ranked[:11]:
-
-            print(
-                f"#{story['homepage_rank']:>2} "
-                f"[{story.get('category', 'Unknown')}] "
-                f"{story.get('headline', '')}"
-            )
-
-        print()
-
-        story = ranked[0]
-
-    except Exception as e:
-
-        print(f"⚠ Homepage Ranker failed: {e}")
+        print("STEP 2: Ranking homepage stories...")
 
         try:
 
-            print("⚠ Falling back to AI Story Selector.\n")
+            ranked = rank_homepage(stories)
 
-            story = select_top_story(stories)
+            if not ranked:
+                raise ValueError("Homepage Ranker returned no stories.")
+
+            print("✓ Homepage Ranker completed.\n")
+
+            print("Top Homepage Rankings:")
+
+            for story in ranked[:11]:
+
+                print(
+                    f"#{story['homepage_rank']:>2} "
+                    f"[{story.get('category', 'Unknown')}] "
+                    f"{story.get('headline', '')}"
+                )
+
+            print()
+
+            story = ranked[0]
 
         except Exception as e:
 
-            print(f"⚠ AI Story Selector failed: {e}")
-            print("⚠ Falling back to Local Story Selector.\n")
+            print(f"⚠ Homepage Ranker failed: {e}")
 
-            story = select_local_story(stories)
+            try:
 
-            if story is None:
+                print("⚠ Falling back to AI Story Selector.\n")
 
-                print("No valid stories available.")
-                return
+                story = select_top_story(stories)
+
+            except Exception as e:
+
+                print(f"⚠ AI Story Selector failed: {e}")
+                print("⚠ Falling back to Local Story Selector.\n")
+
+                story = select_local_story(stories)
+
+                if story is None:
+
+                    print("No valid stories available.")
+                    return
 
     print(f"Top Story: {story['headline']}")
     print(f"Category: {story['category']}\n")
 
-    # -------------------------------------------------
-    # STEP 3
-    # -------------------------------------------------
-
     print("STEP 3: Editorial review...")
 
-    if not should_publish(story):
+    if not is_pending_story:
 
-        print("\nCurrent Top Story remains the best story.")
-        print("Nothing will be published.\n")
+        if not should_publish(story):
 
-        return
+            print("\nCurrent Top Story remains the best story.")
+            print("Nothing will be published.\n")
 
-    print("✓ Editorial approval granted.\n")
+            return
 
-    if not should_replace_top_story(story):
+        print("✓ Editorial approval granted.\n")
 
-        print("\nCurrent published Top Story remains the best story.")
-        print("Publishing skipped.\n")
+        if not should_replace_top_story(story):
 
-        return
+            print("\nCurrent published Top Story remains the best story.")
+            print("Publishing skipped.\n")
 
-    print("✓ Top Story Manager approved replacement.\n")
+            return
 
-    # -------------------------------------------------
-    # STEP 4
-    # -------------------------------------------------
+        print("✓ Top Story Manager approved replacement.\n")
+
+    else:
+
+        print("✓ Pending story already approved. Continuing publication retry.\n")
 
     print("STEP 4: Writing article...")
 
@@ -120,29 +127,24 @@ def main():
 
     if article is None:
 
+        save_pending_story(story)
+
         print("\n========================================")
         print("NEWSROOM")
         print("========================================")
         print("Article generation failed.")
+        print("Top Story saved for retry.")
         print("Publishing skipped.\n")
 
         return
 
     print("✓ Article complete.\n")
 
-    # -------------------------------------------------
-    # STEP 5
-    # -------------------------------------------------
-
     print("STEP 5: Generating featured image...")
 
     article["image"] = get_featured_image(story)
 
     print("✓ Featured image generated.\n")
-
-    # -------------------------------------------------
-    # STEP 6
-    # -------------------------------------------------
 
     print("STEP 6: Publishing to WordPress...")
 
@@ -156,9 +158,7 @@ def main():
 
     retire_previous_top_stories(post["id"])
 
-    # -------------------------------------------------
-    # DONE
-    # -------------------------------------------------
+    clear_pending_story()
 
     print("\n==============================")
     print("      SUCCESS")

@@ -23,11 +23,13 @@ import json
 from pathlib import Path
 
 from dotenv import load_dotenv
-from openai import OpenAI
+
+from engine.openai_helper import (
+    client,
+    create_response,
+)
 
 load_dotenv()
-
-client = OpenAI()
 
 PROMPT_FILE = Path(
     "prompts/featured_entertainer_profile.md"
@@ -98,6 +100,8 @@ Why Featured:
 
 Return ONLY valid JSON.
 """
+
+
 def generate_featured_entertainer_profile(
     report: dict,
 ) -> dict | None:
@@ -116,7 +120,7 @@ def generate_featured_entertainer_profile(
 
     try:
 
-        response = client.responses.create(
+        response = create_response(
             model="gpt-5.5",
             input=prompt,
         )
@@ -132,9 +136,6 @@ def generate_featured_entertainer_profile(
             raise ValueError(
                 "Profile is not a JSON object."
             )
-        #
-        # Required fields.
-        #
 
         required = [
             "name",
@@ -167,10 +168,6 @@ def generate_featured_entertainer_profile(
                     f"Missing field: {field}"
                 )
 
-        #
-        # Validate dictionaries.
-        #
-
         for field in (
             "quick_facts",
             "family",
@@ -184,10 +181,6 @@ def generate_featured_entertainer_profile(
                 raise ValueError(
                     f"{field} must be an object."
                 )
-
-        #
-        # Validate lists.
-        #
 
         list_fields = [
             "career_highlights",
@@ -214,10 +207,6 @@ def generate_featured_entertainer_profile(
                     f"{field} must be a list."
                 )
 
-        #
-        # Preserve weekly metadata.
-        #
-
         profile["week"] = report.get(
             "week",
             ""
@@ -236,6 +225,7 @@ def generate_featured_entertainer_profile(
         profile["source_story"] = report.get(
             "source_story"
         )
+
         return profile
 
     except Exception as e:
@@ -248,4 +238,3 @@ def generate_featured_entertainer_profile(
         print()
 
         return None
-    

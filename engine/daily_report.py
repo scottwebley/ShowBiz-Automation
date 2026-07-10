@@ -1,12 +1,14 @@
 import json
 from datetime import datetime
 
-from openai import OpenAI
 from dotenv import load_dotenv
 
-load_dotenv()
+from engine.openai_helper import (
+    client,
+    create_response,
+)
 
-client = OpenAI()
+load_dotenv()
 
 
 def generate_daily_report(stories):
@@ -86,9 +88,9 @@ Today's News:
                     f"(attempt {attempt}/3)..."
                 )
 
-            response = client.responses.create(
+            response = create_response(
                 model="gpt-5.5",
-                input=prompt
+                input=prompt,
             )
 
             report = json.loads(

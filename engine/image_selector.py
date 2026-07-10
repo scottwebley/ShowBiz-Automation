@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz Image Selector
-Version 3.3
+Version 3.4
 ===========================================
 
 Purpose:
@@ -9,13 +9,12 @@ Purpose:
 
 Workflow:
     1. Search the Media Library.
-    2. Ask the AI Image Verifier to choose
+    2. Remove invalid document/legal candidates.
+    3. Ask the AI Image Verifier to choose
        the best candidate.
-    3. Use the approved Media Library image.
-    4. If the verifier rejects the candidates,
-       use the highest-ranked Media Library image.
-    5. Only generate an AI image when the
-       Media Library has no candidates.
+    4. Use the approved Media Library image.
+    5. If no valid Media Library image exists,
+       generate an AI image.
 
 Author:
     ShowBiz Automation
@@ -24,6 +23,43 @@ Author:
 from engine.image_generator import generate_image
 from engine.image_search import search_media_library
 from engine.image_verifier import verify_image
+
+
+BLOCKED_IMAGE_TERMS = (
+    "agreement",
+    "contract",
+    "signature",
+    "invoice",
+    "receipt",
+    "proposal",
+    "application",
+    "form",
+    "document",
+    "legal",
+    "purchase",
+    "sale",
+)
+
+
+def is_valid_media_candidate(candidate):
+    """
+    Reject non-editorial files.
+    """
+
+    text = " ".join(
+        [
+            str(candidate.get("title", "")),
+            str(candidate.get("filename", "")),
+            str(candidate.get("url", "")),
+        ]
+    ).lower()
+
+    for term in BLOCKED_IMAGE_TERMS:
+
+        if term in text:
+            return False
+
+    return True
 
 
 def get_featured_image(story):
@@ -38,6 +74,12 @@ def get_featured_image(story):
     """
 
     candidates = search_media_library(story)
+
+    candidates = [
+        candidate
+        for candidate in candidates
+        if is_valid_media_candidate(candidate)
+    ]
 
     #
     # First choice:
@@ -56,41 +98,49 @@ def get_featured_image(story):
 
             print("\n✓ Image approved.\n")
             print(f"Media ID   : {decision['media_id']}")
-            print(f"Confidence : {decision.get('confidence', '?')}")
-            print(f"Reason     : {decision.get('reason', '')}")
+            print(
+                f"Confidence : "
+                f"{decision.get('confidence', '?')}"
+            )
+            print(
+                f"Reason     : "
+                f"{decision.get('reason', '')}"
+            )
 
             return f"media:{decision['media_id']}"
 
         #
-        # New policy:
-        # Trust the Media Library before generating AI.
+        # Only fallback to a valid editorial image.
         #
 
         fallback = candidates[0]
 
-        print("\n⚠ Verifier did not approve a candidate.")
-        print("Using highest-ranked Media Library image.")
-        print(f"Media ID : {fallback['media_id']}")
-        print(f"Title    : {fallback['title']}")
+        print(
+            "\n⚠ Verifier did not approve a candidate."
+        )
+        print(
+            "Using highest-ranked valid Media Library image."
+        )
+        print(
+            f"Media ID : {fallback['media_id']}"
+        )
+        print(
+            f"Title    : {fallback['title']}"
+        )
 
         return f"media:{fallback['media_id']}"
 
     #
-    # No Media Library candidates.
-    # AI generation is now the true last resort.
+    # No valid Media Library candidates.
     #
 
-    print("\nNo Media Library candidates found.")
+    print("\nNo valid Media Library candidates found.")
     print("Generating new editorial image...\n")
 
     generated = generate_image(story)
 
     if generated:
         return generated
-
-    #
-    # Last resort.
-    #
 
     return None
 

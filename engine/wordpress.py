@@ -8,6 +8,7 @@ from config import (
 )
 
 from engine.media import upload_image
+from engine.link_enricher import enrich_links
 
 
 HEADERS = {
@@ -58,6 +59,14 @@ def publish_post(article):
             featured_media = upload_image(image)
 
     # -----------------------------------------
+    # Link Enrichment
+    # -----------------------------------------
+
+    article["content"] = enrich_links(
+        article["content"]
+    )
+
+    # -----------------------------------------
     # Build WordPress post
     # -----------------------------------------
 
@@ -91,6 +100,7 @@ def publish_post(article):
     # -----------------------------------------
     # Publish
     # -----------------------------------------
+
     print("\n========================================")
     print("WORDPRESS PUBLISH PAYLOAD")
     print("========================================")
@@ -99,6 +109,7 @@ def publish_post(article):
     print("Featured Media  :", featured_media)
     print("Categories      :", data.get("categories"))
     print("========================================")
+
     response = requests.post(
         f"{WP_URL}/wp-json/wp/v2/posts",
         auth=HTTPBasicAuth(
@@ -119,8 +130,11 @@ def publish_post(article):
         return None
 
     post = response.json()
-    print("\nWordPress returned featured_media:",
-      post.get("featured_media"))
+
+    print(
+        "\nWordPress returned featured_media:",
+        post.get("featured_media")
+    )
 
     print("\n✅ ARTICLE PUBLISHED")
     print("----------------------------")

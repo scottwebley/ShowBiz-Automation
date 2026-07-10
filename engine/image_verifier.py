@@ -16,7 +16,11 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
-from openai import OpenAI
+
+from engine.openai_helper import (
+    client,
+    create_response,
+)
 
 #
 # Always load the project's .env file,
@@ -30,8 +34,6 @@ if not os.getenv("OPENAI_API_KEY"):
     raise RuntimeError(
         f"OPENAI_API_KEY not found in {PROJECT_ROOT / '.env'}"
     )
-
-client = OpenAI()
 
 
 def verify_image(story, candidates):
@@ -123,7 +125,7 @@ Return JSON in exactly this format:
 }}
 """
 
-    response = client.responses.create(
+    response = create_response(
         model="gpt-5.5",
         input=prompt,
     )

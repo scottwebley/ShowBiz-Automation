@@ -1,0 +1,179 @@
+
+==============================
+   SHOWBIZ AI NEWSROOM
+==============================
+
+STEP 1: Fetching live entertainment news...
+Downloading stories...
+PENALTY: \bBest\b (-20)
+PENALTY: \bBest\b (-20)
+PENALTY: \bBest\b (-20)
+PENALTY: \bExplained\b (-20)
+PENALTY: \bBest\b (-20)
+PENALTY: \bTop\s+\d+\b (-40)
+PENALTY: \bTop\s+\d+\b (-40)
+PENALTY: \bTop\s+\d+\b (-40)
+PENALTY: \bBest\b (-20)
+PENALTY: \bBest\b (-20)
+PENALTY: \bExplained\b (-20)
+PENALTY: \bBest\b (-20)
+PENALTY: \bBest\b (-20)
+✓ Cached 48 stories.
+✓ Cached 48 stories.
+✓ 48 stories downloaded.
+
+STEP 2: Ranking homepage stories...
+⚠ Homepage Ranker failed: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+⚠ Falling back to AI Story Selector.
+
+⚠ AI Story Selector failed: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+⚠ Falling back to Local Story Selector.
+
+
+==================================================
+LOCAL STORY SELECTOR V2
+==================================================
+
+Top Candidates:
+ 1. [Television] quality= 260 editorial=  0 feed= 65 :: 'The Pitt' and 'Pluribus' are poised to compete for top honors as Emmy nominations are announced - Mix 107.9
+ 2. [Movies] quality= 251 editorial=  0 feed= 65 :: Enjoy Danang Festival 2026 promises new tourism experiences
+ 3. [Movies] quality= 178 editorial=  0 feed= 50 :: Nollywood set to outpace Hollywood in Nigerian box office revenue
+ 4. [Television] quality= 140 editorial=  0 feed= 50 :: 2026 Emmy Nominations Begin With Variety and Reality Categories as Full List Arrives Later This Morning
+ 5. [Television] quality= 136 editorial=  0 feed= 65 :: Stephen Colbert and "The Late Show" score Emmy nomination for final season - AOL
+ 6. [Music] quality= 132 editorial=  0 feed= 85 :: Concerts in the Garden series returns to Royal Botanical Gardens
+ 7. [Entertainment Industry] quality= 106 editorial=  0 feed= 50 :: Review | Disney's Latest Live-Action Cash Grab Should Be Avoided...You're Welcome
+ 8. [Movies] quality= 105 editorial=  0 feed= 85 :: Disney's Live-Action Moana Is Almost the Same Movie -- And That's Why It Works
+ 9. [Entertainment Industry] quality= 103 editorial=  0 feed= 50 :: Netflix History Slate: Josh Brolin WWII Series & 'Turning Point' Doc
+10. [Entertainment Industry] quality= 103 editorial=  0 feed= 50 :: Disney's new Moana proves great songs can't fix a soulless remake
+
+✓ Local Story Selector chose:
+  'The Pitt' and 'Pluribus' are poised to compete for top honors as Emmy nominations are announced - Mix 107.9
+Top Story: 'The Pitt' and 'Pluribus' are poised to compete for top honors as Emmy nominations are announced - Mix 107.9
+Category: Television
+
+STEP 3: Editorial review...
+✓ Editorial approval granted.
+
+
+Current Top Story:
+Emmy Awards 2026 Nominations: See the Complete List of Nominees for the 78th Annual Ceremony Soon
+
+Candidate:
+'The Pitt' and 'Pluribus' are poised to compete for top honors as Emmy nominations are announced - Mix 107.9
+
+Decision: REPLACE
+✓ Top Story Manager approved replacement.
+
+STEP 4: Writing article...
+
+========================================
+AI WRITER
+========================================
+Unable to generate article:
+Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+Skipping publication.
+
+
+========================================
+NEWSROOM
+========================================
+Article generation failed.
+Publishing skipped.
+
+
+==============================
+ SHOWBIZ DAILY REPORT
+==============================
+
+Today's Winners & Losers has already been published.
+Skipping update.
+
+
+REST Status: 200
+{"success":true}
+
+✅ Daily report uploaded successfully.
+
+==============================
+ FEATURED ENTERTAINER
+==============================
+
+STEP 1: Downloading this week's entertainment news...
+Downloading stories...
+PENALTY: \bBest\b (-20)
+PENALTY: \bBest\b (-20)
+PENALTY: \bBest\b (-20)
+PENALTY: \bExplained\b (-20)
+PENALTY: \bBest\b (-20)
+PENALTY: \bTop\s+\d+\b (-40)
+PENALTY: \bTop\s+\d+\b (-40)
+PENALTY: \bTop\s+\d+\b (-40)
+PENALTY: \bBest\b (-20)
+PENALTY: \bBest\b (-20)
+PENALTY: \bExplained\b (-20)
+PENALTY: \bBest\b (-20)
+PENALTY: \bBest\b (-20)
+✓ Cached 48 stories.
+✓ Cached 48 stories.
+✓ 48 stories downloaded.
+
+STEP 2: AI editorial analysis...
+
+========================================
+FEATURED ENTERTAINER
+========================================
+Unable to generate Featured Entertainer:
+Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+Skipping Featured Entertainer generation.
+
+
+Featured Entertainer generation failed.
+
+
+==============================
+ FEATURED ENTERTAINER UPDATE
+==============================
+
+========================================
+UPDATING FEATURED ENTERTAINER
+========================================
+Name      : CM Punk
+Headline  : CM Punk Returns to WWE RAW and Wins the Undisputed WWE Championship
+URL       : https://showbiz.com/featured-entertainer-of-the-week-cm-punk/
+========================================
+
+Status: 200
+
+✅ Homepage Featured Entertainer updated.
+{'success': True}
+
+Done.
+
+
+==================================================
+        SHOWBIZ DAILY AUTOMATION
+==================================================
+
+Today's Date: July 08, 2026
+
+Starting automation...
+
+
+▶ Publish Top Story
+✓ Publish Top Story completed
+
+▶ Update Winners & Losers
+✓ Update Winners & Losers completed
+
+▶ Update Homepage Winners
+✓ Update Homepage Winners completed
+
+▶ Publish Featured Entertainer
+✓ Publish Featured Entertainer completed
+
+▶ Update Homepage Featured Entertainer
+✓ Update Homepage Featured Entertainer completed
+
+===================================
+✓ SHOWBIZ DAILY COMPLETE
+===================================

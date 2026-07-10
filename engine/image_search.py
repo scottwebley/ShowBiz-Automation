@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz Image Search
-Version 2.1
+Version 3.2
 ===========================================
 
 Purpose:
@@ -10,10 +10,11 @@ Purpose:
 
 Workflow:
     1. Extract entertainment entities.
-    2. Search people first.
-    3. Search movies / TV / music.
-    4. Fall back to keyword phrases.
-    5. Return qualifying image candidates.
+    2. Build search queries.
+    3. Search Media Library.
+    4. Remove invalid candidates.
+    5. Rank candidates.
+    6. Return best candidates.
 
 Author:
     ShowBiz Automation
@@ -28,19 +29,93 @@ from engine.media_library.search import find_best_images
 MINIMUM_SCORE = 175
 
 
+BLOCKED_MEDIA_TERMS = (
+    "agreement",
+    "contract",
+    "signature",
+    "invoice",
+    "receipt",
+    "proposal",
+    "application",
+    "document",
+    "legal",
+    "purchase",
+    "sale",
+    ".pdf",
+)
+
+
+def is_valid_candidate(result, story):
+    """
+    Reject non-editorial media candidates.
+    """
+
+    text = " ".join(
+        [
+            str(result.title),
+            str(result.filename),
+            str(
+                result.raw.get(
+                    "caption",
+                    "",
+                )
+            ),
+        ]
+    ).lower()
+
+    for term in BLOCKED_MEDIA_TERMS:
+
+        if term in text:
+
+            return False
+
+    #
+    # Avoid weak common-name collisions.
+    #
+
+    headline = (
+        story.get("headline", "")
+        .lower()
+    )
+
+    title = (
+        str(result.title)
+        .lower()
+    )
+
+    words = headline.split()
+
+    if len(words) > 1:
+
+        first_name = words[0]
+
+        if (
+            first_name in title
+            and not any(
+                word in title
+                for word in words[1:]
+            )
+        ):
+
+            return False
+
+    return True
+
+
 def search_media_library(story):
 
-    queries = build_search_queries(story)
+    print("\n>>> IMAGE_SEARCH DEBUG BUILD 2026-07-09 <<<")
 
-    best_result = None
-    candidates = []
-    seen_media = set()
+    queries = build_search_queries(story)
 
     print("\n========================================")
     print("IMAGE SEARCH")
     print("========================================")
 
-    print(f"\nHeadline:\n{story.get('headline', '')}")
+    print(
+        f"\nHeadline:\n"
+        f"{story.get('headline', '')}"
+    )
 
     entities = extract_entities(
         story.get("headline", "")
@@ -63,6 +138,10 @@ def search_media_library(story):
     for query in queries:
         print(f"  • {query}")
 
+    all_results = []
+
+    seen_media = set()
+
     print()
 
     for query in queries:
@@ -70,12 +149,9 @@ def search_media_library(story):
         print(f"Searching: {query}")
 
         results = find_best_images(
-            query,
+            query=query,
             limit=10,
         )
-
-        if not results:
-            continue
 
         for result in results:
 
@@ -84,59 +160,141 @@ def search_media_library(story):
                 f"(Score {result.score})"
             )
 
-            if (
-                best_result is None
-                or result.score > best_result.score
+            if not is_valid_candidate(
+                result,
+                story,
             ):
-                best_result = result
 
-            if result.score < MINIMUM_SCORE:
+                print(
+                    "   ✗ Rejected invalid media"
+                )
+
                 continue
 
-            if result.media_id in seen_media:
-                continue
-
-            seen_media.add(result.media_id)
-
-            print("\n========================================")
-            print("MEDIA LIBRARY MATCH")
-            print("========================================")
-            print(f"Title      : {result.title}")
-            print(f"Media ID   : {result.media_id}")
-            print(f"Score      : {result.score}")
-            print(f"Reason     : {result.reason}")
-
-            print("\n✓ Using Media Library image.\n")
-
-            candidates.append(
-                {
-                    "media_id": result.media_id,
-                    "title": result.title,
-                    "caption": result.raw.get(
-                        "caption",
-                        "",
-                    ),
-                    "filename": result.filename,
-                }
+            existing = next(
+                (
+                    r
+                    for r in all_results
+                    if r.media_id
+                    == result.media_id
+                ),
+                None,
             )
 
-    print("\n========================================")
+            if existing:
 
-    if best_result:
+                if result.score > existing.score:
 
-        print("BEST MATCH FOUND")
-        print("----------------------------------------")
-        print(f"Title    : {best_result.title}")
-        print(f"Score    : {best_result.score}")
-        print(f"Required : {MINIMUM_SCORE}")
+                    existing.score = result.score
+                    existing.reason = (
+                        result.reason
+                    )
+
+                continue
+
+            all_results.append(result)
+
+    all_results.sort(
+        key=lambda r: r.score,
+        reverse=True,
+    )
+
+    candidates = []
+
+    for result in all_results:
+
+        if result.score < MINIMUM_SCORE:
+            continue
+
+        if result.media_id in seen_media:
+            continue
+
+        seen_media.add(
+            result.media_id
+        )
+
+        print(
+            "\n========================================"
+        )
+        print(
+            "MEDIA LIBRARY MATCH"
+        )
+        print(
+            "========================================"
+        )
+
+        print(
+            f"Title      : {result.title}"
+        )
+
+        print(
+            f"Media ID   : {result.media_id}"
+        )
+
+        print(
+            f"Score      : {result.score}"
+        )
+
+        print(
+            f"Reason     : {result.reason}"
+        )
+
+        candidates.append(
+            {
+                "media_id": result.media_id,
+                "title": result.title,
+                "caption": result.raw.get(
+                    "caption",
+                    "",
+                ),
+                "filename": result.filename,
+            }
+        )
+
+    print(
+        "\n>>> ENTERING rank_candidates() <<<"
+    )
+
+    candidates = rank_candidates(
+        story,
+        candidates,
+    )
+
+    print(
+        "\n>>> RETURNED FROM rank_candidates() <<<"
+    )
+
+    print(
+        "\n========================================"
+    )
+    print(
+        "FINAL RANKED ORDER"
+    )
+    print(
+        "========================================"
+    )
+
+    if candidates:
+
+        for i, candidate in enumerate(
+            candidates,
+            1,
+        ):
+
+            print(
+                f"{i:2d}. "
+                f"{candidate['media_id']:>6}  "
+                f"{candidate['title']}"
+            )
 
     else:
 
-        print("No Media Library matches found.")
+        print(
+            "No candidates."
+        )
 
-        candidates = rank_candidates(
-        story,
-        candidates,
+    print(
+        "\n========================================"
     )
 
     return candidates
@@ -154,16 +312,24 @@ def main():
         "category": "Celebrity",
     }
 
-    results = search_media_library(story)
+    results = search_media_library(
+        story
+    )
 
     print()
 
     if results:
 
-        print("MATCHES FOUND")
-        print(f"Candidates : {len(results)}")
+        print(
+            "MATCHES FOUND"
+        )
+
+        print(
+            f"Candidates : {len(results)}"
+        )
 
         for image in results:
+
             print(
                 f"- {image['media_id']}: "
                 f"{image['title']}"
@@ -171,7 +337,9 @@ def main():
 
     else:
 
-        print("NO MATCH")
+        print(
+            "NO MATCH"
+        )
 
 
 if __name__ == "__main__":

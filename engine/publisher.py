@@ -21,42 +21,60 @@ PAGES = {
 
 
 def publish_page(page_id, html_file):
-    """Publish one HTML file to one WordPress page."""
+    """
+    Publish one HTML file to one WordPress page.
+    """
 
     path = Path(html_file)
 
     if not path.exists():
         print(f"⚠ File not found: {html_file}")
-        return
+        return False
 
     html = path.read_text(encoding="utf-8")
 
-    data = {
-        "content": html
-    }
+    return publish_html(page_id, html)
+
+
+def publish_html(page_id, html):
+    """
+    Publish HTML directly to an existing
+    WordPress page.
+    """
 
     response = requests.post(
         f"{WP_URL}/wp-json/wp/v2/pages/{page_id}",
-        auth=HTTPBasicAuth(WP_USERNAME, WP_APP_PASSWORD),
+        auth=HTTPBasicAuth(
+            WP_USERNAME,
+            WP_APP_PASSWORD,
+        ),
         headers=HEADERS,
-        json=data
+        json={
+            "content": html,
+        },
     )
 
     if response.status_code == 200:
         print(f"✓ Updated page {page_id}")
+        return True
 
-    else:
-        print(f"✗ Failed page {page_id}")
-        print(response.status_code)
-        print(response.text)
+    print(f"✗ Failed page {page_id}")
+    print(response.status_code)
+    print(response.text)
+
+    return False
 
 
 def publish_all():
+
     print("\n==============================")
     print("Publishing ShowBiz Pages")
     print("==============================\n")
 
     for page_id, html_file in PAGES.items():
-        publish_page(page_id, html_file)
+        publish_page(
+            page_id,
+            html_file,
+        )
 
     print("\n✓ Publishing Complete")

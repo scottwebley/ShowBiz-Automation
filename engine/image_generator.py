@@ -3,11 +3,14 @@ import base64
 from pathlib import Path
 
 from dotenv import load_dotenv
-from openai import OpenAI, BadRequestError
+from openai import BadRequestError
+
+from engine.openai_helper import (
+    client,
+    generate_image as openai_generate_image,
+)
 
 load_dotenv()
-
-client = OpenAI()
 
 IMAGE_DIR = Path("images")
 IMAGE_DIR.mkdir(exist_ok=True)
@@ -71,10 +74,10 @@ def generate_image(story):
     filepath = IMAGE_DIR / filename
 
     try:
-        result = client.images.generate(
+        result = openai_generate_image(
             model="gpt-image-1",
             prompt=prompt,
-            size="1536x1024"
+            size="1536x1024",
         )
 
         image_bytes = base64.b64decode(result.data[0].b64_json)
