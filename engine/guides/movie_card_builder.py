@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz Movie Card Builder
-Version 1.1
+Version 1.2
 ===========================================
 
 Purpose:
@@ -55,6 +55,9 @@ def build_movie_card(
             {trailer}
 
         </div>
+
+        <br>
+        <br>
 
     </div>
 

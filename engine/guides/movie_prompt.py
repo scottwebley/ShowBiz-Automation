@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz Movies Guide Prompt
-Version 4.1
+Version 4.2
 ===========================================
 
 Purpose:
@@ -61,6 +61,28 @@ movies that have already been released.
 For "Coming Soon", choose ONLY movies whose
 release date is in the future.
 
+IMPORTANT
+
+"Best Movies Right Now" is intended to help
+readers decide what to see in theaters today.
+
+Favor CURRENT theatrical releases.
+
+Prefer movies that are actively playing in
+U.S. theaters.
+
+Do NOT recommend older catalog titles,
+classic films, legacy favorites, or
+re-releases unless they are currently
+receiving a significant nationwide
+theatrical release.
+
+Do NOT recommend movies simply because they
+are famous or highly rated.
+
+Choose the strongest current theatrical
+movies from the supplied data.
+
 ------------------------------------------------
 
 EDITOR'S PICK
@@ -72,6 +94,9 @@ Create:
 <h2>🎬 Editor's Pick</h2>
 
 Recommend ONE movie.
+
+Choose the single best CURRENT theatrical
+release from the supplied movie data.
 
 Use this format:
 
@@ -99,6 +124,8 @@ Create:
 <h2>🍿 Best Movies Right Now</h2>
 
 Recommend exactly 10 different movies.
+
+Select only CURRENT theatrical releases.
 
 EVERY movie MUST use this exact structure:
 

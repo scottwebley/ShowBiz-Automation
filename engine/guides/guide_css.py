@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz Guide CSS
-Version 3.1
+Version 3.3
 ===========================================
 
 Shared CSS used by all ShowBiz Guides.
@@ -135,6 +135,8 @@ Movie Card Component
     max-width:none;
 
 }
+
+
 .showbiz-movie-content p{
 
     margin-bottom:18px;
@@ -149,9 +151,19 @@ Movie Card Component
 }
 
 
+/*
+===========================================
+Movie Divider
+===========================================
+*/
+
 .showbiz-movie-divider{
 
-    height:30px;
+    height:1px;
+
+    margin:40px 0;
+
+    background:rgba(255,255,255,.10);
 
 }
 

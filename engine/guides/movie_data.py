@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz Movie Data Provider
-Version 3.2
+Version 3.3
 ===========================================
 
 Purpose:
@@ -24,6 +24,7 @@ Author:
 """
 
 import os
+from datetime import datetime
 
 import requests
 from dotenv import load_dotenv
@@ -53,6 +54,25 @@ def empty_result():
     """
 
     return []
+
+
+def format_release_date(date_string):
+    """
+    Convert TMDb date (YYYY-MM-DD)
+    into "Month DD, YYYY".
+    """
+
+    if not date_string:
+        return ""
+
+    try:
+        return datetime.strptime(
+            date_string,
+            "%Y-%m-%d",
+        ).strftime("%B %d, %Y")
+
+    except Exception:
+        return date_string
 
 
 def request_tmdb(endpoint, params=None):
@@ -127,6 +147,8 @@ def get_upcoming_movies(limit=10):
         data.get("results", []),
         limit,
     )
+
+
 def search_movies(query, limit=10):
     """
     Search movies.
@@ -167,9 +189,11 @@ def normalize_results(results, limit):
                     "title",
                     "",
                 ),
-                "release_date": movie.get(
-                    "release_date",
-                    "",
+                "release_date": format_release_date(
+                    movie.get(
+                        "release_date",
+                        "",
+                    )
                 ),
                 "overview": movie.get(
                     "overview",
