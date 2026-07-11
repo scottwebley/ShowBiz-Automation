@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz Movie Data Provider
-Version 3.1
+Version 3.2
 ===========================================
 
 Purpose:
@@ -16,6 +16,7 @@ Features:
     - Popular movies
     - Structured movie data
     - TMDb movie IDs for trailer lookup
+    - Automatic .env loading
     - Safe fallback without API key
 
 Author:
@@ -23,7 +24,13 @@ Author:
 """
 
 import os
+
 import requests
+from dotenv import load_dotenv
+
+
+# Load .env once when this module is imported.
+load_dotenv()
 
 
 TMDB_API_URL = "https://api.themoviedb.org/3"
@@ -56,6 +63,7 @@ def request_tmdb(endpoint, params=None):
     api_key = get_api_key()
 
     if not api_key:
+        print("TMDB_API_KEY not found.")
         return {}
 
     if params is None:

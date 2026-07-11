@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz HTML Builder
-Version 1.3
+Version 1.4
 ===========================================
 
 Purpose:
@@ -29,12 +29,12 @@ def build_page(title, body, updated=None):
 
     parts = []
 
+    # Output CSS before any page content.
+    parts.append(GUIDE_CSS)
+
     parts.append(
         '<section class="showbiz-guide">'
     )
-
-    # Shared Guide CSS
-    parts.append(GUIDE_CSS)
 
     # NOTE:
     # WordPress already displays the page title.
