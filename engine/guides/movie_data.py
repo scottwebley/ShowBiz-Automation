@@ -13,7 +13,7 @@ Source:
 
 Features:
     - Current theatrical movies
-    - Popular movies
+    - Upcoming movies
     - Structured movie data
     - TMDb movie IDs for trailer lookup
     - Automatic .env loading
@@ -114,21 +114,19 @@ def get_now_playing(limit=10):
     )
 
 
-def get_popular_movies(limit=10):
+def get_upcoming_movies(limit=10):
     """
-    Get popular movies.
+    Get upcoming movies.
     """
 
     data = request_tmdb(
-        "movie/popular",
+        "movie/upcoming",
     )
 
     return normalize_results(
         data.get("results", []),
         limit,
     )
-
-
 def search_movies(query, limit=10):
     """
     Search movies.

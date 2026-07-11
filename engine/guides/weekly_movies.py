@@ -23,7 +23,7 @@ from engine.guides.movie_prompt import (
 )
 from engine.guides.movie_data import (
     get_now_playing,
-    get_popular_movies,
+    get_upcoming_movies,
 )
 from engine.publisher import publish_html
 
@@ -42,7 +42,7 @@ def get_movies():
     )
 
     movies.extend(
-        get_popular_movies(
+        get_upcoming_movies(
             limit=10
         )
     )
@@ -97,7 +97,6 @@ def build_guide():
         prompt=prompt,
     )
 
-
     with open(
         "movie_ai_output.html",
         "w",
@@ -108,13 +107,11 @@ def build_guide():
             html
         )
 
-
     enriched_html = enrich_guide(
         title=TITLE,
         html=html,
         movies=movies,
     )
-
 
     with open(
         "movie_enriched_output.html",
@@ -126,8 +123,9 @@ def build_guide():
             enriched_html
         )
 
-
     return enriched_html
+
+
 def publish_guide():
 
     html = build_guide()
