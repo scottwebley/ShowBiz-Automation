@@ -1,0 +1,11 @@
+
+========================================
+UPDATING MOVIES GUIDE
+========================================
+
+Loading media cache...
+Loaded 2848 media items.
+
+✓ Updated page 23240
+
+✓ Movies Guide updated.

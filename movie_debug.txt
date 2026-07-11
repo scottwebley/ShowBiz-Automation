@@ -1,0 +1,13 @@
+
+========================================
+UPDATING MOVIES GUIDE
+========================================
+TMDb request failed: 401 Client Error: Unauthorized for url: https://api.themoviedb.org/3/movie/now_playing?api_key=YOUR_API_KEY_HERE&language=en-US&region=US
+TMDb request failed: 401 Client Error: Unauthorized for url: https://api.themoviedb.org/3/movie/popular?api_key=YOUR_API_KEY_HERE&language=en-US&region=US
+
+Loading media cache...
+Loaded 2848 media items.
+
+✓ Updated page 23240
+
+✓ Movies Guide updated.

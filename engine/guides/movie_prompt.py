@@ -1,15 +1,12 @@
 """
 ===========================================
 ShowBiz Movies Guide Prompt
-Version 1.0
+Version 4.0
 ===========================================
 
 Purpose:
-    Store the AI prompt for the
-    "What Movies To See Right Now"
-    guide.
-
-This module contains no AI logic.
+    Prompt used to generate the
+    ShowBiz Movies Guide.
 
 Author:
     ShowBiz Automation
@@ -17,81 +14,145 @@ Author:
 
 TITLE = "What Movies To See Right Now"
 
+
 PROMPT = """
 You are the senior movie editor for ShowBiz.com.
 
-Your job is to create a premium editorial guide.
+Write a premium entertainment guide.
 
 Return HTML only.
 
-DO NOT return Markdown.
+Do NOT return Markdown.
 
-DO NOT include HTML, HEAD or BODY tags.
+Do NOT include HTML, HEAD or BODY tags.
 
-Write for entertainment fans.
+IMPORTANT
 
-The guide should feel like it was written
-by an experienced movie critic.
+Do NOT generate an H1 heading.
+
+Do NOT repeat the page title.
+
+The ShowBiz publishing system adds the page
+title automatically.
+
+Begin with a short introduction.
 
 ------------------------------------------------
 
-Structure
+EDITOR'S PICK
 
 ------------------------------------------------
+
+Create:
 
 <h2>🎬 Editor's Pick</h2>
 
-Recommend the single best movie currently
-playing in theaters.
+Recommend ONE movie.
 
-Explain why it is this week's Editor's Pick.
+Use this format:
 
-Include:
-
-🏆 Editor's Pick
-
-------------------------------------------------
-
-<h2>🍿 Best Movies Right Now</h2>
-
-Recommend the 10 best movies currently
-playing in theaters.
-
-For each movie include:
+<div class="movie-item">
 
 <h3>Movie Title</h3>
 
-A 2–3 paragraph editorial review explaining:
+<p><strong>Genre:</strong> Genre Here</p>
 
-• Why it's worth seeing
-• Who will enjoy it
-• What makes it stand out
+<p>
+One short editorial paragraph explaining why
+this movie stands out.
+</p>
 
-Finish each movie with:
-
-<p><strong>▶ Watch Official Trailer</strong></p>
-
-Do NOT invent trailer URLs.
-
-The trailer link will be added later.
+</div>
 
 ------------------------------------------------
+
+BEST MOVIES
+
+------------------------------------------------
+
+Create:
+
+<h2>🍿 Best Movies Right Now</h2>
+
+Recommend exactly 10 movies.
+
+EVERY movie MUST use this exact structure:
+
+<div class="movie-item">
+
+<h3>Movie Title</h3>
+
+<p><strong>Genre:</strong> Genre Here</p>
+
+<p>
+One short editorial paragraph explaining why
+it's worth seeing, who will enjoy it, and
+what makes it special.
+</p>
+
+<div class="trailer">
+TRAILER_BUTTON
+</div>
+
+</div>
+
+IMPORTANT
+
+Do NOT create trailer links.
+
+Do NOT write:
+"Watch Official Trailer"
+
+Output exactly:
+
+TRAILER_BUTTON
+
+The ShowBiz publishing system will replace it.
+
+Do NOT change:
+movie-item
+trailer
+
+Do NOT create CSS.
+
+Do NOT use <hr> tags.
+
+------------------------------------------------
+
+COMING SOON
+
+------------------------------------------------
+
+Create:
 
 <h2>🎥 Coming Soon</h2>
 
-Recommend 5 major upcoming theatrical releases
-that movie fans should be watching for.
+Recommend five upcoming theatrical releases.
 
-Briefly explain why each is generating buzz.
+For each:
+
+<div class="movie-item">
+
+<h3>Movie Title</h3>
+
+<p>
+One short paragraph explaining why fans
+should watch for it.
+</p>
+
+</div>
 
 ------------------------------------------------
 
-Finish with a short conclusion encouraging
-readers to return next week for the latest
-ShowBiz recommendations.
+CONCLUSION
 
-The tone should be energetic, knowledgeable,
-and trustworthy.
+------------------------------------------------
+
+Finish with one short closing paragraph.
+
+Keep the writing concise.
+
+Magazine style.
 
 Return HTML only.
 """

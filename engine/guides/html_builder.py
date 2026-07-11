@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz HTML Builder
-Version 1.0
+Version 1.3
 ===========================================
 
 Purpose:
@@ -19,18 +19,12 @@ Author:
     ShowBiz Automation
 """
 
+from engine.guides.guide_css import GUIDE_CSS
+
 
 def build_page(title, body, updated=None):
     """
     Build a complete ShowBiz Guide page.
-
-    Args:
-        title (str)
-        body (str)
-        updated (str | None)
-
-    Returns:
-        str
     """
 
     parts = []
@@ -39,16 +33,19 @@ def build_page(title, body, updated=None):
         '<section class="showbiz-guide">'
     )
 
-    parts.append(
-        f"<h1>{title}</h1>"
-    )
+    # Shared Guide CSS
+    parts.append(GUIDE_CSS)
+
+    # NOTE:
+    # WordPress already displays the page title.
+    # Do not output another H1 here.
 
     if updated:
         parts.append(
             (
                 '<p class="showbiz-updated">'
-                f"<strong>Updated:</strong> {updated}"
-                "</p>"
+                f'<strong>Updated:</strong> {updated}'
+                '</p>'
             )
         )
 
@@ -83,7 +80,7 @@ def editors_pick():
 
     return (
         '<div class="showbiz-editors-pick">'
-        '🏆 Editor\'s Pick'
+        "🏆 Editor's Pick"
         '</div>'
     )
 
