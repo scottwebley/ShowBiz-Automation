@@ -1,15 +1,15 @@
 """
 ===========================================
-ShowBiz Trailer Finder
-Version 3.0
+ShowBiz TV Trailer Finder
+Version 1.0
 ===========================================
 
 Purpose:
-    Build direct movie trailer links
-    for ShowBiz Guides.
+    Build direct TV trailer links
+    for ShowBiz TV Guide.
 
 Features:
-    - TMDb video lookup
+    - TMDb TV video lookup
     - Direct YouTube trailer URLs
     - Official trailer preference
     - Safe fallback
@@ -35,37 +35,20 @@ def get_api_key():
     )
 
 
-def request_videos(
-    movie_id,
-    media_type="movie",
-):
+def request_videos(show_id):
     """
-    Get TMDb videos.
-
-    media_type:
-        movie (default)
-        tv
+    Get TMDb TV videos.
     """
 
     api_key = get_api_key()
 
-    if not api_key or not movie_id:
+    if not api_key or not show_id:
         return []
-
-    media_type = (
-        media_type or "movie"
-    ).lower()
-
-    if media_type not in (
-        "movie",
-        "tv",
-    ):
-        media_type = "movie"
 
     try:
 
         response = requests.get(
-            f"{TMDB_API_URL}/{media_type}/{movie_id}/videos",
+            f"{TMDB_API_URL}/tv/{show_id}/videos",
             params={
                 "api_key": api_key,
                 "language": "en-US",
@@ -145,22 +128,21 @@ def select_trailer(videos):
 
 
 def find_trailer(
-    movie_id=None,
+    show_id=None,
     title="",
-    media_type="movie",
 ):
     """
     Return trailer information.
     """
 
     videos = request_videos(
-        movie_id,
-        media_type=media_type,
+        show_id
     )
 
     trailer = select_trailer(
         videos
     )
+
 
     if trailer:
 
@@ -176,6 +158,7 @@ def find_trailer(
 
         }
 
+
     return {
 
         "title": title,
@@ -190,23 +173,23 @@ def find_trailer(
 
 
 def trailer_button(
-    movie_id=None,
+    show_id=None,
     title="",
-    media_type="movie",
 ):
     """
     Return HTML trailer button.
     """
 
     trailer = find_trailer(
-        movie_id,
+        show_id,
         title,
-        media_type=media_type,
     )
+
 
     if not trailer["url"]:
 
         return ""
+
 
     return (
         '<p>'
@@ -217,4 +200,14 @@ def trailer_button(
         f'{trailer["label"]}'
         '</a>'
         '</p>'
+    )
+
+
+if __name__ == "__main__":
+
+    print(
+        trailer_button(
+            125988,
+            "Silo",
+        )
     )

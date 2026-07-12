@@ -24,6 +24,7 @@ from datetime import datetime
 
 from engine.guides.html_builder import build_page
 from engine.guides.trailer_finder import trailer_button
+from engine.guides.tv_trailer_finder import trailer_button as tv_trailer_button
 from engine.guides.poster_finder import poster_html
 from engine.guides.movie_card_builder import build_movie_card
 
@@ -188,6 +189,7 @@ def find_movie_id(title, movies):
 def enrich_movie_blocks(
     html: str,
     movies=None,
+    guide_type="movie",
 ) -> str:
     """
     Convert movie-item blocks into
@@ -267,10 +269,19 @@ def enrich_movie_blocks(
             movies,
         )
 
-        trailer = trailer_button(
-            movie_id,
-            title,
-        )
+        if guide_type == "tv":
+
+            trailer = tv_trailer_button(
+                movie_id,
+                title,
+            )
+
+        else:
+
+            trailer = trailer_button(
+                movie_id,
+                title,
+            )
 
         replacement = build_movie_card(
             title=title,
@@ -292,6 +303,7 @@ def enrich_guide(
     title: str,
     html: str,
     movies=None,
+    guide_type="movie",
 ) -> str:
 
     html = clean_html(
@@ -301,6 +313,7 @@ def enrich_guide(
     html = enrich_movie_blocks(
         html,
         movies,
+        guide_type,
     )
 
     return build_page(
