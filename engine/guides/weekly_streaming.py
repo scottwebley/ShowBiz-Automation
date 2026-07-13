@@ -15,7 +15,7 @@ Author:
 """
 
 from engine.guides.guide_writer import write_guide
-from engine.guides.guide_enricher import enrich_guide
+from engine.guides.streaming_guide_enricher import enrich_guide
 from engine.guides.streaming_prompt import (
     TITLE,
     PROMPT,
@@ -99,23 +99,22 @@ def build_guide():
             html
         )
 
-    from engine.guides.trailer_finder import (
-        trailer_button,
-    )
+    from engine.guides.streaming_trailer_finder import (
+    trailer_button,
+)
 
     for item in items:
 
         item["trailer"] = trailer_button(
-            movie_id=item["id"],
+            media_id=item["id"],
             title=item["title"],
             media_type=item["media_type"],
         )
 
-    enriched_html = enrich_guide(
+        enriched_html = enrich_guide(
         title=TITLE,
         html=html,
-        movies=items,
-        guide_type="movie",
+        items=items,
     )
 
     with open(
