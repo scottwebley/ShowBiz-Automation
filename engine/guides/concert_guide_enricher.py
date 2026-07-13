@@ -14,6 +14,7 @@ Author:
 
 import re
 from datetime import datetime
+import html
 
 from engine.guides.html_builder import build_page
 from engine.guides.movie_card_builder import (
@@ -50,6 +51,10 @@ def normalize_title(title):
     if not title:
 
         return ""
+
+    import html as html_lib
+
+    title = html_lib.unescape(title)
 
     title = title.lower()
 
@@ -162,6 +167,8 @@ def enrich_concert_blocks(
     concerts,
 ):
 
+    import html as html_lib
+
     start_tag = '<div class="movie-item">'
 
     while start_tag in html:
@@ -221,18 +228,15 @@ def enrich_concert_blocks(
         if not title_match:
             break
 
-        title = re.sub(
-            "<.*?>",
-            "",
-            title_match.group(1),
-        ).strip()
-
-        poster = concert_poster(
-            title,
-            concerts,
+        title = html_lib.unescape(
+            re.sub(
+                "<.*?>",
+                "",
+                title_match.group(1),
+            ).strip()
         )
 
-        concert = find_concert(
+        poster = concert_poster(
             title,
             concerts,
         )
