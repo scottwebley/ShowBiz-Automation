@@ -548,42 +548,24 @@ def _extract_quoted_titles(
     headline: str,
 ):
 
-    """
-    Extract titles enclosed in real quotation marks.
-
-    Ignore apostrophes used in contractions
-    and possessives.
-    """
-
     titles = []
 
-    #
-    # Double quotes
-    #
-
     for title in re.findall(
-        r'"([^"]+)"',
+        r"[\"']([^\"']+)[\"']",
         headline,
     ):
 
         title = title.strip()
 
-        if len(title) >= 2 and title not in titles:
+        if len(title) < 2:
+
+            continue
+
+
+        if title not in titles:
+
             titles.append(title)
 
-    #
-    # Smart quotes
-    #
-
-    for title in re.findall(
-        r'“([^”]+)”',
-        headline,
-    ):
-
-        title = title.strip()
-
-        if len(title) >= 2 and title not in titles:
-            titles.append(title)
 
     return titles
 
@@ -752,11 +734,12 @@ def extract_entities(
 
 
 
-        # ----------------------------------------------
+    # ----------------------------------------------
     # Generic keywords
     # ----------------------------------------------
 
     excluded = set()
+
 
     for value in (
 
@@ -780,6 +763,7 @@ def extract_entities(
             excluded.add(
                 token.lower()
             )
+
 
 
     skip_words = {
@@ -834,9 +818,8 @@ def extract_entities(
 
         "reveals",
 
-        "what",
-
     }
+
 
 
     for word in re.findall(
@@ -848,43 +831,44 @@ def extract_entities(
             word
         )
 
+
         if not clean:
+
             continue
 
-        #
-        # Ignore pure numbers.
-        #
-
-        if clean.isdigit():
-            continue
-
-        #
-        # "The Rock" is already normalized to
-        # Dwayne Johnson.
-        #
-
-        if clean == "Rock":
-            continue
 
         lower = clean.lower()
 
+
         if len(lower) < 4:
+
             continue
+
 
         if lower in excluded:
+
             continue
+
 
         if lower in skip_words:
+
             continue
+
 
         if clean in LOCATION_WORDS:
+
             continue
+
 
         if clean in TITLE_WORDS:
+
             continue
 
+
         if clean in entities["generic_keywords"]:
+
             continue
+
 
         entities["generic_keywords"].append(
             clean

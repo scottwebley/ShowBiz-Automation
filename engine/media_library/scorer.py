@@ -163,45 +163,34 @@ def score_item(
 
     reasons = []
 
-
     query_phrase = normalize(
         query
     )
-
 
     query_words = _clean_words(
         query
     )
 
-
     if not query_words:
-
         return 0, reasons
-
-
 
     metadata_title = _metadata_field(
         item,
         "title",
     )
 
-
     metadata_caption = _metadata_field(
         item,
         "caption",
     )
 
-
     filename = _filename(
         item
     )
 
-
     wp_title = _wordpress_title(
         item
     )
-
-
 
     #
     # Exact metadata matches
@@ -216,8 +205,6 @@ def score_item(
             ],
         )
 
-
-
     if metadata_caption == query_phrase:
 
         return (
@@ -227,75 +214,71 @@ def score_item(
             ],
         )
 
-
-
     score = 0
 
-
-
     #
-    # Full name matching
+    # Strong full-name matching.
+    #
+    # Only award these large bonuses when the
+    # query contains TWO OR MORE meaningful words.
     #
 
-    for field_name, value, weight in (
+    if len(query_words) >= 2:
 
-        (
-            "metadata_title",
-            metadata_title,
-            7000,
-        ),
+        for field_name, value, weight in (
 
-        (
-            "metadata_caption",
-            metadata_caption,
-            6000,
-        ),
+            (
+                "metadata_title",
+                metadata_title,
+                7000,
+            ),
 
-    ):
+            (
+                "metadata_caption",
+                metadata_caption,
+                6000,
+            ),
 
-        tokens = set(
-            _clean_words(
-                value
-            )
-        )
-
-
-        if all(
-            word in tokens
-            for word in query_words
         ):
 
-            score += weight
-
-            reasons.append(
-                f"{field_name}:full_name"
+            tokens = set(
+                _clean_words(
+                    value
+                )
             )
 
+            if all(
+                word in tokens
+                for word in query_words
+            ):
 
+                score += weight
+
+                reasons.append(
+                    f"{field_name}:full_name"
+                )
 
     #
-    # Partial metadata matching
+    # Partial metadata matching.
+    # Lower weight so single-word searches like
+    # "Sony" don't dominate unrelated images.
     #
 
     if query_phrase in metadata_title:
 
-        score += 3000
+        score += 1000
 
         reasons.append(
             "metadata_title:contains"
         )
 
-
-
     if query_phrase in metadata_caption:
 
-        score += 2500
+        score += 800
 
         reasons.append(
             "metadata_caption:contains"
         )
-
-
 
     #
     # Filename fallback
@@ -306,7 +289,6 @@ def score_item(
             filename
         )
     )
-
 
     if all(
         word in filename_tokens
@@ -319,21 +301,21 @@ def score_item(
             "filename:match"
         )
 
-
-
     #
-    # WordPress title fallback only
+    # WordPress title fallback
     #
+
+    wp_tokens = set(
+        _clean_words(
+            wp_title
+        )
+    )
 
     if (
         "aggregator downloaded"
         not in wp_title
         and all(
-            word in set(
-                _clean_words(
-                    wp_title
-                )
-            )
+            word in wp_tokens
             for word in query_words
         )
     ):
@@ -344,12 +326,7 @@ def score_item(
             "wordpress_title:match"
         )
 
-
-
     if score <= 0:
-
         return 0, reasons
-
-
 
     return score, reasons
