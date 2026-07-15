@@ -13,9 +13,11 @@ Author:
     ShowBiz Automation
 """
 
+import json
 import os
 
 from datetime import datetime
+from pathlib import Path
 
 import requests
 from dotenv import load_dotenv
@@ -27,7 +29,6 @@ load_dotenv()
 TICKETMASTER_URL = (
     "https://app.ticketmaster.com/discovery/v2/events.json"
 )
-
 
 def get_api_key():
 
@@ -53,10 +54,7 @@ def format_date(date_string):
         return date_string
 
 
-def request_ticketmaster(
-    params=None,
-    endpoint=None,
-):
+def request_ticketmaster(params=None):
 
     api_key = get_api_key()
 
@@ -72,36 +70,19 @@ def request_ticketmaster(
 
         params = {}
 
-    params.setdefault(
-        "apikey",
-        api_key,
+    params.update(
+        {
+            "apikey": api_key,
+            "countryCode": "US",
+            "size": 50,
+            "sort": "date,asc",
+        }
     )
-
-    if endpoint is None:
-
-        endpoint = (
-            TICKETMASTER_URL
-        )
-
-        params.setdefault(
-            "countryCode",
-            "US",
-        )
-
-        params.setdefault(
-            "size",
-            50,
-        )
-
-        params.setdefault(
-            "sort",
-            "date,asc",
-        )
 
     try:
 
         response = requests.get(
-            endpoint,
+            TICKETMASTER_URL,
             params=params,
             timeout=20,
         )
@@ -112,116 +93,17 @@ def request_ticketmaster(
 
     except Exception as exc:
 
-        print()
-
         print(
-            "Ticketmaster request failed"
-        )
-
-        print(
-            endpoint
-        )
-
-        print(
-            exc
+            "Ticketmaster request failed:",
+            exc,
         )
 
         return {}
-def get_attraction_image(
-    attraction_ids,
-):
-    """
-    DEBUG VERSION
-
-    Inspect one attraction record so
-    we can see what the Ticketmaster
-    Attractions API actually contains.
-    """
-
-    if not attraction_ids:
-
-        return ""
-
-    attraction_id = attraction_ids[0]
-
-    endpoint = (
-        "https://app.ticketmaster.com/"
-        f"discovery/v2/attractions/{attraction_id}.json"
-    )
-
-    data = request_ticketmaster(
-        endpoint=endpoint,
-    )
-
-    print()
-    print("========================================")
-    print("TICKETMASTER ATTRACTION DEBUG")
-    print("========================================")
-    print()
-
-    print("Attraction ID:")
-    print(attraction_id)
-    print()
-
-    print("Keys:")
-    print(sorted(data.keys()))
-    print()
-
-    images = data.get(
-        "images",
-        []
-    )
-
-    print(
-        "Images:",
-        len(images)
-    )
-
-    for image in images[:10]:
-
-        print(
-            image.get(
-                "ratio"
-            ),
-            image.get(
-                "width"
-            ),
-            "x",
-            image.get(
-                "height"
-            ),
-            image.get(
-                "url"
-            ),
-        )
-
-    print()
-
-    print("URL:")
-    print(
-        data.get(
-            "url"
-        )
-    )
-
-    print()
-
-    print("Name:")
-    print(
-        data.get(
-            "name"
-        )
-    )
-
-    print()
-
-    return ""  
 def normalize_events(events, limit=24):
 
     items = []
 
     blocked = (
-
         "season pass",
         "day pass",
         "weekend pass",
@@ -243,44 +125,29 @@ def normalize_events(events, limit=24):
         "package",
         "add-on",
         "upgrade",
+    )
 
+    generic_attractions = (
+        "happy hour",
+        "princess concert",
+        "summer school",
+        "festival",
+        "symphony",
+        "orchestra",
+        "series",
+        "experience",
+        "tribute",
+        "showcase",
+        "show",
+        "concert",
     )
 
     for event in events:
 
         title = event.get(
             "name",
-            "",
+            ""
         ).strip()
-
-        #
-        # DEBUG
-        #
-        if "usher raymond" in title.lower():
-
-            print()
-            print("=" * 60)
-            print("DEBUG EVENT:", title)
-            print("=" * 60)
-
-            for image in event.get(
-                "images",
-                [],
-            ):
-
-                print(
-                    f"ratio={image.get('ratio')}  "
-                    f"{image.get('width')}x{image.get('height')}"
-                )
-
-                print(
-                    image.get(
-                        "url",
-                        "",
-                    )
-                )
-
-                print()
 
         if not title:
             continue
@@ -313,119 +180,220 @@ def normalize_events(events, limit=24):
             []
         )
 
+        attractions = embedded.get(
+            "attractions",
+            []
+        )
+
+        artist = ""
+        artist_id = ""
+
+        if attractions:
+
+            title_lower = title.lower()
+            best = None
+
+            # 1. Music attraction whose name appears in title.
+            for attraction in attractions:
+
+                name = attraction.get(
+                    "name",
+                    ""
+                ).strip()
+
+                if not name:
+                    continue
+
+                lower_name = name.lower()
+
+                if any(
+                    word in lower_name
+                    for word in generic_attractions
+                ):
+                    continue
+
+                classes = attraction.get(
+                    "classifications",
+                    []
+                )
+
+                segment = ""
+
+                if classes:
+                    segment = (
+                        classes[0]
+                        .get(
+                            "segment",
+                            {}
+                        )
+                        .get(
+                            "name",
+                            ""
+                        )
+                    )
+
+                if (
+                    segment == "Music"
+                    and lower_name in title_lower
+                ):
+                    best = attraction
+                    break
+
+            # 2. Any music attraction that isn't generic.
+            if best is None:
+
+                for attraction in attractions:
+
+                    name = attraction.get(
+                        "name",
+                        ""
+                    ).strip()
+
+                    if not name:
+                        continue
+
+                    lower_name = name.lower()
+
+                    if any(
+                        word in lower_name
+                        for word in generic_attractions
+                    ):
+                        continue
+
+                    classes = attraction.get(
+                        "classifications",
+                        []
+                    )
+
+                    segment = ""
+
+                    if classes:
+                        segment = (
+                            classes[0]
+                            .get(
+                                "segment",
+                                {}
+                            )
+                            .get(
+                                "name",
+                                ""
+                            )
+                        )
+
+                    if segment == "Music":
+                        best = attraction
+                        break
+
+            # 3. First non-generic attraction.
+            if best is None:
+
+                for attraction in attractions:
+
+                    name = attraction.get(
+                        "name",
+                        ""
+                    ).strip()
+
+                    if not name:
+                        continue
+
+                    lower_name = name.lower()
+
+                    if any(
+                        word in lower_name
+                        for word in generic_attractions
+                    ):
+                        continue
+
+                    best = attraction
+                    break
+
+            # 4. Fallback.
+            if best is None:
+                best = attractions[0]
+
+            artist = best.get(
+                "name",
+                ""
+            )
+
+            artist_id = best.get(
+                "id",
+                ""
+            )
+
         venue = ""
         city = ""
+        state = ""
+        country = ""
 
         if venues:
 
-            venue = venues[0].get(
+            venue_info = venues[0]
+
+            venue = venue_info.get(
                 "name",
                 ""
             )
 
             city = (
-                venues[0]
-                .get(
-                    "city",
-                    {}
-                )
-                .get(
-                    "name",
-                    ""
-                )
+                venue_info
+                .get("city", {})
+                .get("name", "")
             )
 
-        attraction_ids = []
-
-        for attraction in embedded.get(
-            "attractions",
-            []
-        ):
-
-            attraction_id = attraction.get(
-                "id"
+            state = (
+                venue_info
+                .get("state", {})
+                .get("stateCode", "")
             )
 
-            if attraction_id:
+            country = (
+                venue_info
+                .get("country", {})
+                .get("countryCode", "")
+            )
 
-                attraction_ids.append(
-                    attraction_id
-                )
-
-        #
-        # Choose the best Ticketmaster
-        # concert artwork.
-        #
         poster = ""
 
-        best_score = -1
-
-        for image in event.get(
+        images = event.get(
             "images",
-            [],
-        ):
+            []
+        )
 
-            url = image.get(
+        if images:
+
+            ranked = sorted(
+                images,
+                key=lambda img: (
+                    "16_9" in img.get(
+                        "url",
+                        ""
+                    ),
+                    img.get(
+                        "width",
+                        0,
+                    ),
+                ),
+                reverse=True,
+            )
+
+            poster = ranked[0].get(
                 "url",
-                "",
+                ""
             )
-
-            width = image.get(
-                "width",
-                0,
-            )
-
-            height = image.get(
-                "height",
-                0,
-            )
-
-            score = width * height
-
-            if "_SOURCE" in url:
-
-                score += 1000000000
-
-            elif "_TABLET_LANDSCAPE_LARGE" in url:
-
-                score += 500000000
-
-            elif "_TABLET_LANDSCAPE" in url:
-
-                score += 250000000
-
-            elif "_ARTIST_PAGE" in url:
-
-                score += 100000000
-
-            elif "_RETINA_LANDSCAPE" in url:
-
-                score += 75000000
-
-            elif "_RETINA_PORTRAIT" in url:
-
-                score += 50000000
-
-            elif "_EVENT_DETAIL_PAGE" in url:
-
-                score += 25000000
-
-            if score > best_score:
-
-                best_score = score
-                poster = url
 
         classification = ""
 
-        classifications = event.get(
+        classes = event.get(
             "classifications",
             []
         )
 
-        if classifications:
+        if classes:
 
             classification = (
-                classifications[0]
+                classes[0]
                 .get(
                     "segment",
                     {}
@@ -438,8 +406,13 @@ def normalize_events(events, limit=24):
 
         items.append(
             {
-                "id": event.get("id"),
+                "id": event.get(
+                    "id",
+                    ""
+                ),
                 "title": title,
+                "artist": artist,
+                "artist_id": artist_id,
                 "event_date": format_date(
                     start.get(
                         "localDate",
@@ -448,6 +421,8 @@ def normalize_events(events, limit=24):
                 ),
                 "venue": venue,
                 "city": city,
+                "state": state,
+                "country": country,
                 "classification": classification,
                 "poster": poster,
                 "url": event.get(
@@ -455,97 +430,27 @@ def normalize_events(events, limit=24):
                     ""
                 ),
                 "overview": venue,
-                "attraction_ids": attraction_ids,
             }
         )
 
         if len(items) >= limit:
-
             break
 
     return items
 def get_concert_guide(limit=24):
     """
     Return the best upcoming concerts.
-
-    Rules:
-
-    • Search multiple Ticketmaster pages.
-    • Keep only future events.
-    • Remove duplicate Ticketmaster IDs.
-    • Sort chronologically.
     """
 
-    today = datetime.today().date()
+    from .concert_api import (
+        fetch_ticketmaster_events,
+    )
 
-    all_events = []
-
-    #
-    # Search up to 10 pages
-    # (approximately 500 events).
-    #
-    for page in range(10):
-
-        data = request_ticketmaster(
-            {
-                "classificationName": "Music",
-                "page": page,
-                "startDateTime": (
-                    today.strftime("%Y-%m-%d")
-                    + "T00:00:00Z"
-                ),
-            }
-        )
-
-        events = (
-            data.get(
-                "_embedded",
-                {}
-            ).get(
-                "events",
-                []
-            )
-        )
-
-        #
-        # No more events.
-        #
-        if not events:
-            break
-
-        all_events.extend(
-            events
-        )
-
-        #
-        # Last page returned
-        # fewer than 50 events.
-        #
-        if len(events) < 50:
-            break
-
-    #
-    # Remove duplicate
-    # Ticketmaster IDs.
-    #
-    unique = {}
-
-    for event in all_events:
-
-        event_id = event.get(
-            "id"
-        )
-
-        if (
-            event_id
-            and event_id not in unique
-        ):
-
-            unique[event_id] = event
+    today = datetime.today()
 
     concerts = normalize_events(
-        list(
-            unique.values()
+        fetch_ticketmaster_events(
+            today.strftime("%Y-%m-%d")
         ),
         limit=5000,
     )
@@ -559,16 +464,13 @@ def get_concert_guide(limit=24):
             event_date = datetime.strptime(
                 concert["event_date"],
                 "%B %d, %Y",
-            ).date()
+            )
 
         except Exception:
 
             continue
 
-        #
-        # Ignore expired events.
-        #
-        if event_date < today:
+        if event_date.date() < today.date():
 
             continue
 
@@ -578,27 +480,17 @@ def get_concert_guide(limit=24):
             concert
         )
 
-    #
-    # Chronological order.
-    #
     upcoming.sort(
-        key=lambda c: (
-            c["_sort_date"],
-            c.get(
-                "title",
-                "",
-            ).lower(),
-        )
+        key=lambda c: c["_sort_date"]
     )
 
-    #
-    # Remove helper field.
-    #
-    for concert in upcoming:
+    featured = upcoming[:limit]
+
+    for concert in featured:
 
         concert.pop(
             "_sort_date",
             None,
         )
 
-    return upcoming[:limit]
+    return featured

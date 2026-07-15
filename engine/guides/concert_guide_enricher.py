@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz Concert Guide Enricher
-Version 1.0
+Version 2.0
 ===========================================
 
 Purpose:
@@ -138,6 +138,84 @@ def concert_poster(
         f'<img src="{poster}" '
         f'alt="{title}">'
     )
+
+
+def build_tour_information(concert):
+
+    if not concert:
+
+        return ""
+
+    rows = []
+
+    if concert.get("artist"):
+
+        rows.append(
+            (
+                "Artist",
+                concert["artist"],
+            )
+        )
+
+    if concert.get("event_date"):
+
+        rows.append(
+            (
+                "Next Show",
+                concert["event_date"],
+            )
+        )
+
+    if concert.get("venue"):
+
+        rows.append(
+            (
+                "Venue",
+                concert["venue"],
+            )
+        )
+
+    location = ", ".join(
+        part
+        for part in (
+            concert.get("city", ""),
+            concert.get("state", ""),
+        )
+        if part
+    )
+
+    if location:
+
+        rows.append(
+            (
+                "Location",
+                location,
+            )
+        )
+
+    if not rows:
+
+        return ""
+
+    info_html = """
+<div class="showbiz-tour-info">
+<h4>Concert Details</h4>
+<ul>
+"""
+
+    for label, value in rows:
+
+        info_html += (
+            f"<li><strong>{label}:</strong> "
+            f"{value}</li>\n"
+        )
+
+    info_html += """
+</ul>
+</div>
+"""
+
+    return info_html
 def extract_content(block):
 
     block = re.sub(
@@ -236,17 +314,30 @@ def enrich_concert_blocks(
             ).strip()
         )
 
+        concert = find_concert(
+            title,
+            concerts,
+        )
+
         poster = concert_poster(
             title,
             concerts,
         )
 
+        content = extract_content(
+            block
+        )
+
+        if concert:
+
+            content += build_tour_information(
+                concert
+            )
+
         replacement = build_movie_card(
             title=title,
             poster=poster,
-            content=extract_content(
-                block
-            ),
+            content=content,
             trailer="",
         )
 
@@ -257,6 +348,8 @@ def enrich_concert_blocks(
         )
 
     return html
+
+
 def enrich_guide(
     title,
     html,
@@ -296,6 +389,11 @@ This is a sample concert description.
         {
             "title": "Sample Concert",
             "poster": "https://example.com/poster.jpg",
+            "tour_start_date": "May 8, 2026",
+            "tour_end_date": "October 17, 2026",
+            "total_tour_dates": 42,
+            "next_stop": "Kansas City • July 17, 2026",
+            "final_stop": "Los Angeles • October 17, 2026",
         }
     ]
 

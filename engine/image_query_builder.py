@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz Image Query Builder
-Version 1.1
+Version 2.0
 ===========================================
 
 Builds prioritized Media Library search
@@ -13,15 +13,74 @@ Author:
     ShowBiz Automation
 """
 
+import re
 from itertools import combinations
 
 from engine.entity_extractor import extract_entities
 
 
+#
+# Entertainment companies that often have
+# corresponding Media Library images.
+#
+
+KNOWN_ORGANIZATIONS = (
+    "Disney",
+    "Disney+",
+    "Pixar",
+    "Marvel",
+    "Lucasfilm",
+    "Star Wars",
+    "Netflix",
+    "Apple TV+",
+    "Apple TV",
+    "Amazon MGM",
+    "Amazon",
+    "Prime Video",
+    "Warner Bros.",
+    "Warner Bros",
+    "Warner",
+    "Max",
+    "HBO",
+    "Hulu",
+    "Paramount",
+    "Paramount+",
+    "Peacock",
+    "NBC",
+    "NBCUniversal",
+    "Universal",
+    "Sony",
+    "Sony Pictures",
+    "A24",
+    "Lionsgate",
+    "DreamWorks",
+    "DC",
+)
+
+
+BAD_PERSON_WORDS = {
+    "daily",
+    "news",
+    "live",
+    "contest",
+    "champions",
+    "tournament",
+    "tournaments",
+    "coverage",
+    "review",
+    "preview",
+    "guide",
+    "updates",
+    "today",
+    "breaking",
+    "independent",
+}
+
+
 def _unique(items):
 
     seen = set()
-    result = []
+    output = []
 
     for item in items:
 
@@ -36,29 +95,73 @@ def _unique(items):
             continue
 
         seen.add(key)
-        result.append(item)
+        output.append(item)
 
-    return result
+    return output
 
 
+def _clean_people(people):
+
+    cleaned = []
+
+    for person in people:
+
+        words = person.split()
+
+        #
+        # Ignore one-word names.
+        #
+
+        if len(words) < 2:
+            continue
+
+        lower = person.lower()
+
+        #
+        # Reject obvious bad entities.
+        #
+
+        if any(
+            bad in lower
+            for bad in BAD_PERSON_WORDS
+        ):
+            continue
+
+        cleaned.append(person)
+
+    return cleaned
+
+
+def _organizations_from_headline(headline):
+
+    found = []
+
+    lower = headline.lower()
+
+    for org in KNOWN_ORGANIZATIONS:
+
+        if org.lower() in lower:
+            found.append(org)
+
+    return found
 def build_search_queries(
     story,
     keyword_queries=None,
 ):
     """
-    Returns a prioritized list of search queries.
+    Returns a prioritized list of editorial-quality
+    Media Library search queries.
 
     Priority:
 
-        1. Individual people
-        2. Person pairs
-        3. Three-person combination
-        4. Movies (only when no people)
-        5. TV (only when no people)
-        6. Music (only when no people)
-        7. Organizations
-        8. Events
-        9. Keyword fallback
+        1. Exact movie titles
+        2. Exact TV titles
+        3. Music artists
+        4. Entertainment companies
+        5. Valid people
+        6. Person pairs
+        7. Events
+        8. Keyword fallback
     """
 
     headline = story.get(
@@ -72,25 +175,79 @@ def build_search_queries(
 
     queries = []
 
+    #
+    # 1. Movies first.
+    #
 
-    people = [
-        person.strip()
-        for person in entities["people"]
-        if person.strip()
-    ]
-
+    queries.extend(
+        entities.get(
+            "movies",
+            [],
+        )
+    )
 
     #
-    # People always win.
+    # 2. TV shows.
     #
+
+    queries.extend(
+        entities.get(
+            "tv_shows",
+            [],
+        )
+    )
+
+    #
+    # 3. Music artists.
+    #
+
+    queries.extend(
+        entities.get(
+            "music_artists",
+            [],
+        )
+    )
+
+    #
+    # 4. Organizations detected by
+    # the extractor.
+    #
+
+    queries.extend(
+        entities.get(
+            "organizations",
+            [],
+        )
+    )
+
+    #
+    # 5. Organizations detected
+    # directly from the headline.
+    #
+
+    queries.extend(
+        _organizations_from_headline(
+            headline
+        )
+    )
+
+    #
+    # 6. Cleaned people.
+    #
+
+    people = _clean_people(
+        entities.get(
+            "people",
+            [],
+        )
+    )
 
     queries.extend(
         people
     )
 
-
     #
-    # Person pairs.
+    # 7. Person pairs only.
     #
 
     for pair in combinations(
@@ -102,67 +259,44 @@ def build_search_queries(
             " ".join(pair)
         )
 
+    #
+    # 8. Events.
+    #
+
+    queries.extend(
+        entities.get(
+            "events",
+            [],
+        )
+    )
 
     #
-    # Three-person combination.
+    # 9. Franchise fallback.
     #
 
-    if len(people) >= 3:
+    franchise_hits = []
 
-        queries.append(
-            " ".join(
-                people[:3]
+    headline_lower = headline.lower()
+
+    for franchise in (
+        "Marvel",
+        "DC",
+        "Star Wars",
+        "Pixar",
+    ):
+
+        if franchise.lower() in headline_lower:
+
+            franchise_hits.append(
+                franchise
             )
-        )
-
-
-    #
-    # Only use title searches when
-    # no people were found.
-    #
-    # Prevents:
-    #
-    # Bonnie Tyler
-    # Total Eclipse of the Heart
-    #
-    # from becoming a movie search.
-    #
-
-    if not people:
-
-        queries.extend(
-            entities["movies"]
-        )
-
-        queries.extend(
-            entities["tv_shows"]
-        )
-
-        queries.extend(
-            entities["music_artists"]
-        )
-
-
-    #
-    # Organizations remain useful.
-    #
 
     queries.extend(
-        entities["organizations"]
+        franchise_hits
     )
 
-
     #
-    # Events remain useful.
-    #
-
-    queries.extend(
-        entities["events"]
-    )
-
-
-    #
-    # Keyword fallback.
+    # 10. Keyword fallback.
     #
 
     if keyword_queries:
@@ -171,28 +305,68 @@ def build_search_queries(
             keyword_queries
         )
 
+    #
+    # Final cleanup.
+    #
 
-    return _unique(
+    cleaned = []
+
+    for query in _unique(
         queries
-    )
-
-
-if __name__ == "__main__":
-
-    story = {
-        "headline":
-            "Taylor Swift and Travis Kelce "
-            "expected wedding celebrations approach"
-    }
-
-
-    print()
-
-    for query in build_search_queries(
-        story,
-        keyword_queries=[
-            "Taylor Swift Travis Kelce wedding"
-        ],
     ):
 
-        print(query)
+        query = re.sub(
+            r"\s+",
+            " ",
+            query,
+        ).strip()
+
+        if len(query) < 2:
+            continue
+
+        cleaned.append(
+            query
+        )
+
+    return cleaned
+if __name__ == "__main__":
+
+    tests = [
+
+        {
+            "headline":
+                "Taylor Swift and Travis Kelce expected wedding celebrations approach"
+        },
+
+        {
+            "headline":
+                "Marvel Contest of Champions to Host Demos and Daily Tournaments at SDCC 2026"
+        },
+
+        {
+            "headline":
+                "Paramount merger gets breathing room after regulators delay decision"
+        },
+
+        {
+            "headline":
+                "Finn Wolfhard planning Phoenix tour stop"
+        },
+
+        {
+            "headline":
+                "Disney+ planning new Marvel series"
+        },
+
+    ]
+
+    for story in tests:
+
+        print()
+        print("=" * 60)
+        print(story["headline"])
+        print("=" * 60)
+
+        for query in build_search_queries(story):
+
+            print(f"• {query}")

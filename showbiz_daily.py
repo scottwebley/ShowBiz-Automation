@@ -1,6 +1,6 @@
 # ============================================
 # SHOWBIZ DAILY AUTOMATION ENGINE
-# Version 3.2
+# Version 3.3
 # ============================================
 
 import subprocess
@@ -18,7 +18,21 @@ def banner():
 def run_step(name, script):
     print(f"\n▶ {name}")
 
-    result = subprocess.run(["python3", script])
+    # Run guide modules as Python modules
+    if script.startswith("engine/guides/") and script.endswith(".py"):
+
+        module = script[:-3].replace("/", ".")
+
+        result = subprocess.run(
+            ["python3", "-m", module]
+        )
+
+    # Run top-level scripts normally
+    else:
+
+        result = subprocess.run(
+            ["python3", script]
+        )
 
     if result.returncode == 0:
         print(f"✓ {name} completed")
@@ -39,24 +53,31 @@ def main():
     # Publish today's Top Story
     # -----------------------------------------
 
-    run_step("Publish Top Story", "newsroom.py")
+    run_step(
+        "Publish Top Story",
+        "newsroom.py",
+    )
 
     # -----------------------------------------
     # Update Winners & Losers page
     # -----------------------------------------
 
-    run_step("Update Winners & Losers", "newsroom_daily.py")
+    run_step(
+        "Update Winners & Losers",
+        "newsroom_daily.py",
+    )
 
     # -----------------------------------------
     # Update Homepage Winners teaser
     # -----------------------------------------
 
-    run_step("Update Homepage Winners", "upload_daily_report.py")
+    run_step(
+        "Update Homepage Winners",
+        "upload_daily_report.py",
+    )
 
     # -----------------------------------------
     # Publish Featured Entertainer of the Week
-    # (Runs every day but safely skips if this
-    # week's feature has already been published.)
     # -----------------------------------------
 
     run_step(
@@ -73,7 +94,32 @@ def main():
         "update_featured_entertainer_homepage.py",
     )
 
-    print("\n===================================")
+    # =========================================
+    # SHOWBIZ GUIDES
+    # =========================================
+
+    run_step(
+        "Update Movies Guide",
+        "engine/guides/weekly_movies.py",
+    )
+
+    run_step(
+        "Update TV Guide",
+        "engine/guides/weekly_tv.py",
+    )
+
+    run_step(
+        "Update Streaming Guide",
+        "engine/guides/weekly_streaming.py",
+    )
+
+    run_step(
+        "Update Concert Guide",
+        "engine/guides/weekly_concerts.py",
+    )
+
+    print()
+    print("===================================")
     print("✓ SHOWBIZ DAILY COMPLETE")
     print("===================================")
 

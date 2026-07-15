@@ -1,14 +1,11 @@
 """
 ===========================================
 ShowBiz Concert Guide Prompt
-Version 1.0
+Version 2.1
 ===========================================
 
 Prompt used by the AI writer to
 generate the Weekly Concert Guide.
-
-Author:
-    ShowBiz Automation
 """
 
 TITLE = "🎤 New Concerts & Tours"
@@ -22,10 +19,9 @@ TITLE
 
 GOAL
 
-Create a weekly guide highlighting the
-most interesting upcoming concerts,
-tours and live music events in the
-United States.
+Create a weekly guide covering the
+best upcoming concerts and live music
+events in the United States.
 
 STYLE
 
@@ -39,34 +35,59 @@ STYLE
 
 • Keep paragraphs short.
 
-• Mention artists, venues and cities
-  when relevant.
+• Mention artists, venues, cities and
+  concert dates when relevant.
 
-• Focus on why each concert is worth
-  seeing.
+• Focus on why each performance is
+  worth seeing.
 
 USE THE PROVIDED DATA
 
 The supplied concert data is your
-primary source.
+only source.
 
-Prefer major artists, notable tours,
-festival appearances and unique live
-events.
+Use ONLY the supplied concerts.
+
+Do NOT invent concerts.
+
+Do NOT invent tour dates.
+
+Do NOT invent additional tour stops.
+
+Do NOT invent tour history.
+
+Do NOT invent future appearances.
+
+Do NOT invent venue information.
+
+CONCERT SELECTION
+
+The supplied concerts have already
+been editorially selected and ranked.
+
+Create one section for EVERY supplied
+concert.
+
+Do NOT omit concerts.
+
+Do NOT replace concerts with others.
+
+Do NOT reorder the concerts.
+
+Write about the concerts in the exact
+order they are provided.
 
 Ignore obvious ticket packages,
 VIP offers, season passes,
-parking passes and promotional items.
-
-If several entries are very similar,
-choose only the strongest one.
+parking passes and promotional items
+only if they appear in the supplied data.
 
 FORMAT
 
 Begin with a short introduction.
 
-Then create one section for each
-featured concert.
+Then create one section for EACH
+concert provided.
 
 Each concert must use exactly:
 
@@ -74,19 +95,28 @@ Each concert must use exactly:
 <h3>Concert Name</h3>
 
 <p>
-Two or three informative paragraphs
-about the artist, tour or event.
-Include venue, city and concert date
-when available.
+Write two or three informative
+paragraphs about the artist and the
+upcoming performance.
+
+Include the venue, city and concert
+date when available.
+
+Explain why fans may be interested in
+this performance using ONLY the
+supplied information.
 </p>
 
 </div>
 
-Include between 10 and 15 concerts.
+Create one section for every supplied
+concert.
+
+Do NOT skip any concert.
 
 Finish with a short closing paragraph
-encouraging readers to check local
-availability and tour schedules.
+encouraging readers to check official
+ticket availability and event details.
 
 Return HTML only.
 
@@ -95,7 +125,4 @@ Do not wrap the response in Markdown.
 Do not include CSS.
 
 Do not include JavaScript.
-
-Do not invent concerts that are not
-present in the supplied data.
 """

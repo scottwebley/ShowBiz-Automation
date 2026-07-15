@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz Weekly Concert Guide
-Version 1.0
+Version 2.0
 ===========================================
 
 Generate and publish the
@@ -29,18 +29,48 @@ from engine.publisher import (
 )
 
 
-#
-# Replace with your WordPress
-# Concert Guide page ID.
-#
 PAGE_ID = 23748
 
 
 def get_concerts():
 
-    return get_concert_guide(
+    from engine.guides.concert_filters import (
+        filter_concerts,
+    )
+
+    from engine.guides.concert_ranker import (
+        rank_concerts,
+    )
+
+    concerts = get_concert_guide(
+        limit=1000,
+    )
+
+    concerts = filter_concerts(
+        concerts,
+    )
+
+    concerts = rank_concerts(
+        concerts,
         limit=24,
     )
+
+    print()
+    print("========================================")
+    print("FINAL TOP 24")
+    print("========================================")
+
+    for i, concert in enumerate(concerts, 1):
+
+        print(
+            f"{i:2}. "
+            f"{concert.get('editorial_score', 0):4}  "
+            f"{concert.get('title', '')}"
+        )
+
+    print()
+
+    return concerts
 
 
 def build_concert_context(
@@ -64,15 +94,21 @@ Use ONLY the concerts below.
         context += f"""
 
 Title: {concert.get('title')}
+Artist: {concert.get('artist')}
 Date: {concert.get('event_date')}
 Venue: {concert.get('venue')}
 City: {concert.get('city')}
+State: {concert.get('state')}
+
 Overview: {concert.get('overview')}
 Poster: {concert.get('poster')}
+Event URL: {concert.get('url')}
 
 """
 
     return context
+
+
 def build_guide():
 
     concerts = get_concerts()
@@ -128,6 +164,8 @@ def publish_guide():
         page_id=PAGE_ID,
         html=html,
     )
+
+
 def main():
 
     print()

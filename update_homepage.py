@@ -1,3 +1,5 @@
+import sys
+
 import requests
 from requests.auth import HTTPBasicAuth
 
@@ -25,6 +27,19 @@ def main():
 
     with open("content/homepage.html", "r", encoding="utf-8") as f:
         content = f.read()
+
+    # -----------------------------------------------------
+    # Safety Check
+    # Refuse to upload anything that does not appear to be
+    # a Gutenberg homepage.
+    # -----------------------------------------------------
+
+    if "<!-- wp:" not in content:
+        print("ERROR")
+        print()
+        print("This does not appear to be a Gutenberg homepage.")
+        print("Upload cancelled.")
+        sys.exit(1)
 
     response = requests.post(
         f"{WP_URL}/wp-json/wp/v2/pages/{PAGE_ID}",
