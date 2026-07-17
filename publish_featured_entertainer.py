@@ -341,15 +341,30 @@ def main():
         )
 
         return
-        save_featured_entertainer(
+
+    save_featured_entertainer(
         report,
-        post
+        post,
     )
 
     archive_featured_entertainer(
         profile,
         article,
     )
+
+    print("\n==============================")
+    print(" FEATURED ENTERTAINER PUBLISHED")
+    print("==============================")
+    print(f"Post ID : {post['id']}")
+    print(
+        f"Title   : "
+        f"{post['title']['rendered']}"
+    )
+    print(
+        f"URL     : "
+        f"{post['link']}"
+    )
+    print("==============================\n")
 
     print("\n==============================")
     print(" FEATURED ENTERTAINER PUBLISHED")

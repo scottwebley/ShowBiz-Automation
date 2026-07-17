@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz Weekly Streaming Guide
-Version 1.0
+Version 1.1
 ===========================================
 
 Generate and publish the
@@ -27,8 +27,7 @@ from engine.publisher import publish_html
 
 
 #
-# Replace with the WordPress
-# Streaming Guide page ID.
+# WordPress Streaming Guide page.
 #
 PAGE_ID = 23783
 
@@ -95,14 +94,15 @@ def build_guide():
         encoding="utf-8",
     ) as file:
 
-        file.write(
-            html
-        )
+        file.write(html)
 
     from engine.guides.streaming_trailer_finder import (
-    trailer_button,
-)
+        trailer_button,
+    )
 
+    #
+    # Add trailer button for each title.
+    #
     for item in items:
 
         item["trailer"] = trailer_button(
@@ -111,7 +111,11 @@ def build_guide():
             media_type=item["media_type"],
         )
 
-        enriched_html = enrich_guide(
+    #
+    # Enrich the guide once after
+    # all trailers have been added.
+    #
+    enriched_html = enrich_guide(
         title=TITLE,
         html=html,
         items=items,

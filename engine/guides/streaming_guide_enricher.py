@@ -236,11 +236,35 @@ def enrich_movie_blocks(
         )
 
         trailer = ""
+        platform = ""
+        platform_logo = ""
+        trailer_url = ""
+        watch_url = ""
 
         if item:
 
             trailer = item.get(
                 "trailer",
+                "",
+            )
+
+            platform = item.get(
+                "platform",
+                "",
+            )
+
+            platform_logo = item.get(
+                "platform_logo",
+                "",
+            )
+
+            trailer_url = item.get(
+                "trailer_url",
+                "",
+            )
+
+            watch_url = item.get(
+                "watch_url",
                 "",
             )
 
@@ -251,6 +275,10 @@ def enrich_movie_blocks(
                 block
             ),
             trailer=trailer,
+            platform=platform,
+            platform_logo=platform_logo,
+            trailer_url=trailer_url,
+            watch_url=watch_url,
         )
 
         html = (

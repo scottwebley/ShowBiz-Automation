@@ -393,14 +393,16 @@ def _extract_people(
 
     people = []
 
-
     protected_titles = list(
         KNOWN_TITLES
     )
 
-
     working = headline
 
+    #
+    # Remove known titles so they cannot be
+    # mistaken for people.
+    #
 
     for title in protected_titles:
 
@@ -409,12 +411,10 @@ def _extract_people(
             "",
         )
 
-
     tokens = re.findall(
         r"[A-Z][A-Za-z0-9']*",
         working,
     )
-
 
     reject_first = {
 
@@ -437,8 +437,22 @@ def _extract_people(
         "Season",
         "Episode",
 
-    }
+        # Headline verbs
 
+        "Celebrates",
+        "Celebrating",
+        "Announces",
+        "Announced",
+        "Returns",
+        "Return",
+        "Wins",
+        "Win",
+        "Upcoming",
+        "Featuring",
+        "Feature",
+        "Reaching",
+
+    }
 
     reject_second = {
 
@@ -463,9 +477,7 @@ def _extract_people(
 
     }
 
-
     i = 0
-
 
     while i < len(tokens):
 
@@ -473,6 +485,10 @@ def _extract_people(
             tokens[i]
         )
 
+        #
+        # Alias:
+        # The Rock -> Dwayne Johnson
+        #
 
         if (
             current == "The"
@@ -487,10 +503,48 @@ def _extract_people(
             )
 
             i += 2
-
             continue
 
+        #
+        # Pattern:
+        # Starring Cole Escola
+        # Featuring Taylor Swift
+        #
 
+        if (
+            current in {
+                "Starring",
+                "Featuring",
+                "Feature",
+            }
+            and i + 2 < len(tokens)
+        ):
+
+            first = _clean_person_token(
+                tokens[i + 1]
+            )
+
+            second = _clean_person_token(
+                tokens[i + 2]
+            )
+
+            if _is_valid_person(
+                first,
+                second,
+            ):
+
+                people.append(
+                    normalize(
+                        f"{first} {second}"
+                    )
+                )
+
+                i += 3
+                continue
+
+        #
+        # Standard First Last extraction
+        #
 
         if i + 1 < len(tokens):
 
@@ -500,20 +554,15 @@ def _extract_people(
                 tokens[i + 1]
             )
 
-
             if first in reject_first:
 
                 i += 1
-
                 continue
-
 
             if second in reject_second:
 
                 i += 1
-
                 continue
-
 
             if _is_valid_person(
                 first,
@@ -527,12 +576,9 @@ def _extract_people(
                 )
 
                 i += 2
-
                 continue
 
-
         i += 1
-
 
     return list(
         dict.fromkeys(

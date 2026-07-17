@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz Streaming Data
-Version 1.1
+Version 1.0
 ===========================================
 
 Purpose:
@@ -88,125 +88,6 @@ def request_tmdb(endpoint, params=None):
         return {}
 
 
-def get_watch_provider(
-    media_type,
-    tmdb_id,
-):
-    """
-    Return the primary US streaming
-    provider for a movie or TV show.
-    """
-
-    data = request_tmdb(
-        f"{media_type}/{tmdb_id}/watch/providers"
-    )
-
-    results = data.get(
-        "results",
-        {},
-    )
-
-    us = results.get(
-        "US",
-        {},
-    )
-
-    watch_url = us.get(
-        "link",
-        "",
-    )
-
-    #
-    # Check provider types in order.
-    #
-    for provider_type in (
-        "flatrate",
-        "ads",
-        "free",
-        "buy",
-        "rent",
-    ):
-
-        providers = us.get(
-            provider_type,
-            [],
-        )
-
-        if providers:
-
-            provider = providers[0]
-
-            logo = provider.get(
-                "logo_path",
-                "",
-            )
-
-            return {
-                "platform": provider.get(
-                    "provider_name",
-                    "",
-                ),
-                "platform_logo": (
-                    f"https://image.tmdb.org/t/p/w185{logo}"
-                    if logo
-                    else ""
-                ),
-                "watch_url": watch_url,
-            }
-
-    return {
-        "platform": "",
-        "platform_logo": "",
-        "watch_url": watch_url,
-    }
-def get_trailer_url(
-    media_type,
-    tmdb_id,
-):
-    """
-    Return the official YouTube trailer URL.
-    """
-
-    data = request_tmdb(
-        f"{media_type}/{tmdb_id}/videos"
-    )
-
-    for video in data.get(
-        "results",
-        [],
-    ):
-
-        if (
-            video.get("site") == "YouTube"
-            and video.get("type") == "Trailer"
-            and video.get("official", False)
-        ):
-
-            return (
-                "https://www.youtube.com/watch?v="
-                + video["key"]
-            )
-
-    #
-    # Fallback to any YouTube trailer.
-    #
-    for video in data.get(
-        "results",
-        [],
-    ):
-
-        if (
-            video.get("site") == "YouTube"
-            and video.get("type") == "Trailer"
-        ):
-
-            return (
-                "https://www.youtube.com/watch?v="
-                + video["key"]
-            )
-
-    return ""
-
 def normalize_results(
     results,
     limit,
@@ -262,10 +143,6 @@ def normalize_results(
                     if poster
                     else ""
                 ),
-                "platform": "",
-                "platform_logo": "",
-                "watch_url": "",
-                "trailer_url": "",
             }
         )
 
@@ -275,6 +152,14 @@ def get_streaming_guide(limit=24):
     Return a combined list of
     upcoming movies and TV
     suitable for the Streaming Guide.
+
+    NOTE:
+        This starts with TMDb's
+        upcoming releases. We can
+        later replace the queries
+        with streaming-specific
+        sources without changing
+        the public interface.
     """
 
     combined = {}
@@ -300,7 +185,6 @@ def get_streaming_guide(limit=24):
             continue
 
         try:
-
             release = datetime.strptime(
                 movie["release_date"],
                 "%B %d, %Y",
@@ -313,24 +197,6 @@ def get_streaming_guide(limit=24):
             continue
 
         movie["media_type"] = "movie"
-
-        #
-        # Streaming provider
-        #
-        movie.update(
-            get_watch_provider(
-                "movie",
-                movie["id"],
-            )
-        )
-
-        #
-        # Official trailer
-        #
-        movie["trailer_url"] = get_trailer_url(
-            "movie",
-            movie["id"],
-        )
 
         combined[
             (
@@ -366,24 +232,6 @@ def get_streaming_guide(limit=24):
     ):
 
         show["media_type"] = "tv"
-
-        #
-        # Streaming provider
-        #
-        show.update(
-            get_watch_provider(
-                "tv",
-                show["id"],
-            )
-        )
-
-        #
-        # Official trailer
-        #
-        show["trailer_url"] = get_trailer_url(
-            "tv",
-            show["id"],
-        )
 
         combined[
             (
@@ -421,22 +269,7 @@ if __name__ == "__main__":
     for item in titles:
 
         print(
-            f'{item["media_type"]:6} '
-            f'{item["title"]} '
-            f'({item["release_date"]})'
+            item["media_type"],
+            item["title"],
+            item["release_date"],
         )
-
-        if item.get("platform"):
-
-            print(
-                "   Platform:",
-                item["platform"],
-            )
-
-        else:
-
-            print(
-                "   Platform: Unknown"
-            )
-
-        print()

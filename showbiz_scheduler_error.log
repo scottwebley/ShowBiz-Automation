@@ -1,0 +1,20 @@
+/Library/Developer/CommandLineTools/usr/bin/python3: can't open file 'showbiz_daily.py': [Errno 1] Operation not permitted
+/Library/Developer/CommandLineTools/usr/bin/python3: can't open file 'showbiz_daily.py': [Errno 1] Operation not permitted
+Traceback (most recent call last):
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/newsroom.py", line 1, in <module>
+    from engine.ai_news import get_top_stories
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/ai_news.py", line 1, in <module>
+    from eventregistry import *
+ModuleNotFoundError: No module named 'eventregistry'
+Traceback (most recent call last):
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/newsroom.py", line 1, in <module>
+    from engine.ai_news import get_top_stories
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/ai_news.py", line 1, in <module>
+    from eventregistry import *
+ModuleNotFoundError: No module named 'eventregistry'
+/bin/zsh: can't open input file: /Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/run_showbiz.sh
+/bin/zsh: can't open input file: /Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/run_showbiz.sh
+/bin/zsh: can't open input file: /Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/run_showbiz.sh
+/bin/zsh: can't open input file: /Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/run_showbiz.sh
+/bin/zsh: can't open input file: /Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/run_showbiz.sh
+/bin/zsh: can't open input file: /Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/run_showbiz.sh
