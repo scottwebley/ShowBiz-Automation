@@ -1,46 +1,170 @@
 # ============================================
 # SHOWBIZ DAILY AUTOMATION ENGINE
-# Version 3.3
+# Version 4.0
 # ============================================
 
 import subprocess
+import sys
+import time
+import traceback
 from datetime import datetime
+
+from engine.scheduler import (
+    should_run_daily,
+    should_run_weekly,
+)
+
+
+LOG_FILE = "showbiz_scheduler.log"
+
+RUN_RESULTS = []
+
+
+def log(message=""):
+    """
+    Write to console and scheduler log.
+    """
+
+    timestamp = datetime.now().strftime(
+        "%Y-%m-%d %H:%M:%S"
+    )
+
+    line = f"[{timestamp}] {message}"
+
+    print(line)
+
+    with open(
+        LOG_FILE,
+        "a",
+        encoding="utf-8",
+    ) as logfile:
+
+        logfile.write(
+            line + "\n"
+        )
 
 
 def banner():
-    print()
-    print("=" * 50)
-    print("        SHOWBIZ DAILY AUTOMATION")
-    print("=" * 50)
-    print()
+
+    log()
+    log("=" * 60)
+    log("SHOWBIZ DAILY AUTOMATION")
+    log("=" * 60)
+    log(
+        f"Started: {datetime.now().strftime('%B %d, %Y %I:%M:%S %p')}"
+    )
+    log()
 
 
-def run_step(name, script):
-    print(f"\n▶ {name}")
+def run_step(
+    name,
+    script,
+):
+    """
+    Run one automation step.
+    Continue even if it fails.
+    """
 
-    # Run guide modules as Python modules
-    if script.startswith("engine/guides/") and script.endswith(".py"):
+    log("-" * 60)
+    log(f"Starting: {name}")
 
-        module = script[:-3].replace("/", ".")
+    start = time.time()
 
-        result = subprocess.run(
-            ["python3", "-m", module]
+    try:
+
+        #
+        # Run guide modules.
+        #
+        if (
+            script.startswith("engine/guides/")
+            and script.endswith(".py")
+        ):
+
+            module = (
+                script[:-3]
+                .replace("/", ".")
+            )
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    module,
+                ]
+            )
+
+        #
+        # Run normal scripts.
+        #
+        else:
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    script,
+                ]
+            )
+
+        elapsed = (
+            time.time() - start
         )
 
-    # Run top-level scripts normally
-    else:
+        if result.returncode == 0:
 
-        result = subprocess.run(
-            ["python3", script]
+            RUN_RESULTS.append(
+                (
+                    name,
+                    True,
+                    elapsed,
+                )
+            )
+
+            log(
+                f"SUCCESS: {name} "
+                f"({elapsed:.1f}s)"
+            )
+
+            return True
+
+        RUN_RESULTS.append(
+            (
+                name,
+                False,
+                elapsed,
+            )
         )
 
-    if result.returncode == 0:
-        print(f"✓ {name} completed")
-    else:
-        print(f"✗ {name} failed")
-        raise SystemExit(1)
+        log(
+            f"FAILED: {name} "
+            f"(exit code {result.returncode}) "
+            f"({elapsed:.1f}s)"
+        )
 
+        return False
 
+    except Exception:
+
+        elapsed = (
+            time.time() - start
+        )
+
+        RUN_RESULTS.append(
+            (
+                name,
+                False,
+                elapsed,
+            )
+        )
+
+        log(
+            f"EXCEPTION: {name}"
+        )
+
+        log(
+            traceback.format_exc()
+        )
+
+        return False
 def main():
     banner()
 
@@ -50,7 +174,7 @@ def main():
     print("\nStarting automation...\n")
 
     # -----------------------------------------
-    # Publish today's Top Story
+    # Always publish today's Top Story
     # -----------------------------------------
 
     run_step(
@@ -59,64 +183,66 @@ def main():
     )
 
     # -----------------------------------------
-    # Update Winners & Losers page
+    # First run of the day
     # -----------------------------------------
 
-    run_step(
-        "Update Winners & Losers",
-        "newsroom_daily.py",
-    )
+    if should_run_daily():
+
+        print("\nRunning daily automation...\n")
+
+        run_step(
+            "Update Winners & Losers",
+            "newsroom_daily.py",
+        )
+
+        run_step(
+            "Update Homepage Winners",
+            "upload_daily_report.py",
+        )
+
+        run_step(
+            "Update Movies Guide",
+            "engine/guides/weekly_movies.py",
+        )
+
+        run_step(
+            "Update TV Guide",
+            "engine/guides/weekly_tv.py",
+        )
+
+        run_step(
+            "Update Streaming Guide",
+            "engine/guides/weekly_streaming.py",
+        )
+
+        run_step(
+            "Update Concert Guide",
+            "engine/guides/weekly_concerts.py",
+        )
+
+    else:
+        print("\n✓ Daily automation already completed today.")
 
     # -----------------------------------------
-    # Update Homepage Winners teaser
+    # First run of the week
     # -----------------------------------------
 
-    run_step(
-        "Update Homepage Winners",
-        "upload_daily_report.py",
-    )
+    if should_run_weekly():
 
-    # -----------------------------------------
-    # Publish Featured Entertainer of the Week
-    # -----------------------------------------
+        print("\nRunning weekly automation...\n")
 
-    run_step(
-        "Publish Featured Entertainer",
-        "publish_featured_entertainer.py",
-    )
+        run_step(
+            "Publish Featured Entertainer",
+            "publish_featured_entertainer.py",
+        )
 
-    # -----------------------------------------
-    # Update Homepage Featured Entertainer
-    # -----------------------------------------
+        run_step(
+            "Update Homepage Featured Entertainer",
+            "update_featured_entertainer_homepage.py",
+        )
 
-    run_step(
-        "Update Homepage Featured Entertainer",
-        "update_featured_entertainer_homepage.py",
-    )
-
-    # =========================================
-    # SHOWBIZ GUIDES
-    # =========================================
-
-    run_step(
-        "Update Movies Guide",
-        "engine/guides/weekly_movies.py",
-    )
-
-    run_step(
-        "Update TV Guide",
-        "engine/guides/weekly_tv.py",
-    )
-
-    run_step(
-        "Update Streaming Guide",
-        "engine/guides/weekly_streaming.py",
-    )
-
-    run_step(
-        "Update Concert Guide",
-        "engine/guides/weekly_concerts.py",
-    )
+    else:
+        print("\n✓ Weekly automation already completed this week.")
 
     print()
     print("===================================")
@@ -125,4 +251,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main()   
+        
