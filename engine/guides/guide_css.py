@@ -170,11 +170,12 @@ Movie Divider
 
 /*
 ===========================================
-Trailer Button
+Buttons
 ===========================================
 */
 
-.showbiz-trailer-button{
+.showbiz-trailer-button,
+.showbiz-ticket-button{
 
     display:inline-block;
 
@@ -194,10 +195,16 @@ Trailer Button
 
 }
 
-
-.showbiz-trailer-button:hover{
+.showbiz-trailer-button:hover,
+.showbiz-ticket-button:hover{
 
     opacity:.90;
+
+}
+
+.showbiz-ticket-buttons{
+
+    margin-top:18px;
 
 }
 

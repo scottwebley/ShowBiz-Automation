@@ -18,3 +18,97 @@ ModuleNotFoundError: No module named 'eventregistry'
 /bin/zsh: can't open input file: /Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/run_showbiz.sh
 /bin/zsh: can't open input file: /Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/run_showbiz.sh
 /bin/zsh: can't open input file: /Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/run_showbiz.sh
+=========== WARNING ===========
+The processing of the request took a lot of time (22 sec). By repeatedly making slow requests your account will be temporarily disabled.
+===============================
+=========== WARNING ===========
+The processing of the request took a lot of time (20 sec). By repeatedly making slow requests your account will be temporarily disabled.
+===============================
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/urllib3/connection.py", line 204, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/urllib3/connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/urllib3/connectionpool.py", line 1106, in _validate_conn
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/urllib3/connection.py", line 759, in connect
+    self.sock = sock = self._new_conn()
+                       ~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/urllib3/connection.py", line 211, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: HTTPSConnection(host='showbiz.com', port=443): Failed to resolve 'showbiz.com' ([Errno 8] nodename nor servname provided, or not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/requests/adapters.py", line 696, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/urllib3/connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/urllib3/util/retry.py", line 543, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='showbiz.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?categories=64&per_page=100&orderby=date&order=desc&status=publish (Caused by NameResolutionError("HTTPSConnection(host='showbiz.com', port=443): Failed to resolve 'showbiz.com' ([Errno 8] nodename nor servname provided, or not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/scottwebley/ShowBiz-Automation-Production-Backup/newsroom.py", line 173, in <module>
+    main()
+    ~~~~^^
+  File "/Users/scottwebley/ShowBiz-Automation-Production-Backup/newsroom.py", line 111, in main
+    if not should_replace_top_story(story):
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/scottwebley/ShowBiz-Automation-Production-Backup/engine/top_story_manager.py", line 95, in should_replace_top_story
+    current = get_current_top_story()
+  File "/Users/scottwebley/ShowBiz-Automation-Production-Backup/engine/top_story_manager.py", line 85, in get_current_top_story
+    posts = get_top_story_posts()
+  File "/Users/scottwebley/ShowBiz-Automation-Production-Backup/engine/top_story_manager.py", line 64, in get_top_story_posts
+    response = requests.get(
+        f"{WP_URL}/wp-json/wp/v2/posts",
+    ...<9 lines>...
+        timeout=30,
+    )
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/requests/api.py", line 87, in get
+    return request("get", url, params=params, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/requests/api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/requests/sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/requests/sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/requests/adapters.py", line 729, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='showbiz.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?categories=64&per_page=100&orderby=date&order=desc&status=publish (Caused by NameResolutionError("HTTPSConnection(host='showbiz.com', port=443): Failed to resolve 'showbiz.com' ([Errno 8] nodename nor servname provided, or not known)"))

@@ -6,14 +6,11 @@ from engine.editor import should_publish
 from engine.ai_writer import write_article
 from engine.image_selector import get_featured_image
 from engine.wordpress import publish_post
-from engine.story_consolidator import analyze_story_duplicates
-
 from engine.pending_story import (
     save_pending_story,
     load_pending_story,
     clear_pending_story,
 )
-
 from engine.top_story_manager import (
     should_replace_top_story,
     retire_previous_top_stories,
@@ -41,8 +38,6 @@ def main():
         print("STEP 1: Fetching live entertainment news...")
 
         stories = get_top_stories()
-
-        stories = analyze_story_duplicates(stories)
 
         if not stories:
             print("No stories found.")
@@ -96,7 +91,8 @@ def main():
 
                     print("No valid stories available.")
                     return
-                    print(f"Top Story: {story['headline']}")
+
+    print(f"Top Story: {story['headline']}")
     print(f"Category: {story['category']}\n")
 
     print("STEP 3: Editorial review...")

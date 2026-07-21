@@ -212,6 +212,28 @@ def build_tour_information(concert):
 
     info_html += """
 </ul>
+"""
+
+    ticket_url = concert.get(
+        "url",
+        "",
+    ).strip()
+
+    if ticket_url:
+
+        info_html += f"""
+<div class="showbiz-ticket-buttons">
+    <a
+        class="showbiz-ticket-button"
+        href="{html.escape(ticket_url, quote=True)}"
+        target="_blank"
+        rel="noopener sponsored">
+        🎟 Buy Tickets
+    </a>
+</div>
+"""
+
+    info_html += """
 </div>
 """
 
