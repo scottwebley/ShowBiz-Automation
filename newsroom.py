@@ -7,6 +7,7 @@ from engine.ai_writer import write_article
 from engine.image_selector import get_featured_image
 from engine.wordpress import publish_post
 from engine.story_consolidator import analyze_story_duplicates
+from engine.trailer_enricher import enrich_article
 
 from engine.pending_story import (
     save_pending_story,
@@ -128,6 +129,9 @@ def main():
     print("STEP 4: Writing article...")
 
     article = write_article(story)
+
+    if article is not None:
+        article = enrich_article(article, story)
 
     if article is None:
 

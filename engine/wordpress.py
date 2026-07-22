@@ -130,6 +130,11 @@ def publish_post(article):
         return None
 
     post = response.json()
+    
+    print("\n========== WORDPRESS RESPONSE ==========")
+    print("Post ID   :", post["id"])
+    print("Categories:", post.get("categories"))
+    print("========================================")
 
     print(
         "\nWordPress returned featured_media:",
