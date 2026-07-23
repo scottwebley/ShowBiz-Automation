@@ -112,3 +112,9 @@ Traceback (most recent call last):
   File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/requests/adapters.py", line 729, in send
     raise ConnectionError(e, request=request)
 requests.exceptions.ConnectionError: HTTPSConnectionPool(host='showbiz.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?categories=64&per_page=100&orderby=date&order=desc&status=publish (Caused by NameResolutionError("HTTPSConnection(host='showbiz.com', port=443): Failed to resolve 'showbiz.com' ([Errno 8] nodename nor servname provided, or not known)"))
+Traceback (most recent call last):
+  File "/Users/scottwebley/ShowBiz-Automation-Production-Backup/newsroom.py", line 6, in <module>
+    from engine.ai_writer import write_article
+  File "/Users/scottwebley/ShowBiz-Automation-Production-Backup/engine/ai_writer.py", line 16, in <module>
+    from engine.ai_writer_core import write_article_core
+ModuleNotFoundError: No module named 'engine.ai_writer_core'

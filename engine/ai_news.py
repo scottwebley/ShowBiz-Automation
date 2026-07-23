@@ -1,6 +1,7 @@
 from eventregistry import *
 from dotenv import load_dotenv
 import os
+from pprint import pprint
 
 from engine.categorizer import categorize
 from engine.editorial_filter import keep_story
@@ -46,11 +47,40 @@ def get_top_stories(max_items=50):
 
         print("Downloading stories...")
 
+        debug_printed = False
+
         for article in query.execQuery(
             er,
             sortBy="date",
             maxItems=max_items * 3,
         ):
+
+            #
+            # DEBUG - print the first raw article returned
+            #
+            if not debug_printed:
+                print("\n" + "=" * 80)
+                print("RAW EVENT REGISTRY ARTICLE")
+                print("=" * 80)
+
+                print("\nAVAILABLE KEYS:\n")
+                pprint(sorted(article.keys()))
+
+                print("\nTITLE:\n")
+                print(article.get("title"))
+
+                print("\nBODY LENGTH:")
+                print(len(article.get("body", "") or ""))
+
+                print("\nBODY (first 1000 chars):\n")
+                print((article.get("body", "") or "")[:1000])
+
+                print("\nFULL RAW ARTICLE:\n")
+                pprint(article)
+
+                print("=" * 80 + "\n")
+
+                debug_printed = True
 
             story = {
                 "headline": article.get("title", "").strip(),

@@ -80,9 +80,6 @@ def publish_post(article):
     #
     # Categories
     #
-    # Supports BOTH the new category_ids list and
-    # the older single category_id.
-    #
 
     if article.get("category_ids"):
         data["categories"] = article["category_ids"]
@@ -130,7 +127,55 @@ def publish_post(article):
         return None
 
     post = response.json()
-    
+
+    # --------------------------------------------------
+    # TEST: Try setting featured image AFTER creation
+    # --------------------------------------------------
+
+    if featured_media:
+
+        update = requests.post(
+            f"{WP_URL}/wp-json/wp/v2/posts/{post['id']}",
+            auth=HTTPBasicAuth(
+                WP_USERNAME,
+                WP_APP_PASSWORD
+            ),
+            headers=HEADERS,
+            json={
+                "featured_media": featured_media
+            },
+            timeout=60
+        )
+
+        print("\nSecond update:", update.status_code)
+
+        try:
+            print(
+                "Second featured_media:",
+                update.json().get("featured_media")
+            )
+        except Exception:
+            print(update.text)
+
+    # --------------------------------------------------
+    # Verify what WordPress actually stored
+    # --------------------------------------------------
+
+    verify = requests.get(
+        f"{WP_URL}/wp-json/wp/v2/posts/{post['id']}",
+        auth=HTTPBasicAuth(
+            WP_USERNAME,
+            WP_APP_PASSWORD
+        ),
+        headers=HEADERS,
+        timeout=60
+    )
+
+    print(
+        "Verified featured_media:",
+        verify.json().get("featured_media")
+    )
+
     print("\n========== WORDPRESS RESPONSE ==========")
     print("Post ID   :", post["id"])
     print("Categories:", post.get("categories"))

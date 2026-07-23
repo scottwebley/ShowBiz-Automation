@@ -23,6 +23,7 @@ Author:
 from engine.image_generator import generate_image
 from engine.image_search import search_media_library
 from engine.image_verifier import verify_image
+from engine.image_providers.unsplash import get_unsplash_image
 
 
 BLOCKED_IMAGE_TERMS = (
@@ -129,12 +130,32 @@ def get_featured_image(story):
         )
 
         return f"media:{fallback['media_id']}"
-
-    #
+        #
     # No valid Media Library candidates.
     #
 
     print("\nNo valid Media Library candidates found.")
+
+    #
+    # Second choice:
+    # Download a legal editorial image from Unsplash.
+    #
+
+    print("Searching Unsplash...\n")
+
+    unsplash_image = get_unsplash_image(story)
+
+    if unsplash_image:
+
+        print("✓ Using Unsplash image.")
+        return unsplash_image
+
+    #
+    # Final fallback:
+    # Generate an AI editorial image.
+    #
+
+    print("No Unsplash image found.")
     print("Generating new editorial image...\n")
 
     generated = generate_image(story)

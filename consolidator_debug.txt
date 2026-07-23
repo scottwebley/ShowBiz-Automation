@@ -1,0 +1,5260 @@
+Downloading stories...
+PENALTY: \bBest\b (-20)
+REJECT: Hard rule matched (\bSummaryBrief\b)
+PENALTY: \bBest\b (-20)
+PENALTY: \bHow To\b (-35)
+PENALTY: \bBest\b (-20)
+PENALTY: \bHow To\b (-35)
+PENALTY: \bExplained\b (-20)
+PENALTY: \bBest\b (-20)
+PENALTY: \bBest\b (-20)
+PENALTY: \bExplained\b (-20)
+PENALTY: \bExplained\b (-20)
+PENALTY: \bBest\b (-20)
+PENALTY: \bBest\b (-20)
+PENALTY: \bBest\b (-20)
+PENALTY: \bEverything You Need To Know\b (-40)
+PENALTY: \bHow To\b (-35)
+PENALTY: \bBest\b (-20)
+PENALTY: \bBest\b (-20)
+PENALTY: \bHow To\b (-35)
+REJECT: Hard rule matched (\bArchive\b)
+✓ Cached 30 stories.
+✓ Cached 30 stories.
+
+===================================
+      STORY CONSOLIDATOR
+      Version 6.0
+===================================
+
+Stories downloaded: 30
+
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+Headline : 0.42
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.10
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+Headline : 0.36
+Keyword  : 0.06
+Entity   : 0.00
+Tokens   : 0.12
+Combined : 0.12
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+Headline : 0.23
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+Headline : 0.34
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.09
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+Headline : 0.17
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+Headline : 0.30
+Keyword  : 0.06
+Entity   : 0.00
+Tokens   : 0.12
+Combined : 0.11
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: Revenge, body horror and DC collide in new Clayface trailer
+Headline : 0.22
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+Headline : 0.33
+Keyword  : 0.07
+Entity   : 0.00
+Tokens   : 0.12
+Combined : 0.12
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+Headline : 0.29
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+Headline : 0.12
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.03
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+Headline : 0.36
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.09
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: Live Music On A Great Lakes Freighter? Only In Duluth
+Headline : 0.32
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+Headline : 0.46
+Keyword  : 0.06
+Entity   : 0.00
+Tokens   : 0.12
+Combined : 0.15
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+Headline : 0.02
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.01
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+Headline : 0.29
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+Headline : 0.39
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.10
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+Headline : 0.28
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: The Best New Movies to Watch at Home This Weekend
+Headline : 0.30
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: Throssel: The oldest footprints in Hardin County?
+Headline : 0.31
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+Headline : 0.18
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: What to Know About HGTV's 'Sin City Rehab' Season 2
+Headline : 0.30
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: 15 Best TV Shows Like Two And A Half Men - TVLine
+Headline : 0.22
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+Headline : 0.33
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.20
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: New Swords and Sorcery movie is now streaming on Amazon Prime - AOL
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.26
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+Headline : 0.13
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.03
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+Headline : 0.30
+Keyword  : 0.06
+Entity   : 0.00
+Tokens   : 0.11
+Combined : 0.11
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+Headline : 0.18
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+Headline : 0.22
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+Headline : 0.10
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.02
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+Headline : 0.26
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+Headline : 0.17
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+Headline : 0.23
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: Revenge, body horror and DC collide in new Clayface trailer
+Headline : 0.24
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+Headline : 0.34
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+Headline : 0.20
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+Headline : 0.34
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+Headline : 0.18
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: Live Music On A Great Lakes Freighter? Only In Duluth
+Headline : 0.23
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+Headline : 0.22
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+Headline : 0.06
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.01
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+Headline : 0.20
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+Headline : 0.32
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+Headline : 0.23
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: The Best New Movies to Watch at Home This Weekend
+Headline : 0.17
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: Throssel: The oldest footprints in Hardin County?
+Headline : 0.30
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+Headline : 0.28
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: What to Know About HGTV's 'Sin City Rehab' Season 2
+Headline : 0.32
+Keyword  : 0.06
+Entity   : 0.00
+Tokens   : 0.11
+Combined : 0.11
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: 15 Best TV Shows Like Two And A Half Men - TVLine
+Headline : 0.32
+Keyword  : 0.06
+Entity   : 0.07
+Tokens   : 0.11
+Combined : 0.14
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+Headline : 0.21
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Save The Dates: Julie Andrews Documentary, Conan O'Brien Must Go Season 3, And More - TVLine
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.30
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+B: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+B: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+Headline : 0.36
+Keyword  : 0.05
+Entity   : 0.07
+Tokens   : 0.10
+Combined : 0.14
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+B: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+Headline : 0.15
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+B: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+Headline : 0.30
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+B: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+Headline : 0.37
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.09
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+B: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+Headline : 0.28
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+B: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+Headline : 0.25
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+B: Revenge, body horror and DC collide in new Clayface trailer
+Headline : 0.06
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.01
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+B: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+Headline : 0.26
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+B: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+Headline : 0.36
+Keyword  : 0.06
+Entity   : 0.08
+Tokens   : 0.12
+Combined : 0.15
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+B: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+Headline : 0.31
+Keyword  : 0.05
+Entity   : 0.07
+Tokens   : 0.08
+Combined : 0.13
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+B: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+Headline : 0.16
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+B: Live Music On A Great Lakes Freighter? Only In Duluth
+Headline : 0.25
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+B: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+Headline : 0.29
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+B: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+Headline : 0.02
+Keyword  : 0.06
+Entity   : 0.04
+Tokens   : 0.17
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+B: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+Headline : 0.22
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+B: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+Headline : 0.31
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+B: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+Headline : 0.15
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+B: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+Headline : 0.31
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+B: The Best New Movies to Watch at Home This Weekend
+Headline : 0.36
+Keyword  : 0.07
+Entity   : 0.11
+Tokens   : 0.20
+Combined : 0.18
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+B: Throssel: The oldest footprints in Hardin County?
+Headline : 0.26
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+B: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+Headline : 0.28
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+B: What to Know About HGTV's 'Sin City Rehab' Season 2
+Headline : 0.30
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+B: 15 Best TV Shows Like Two And A Half Men - TVLine
+Headline : 0.28
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+B: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+Headline : 0.22
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.24
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: This Rap Star Is All-In on Making Movies Now, and I Have to Admit I'm Not Excited
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.24
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+B: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+Headline : 0.21
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+B: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+Headline : 0.23
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+B: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+Headline : 0.23
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+B: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+Headline : 0.18
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.11
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+B: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.11
+Combined : 0.09
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+B: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+Headline : 0.21
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+B: Revenge, body horror and DC collide in new Clayface trailer
+Headline : 0.28
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+B: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+Headline : 0.29
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.11
+Combined : 0.09
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+B: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+B: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+Headline : 0.34
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.11
+Combined : 0.10
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+B: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+Headline : 0.20
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+B: Live Music On A Great Lakes Freighter? Only In Duluth
+Headline : 0.25
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+B: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+Headline : 0.30
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+B: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+Headline : 0.03
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.01
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+B: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+Headline : 0.30
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+B: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+Headline : 0.37
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.11
+Combined : 0.11
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+B: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+Headline : 0.19
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.11
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+B: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+Headline : 0.21
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+B: The Best New Movies to Watch at Home This Weekend
+Headline : 0.10
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.02
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+B: Throssel: The oldest footprints in Hardin County?
+Headline : 0.30
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+B: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+Headline : 0.23
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+B: What to Know About HGTV's 'Sin City Rehab' Season 2
+Headline : 0.23
+Keyword  : 0.08
+Entity   : 0.00
+Tokens   : 0.22
+Combined : 0.11
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+B: 15 Best TV Shows Like Two And A Half Men - TVLine
+Headline : 0.17
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+B: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+Headline : 0.32
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.36
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.09
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Mandalorian Season 4 Starts Today With Din Djarin & Grogu's Return
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.25
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+B: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+Headline : 0.36
+Keyword  : 0.06
+Entity   : 0.06
+Tokens   : 0.10
+Combined : 0.14
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+B: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+B: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+Headline : 0.22
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+B: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+Headline : 0.23
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+B: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+Headline : 0.26
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+B: Revenge, body horror and DC collide in new Clayface trailer
+Headline : 0.10
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.03
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+B: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+Headline : 0.26
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+B: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+Headline : 0.39
+Keyword  : 0.06
+Entity   : 0.06
+Tokens   : 0.12
+Combined : 0.15
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+B: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+Headline : 0.30
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+B: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+Headline : 0.29
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+B: Live Music On A Great Lakes Freighter? Only In Duluth
+Headline : 0.28
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+B: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+Headline : 0.29
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+B: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+Headline : 0.02
+Keyword  : 0.03
+Entity   : 0.03
+Tokens   : 0.10
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+B: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+Headline : 0.23
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+B: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+Headline : 0.19
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+B: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+Headline : 0.32
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+B: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+Headline : 0.26
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+B: The Best New Movies to Watch at Home This Weekend
+Headline : 0.28
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+B: Throssel: The oldest footprints in Hardin County?
+Headline : 0.28
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+B: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+Headline : 0.26
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+B: What to Know About HGTV's 'Sin City Rehab' Season 2
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+B: 15 Best TV Shows Like Two And A Half Men - TVLine
+Headline : 0.20
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+B: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+Headline : 0.21
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.16
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Iconic Los Angeles Cinerama Dome shuttered during pandemic to have grand reopening
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.20
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+B: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+Headline : 0.13
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.03
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+B: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+Headline : 0.21
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+B: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+Headline : 0.26
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+B: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+B: Revenge, body horror and DC collide in new Clayface trailer
+Headline : 0.28
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+B: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+B: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+Headline : 0.39
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.10
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+B: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+Headline : 0.17
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+B: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+Headline : 0.20
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+B: Live Music On A Great Lakes Freighter? Only In Duluth
+Headline : 0.31
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+B: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+Headline : 0.14
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+B: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+Headline : 0.04
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.01
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+B: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+Headline : 0.35
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.09
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+B: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+Headline : 0.25
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+B: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+Headline : 0.45
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.11
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+B: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+Headline : 0.23
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+B: The Best New Movies to Watch at Home This Weekend
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+B: Throssel: The oldest footprints in Hardin County?
+Headline : 0.30
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+B: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+Headline : 0.18
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+B: What to Know About HGTV's 'Sin City Rehab' Season 2
+Headline : 0.24
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+B: 15 Best TV Shows Like Two And A Half Men - TVLine
+Headline : 0.36
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.09
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+B: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+Headline : 0.20
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.18
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Will Smith Debuted a Shaved Head at the Monaco E1 Grand Prix with Prince Albert
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.28
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+B: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+Headline : 0.20
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+B: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+Headline : 0.19
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+B: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+Headline : 0.15
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+B: Revenge, body horror and DC collide in new Clayface trailer
+Headline : 0.18
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+B: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+Headline : 0.16
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+B: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+Headline : 0.21
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+B: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+B: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+Headline : 0.26
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+B: Live Music On A Great Lakes Freighter? Only In Duluth
+Headline : 0.38
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.09
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+B: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+Headline : 0.25
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+B: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+Headline : 0.05
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.01
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+B: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+Headline : 0.26
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+B: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+Headline : 0.20
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+B: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+Headline : 0.32
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+B: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+Headline : 0.24
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+B: The Best New Movies to Watch at Home This Weekend
+Headline : 0.11
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.03
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+B: Throssel: The oldest footprints in Hardin County?
+Headline : 0.14
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.03
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+B: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+Headline : 0.32
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+B: What to Know About HGTV's 'Sin City Rehab' Season 2
+Headline : 0.16
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+B: 15 Best TV Shows Like Two And A Half Men - TVLine
+Headline : 0.17
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+B: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+Headline : 0.34
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.25
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Independent autopsy of Nolan Wells finds 'undetermined' cause of death
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+B: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+Headline : 0.29
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.10
+Combined : 0.09
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+B: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+Headline : 0.18
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+B: Revenge, body horror and DC collide in new Clayface trailer
+Headline : 0.19
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+B: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+Headline : 0.17
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.11
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+B: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+Headline : 0.38
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.10
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+B: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+Headline : 0.39
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.09
+Combined : 0.11
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+B: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+Headline : 0.33
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+B: Live Music On A Great Lakes Freighter? Only In Duluth
+Headline : 0.36
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.09
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+B: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+Headline : 0.24
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+B: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+Headline : 0.02
+Keyword  : 0.03
+Entity   : 0.00
+Tokens   : 0.09
+Combined : 0.03
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+B: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+Headline : 0.22
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+B: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.09
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+B: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+Headline : 0.32
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.11
+Combined : 0.10
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+B: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+Headline : 0.26
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+B: The Best New Movies to Watch at Home This Weekend
+Headline : 0.19
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+B: Throssel: The oldest footprints in Hardin County?
+Headline : 0.26
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+B: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+Headline : 0.25
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+B: What to Know About HGTV's 'Sin City Rehab' Season 2
+Headline : 0.26
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.11
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+B: 15 Best TV Shows Like Two And A Half Men - TVLine
+Headline : 0.19
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+B: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+Headline : 0.34
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.24
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'The last picture': A passing boater's photograph may be the 5 adults who drowned in Ohio
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.33
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+B: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+B: Revenge, body horror and DC collide in new Clayface trailer
+Headline : 0.29
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+B: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+Headline : 0.14
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.11
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+B: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+Headline : 0.20
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+B: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+Headline : 0.29
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.10
+Combined : 0.09
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+B: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+Headline : 0.26
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+B: Live Music On A Great Lakes Freighter? Only In Duluth
+Headline : 0.22
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+B: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+Headline : 0.26
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+B: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+Headline : 0.03
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.01
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+B: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+Headline : 0.22
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+B: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+Headline : 0.14
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.10
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+B: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+Headline : 0.09
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.11
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+B: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+Headline : 0.06
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.01
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+B: The Best New Movies to Watch at Home This Weekend
+Headline : 0.26
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+B: Throssel: The oldest footprints in Hardin County?
+Headline : 0.25
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+B: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+Headline : 0.15
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+B: What to Know About HGTV's 'Sin City Rehab' Season 2
+Headline : 0.29
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.11
+Combined : 0.09
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+B: 15 Best TV Shows Like Two And A Half Men - TVLine
+Headline : 0.23
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+B: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+Headline : 0.15
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'There's been dumb luck': Patrick Brammall on Colin, Hollywood haters and what's next
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.16
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+B: Revenge, body horror and DC collide in new Clayface trailer
+Headline : 0.28
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+B: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+Headline : 0.29
+Keyword  : 0.06
+Entity   : 0.00
+Tokens   : 0.11
+Combined : 0.10
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+B: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+Headline : 0.31
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+B: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+Headline : 0.25
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+B: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+Headline : 0.25
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+B: Live Music On A Great Lakes Freighter? Only In Duluth
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+B: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+Headline : 0.21
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+B: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+Headline : 0.04
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.01
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+B: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+Headline : 0.29
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+B: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+Headline : 0.23
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+B: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+Headline : 0.32
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+B: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+Headline : 0.41
+Keyword  : 0.06
+Entity   : 0.07
+Tokens   : 0.11
+Combined : 0.16
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+B: The Best New Movies to Watch at Home This Weekend
+Headline : 0.31
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+B: Throssel: The oldest footprints in Hardin County?
+Headline : 0.30
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+B: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+Headline : 0.25
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+B: What to Know About HGTV's 'Sin City Rehab' Season 2
+Headline : 0.26
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+B: 15 Best TV Shows Like Two And A Half Men - TVLine
+Headline : 0.20
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+B: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+Headline : 0.24
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.29
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Outdoor movie nights are back at popular venue in downtown Mississauga | INsauga
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.17
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Revenge, body horror and DC collide in new Clayface trailer
+B: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+Headline : 0.38
+Keyword  : 0.08
+Entity   : 0.00
+Tokens   : 0.14
+Combined : 0.14
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Revenge, body horror and DC collide in new Clayface trailer
+B: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+Headline : 0.42
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.10
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Revenge, body horror and DC collide in new Clayface trailer
+B: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+Headline : 0.28
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Revenge, body horror and DC collide in new Clayface trailer
+B: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+Headline : 0.16
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Revenge, body horror and DC collide in new Clayface trailer
+B: Live Music On A Great Lakes Freighter? Only In Duluth
+Headline : 0.15
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Revenge, body horror and DC collide in new Clayface trailer
+B: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+Headline : 0.14
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Revenge, body horror and DC collide in new Clayface trailer
+B: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+Headline : 0.04
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.01
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Revenge, body horror and DC collide in new Clayface trailer
+B: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+Headline : 0.24
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Revenge, body horror and DC collide in new Clayface trailer
+B: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+Headline : 0.25
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Revenge, body horror and DC collide in new Clayface trailer
+B: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+Headline : 0.10
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.03
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Revenge, body horror and DC collide in new Clayface trailer
+B: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+Headline : 0.13
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.03
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Revenge, body horror and DC collide in new Clayface trailer
+B: The Best New Movies to Watch at Home This Weekend
+Headline : 0.29
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Revenge, body horror and DC collide in new Clayface trailer
+B: Throssel: The oldest footprints in Hardin County?
+Headline : 0.28
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Revenge, body horror and DC collide in new Clayface trailer
+B: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+Headline : 0.22
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Revenge, body horror and DC collide in new Clayface trailer
+B: What to Know About HGTV's 'Sin City Rehab' Season 2
+Headline : 0.11
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.03
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Revenge, body horror and DC collide in new Clayface trailer
+B: 15 Best TV Shows Like Two And A Half Men - TVLine
+Headline : 0.32
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Revenge, body horror and DC collide in new Clayface trailer
+B: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+Headline : 0.29
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Revenge, body horror and DC collide in new Clayface trailer
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.30
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Revenge, body horror and DC collide in new Clayface trailer
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.21
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+B: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+Headline : 0.47
+Keyword  : 0.14
+Entity   : 0.18
+Tokens   : 0.25
+Combined : 0.25
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+B: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.11
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+B: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+Headline : 0.26
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+B: Live Music On A Great Lakes Freighter? Only In Duluth
+Headline : 0.20
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+B: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+Headline : 0.37
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.09
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+B: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+Headline : 0.06
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.01
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+B: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+Headline : 0.29
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+B: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+Headline : 0.33
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.11
+Combined : 0.10
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+B: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+Headline : 0.30
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.11
+Combined : 0.09
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+B: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+Headline : 0.21
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+B: The Best New Movies to Watch at Home This Weekend
+Headline : 0.30
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+B: Throssel: The oldest footprints in Hardin County?
+Headline : 0.17
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+B: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+Headline : 0.30
+Keyword  : 0.06
+Entity   : 0.00
+Tokens   : 0.11
+Combined : 0.11
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+B: What to Know About HGTV's 'Sin City Rehab' Season 2
+Headline : 0.13
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.11
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+B: 15 Best TV Shows Like Two And A Half Men - TVLine
+Headline : 0.17
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+B: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+Headline : 0.21
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.21
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Avengers: Doomsday: Did The First Trailer Inadvertently Spoil The Movie's Ending?
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.28
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+B: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+Headline : 0.25
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+B: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+Headline : 0.24
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+B: Live Music On A Great Lakes Freighter? Only In Duluth
+Headline : 0.23
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+B: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+Headline : 0.24
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+B: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+Headline : 0.05
+Keyword  : 0.03
+Entity   : 0.03
+Tokens   : 0.12
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+B: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+Headline : 0.25
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+B: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+Headline : 0.25
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+B: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+Headline : 0.29
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+B: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+Headline : 0.29
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+B: The Best New Movies to Watch at Home This Weekend
+Headline : 0.13
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.03
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+B: Throssel: The oldest footprints in Hardin County?
+Headline : 0.32
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+B: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+Headline : 0.31
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+B: What to Know About HGTV's 'Sin City Rehab' Season 2
+Headline : 0.30
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+B: 15 Best TV Shows Like Two And A Half Men - TVLine
+Headline : 0.30
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+B: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+Headline : 0.25
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.30
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Many Avengers: Doomsday Reactions Have Missed the Point of Trailers
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.22
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+B: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+Headline : 0.25
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+B: Live Music On A Great Lakes Freighter? Only In Duluth
+Headline : 0.25
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+B: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+Headline : 0.26
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+B: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+Headline : 0.04
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.01
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+B: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+Headline : 0.29
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+B: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+Headline : 0.35
+Keyword  : 0.04
+Entity   : 0.05
+Tokens   : 0.17
+Combined : 0.14
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+B: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+Headline : 0.35
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.11
+Combined : 0.10
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+B: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+Headline : 0.28
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+B: The Best New Movies to Watch at Home This Weekend
+Headline : 0.24
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+B: Throssel: The oldest footprints in Hardin County?
+Headline : 0.17
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+B: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+Headline : 0.19
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+B: What to Know About HGTV's 'Sin City Rehab' Season 2
+Headline : 0.31
+Keyword  : 0.06
+Entity   : 0.07
+Tokens   : 0.22
+Combined : 0.15
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+B: 15 Best TV Shows Like Two And A Half Men - TVLine
+Headline : 0.25
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+B: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+Headline : 0.29
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.29
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'Fast & Furious' star Sung Kang's film about a racetrack janitor heads to TIFF
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.22
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+B: Live Music On A Great Lakes Freighter? Only In Duluth
+Headline : 0.25
+Keyword  : 0.06
+Entity   : 0.08
+Tokens   : 0.14
+Combined : 0.13
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+B: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+Headline : 0.46
+Keyword  : 0.11
+Entity   : 0.07
+Tokens   : 0.36
+Combined : 0.22
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+B: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+Headline : 0.03
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.01
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+B: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+Headline : 0.14
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+B: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+Headline : 0.32
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+B: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+Headline : 0.31
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+B: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+Headline : 0.23
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+B: The Best New Movies to Watch at Home This Weekend
+Headline : 0.23
+Keyword  : 0.07
+Entity   : 0.00
+Tokens   : 0.20
+Combined : 0.10
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+B: Throssel: The oldest footprints in Hardin County?
+Headline : 0.21
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+B: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+Headline : 0.25
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+B: What to Know About HGTV's 'Sin City Rehab' Season 2
+Headline : 0.17
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+B: 15 Best TV Shows Like Two And A Half Men - TVLine
+Headline : 0.20
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.11
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+B: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+Headline : 0.14
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.26
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How to watch Inter Miami vs Chicago Fire match in the USA: Live Stream and TV for 2026 MLS
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.21
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Live Music On A Great Lakes Freighter? Only In Duluth
+B: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+Headline : 0.23
+Keyword  : 0.07
+Entity   : 0.08
+Tokens   : 0.14
+Combined : 0.13
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Live Music On A Great Lakes Freighter? Only In Duluth
+B: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+Headline : 0.04
+Keyword  : 0.03
+Entity   : 0.04
+Tokens   : 0.14
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Live Music On A Great Lakes Freighter? Only In Duluth
+B: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+Headline : 0.29
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Live Music On A Great Lakes Freighter? Only In Duluth
+B: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+Headline : 0.21
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Live Music On A Great Lakes Freighter? Only In Duluth
+B: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+Headline : 0.36
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.09
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Live Music On A Great Lakes Freighter? Only In Duluth
+B: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+Headline : 0.28
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Live Music On A Great Lakes Freighter? Only In Duluth
+B: The Best New Movies to Watch at Home This Weekend
+Headline : 0.30
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Live Music On A Great Lakes Freighter? Only In Duluth
+B: Throssel: The oldest footprints in Hardin County?
+Headline : 0.26
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Live Music On A Great Lakes Freighter? Only In Duluth
+B: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+Headline : 0.37
+Keyword  : 0.06
+Entity   : 0.00
+Tokens   : 0.14
+Combined : 0.13
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Live Music On A Great Lakes Freighter? Only In Duluth
+B: What to Know About HGTV's 'Sin City Rehab' Season 2
+Headline : 0.35
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.09
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Live Music On A Great Lakes Freighter? Only In Duluth
+B: 15 Best TV Shows Like Two And A Half Men - TVLine
+Headline : 0.16
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Live Music On A Great Lakes Freighter? Only In Duluth
+B: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+Headline : 0.15
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Live Music On A Great Lakes Freighter? Only In Duluth
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.35
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.09
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Live Music On A Great Lakes Freighter? Only In Duluth
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.34
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.09
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+B: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+Headline : 0.04
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.01
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+B: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+Headline : 0.16
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+B: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+Headline : 0.29
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+B: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+Headline : 0.10
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.03
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+B: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+B: The Best New Movies to Watch at Home This Weekend
+Headline : 0.25
+Keyword  : 0.08
+Entity   : 0.00
+Tokens   : 0.20
+Combined : 0.11
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+B: Throssel: The oldest footprints in Hardin County?
+Headline : 0.22
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+B: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+Headline : 0.23
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+B: What to Know About HGTV's 'Sin City Rehab' Season 2
+Headline : 0.39
+Keyword  : 0.07
+Entity   : 0.09
+Tokens   : 0.11
+Combined : 0.16
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+B: 15 Best TV Shows Like Two And A Half Men - TVLine
+Headline : 0.24
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.11
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+B: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+Headline : 0.16
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.28
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: How & Where to Watch Cádiz vs. Leicester City? Start Time, Live Streaming & TV Channels
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.33
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+B: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+Headline : 0.19
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+B: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+Headline : 0.18
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+B: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+Headline : 0.19
+Keyword  : 0.03
+Entity   : 0.04
+Tokens   : 0.11
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+B: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+Headline : 0.19
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+B: The Best New Movies to Watch at Home This Weekend
+Headline : 0.09
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.02
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+B: Throssel: The oldest footprints in Hardin County?
+Headline : 0.12
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.03
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+B: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+Headline : 0.23
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+B: What to Know About HGTV's 'Sin City Rehab' Season 2
+Headline : 0.18
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+B: 15 Best TV Shows Like Two And A Half Men - TVLine
+Headline : 0.15
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+B: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+Headline : 0.23
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.17
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Quote of the day by Luise Rainer: 'Happiness lies in moments, and while you have it, you're not even...' - inspirational life lesson by Oscar-winning actress of The Great Ziegfeld and The Good Earth on why the moments we overlook may become our happiest memories
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.19
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+B: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+Headline : 0.20
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+B: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+Headline : 0.29
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+B: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+Headline : 0.29
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+B: The Best New Movies to Watch at Home This Weekend
+Headline : 0.07
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.02
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+B: Throssel: The oldest footprints in Hardin County?
+Headline : 0.30
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+B: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+Headline : 0.24
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+B: What to Know About HGTV's 'Sin City Rehab' Season 2
+Headline : 0.24
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+B: 15 Best TV Shows Like Two And A Half Men - TVLine
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+B: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+Headline : 0.15
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Who Needs Shorts? Tracee Ellis Ross Beats the Heat in Sheer Pants Instead
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.16
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+B: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+Headline : 0.30
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.11
+Combined : 0.09
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+B: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+Headline : 0.28
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+B: The Best New Movies to Watch at Home This Weekend
+Headline : 0.23
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+B: Throssel: The oldest footprints in Hardin County?
+Headline : 0.22
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+B: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+Headline : 0.31
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+B: What to Know About HGTV's 'Sin City Rehab' Season 2
+Headline : 0.30
+Keyword  : 0.05
+Entity   : 0.06
+Tokens   : 0.22
+Combined : 0.14
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+B: 15 Best TV Shows Like Two And A Half Men - TVLine
+Headline : 0.26
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+B: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+Headline : 0.28
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.26
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Tenisha Warner Speaks About Grief As Estate Dispute With Malcolm-Jamal Warner's Mother Comes To Light - Essence
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.19
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+B: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+Headline : 0.21
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+B: The Best New Movies to Watch at Home This Weekend
+Headline : 0.37
+Keyword  : 0.09
+Entity   : 0.10
+Tokens   : 0.20
+Combined : 0.18
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+B: Throssel: The oldest footprints in Hardin County?
+Headline : 0.33
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+B: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+Headline : 0.17
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+B: What to Know About HGTV's 'Sin City Rehab' Season 2
+Headline : 0.30
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.11
+Combined : 0.09
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+B: 15 Best TV Shows Like Two And A Half Men - TVLine
+Headline : 0.35
+Keyword  : 0.08
+Entity   : 0.09
+Tokens   : 0.11
+Combined : 0.15
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+B: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+Headline : 0.17
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.26
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Best Shoe Moments from 50 Cent's 'Fightland' New York Premiere
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.14
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+B: The Best New Movies to Watch at Home This Weekend
+Headline : 0.14
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.03
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+B: Throssel: The oldest footprints in Hardin County?
+Headline : 0.25
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+B: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+Headline : 0.24
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+B: What to Know About HGTV's 'Sin City Rehab' Season 2
+Headline : 0.25
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+B: 15 Best TV Shows Like Two And A Half Men - TVLine
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+B: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+Headline : 0.22
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.32
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: FTC brings Black Rock Theatre, Downtown Cabaret Theatre programs together
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.30
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Best New Movies to Watch at Home This Weekend
+B: Throssel: The oldest footprints in Hardin County?
+Headline : 0.29
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Best New Movies to Watch at Home This Weekend
+B: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+Headline : 0.26
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Best New Movies to Watch at Home This Weekend
+B: What to Know About HGTV's 'Sin City Rehab' Season 2
+Headline : 0.28
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Best New Movies to Watch at Home This Weekend
+B: 15 Best TV Shows Like Two And A Half Men - TVLine
+Headline : 0.42
+Keyword  : 0.09
+Entity   : 0.12
+Tokens   : 0.20
+Combined : 0.20
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Best New Movies to Watch at Home This Weekend
+B: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+Headline : 0.29
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Best New Movies to Watch at Home This Weekend
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.37
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.09
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The Best New Movies to Watch at Home This Weekend
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.20
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Throssel: The oldest footprints in Hardin County?
+B: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Throssel: The oldest footprints in Hardin County?
+B: What to Know About HGTV's 'Sin City Rehab' Season 2
+Headline : 0.35
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.09
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Throssel: The oldest footprints in Hardin County?
+B: 15 Best TV Shows Like Two And A Half Men - TVLine
+Headline : 0.30
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Throssel: The oldest footprints in Hardin County?
+B: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+Headline : 0.20
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Throssel: The oldest footprints in Hardin County?
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.32
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Throssel: The oldest footprints in Hardin County?
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.22
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+B: What to Know About HGTV's 'Sin City Rehab' Season 2
+Headline : 0.20
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+B: 15 Best TV Shows Like Two And A Half Men - TVLine
+Headline : 0.18
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+B: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+Headline : 0.24
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: Ranking 18 Of The Most Expensive Music Videos Ever Made. Why Did They Cost So Much?
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.35
+Keyword  : 0.06
+Entity   : 0.07
+Tokens   : 0.14
+Combined : 0.15
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: What to Know About HGTV's 'Sin City Rehab' Season 2
+B: 15 Best TV Shows Like Two And A Half Men - TVLine
+Headline : 0.29
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: What to Know About HGTV's 'Sin City Rehab' Season 2
+B: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+Headline : 0.14
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.04
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: What to Know About HGTV's 'Sin City Rehab' Season 2
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.32
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.08
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: What to Know About HGTV's 'Sin City Rehab' Season 2
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 15 Best TV Shows Like Two And A Half Men - TVLine
+B: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+Headline : 0.19
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 15 Best TV Shows Like Two And A Half Men - TVLine
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.20
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 15 Best TV Shows Like Two And A Half Men - TVLine
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.27
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.07
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+B: The one guitarist Linda Ronstadt compared to "God"
+Headline : 0.26
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.06
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: 'Seinfeld' Actor Jason Alexander Apologizes to Courtney Stodden for "Inappropriate" Sketch Filmed When She Was Underage
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.22
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.05
+Event    : False
+
+----------------------------------------
+COMPARE
+----------------------------------------
+A: The one guitarist Linda Ronstadt compared to "God"
+B: A Definitive Ranking of Every Ozzy Osbourne Solo Album
+Headline : 0.13
+Keyword  : 0.00
+Entity   : 0.00
+Tokens   : 0.00
+Combined : 0.03
+Event    : False
+No related story clusters found.
+===================================
+STORY CONSOLIDATOR RESULTS
+===================================
+Original stories : 30
+Unique stories   : 30
+Merged stories   : 0
+===================================
+
