@@ -767,6 +767,21 @@ def extract_entities(
 
     }
 
+    IGNORE_MUSIC_WORDS = {
+        "ALERT",
+        "BREAKING",
+        "NEW",
+        "NEWS",
+        "MUSIC",
+        "LIVE",
+        "WATCH",
+        "VIDEO",
+        "EXCLUSIVE",
+        "UPDATE",
+        "TODAY",
+        "NOW",
+    }
+
 
     for word in re.findall(
         r"\b[A-Z][A-Za-z0-9']+\b",
@@ -777,12 +792,13 @@ def extract_entities(
             word
         )
 
-
         if (
 
             clean.isupper()
 
             and len(clean) >= 3
+
+            and clean not in IGNORE_MUSIC_WORDS
 
             and clean.lower()
             not in excluded_music
@@ -795,10 +811,7 @@ def extract_entities(
             entities["music_artists"].append(
                 clean
             )
-
-
-
-        # ----------------------------------------------
+                # ----------------------------------------------
     # Generic keywords
     # ----------------------------------------------
 
@@ -936,7 +949,6 @@ def extract_entities(
             clean
         )
 
-
     return entities
 
 
@@ -951,16 +963,8 @@ if __name__ == "__main__":
 
 
     tests = [
-
-        "FX's \"Alien: Earth\" Season 2 Cast Revealed - What's On Disney Plus",
-
-        "Emmy Awards 2026 Nominees Revealed",
-
-        "Taylor Swift and Travis Kelce's expected wedding celebrations approach",
-
-        "The Rock Announces Big Moana 3 News",
-
-    ]
+    "ALERT ALERT! NEW DESTINY'S CHILD MUSIC!! ALERT ALERT!",
+]
 
 
     for headline in tests:
