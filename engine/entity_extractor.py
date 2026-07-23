@@ -102,6 +102,25 @@ KNOWN_TITLES = {
 }
 
 
+
+
+# --------------------------------------------------
+# KNOWN MUSIC ARTISTS
+# --------------------------------------------------
+
+KNOWN_MUSIC_ARTISTS = {
+    "Destiny's Child",
+    "Taylor Swift",
+    "Beyoncé",
+    "Drake",
+    "Metallica",
+    "The Beatles",
+    "Backstreet Boys",
+    "NSYNC",
+    "BTS",
+    "BLACKPINK",
+}
+
 # --------------------------------------------------
 # LOCATION / CONTEXT WORDS
 # --------------------------------------------------
@@ -749,6 +768,19 @@ def extract_entities(
 
 
     # ----------------------------------------------
+    # Known music artists
+    # ----------------------------------------------
+
+    matched_music_words = set()
+
+    for artist in sorted(KNOWN_MUSIC_ARTISTS, key=len, reverse=True):
+        if artist.lower() in headline_lower:
+            if artist not in entities["music_artists"]:
+                entities["music_artists"].append(artist)
+            for token in re.findall(r"[A-Za-z0-9']+", artist):
+                matched_music_words.add(token.upper())
+
+    # ----------------------------------------------
     # Music-style uppercase detection
     # ----------------------------------------------
 
@@ -799,6 +831,8 @@ def extract_entities(
             and len(clean) >= 3
 
             and clean not in IGNORE_MUSIC_WORDS
+
+            and clean.upper() not in matched_music_words
 
             and clean.lower()
             not in excluded_music
