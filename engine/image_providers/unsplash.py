@@ -1,136 +1,86 @@
 """
 ShowBiz Unsplash Provider
+Version 1.0
+
+Searches Unsplash for editorial images and downloads the
+highest-ranked result for the Image Engine.
 """
 
+from __future__ import annotations
+
 import os
-import tempfile
-
 import requests
-
-import sys
-from pathlib import Path
-
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from config import UNSPLASH_ACCESS_KEY
 
+SEARCH_URL = "https://api.unsplash.com/search/photos"
 
-def build_query(story):
+DOWNLOAD_DIR = "images"
+
+
+def search_unsplash(story):
     """
-    Build an Unsplash search query from the story.
-
-    Rather than searching the entire headline, extract the
-    most important subject for better image matches.
-    """
-
-    if isinstance(story, dict):
-        headline = (
-            story.get("headline")
-            or story.get("title")
-            or story.get("query")
-            or ""
-        )
-    else:
-        headline = str(story)
-
-    if not headline:
-        return ""
-
-    query = headline
-
-    # Remove common entertainment/news phrases.
-    replacements = [
-        "Why ",
-        "How ",
-        "What ",
-        "When ",
-        "Where ",
-        "Who ",
-        "Box Office",
-        "at the Box Office",
-        "Review",
-        "Reviews",
-        "Trailer",
-        "Official Trailer",
-        "First Look",
-        "Opening Weekend",
-        "Premiere",
-        "Premieres",
-        "Debuts",
-        "Debut",
-        "Announced",
-        "Announces",
-        "Revealed",
-        "Reveals",
-        "Confirmed",
-        "Explained",
-        "Explains",
-        "Interview",
-    ]
-
-    for text in replacements:
-        query = query.replace(text, "")
-
-    query = query.replace(":", " ")
-    query = query.replace("-", " ")
-
-    words = query.split()
-
-    # Keep only the first few words.
-    query = " ".join(words[:3]).strip()
-
-    print(f"Unsplash query: {query}")
-
-    return query
-
-
-def search_unsplash(story, per_page=5):
-    """
-    Search Unsplash for matching photos.
+    Returns a list of Unsplash search results.
     """
 
     if not UNSPLASH_ACCESS_KEY:
         print("Unsplash API key not configured.")
         return []
 
-    query = build_query(story)
+    if isinstance(story, dict):
+        query = story.get("headline", "")
+    else:
+        query = str(story)
 
-    if not query:
-        return []
+    params = {
+        "query": query,
+        "per_page": 5,
+        "orientation": "landscape",
+    }
+
+    headers = {
+        "Authorization": f"Client-ID {UNSPLASH_ACCESS_KEY}"
+    }
 
     response = requests.get(
-        "https://api.unsplash.com/search/photos",
-        headers={
-            "Authorization": f"Client-ID {UNSPLASH_ACCESS_KEY}"
-        },
-        params={
-            "query": query,
-            "orientation": "landscape",
-            "per_page": per_page,
-        },
+        SEARCH_URL,
+        params=params,
+        headers=headers,
         timeout=20,
     )
 
     response.raise_for_status()
 
-    data = response.json()
-    return data.get("results", [])
+    return response.json().get("results", [])
 
 
-def download_unsplash_image(photo):
+def download_unsplash_image(result):
     """
-    Download an Unsplash image to a temporary file.
+    Downloads one Unsplash image.
+    Returns the local filename.
     """
 
-    image_url = photo["urls"]["regular"]
+    os.makedirs(DOWNLOAD_DIR, exist_ok=True)
 
-    response = requests.get(image_url, timeout=30)
-    response.raise_for_status()
+    url = result["urls"]["regular"]
+
+    slug = (
+        result.get("slug")
+        or result.get("id")
+        or "unsplash"
+    )
 
     filename = os.path.join(
-        tempfile.gettempdir(),
-        f"unsplash_{photo['id']}.jpg",
+        DOWNLOAD_DIR,
+        f"{slug}.jpg",
     )
+
+    response = requests.get(
+        url,
+        timeout=30,
+    )
+
+    response.raise_for_status()
 
     with open(filename, "wb") as f:
         f.write(response.content)
@@ -141,30 +91,37 @@ def download_unsplash_image(photo):
 def get_unsplash_image(story):
     """
     Search and download the best Unsplash image.
-    Returns the local filename or None.
+    Returns local filename or None.
     """
 
+    print("\n========================================")
+    print(">>> UNSPLASH PROVIDER VERSION 1.0 <<<")
+    print("========================================")
+
     try:
+
+        print(f"Story type : {type(story).__name__}")
+
+        if isinstance(story, dict):
+            print(f"Headline   : {story.get('headline', '')}")
+
+        print("\nCalling search_unsplash()...")
+
         results = search_unsplash(story)
+
+        print(f"Unsplash returned {len(results)} result(s).")
 
         if not results:
             return None
 
-        return download_unsplash_image(results[0])
+        print("Downloading first Unsplash image...")
+
+        filename = download_unsplash_image(results[0])
+
+        print(f"Downloaded: {filename}")
+
+        return filename
 
     except Exception as e:
         print(f"Unsplash error: {e}")
         return None
-
-
-if __name__ == "__main__":
-    test_story = {
-        "headline": "Taylor Swift announces world tour"
-    }
-
-    image = get_unsplash_image(test_story)
-
-    if image:
-        print("Downloaded:", image)
-    else:
-        print("No image found.")

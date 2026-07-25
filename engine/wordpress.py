@@ -29,6 +29,11 @@ def publish_post(article):
             Uploads a new image and uses it as the featured image.
     """
 
+    auth = HTTPBasicAuth(
+        WP_USERNAME,
+        WP_APP_PASSWORD,
+    )
+
     featured_media = None
 
     # -----------------------------------------
@@ -49,6 +54,23 @@ def publish_post(article):
                 f"\nUsing existing Media Library image "
                 f"(ID {featured_media})"
             )
+
+            # Verify the media item still exists
+            check = requests.get(
+                f"{WP_URL}/wp-json/wp/v2/media/{featured_media}",
+                auth=auth,
+                headers=HEADERS,
+                timeout=30,
+            )
+
+            if check.status_code != 200:
+                print(
+                    f"❌ Media ID {featured_media} is invalid "
+                    f"({check.status_code})"
+                )
+                featured_media = None
+            else:
+                print(f"✓ Media ID {featured_media} verified.")
 
         # Upload newly generated image
 
@@ -91,7 +113,7 @@ def publish_post(article):
     # Featured image
     #
 
-    if featured_media:
+    if featured_media is not None:
         data["featured_media"] = featured_media
 
     # -----------------------------------------
@@ -109,10 +131,7 @@ def publish_post(article):
 
     response = requests.post(
         f"{WP_URL}/wp-json/wp/v2/posts",
-        auth=HTTPBasicAuth(
-            WP_USERNAME,
-            WP_APP_PASSWORD
-        ),
+        auth=auth,
         headers=HEADERS,
         json=data,
         timeout=60
@@ -121,9 +140,7 @@ def publish_post(article):
     print("\nPublish Status:", response.status_code)
 
     if response.status_code not in (200, 201):
-
         print(response.text)
-
         return None
 
     post = response.json()
@@ -132,14 +149,11 @@ def publish_post(article):
     # TEST: Try setting featured image AFTER creation
     # --------------------------------------------------
 
-    if featured_media:
+    if featured_media is not None:
 
         update = requests.post(
             f"{WP_URL}/wp-json/wp/v2/posts/{post['id']}",
-            auth=HTTPBasicAuth(
-                WP_USERNAME,
-                WP_APP_PASSWORD
-            ),
+            auth=auth,
             headers=HEADERS,
             json={
                 "featured_media": featured_media
@@ -148,14 +162,9 @@ def publish_post(article):
         )
 
         print("\nSecond update:", update.status_code)
-
-        try:
-            print(
-                "Second featured_media:",
-                update.json().get("featured_media")
-            )
-        except Exception:
-            print(update.text)
+        print("\n========== SECOND UPDATE RESPONSE ==========")
+        print(update.text)
+        print("===========================================")
 
     # --------------------------------------------------
     # Verify what WordPress actually stored
@@ -163,10 +172,7 @@ def publish_post(article):
 
     verify = requests.get(
         f"{WP_URL}/wp-json/wp/v2/posts/{post['id']}",
-        auth=HTTPBasicAuth(
-            WP_USERNAME,
-            WP_APP_PASSWORD
-        ),
+        auth=auth,
         headers=HEADERS,
         timeout=60
     )
@@ -196,7 +202,7 @@ def publish_post(article):
     if "categories" in data:
         print("Categories :", data["categories"])
 
-    if featured_media:
+    if featured_media is not None:
         print("Featured Image :", featured_media)
 
     return post

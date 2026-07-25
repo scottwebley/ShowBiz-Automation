@@ -16,6 +16,8 @@ Author:
 from __future__ import annotations
 
 import re
+print("ENTITY_EXTRACTOR VERSION 3.4 TEST")
+print(__file__)
 
 
 # --------------------------------------------------
@@ -56,6 +58,8 @@ ORGANIZATIONS = {
     "Sony",
     "Universal",
     "Warner Bros",
+    "Warner Bros.",
+    "Warner Brothers",
     "Sky",
     "ITV",
     "BBC",
@@ -85,6 +89,7 @@ KNOWN_TITLES = {
     "Alien: Earth",
     "Stranger Things",
     "The Last of Us",
+    "The Morning Show",
     "Total Eclipse of the Heart",
     "Game of Thrones",
     "House of the Dragon",
@@ -230,6 +235,43 @@ STOP_NAME_WORDS = {
     "Episode",
 }
 
+COMMON_NON_NAME_WORDS = {
+    # Existing words...
+    "New", "Latest", "Breaking", "Update", "Live", "Exclusive",
+    "Alert", "Watch", "Today", "Tomorrow", "Yesterday",
+
+    # Organizations / generic nouns
+    "Netflix", "Disney", "Marvel", "DC", "AEW", "WWE",
+    "Music", "Movie", "Movies", "Film", "TV", "Television",
+    "Streaming", "Gaming", "Broadway", "Theater", "Theatre",
+    "Concert", "Festival", "Award", "Awards",
+
+    # False-name starters
+    "Thousands",
+    "Thousand",
+    "Hundreds",
+    "Hundred",
+    "Millions",
+    "Million",
+    "Billions",
+    "Billion",
+    "Dozens",
+    "Several",
+    "Many",
+    "Most",
+    "Some",
+    "Few",
+    "Countless",
+    "Multiple",
+    "Numerous",
+    "More",
+    "Less",
+    "Over",
+    "Under",
+    "Around",
+    "Nearly",
+    "Almost",
+}
 
 IGNORE_KEYWORDS = {
     "the",
@@ -366,6 +408,20 @@ def _is_valid_person(
 
         return False
 
+    if first in COMMON_NON_NAME_WORDS:
+        return False
+
+    if second in COMMON_NON_NAME_WORDS:
+        return False
+
+    #
+    # Reject abbreviation pairs like:
+    # AEW WBD
+    # ABC NBC
+    #
+
+    if first.isupper() and second.isupper():
+        return False
 
     if _is_title_fragment(
         first,
@@ -412,11 +468,17 @@ def _extract_people(
 
     people = []
 
-    protected_titles = list(
-        KNOWN_TITLES
-    )
+    protected_titles = list(KNOWN_TITLES)
 
     working = headline
+
+    #
+    # Remove quoted titles first so they don't leave
+    # stray capitalized words behind.
+    #
+
+    for title in _extract_quoted_titles(headline):
+        working = working.replace(title, "")
 
     #
     # Remove known titles so they cannot be
@@ -424,16 +486,92 @@ def _extract_people(
     #
 
     for title in protected_titles:
+        working = working.replace(title, "")
 
-        working = working.replace(
-            title,
-            "",
+    #
+    # Protect well-known brands so they are not
+    # broken into fake people like "Video AI".
+    #
+
+    protected_brands = (
+        "Prime Video",
+        "Amazon Prime Video",
+        "Apple TV+",
+        "Apple TV",
+        "Disney+",
+        "Disney Plus",
+        "Paramount+",
+        "Paramount Plus",
+        "Warner Bros.",
+        "Warner Bros",
+        "HBO Max",
+        "Prime",
+        "Netflix",
+        "Peacock",
+        "Hulu",
+        "Max",
+    )
+
+    for brand in protected_brands:
+        working = re.sub(
+            rf"\b{re.escape(brand)}\b",
+            " ",
+            working,
+            flags=re.IGNORECASE,
         )
 
-    tokens = re.findall(
-        r"[A-Z][A-Za-z0-9']*",
-        working,
-    )
+    tokens = []
+
+    bad_person_tokens = {
+        "AI",
+        "TV",
+        "Video",
+        "Streaming",
+        "Stream",
+        "Movie",
+        "Movies",
+        "Series",
+        "Season",
+        "Episode",
+        "Prime",
+        "Amazon",
+        "Netflix",
+        "Disney",
+        "Apple",
+        "Peacock",
+        "Hulu",
+        "Max",
+        "Plus",
+    }
+
+    for token in re.findall(r"[A-Z][A-Za-z0-9'.&+-]*", working):
+
+        clean = _clean_person_token(token)
+
+        if not clean:
+            continue
+
+        if clean in bad_person_tokens:
+            continue
+
+        if clean in {
+            "Bros",
+            "Inc",
+            "Corp",
+            "Co",
+            "LLC",
+            "Ltd",
+            "Group",
+            "Studios",
+            "Studio",
+            "Discovery",
+            "Pictures",
+            "Entertainment",
+            "Media",
+        }:
+            continue
+
+        tokens.append(clean)
 
     reject_first = {
 
@@ -456,7 +594,24 @@ def _extract_people(
         "Season",
         "Episode",
 
-        # Headline verbs
+        "Singer",
+        "Actor",
+        "Actress",
+        "Musician",
+        "Rapper",
+        "Producer",
+        "Director",
+        "Filmmaker",
+        "Writer",
+        "Author",
+        "Composer",
+        "Comedian",
+        "DJ",
+        "Band",
+        "Group",
+        "Performer",
+        "Star",
+        "Celebrity",
 
         "Celebrates",
         "Celebrating",
@@ -470,11 +625,48 @@ def _extract_people(
         "Featuring",
         "Feature",
         "Reaching",
+        "Gets",
+        "Get",
+        "Breaks",
+        "Break",
+        "Sends",
+        "Send",
+        "Signals",
+        "Signal",
+        "Turns",
+        "Turn",
+        "Blocks",
+        "Block",
+        "Judge",
+        "Judges",
+        "Powers",
+        "Prepares",
 
+        "Media",
+        "Giants",
+        "Shock",
+        "Shocks",
+        "Tie",
+        "Up",
+        "Through",
+        "Industry",
+        "Entertainment",
+        "Streaming",
+        "Gaming",
+        "Music",
+        "Television",
+        "Legal",
+        "Fight",
+        "Merger",
+        "Frozen",
+        "Costly",
+        "Lawsuit",
+        "Lawsuits",
+        "Trial",
+        "Regulators",
     }
 
     reject_second = {
-
         "Awards",
         "Award",
         "September",
@@ -493,42 +685,64 @@ def _extract_people(
         "Emmys",
         "Oscar",
         "Oscars",
-
     }
+
+    generic_words = {
+        "Toward",
+        "Towards",
+        "Against",
+        "Across",
+        "Inside",
+        "Outside",
+        "During",
+        "Following",
+        "Starting",
+        "Ending",
+        "Rolling",
+        "Line",
+        "Video",
+        "Prime",
+        "Streaming",
+        "Movie",
+        "Series",
+        "Season",
+        "Episode",
+        "AI",
+        "TV",
+    }
+
+    def looks_like_real_name(first, second):
+
+        if first in generic_words or second in generic_words:
+            return False
+
+        if first.endswith("ly") or second.endswith("ly"):
+            return False
+
+        if not (
+            len(first) >= 2
+            and len(second) >= 2
+            and first[0].isupper()
+            and second[0].isupper()
+        ):
+            return False
+
+        return True
 
     i = 0
 
     while i < len(tokens):
 
-        current = _clean_person_token(
-            tokens[i]
-        )
-
-        #
-        # Alias:
-        # The Rock -> Dwayne Johnson
-        #
+        current = _clean_person_token(tokens[i])
 
         if (
             current == "The"
             and i + 1 < len(tokens)
             and tokens[i + 1] == "Rock"
         ):
-
-            people.append(
-                normalize(
-                    "The Rock"
-                )
-            )
-
+            people.append(normalize("The Rock"))
             i += 2
             continue
-
-        #
-        # Pattern:
-        # Starring Cole Escola
-        # Featuring Taylor Swift
-        #
 
         if (
             current in {
@@ -539,116 +753,106 @@ def _extract_people(
             and i + 2 < len(tokens)
         ):
 
-            first = _clean_person_token(
-                tokens[i + 1]
-            )
+            first = _clean_person_token(tokens[i + 1])
+            second = _clean_person_token(tokens[i + 2])
 
-            second = _clean_person_token(
-                tokens[i + 2]
-            )
-
-            if _is_valid_person(
-                first,
-                second,
+            if (
+                looks_like_real_name(first, second)
+                and _is_valid_person(first, second)
             ):
-
-                people.append(
-                    normalize(
-                        f"{first} {second}"
-                    )
-                )
-
-                i += 3
+                people.append(normalize(f"{first} {second}"))
+                i += 2
                 continue
-
-        #
-        # Standard First Last extraction
-        #
 
         if i + 1 < len(tokens):
 
             first = current
-
-            second = _clean_person_token(
-                tokens[i + 1]
-            )
+            second = _clean_person_token(tokens[i + 1])
 
             if first in reject_first:
-
                 i += 1
                 continue
 
             if second in reject_second:
-
                 i += 1
                 continue
 
-            if _is_valid_person(
-                first,
-                second,
+            if (
+                first in TITLE_WORDS
+                or second in TITLE_WORDS
             ):
+                i += 1
+                continue
 
-                people.append(
-                    normalize(
-                        f"{first} {second}"
-                    )
-                )
+            pair = f"{first} {second}".lower()
 
+            if any(
+                pair in title.lower()
+                for title in KNOWN_TITLES
+            ):
+                i += 1
+                continue
+
+            if (
+                f"{first} {second}" in ORGANIZATIONS
+                or first in ORGANIZATIONS
+                or second in ORGANIZATIONS
+            ):
+                i += 1
+                continue
+
+            if second in {
+                "Block",
+                "Shock",
+                "Giants",
+                "Through",
+                "Up",
+            }:
+                i += 1
+                continue
+
+            if (
+                looks_like_real_name(first, second)
+                and _is_valid_person(first, second)
+            ):
+                people.append(normalize(f"{first} {second}"))
                 i += 2
                 continue
 
         i += 1
 
-    return list(
-        dict.fromkeys(
-            people
-        )
-    )
+    return list(dict.fromkeys(people))
 # --------------------------------------------------
 # QUOTED TITLES
 # --------------------------------------------------
 
 
-def _extract_quoted_titles(
-    headline: str,
-):
-
+def _extract_quoted_titles(headline: str):
     """
-    Extract titles enclosed in real quotation marks.
+    Extract movie/TV titles enclosed in quotation marks.
 
-    Ignore apostrophes used in contractions
-    and possessives.
+    Supports:
+        "Blade Runner 2099"
+        'Blade Runner 2099'
+        “Blade Runner 2099”
+        ‘Blade Runner 2099’
     """
 
     titles = []
 
-    #
-    # Double quotes
-    #
-
-    for title in re.findall(
+    patterns = [
         r'"([^"]+)"',
-        headline,
-    ):
+        r"'([^']+)'",
+        r"“([^”]+)”",
+        r"‘([^’]+)’",
+    ]
 
-        title = title.strip()
+    for pattern in patterns:
+        for title in re.findall(pattern, headline):
+            title = title.strip()
 
-        if len(title) >= 2 and title not in titles:
-            titles.append(title)
-
-    #
-    # Smart quotes
-    #
-
-    for title in re.findall(
-        r'“([^”]+)”',
-        headline,
-    ):
-
-        title = title.strip()
-
-        if len(title) >= 2 and title not in titles:
-            titles.append(title)
+            if len(title) >= 2 and title not in titles:
+                titles.append(title)
 
     return titles
 
@@ -997,7 +1201,7 @@ if __name__ == "__main__":
 
 
     tests = [
-    "ALERT ALERT! NEW DESTINY'S CHILD MUSIC!! ALERT ALERT!",
+    "Singer Chris Brown pleads guilty over bottle attack at a London nightclub",
 ]
 
 

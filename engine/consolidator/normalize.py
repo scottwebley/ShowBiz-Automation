@@ -93,11 +93,6 @@ EVENT_ALIASES = {
     "closed":"close",
     "closing":"close",
 
-    # trailers
-    "trailer":"trailer",
-    "teaser":"trailer",
-    "teasers":"trailer",
-
     # casting
     "cast":"cast",
     "casting":"cast",
@@ -176,75 +171,114 @@ def keywords(text):
     }
 
 
-def entities(text):
+def entities(text: str) -> set[str]:
     """
-    Return likely entertainment entities.
+    Extract entertainment entities from headlines and article bodies.
+
+    Designed to recognize:
+    - People (Ian Diaz, Michelle Hadley)
+    - Titles ("A Toxic Love Story", Heartstopper: Forever)
+    - Companies/brands (Netflix, Disney+, Marvel Studios)
     """
+
+    import re
 
     if not text:
         return set()
 
-    original = normalize(text)
+    text = text.replace("\n", " ")
 
-    PHRASES = [
-        "warner bros",
-        "warner brothers",
-        "universal studios",
-        "universal pictures",
-        "paramount pictures",
-        "sony pictures",
-        "searchlight pictures",
-        "20th century studios",
-        "amazon mgm",
+    entities = set()
 
-        "disney plus",
-        "apple tv",
-        "prime video",
-        "hbo max",
-        "paramount",
-        "peacock",
-        "netflix",
-        "hulu",
+    #
+    # 1. Quoted titles
+    #
+    for m in re.finditer(r"[\"']([^\"']{3,80})[\"']", text):
+        title = m.group(1).strip()
 
-        "cinerama dome",
-        "radio city music hall",
-        "hollywood bowl",
-        "madison square garden",
+        title = re.sub(r"\s+", " ", title)
+        title = title.strip(" .,:;!?")
 
-        "academy awards",
-        "golden globes",
-        "emmy awards",
-        "grammy awards",
-        "tony awards",
+        if len(title.split()) <= 8:
+            entities.add(title)
 
-        "warner discovery",
-        "warner bros discovery",
-        "disney",
-        "pixar",
-        "marvel",
-        "lucasfilm",
-        "a24",
-        "apple",
-        "amazon",
-        "netflix",
-        "paramount",
-        "universal",
-        "sony",
-    ]
+    #
+    # 2. Capitalized phrases
+    #
+    pattern = re.compile(
+        r"\b[A-Z][A-Za-z0-9'&:+.-]*"
+        r"(?:\s+[A-Z][A-Za-z0-9'&:+.-]*){0,5}"
+    )
 
-    found = set()
+    bad_start = {
+        "A","An","And","As","At","By","For","From",
+        "Get","Here's","How","In","Into","Its",
+        "Last","Latest","New","On","Published",
+        "Press","Report","Reports","Senior",
+        "The","This","To","Updated","Via",
+        "What","When","Where","Why","Will","With"
+    }
 
-    for phrase in PHRASES:
-        if phrase in original:
-            found.add(
-                phrase.replace(" ", "_")
-            )
+    bad_phrase = {
+        "Breaking News",
+        "Latest News",
+        "Read More",
+        "Press Association",
+        "Senior Entertainment Reporter",
+        "Entertainment Reporter",
+    }
 
-    for word in keywords(text):
-        if len(word) >= 4 and word not in NON_ENTITY_WORDS:
-            found.add(word)
+    for match in pattern.finditer(text):
 
-    return found
+        phrase = match.group(0).strip(" ,.:;!?()[]{}")
+
+        words = phrase.split()
+
+        if not words:
+            continue
+
+        if words[0] in bad_start:
+            continue
+
+        if phrase in bad_phrase:
+            continue
+
+        phrase = re.sub(r"\s+", " ", phrase)
+
+        entities.add(phrase)
+
+    #
+    # 3. Normalize punctuation
+    #
+    cleaned = set()
+
+    for entity in entities:
+
+        entity = entity.replace("’", "'")
+        entity = re.sub(r"\s+", " ", entity)
+        entity = entity.strip(" .,:;!?")
+
+        if len(entity) >= 3:
+            cleaned.add(entity)
+
+    #
+    # 4. Remove only obvious supersets
+    #
+    final = set(cleaned)
+
+    for a in cleaned:
+        for b in cleaned:
+
+            if a == b:
+                continue
+
+            if (
+                len(a.split()) > len(b.split())
+                and a.endswith(b)
+            ):
+                final.discard(a)
+
+    return final
 
 
 def event_words(text):

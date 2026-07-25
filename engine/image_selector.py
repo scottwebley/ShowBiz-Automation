@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz Image Selector
-Version 3.4
+Version 3.5
 ===========================================
 
 Purpose:
@@ -13,16 +13,15 @@ Workflow:
     3. Ask the AI Image Verifier to choose
        the best candidate.
     4. Use the approved Media Library image.
-    5. If no valid Media Library image exists,
-       generate an AI image.
-
-Author:
-    ShowBiz Automation
+    5. Search TMDb for official movie/TV artwork.
+    6. Search Unsplash.
+    7. Generate an AI image.
 """
 
 from engine.image_generator import generate_image
 from engine.image_search import search_media_library
 from engine.image_verifier import verify_image
+from engine.image_providers.tmdb import get_movie_poster
 from engine.image_providers.unsplash import get_unsplash_image
 
 
@@ -56,7 +55,6 @@ def is_valid_media_candidate(candidate):
     ).lower()
 
     for term in BLOCKED_IMAGE_TERMS:
-
         if term in text:
             return False
 
@@ -130,7 +128,8 @@ def get_featured_image(story):
         )
 
         return f"media:{fallback['media_id']}"
-        #
+
+    #
     # No valid Media Library candidates.
     #
 
@@ -138,7 +137,23 @@ def get_featured_image(story):
 
     #
     # Second choice:
-    # Download a legal editorial image from Unsplash.
+    # TMDb
+    #
+
+    print("Searching TMDb...\n")
+
+    headline = story.get("headline", "")
+
+    tmdb_image = get_movie_poster(story)
+
+    if tmdb_image:
+
+        print("✓ Using TMDb poster.")
+        return tmdb_image
+
+    #
+    # Third choice:
+    # Unsplash
     #
 
     print("Searching Unsplash...\n")

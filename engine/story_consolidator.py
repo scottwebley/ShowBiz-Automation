@@ -29,6 +29,37 @@ def analyze_story_duplicates(stories):
         print("No stories supplied.\n")
         return []
 
+    print("===================================")
+    print("INPUT STORIES")
+    print("===================================")
+
+    for i, story in enumerate(stories, 1):
+
+        if isinstance(story, dict):
+            headline = (
+                story.get("headline")
+                or story.get("title")
+                or story.get("name")
+                or "(no headline)"
+            )
+
+            source = (
+                story.get("source")
+                or story.get("publisher")
+                or story.get("site")
+                or story.get("feed")
+                or "Unknown"
+            )
+        else:
+            headline = str(story)
+            source = "Unknown"
+
+        print(f"{i:02d}. [{source}] {headline}")
+
+    print("===================================")
+    print(f"Total stories loaded: {len(stories)}")
+    print("===================================\n")
+
     clusters = build_clusters(stories)
 
     duplicate_clusters = [

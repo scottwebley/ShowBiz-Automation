@@ -56,59 +56,59 @@ def banner():
     log()
 
 
-def run_step(
-    name,
-    script,
-):
+def run_step(name, script):
     """
     Run one automation step.
     Continue even if it fails.
+    Keep scheduler log clean while saving errors separately.
     """
 
     log("-" * 60)
     log(f"Starting: {name}")
 
     start = time.time()
+    error_log = "showbiz_scheduler_error.log"
 
     try:
 
-        #
-        # Run guide modules.
-        #
-        if (
-            script.startswith("engine/guides/")
-            and script.endswith(".py")
-        ):
+        # ------------------------------------------
+        # Run guide modules
+        # ------------------------------------------
+        if script.startswith("engine/guides/") and script.endswith(".py"):
 
-            module = (
-                script[:-3]
-                .replace("/", ".")
-            )
+            module = script[:-3].replace("/", ".")
 
             result = subprocess.run(
                 [
                     sys.executable,
                     "-m",
                     module,
-                ]
+                ],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.PIPE,
+                text=True,
             )
 
-        #
-        # Run normal scripts.
-        #
+        # ------------------------------------------
+        # Run normal scripts
+        # ------------------------------------------
         else:
 
             result = subprocess.run(
                 [
                     sys.executable,
                     script,
-                ]
+                ],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.PIPE,
+                text=True,
             )
 
-        elapsed = (
-            time.time() - start
-        )
+        elapsed = time.time() - start
 
+        # ------------------------------------------
+        # Success
+        # ------------------------------------------
         if result.returncode == 0:
 
             RUN_RESULTS.append(
@@ -119,13 +119,12 @@ def run_step(
                 )
             )
 
-            log(
-                f"SUCCESS: {name} "
-                f"({elapsed:.1f}s)"
-            )
-
+            log(f"SUCCESS: {name} ({elapsed:.1f}s)")
             return True
 
+        # ------------------------------------------
+        # Failure
+        # ------------------------------------------
         RUN_RESULTS.append(
             (
                 name,
@@ -140,13 +139,28 @@ def run_step(
             f"({elapsed:.1f}s)"
         )
 
+        if result.stderr:
+
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+            with open(
+                error_log,
+                "a",
+                encoding="utf-8",
+            ) as f:
+
+                f.write("\n" + "=" * 80 + "\n")
+                f.write(f"[{timestamp}] {name}\n")
+                f.write(result.stderr.strip())
+                f.write("\n")
+
+            log(f"See {error_log} for details.")
+
         return False
 
     except Exception:
 
-        elapsed = (
-            time.time() - start
-        )
+        elapsed = time.time() - start
 
         RUN_RESULTS.append(
             (
@@ -156,13 +170,22 @@ def run_step(
             )
         )
 
-        log(
-            f"EXCEPTION: {name}"
-        )
+        log(f"EXCEPTION: {name}")
 
-        log(
-            traceback.format_exc()
-        )
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        with open(
+            error_log,
+            "a",
+            encoding="utf-8",
+        ) as f:
+
+            f.write("\n" + "=" * 80 + "\n")
+            f.write(f"[{timestamp}] {name}\n")
+            f.write(traceback.format_exc())
+            f.write("\n")
+
+        log(f"See {error_log} for details.")
 
         return False
 def main():

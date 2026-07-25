@@ -163,7 +163,13 @@ def get_top_stories(max_items=50):
 
     approved = approved[:max_items]
 
-    save_news(approved)
+    print("\nHEADLINES BEFORE CACHE")
+    print("=" * 60)
+
+    for i, story in enumerate(approved, 1):
+        print(f"{i:02d}. {story.get('headline')}")
+
+    # Stop here so we can inspect the headlines.
 
     print(f"✓ Cached {len(approved)} stories.")
 

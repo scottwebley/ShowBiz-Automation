@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz Media Scorer
-Version 4.0
+Version 4.1
 ===========================================
 
 Purpose:
@@ -14,6 +14,14 @@ Scoring priority:
     3. image_meta title/caption full-name match
     4. filename fallback
     5. WordPress title fallback
+
+Version 4.1
+-----------
+• Prevents single-word organization searches
+  (Disney, Pixar, Sony, Netflix, etc.)
+  from being dominated by weak caption matches.
+• Multi-word searches continue to behave exactly
+  as before.
 
 Ignored:
     - SEO fields
@@ -45,7 +53,6 @@ STOP_WORDS = {
 }
 
 
-
 def _tokens(text):
 
     return [
@@ -56,14 +63,12 @@ def _tokens(text):
     ]
 
 
-
 def _clean_words(text):
 
     return [
         word.lower()
         for word in _tokens(text)
     ]
-
 
 
 def _metadata_field(
@@ -76,28 +81,22 @@ def _metadata_field(
         {},
     )
 
-
     if not isinstance(
         details,
         dict,
     ):
-
         return ""
-
 
     image_meta = details.get(
         "image_meta",
         {},
     )
 
-
     if not isinstance(
         image_meta,
         dict,
     ):
-
         return ""
-
 
     return normalize(
         safe(
@@ -108,7 +107,6 @@ def _metadata_field(
     )
 
 
-
 def _wordpress_title(
     item,
 ):
@@ -117,7 +115,6 @@ def _wordpress_title(
         "title",
         "",
     )
-
 
     if isinstance(
         title,
@@ -132,13 +129,11 @@ def _wordpress_title(
             )
         )
 
-
     return normalize(
         safe(
             title
         )
     )
-
 
 
 def _filename(
@@ -152,7 +147,6 @@ def _filename(
             )
         )
     )
-
 
 
 def score_item(
@@ -219,7 +213,7 @@ def score_item(
     #
     # Strong full-name matching.
     #
-    # Only award these large bonuses when the
+    # Only award these bonuses when the
     # query contains TWO OR MORE meaningful words.
     #
 
@@ -260,25 +254,43 @@ def score_item(
 
     #
     # Partial metadata matching.
-    # Lower weight so single-word searches like
-    # "Sony" don't dominate unrelated images.
+    #
+    # Multi-word searches behave exactly as before.
+    # Single-word searches only trust metadata titles.
     #
 
-    if query_phrase in metadata_title:
+    if len(query_words) >= 2:
 
-        score += 1000
+        if query_phrase in metadata_title:
 
-        reasons.append(
-            "metadata_title:contains"
-        )
+            score += 1000
 
-    if query_phrase in metadata_caption:
+            reasons.append(
+                "metadata_title:contains"
+            )
 
-        score += 800
+        if query_phrase in metadata_caption:
 
-        reasons.append(
-            "metadata_caption:contains"
-        )
+            score += 800
+
+            reasons.append(
+                "metadata_caption:contains"
+            )
+
+    else:
+
+        #
+        # Ignore caption-only matches for broad
+        # one-word searches like Disney or Pixar.
+        #
+
+        if query_phrase in metadata_title:
+
+            score += 300
+
+            reasons.append(
+                "metadata_title:contains"
+            )
 
     #
     # Filename fallback

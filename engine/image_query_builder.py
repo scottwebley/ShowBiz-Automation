@@ -18,6 +18,9 @@ from itertools import combinations
 
 from engine.entity_extractor import extract_entities
 
+print("USING IMAGE_QUERY_BUILDER:", __file__)
+print("IMAGE_QUERY_BUILDER VERSION TEST")
+
 
 #
 # Entertainment companies that often have
@@ -39,7 +42,6 @@ KNOWN_ORGANIZATIONS = (
     "Prime Video",
     "Warner Bros.",
     "Warner Bros",
-    "Warner",
     "Max",
     "HBO",
     "Hulu",
@@ -157,11 +159,13 @@ def build_search_queries(
         1. Exact movie titles
         2. Exact TV titles
         3. Music artists
-        4. Entertainment companies
-        5. Valid people
-        6. Person pairs
-        7. Events
-        8. Keyword fallback
+        4. Person + title combinations
+        5. Entertainment companies
+        6. Valid people
+        7. Person pairs
+        8. Events
+        9. Franchise fallback
+        10. Keyword fallback
     """
 
     headline = story.get(
@@ -179,60 +183,47 @@ def build_search_queries(
     # 1. Movies first.
     #
 
-    queries.extend(
-        entities.get(
-            "movies",
-            [],
-        )
+    movie_titles = entities.get(
+        "movies",
+        [],
     )
+
+    queries.extend(movie_titles)
 
     #
     # 2. TV shows.
     #
 
-    queries.extend(
-        entities.get(
-            "tv_shows",
-            [],
-        )
+    tv_titles = entities.get(
+        "tv_shows",
+        [],
     )
+
+    queries.extend(tv_titles)
 
     #
     # 3. Music artists.
     #
 
-    queries.extend(
-        entities.get(
-            "music_artists",
-            [],
-        )
+    music_titles = entities.get(
+        "music_artists",
+        [],
+    )
+
+    queries.extend(music_titles)
+
+    #
+    # Primary visual subjects.
+    #
+
+    primary_titles = (
+        movie_titles
+        + tv_titles
+        + music_titles
     )
 
     #
-    # 4. Organizations detected by
-    # the extractor.
-    #
-
-    queries.extend(
-        entities.get(
-            "organizations",
-            [],
-        )
-    )
-
-    #
-    # 5. Organizations detected
-    # directly from the headline.
-    #
-
-    queries.extend(
-        _organizations_from_headline(
-            headline
-        )
-    )
-
-    #
-    # 6. Cleaned people.
+    # Clean people.
     #
 
     people = _clean_people(
@@ -242,12 +233,68 @@ def build_search_queries(
         )
     )
 
+    has_primary_subject = any([
+        primary_titles,
+        people,
+        entities.get("events"),
+    ])
+
+    #
+    # 4. Person + title combinations.
+    #
+    # These are much more specific than
+    # person-only searches and help avoid
+    # matching the wrong production.
+    #
+
+    for title in primary_titles:
+        for person in people:
+
+            queries.append(
+                f"{person} {title}"
+            )
+
+            queries.append(
+                f"{title} {person}"
+            )
+
+        #
+    # 5. Organizations.
+    #
+    # Only search companies if we don't
+    # already have a better visual subject.
+    #
+
+    if not has_primary_subject:
+
+        organizations = _unique(
+            entities.get("organizations", [])
+            + _organizations_from_headline(headline)
+        )
+
+        #
+        # If two major organizations appear together,
+        # search the combined phrase first.
+        #
+
+        if len(organizations) >= 2:
+
+            queries.append(
+                f"{organizations[0]} {organizations[1]}"
+            )
+
+        queries.extend(organizations)
+
+    #
+    # 6. People.
+    #
+
     queries.extend(
         people
     )
 
     #
-    # 7. Person pairs only.
+    # 7. Person pairs.
     #
 
     for pair in combinations(

@@ -58,6 +58,10 @@ def load_media():
         response.raise_for_status()
 
         items = response.json()
+        if page == 1:
+            print("\nFirst 10 media IDs:")
+            for item in items[:10]:
+                print(item.get("id"))
 
         if not items:
             break
