@@ -118,3 +118,39 @@ Traceback (most recent call last):
   File "/Users/scottwebley/ShowBiz-Automation-Production-Backup/engine/ai_writer.py", line 16, in <module>
     from engine.ai_writer_core import write_article_core
 ModuleNotFoundError: No module named 'engine.ai_writer_core'
+
+================================================================================
+[2026-07-25 18:26:02] Publish Top Story
+Traceback (most recent call last):
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/newsroom.py", line 200, in <module>
+    main()
+    ~~~~^^
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/newsroom.py", line 170, in main
+    raise RuntimeError(
+        f"Top Story aborted: no featured image for '{story['headline']}'"
+    )
+RuntimeError: Top Story aborted: no featured image for 'Ryan Gosling to Star in Ghost Rider Movie for Marvel Studios, Director Shawn Levy'
+
+================================================================================
+[2026-07-25 19:27:50] Publish Top Story
+Traceback (most recent call last):
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/newsroom.py", line 200, in <module>
+    main()
+    ~~~~^^
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/newsroom.py", line 170, in main
+    raise RuntimeError(
+        f"Top Story aborted: no featured image for '{story['headline']}'"
+    )
+RuntimeError: Top Story aborted: no featured image for 'Marvel unveils 'Ghost Rider,' 'Black Panther 3' at Comic-Con'
+
+================================================================================
+[2026-07-25 20:24:34] Publish Top Story
+Traceback (most recent call last):
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/newsroom.py", line 200, in <module>
+    main()
+    ~~~~^^
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/newsroom.py", line 170, in main
+    raise RuntimeError(
+        f"Top Story aborted: no featured image for '{story['headline']}'"
+    )
+RuntimeError: Top Story aborted: no featured image for 'Marvel unveils 'Ghost Rider,' 'Black Panther 3' at Comic-Con'

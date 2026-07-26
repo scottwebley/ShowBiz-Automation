@@ -156,6 +156,16 @@ def write_article_core(story):
         None on failure
     """
 
+    from engine.guides.trailer_finder import trailer_button
+
+    TRAILER_KEYWORDS = (
+        "trailer",
+        "teaser",
+        "official trailer",
+        "teaser trailer",
+        "first look",
+    )
+
     category = normalize_category(
         story.get(
             "category",
@@ -194,6 +204,45 @@ def write_article_core(story):
         )
 
         return None
+
+    # ---------------------------------------------------------
+    # Add Watch Trailer button for trailer stories
+    # ---------------------------------------------------------
+
+    headline = story.get("headline", "")
+
+    if any(
+        keyword in headline.lower()
+        for keyword in TRAILER_KEYWORDS
+    ):
+
+        try:
+
+            button = trailer_button(title=headline)
+
+            if button:
+
+                first_paragraph = html.find("</p>")
+
+                if first_paragraph != -1:
+
+                    trailer_html = (
+                        "\n"
+                        "<h3>🎬 Watch the Trailer</h3>\n"
+                        f"{button}\n"
+                    )
+
+                    html = (
+                        html[:first_paragraph + 4]
+                        + trailer_html
+                        + html[first_paragraph + 4:]
+                    )
+
+                    print("✓ Trailer button added.")
+
+        except Exception as exc:
+
+            print(f"Trailer lookup failed: {exc}")
 
     category_ids = [
         TOP_STORY_CATEGORY_ID,

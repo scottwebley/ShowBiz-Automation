@@ -34,6 +34,7 @@ def select_top_story(stories):
             "headline": story.get("headline", ""),
             "summary": story.get("summary", ""),
             "category": story.get("category", ""),
+            "source": story.get("source", ""),
             "score": story.get("score", 0)
         })
 
@@ -64,6 +65,14 @@ Avoid:
 • Opinion pieces
 • Evergreen stories
 • Generic listicles
+
+If multiple stories describe the same entertainment event, select only one.
+
+Prefer the version from the most authoritative entertainment news source.
+
+Examples of authoritative sources include Deadline, Variety, The Hollywood Reporter, Reuters, Associated Press, and official studio announcements.
+
+Do not select two different headlines covering the same announcement, trailer, casting, premiere, or event.
 
 Return ONLY valid JSON.
 

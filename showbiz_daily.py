@@ -60,7 +60,7 @@ def run_step(name, script):
     """
     Run one automation step.
     Continue even if it fails.
-    Keep scheduler log clean while saving errors separately.
+    Save stdout to the scheduler log and stderr to the error log.
     """
 
     log("-" * 60)
@@ -84,7 +84,7 @@ def run_step(name, script):
                     "-m",
                     module,
                 ],
-                stdout=subprocess.DEVNULL,
+                stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 text=True,
             )
@@ -99,12 +99,25 @@ def run_step(name, script):
                     sys.executable,
                     script,
                 ],
-                stdout=subprocess.DEVNULL,
+                stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 text=True,
             )
 
         elapsed = time.time() - start
+
+        # ------------------------------------------
+        # Save child stdout to scheduler log
+        # ------------------------------------------
+        if result.stdout:
+            with open(
+                LOG_FILE,
+                "a",
+                encoding="utf-8",
+            ) as logfile:
+                logfile.write(result.stdout)
+                if not result.stdout.endswith("\n"):
+                    logfile.write("\n")
 
         # ------------------------------------------
         # Success

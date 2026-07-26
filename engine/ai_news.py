@@ -85,6 +85,7 @@ def get_top_stories(max_items=50):
             story = {
                 "headline": article.get("title", "").strip(),
                 "summary": article.get("body", "")[:500],
+                "body": article.get("body", ""),
                 "url": article.get("url", ""),
                 "source": article.get("source", {}).get("title", ""),
                 "published": article.get("dateTime", ""),

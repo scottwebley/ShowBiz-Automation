@@ -98,10 +98,10 @@ def similarity_report(story1, story2):
     same = same_event(story1, story2)
 
     score = (
-        headline_score * 0.20 +
-        body_score * 0.40 +
-        keyword_score * 0.20 +
-        entity_score * 0.20
+        headline_score * 0.15 +
+        body_score * 0.30 +
+        keyword_score * 0.15 +
+        entity_score * 0.40
     )
 
     if same:

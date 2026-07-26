@@ -97,7 +97,8 @@ def main():
 
                     print("No valid stories available.")
                     return
-                    print(f"Top Story: {story['headline']}")
+
+    print(f"Top Story: {story['headline']}")
     print(f"Category: {story['category']}\n")
 
     print("STEP 3: Editorial review...")
@@ -151,6 +152,24 @@ def main():
     print("STEP 5: Generating featured image...")
 
     article["image"] = get_featured_image(story)
+
+    if not article["image"]:
+
+        save_pending_story(story)
+
+        print("\n========================================")
+        print("NEWSROOM")
+        print("========================================")
+        print("TOP STORY NOT PUBLISHED")
+        print(f"Headline: {story['headline']}")
+        print(f"Category: {story['category']}")
+        print("Reason: No approved featured image found.")
+        print("The article has been saved for retry/manual publication.")
+        print("Publishing skipped.\n")
+
+        raise RuntimeError(
+            f"Top Story aborted: no featured image for '{story['headline']}'"
+        )
 
     print("✓ Featured image generated.\n")
 

@@ -1,7 +1,7 @@
 """
 ===========================================
 ShowBiz Image Selector
-Version 3.5
+Version 3.6 (Debug)
 ===========================================
 
 Purpose:
@@ -72,13 +72,33 @@ def get_featured_image(story):
         path/to/generated/image.png
     """
 
+    print("\n" + "=" * 60)
+    print("MEDIA LIBRARY SEARCH")
+    print("=" * 60)
+    print(f"Headline : {story.get('headline', '')}")
+    print(f"Category : {story.get('category', '')}")
+    print()
+
     candidates = search_media_library(story)
+
+    print(f"Candidates returned : {len(candidates)}")
+
+    if candidates:
+        print("\nTop candidates:")
+        for i, candidate in enumerate(candidates[:10], 1):
+            print(
+                f"{i:2d}. "
+                f"{candidate.get('title', '(no title)')} "
+                f"(ID: {candidate.get('id', '?')})"
+            )
 
     candidates = [
         candidate
         for candidate in candidates
         if is_valid_media_candidate(candidate)
     ]
+
+    print(f"\nValid candidates : {len(candidates)}")
 
     #
     # First choice:
@@ -109,40 +129,24 @@ def get_featured_image(story):
             return f"media:{decision['media_id']}"
 
         #
-        # Only fallback to a valid editorial image.
+        # No Media Library image was approved.
         #
 
-        fallback = candidates[0]
+        print("\n⚠ Verifier rejected all Media Library candidates.")
+        print("Continuing to other providers...\n")
 
-        print(
-            "\n⚠ Verifier did not approve a candidate."
-        )
-        print(
-            "Using highest-ranked valid Media Library image."
-        )
-        print(
-            f"Media ID : {fallback['media_id']}"
-        )
-        print(
-            f"Title    : {fallback['title']}"
-        )
+    else:
 
-        return f"media:{fallback['media_id']}"
-
-    #
-    # No valid Media Library candidates.
-    #
-
-    print("\nNo valid Media Library candidates found.")
+        print("\n⚠ No valid Media Library candidates.")
 
     #
     # Second choice:
     # TMDb
     #
 
-    print("Searching TMDb...\n")
-
-    headline = story.get("headline", "")
+    print("\n========================================")
+    print("TMDb SEARCH")
+    print("========================================")
 
     tmdb_image = get_movie_poster(story)
 
@@ -151,12 +155,16 @@ def get_featured_image(story):
         print("✓ Using TMDb poster.")
         return tmdb_image
 
+    print("No TMDb image found.")
+
     #
     # Third choice:
     # Unsplash
     #
 
-    print("Searching Unsplash...\n")
+    print("\n========================================")
+    print("UNSPLASH SEARCH")
+    print("========================================")
 
     unsplash_image = get_unsplash_image(story)
 
@@ -165,18 +173,24 @@ def get_featured_image(story):
         print("✓ Using Unsplash image.")
         return unsplash_image
 
+    print("No Unsplash image found.")
+
     #
     # Final fallback:
-    # Generate an AI editorial image.
     #
 
-    print("No Unsplash image found.")
-    print("Generating new editorial image...\n")
+    print("\n========================================")
+    print("AI IMAGE GENERATION")
+    print("========================================")
 
     generated = generate_image(story)
 
     if generated:
+
+        print("✓ AI image generated.")
         return generated
+
+    print("✗ AI image generation failed.")
 
     return None
 
