@@ -1,7 +1,9 @@
-WP_URL = "https://showbiz.com"
+import os
 
-WP_USERNAME = "admin"
+WP_URL = os.getenv("WP_URL", "https://showbiz.com")
 
-WP_APP_PASSWORD = "KB6V CcUJ HXrd er84 u9Ci ZQBY"
+WP_USERNAME = os.getenv("WP_USERNAME", "admin")
 
-UNSPLASH_ACCESS_KEY = "ZD3PTjIBS-LDMyVzzUfseFAZ4knVqofeVo1vJax4rxM"
+WP_APP_PASSWORD = os.getenv("WP_APP_PASSWORD")
+
+UNSPLASH_ACCESS_KEY = os.getenv("UNSPLASH_ACCESS_KEY")
