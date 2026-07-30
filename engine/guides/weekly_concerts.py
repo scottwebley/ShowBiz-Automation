@@ -50,14 +50,39 @@ def get_concerts():
         concerts,
     )
 
+    # Rank a larger pool first.
     concerts = rank_concerts(
         concerts,
-        limit=24,
+        limit=1000,
     )
+
+    # Final deduplication after scoring.
+    unique = []
+    seen = set()
+
+    for concert in concerts:
+
+        key = (
+            concert.get("artist", "").strip().lower(),
+            concert.get("event_date", "").strip(),
+            concert.get("city", "").strip().lower(),
+            concert.get("state", "").strip().lower(),
+        )
+
+        if key in seen:
+            continue
+
+        seen.add(key)
+        unique.append(concert)
+
+        if len(unique) >= 30:
+            break
+
+    concerts = unique
 
     print()
     print("========================================")
-    print("FINAL TOP 24")
+    print("FINAL TOP 30")
     print("========================================")
 
     for i, concert in enumerate(concerts, 1):

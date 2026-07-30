@@ -14,17 +14,17 @@ is returned unchanged.
 import re
 
 from engine.trailer_finder import find_trailer
+print(">>> LOADED trailer_enricher.py v2 <<<")
 
 
 TRAILER_KEYWORDS = (
-    " trailer",
-    " teaser",
-    " first look",
-    " official trailer",
-    " official teaser",
-    " sneak peek",
+    "trailer",
+    "teaser",
+    "first look",
+    "official trailer",
+    "official teaser",
+    "sneak peek",
 )
-
 
 def is_trailer_story(story):
     """
@@ -37,6 +37,8 @@ def is_trailer_story(story):
         else ""
     ).lower()
 
+    print(f"HEADLINE: {headline!r}")
+
     return any(
         keyword in headline
         for keyword in TRAILER_KEYWORDS
@@ -45,83 +47,88 @@ def is_trailer_story(story):
 
 def extract_title(headline):
     """
-    Extract movie/TV title from headline.
+    Extract movie/TV title from trailer headlines while preserving
+    titles that legitimately contain a colon.
     """
 
     if not headline:
         return ""
 
-    headline = re.sub(
-        r":.*$",
-        "",
-        headline,
-        flags=re.IGNORECASE,
-    )
+    headline = headline.strip(" '\"“”‘’")
 
     patterns = [
 
+        # Jumanji: Open World Trailer Takes...
+        r"^(.*?)\s+Trailer\s+(?:Takes|Brings|Drops|Debuts|Launches|Reveals)",
+
+        # Superman Official Trailer
         r"^(.*?)\s+(Official\s+)?Trailer",
 
+        # Superman Official Teaser
         r"^(.*?)\s+(Official\s+)?Teaser",
 
+        # Gets New Trailer
         r"^(.*?)\s+Gets?\s+New\s+Trailer",
 
+        # First Look
         r"^(.*?)\s+First\s+Look",
 
+        # Releases Trailer
         r"^(.*?)\s+Releases?\s+Trailer",
 
+        # Debuts Trailer
         r"^(.*?)\s+Debuts?\s+Trailer",
-
     ]
 
     for pattern in patterns:
-
-        match = re.search(
-            pattern,
-            headline,
-            flags=re.IGNORECASE,
-        )
-
+        match = re.search(pattern, headline, flags=re.IGNORECASE)
         if match:
-
-            return match.group(1).strip()
+            return match.group(1).strip(" '\"“”‘’:-")
 
     words = headline.split()
-
-    return " ".join(words[:4]).strip()
-def enrich_article(article_html, story):
+    return " ".join(words[:6]).strip(" '\"“”‘’:-")
+def enrich_article(article, story):
     """
     Add an embedded trailer to trailer stories.
     """
 
+    print(">>> ENTERING enrich_article() <<<", flush=True)
+
     try:
 
-        if not article_html:
-            return article_html
+        if not article or not isinstance(article, dict):
+            return article
 
         if not isinstance(story, dict):
-            return article_html
+            return article
 
         if not is_trailer_story(story):
-            return article_html
+            return article
 
         headline = story.get("headline", "").strip()
 
         if not headline:
-            return article_html
+            return article
 
         title = extract_title(headline)
 
         if not title:
-            return article_html
+            return article
+
+        print(f"Trailer search title: {title}")
 
         trailer = find_trailer(title=title)
 
         if not trailer:
-            return article_html
+            return article
 
         if not trailer.get("embed_url"):
-            return article_html
+            return article
+
+        content = article.get("content", "")
+
+        if not content:
+            return article
 
         trailer_html = f"""
 <div class="showbiz-trailer-box">
@@ -149,25 +156,26 @@ Watch the official trailer on YouTube.
 </div>
 """
 
-        end_p = article_html.find("</p>")
+        end_p = content.find("</p>")
 
         if end_p != -1:
-
-            return (
-                article_html[: end_p + 4]
+            article["content"] = (
+                content[: end_p + 4]
                 + "\n\n"
                 + trailer_html
                 + "\n\n"
-                + article_html[end_p + 4 :]
+                + content[end_p + 4 :]
             )
+        else:
+            article["content"] = trailer_html + "\n\n" + content
 
-        return trailer_html + "\n\n" + article_html
+        return article
 
     except Exception as exc:
 
         print("Trailer enrichment failed:", exc)
 
-        return article_html
+        return article
 
 
 if __name__ == "__main__":
@@ -176,9 +184,13 @@ if __name__ == "__main__":
         "headline": "Clayface Trailer Teases Why It's Getting an R-Rating",
     }
 
-    print(
-        enrich_article(
-            "<p>Opening paragraph.</p><p>Second paragraph.</p>",
-            sample_story,
-        )
-    )
+    sample_article = {
+        "content": "<p>Opening paragraph.</p><p>Second paragraph.</p>",
+    }
+
+    result = enrich_article(sample_article, sample_story)
+
+    print("\n==============================")
+    print("RESULT")
+    print("==============================")
+    print(result["content"])

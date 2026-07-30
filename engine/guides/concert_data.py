@@ -102,14 +102,22 @@ def request_ticketmaster(params=None):
 def normalize_events(events, limit=24):
 
     items = []
+    seen = set()
 
     blocked = (
         "season pass",
         "day pass",
         "weekend pass",
         "hotel package",
+        "hotel deals",
         "ticket package",
+        "ticket + hotel",
+        "ticket and hotel",
+        "official ticket",
+        "official ticket + hotel",
         "official caesars ticket",
+        "travel package",
+        "vacation package",
         "vip package",
         "vip experience",
         "parking",
@@ -144,46 +152,21 @@ def normalize_events(events, limit=24):
 
     for event in events:
 
-        title = event.get(
-            "name",
-            ""
-        ).strip()
+        title = event.get("name", "").strip()
 
         if not title:
             continue
 
         lower = title.lower()
 
-        if any(
-            word in lower
-            for word in blocked
-        ):
+        if any(word in lower for word in blocked):
             continue
 
-        dates = event.get(
-            "dates",
-            {}
-        )
-
-        start = dates.get(
-            "start",
-            {}
-        )
-
-        embedded = event.get(
-            "_embedded",
-            {}
-        )
-
-        venues = embedded.get(
-            "venues",
-            []
-        )
-
-        attractions = embedded.get(
-            "attractions",
-            []
-        )
+        dates = event.get("dates", {})
+        start = dates.get("start", {})
+        embedded = event.get("_embedded", {})
+        venues = embedded.get("venues", [])
+        attractions = embedded.get("attractions", [])
 
         artist = ""
         artist_id = ""
@@ -196,40 +179,25 @@ def normalize_events(events, limit=24):
             # 1. Music attraction whose name appears in title.
             for attraction in attractions:
 
-                name = attraction.get(
-                    "name",
-                    ""
-                ).strip()
+                name = attraction.get("name", "").strip()
 
                 if not name:
                     continue
 
                 lower_name = name.lower()
 
-                if any(
-                    word in lower_name
-                    for word in generic_attractions
-                ):
+                if any(word in lower_name for word in generic_attractions):
                     continue
 
-                classes = attraction.get(
-                    "classifications",
-                    []
-                )
+                classes = attraction.get("classifications", [])
 
                 segment = ""
 
                 if classes:
                     segment = (
                         classes[0]
-                        .get(
-                            "segment",
-                            {}
-                        )
-                        .get(
-                            "name",
-                            ""
-                        )
+                        .get("segment", {})
+                        .get("name", "")
                     )
 
                 if (
@@ -244,40 +212,25 @@ def normalize_events(events, limit=24):
 
                 for attraction in attractions:
 
-                    name = attraction.get(
-                        "name",
-                        ""
-                    ).strip()
+                    name = attraction.get("name", "").strip()
 
                     if not name:
                         continue
 
                     lower_name = name.lower()
 
-                    if any(
-                        word in lower_name
-                        for word in generic_attractions
-                    ):
+                    if any(word in lower_name for word in generic_attractions):
                         continue
 
-                    classes = attraction.get(
-                        "classifications",
-                        []
-                    )
+                    classes = attraction.get("classifications", [])
 
                     segment = ""
 
                     if classes:
                         segment = (
                             classes[0]
-                            .get(
-                                "segment",
-                                {}
-                            )
-                            .get(
-                                "name",
-                                ""
-                            )
+                            .get("segment", {})
+                            .get("name", "")
                         )
 
                     if segment == "Music":
@@ -289,20 +242,14 @@ def normalize_events(events, limit=24):
 
                 for attraction in attractions:
 
-                    name = attraction.get(
-                        "name",
-                        ""
-                    ).strip()
+                    name = attraction.get("name", "").strip()
 
                     if not name:
                         continue
 
                     lower_name = name.lower()
 
-                    if any(
-                        word in lower_name
-                        for word in generic_attractions
-                    ):
+                    if any(word in lower_name for word in generic_attractions):
                         continue
 
                     best = attraction
@@ -312,15 +259,8 @@ def normalize_events(events, limit=24):
             if best is None:
                 best = attractions[0]
 
-            artist = best.get(
-                "name",
-                ""
-            )
-
-            artist_id = best.get(
-                "id",
-                ""
-            )
+            artist = best.get("name", "")
+            artist_id = best.get("id", "")
 
         venue = ""
         city = ""
@@ -331,104 +271,71 @@ def normalize_events(events, limit=24):
 
             venue_info = venues[0]
 
-            venue = venue_info.get(
-                "name",
-                ""
-            )
-
-            city = (
-                venue_info
-                .get("city", {})
-                .get("name", "")
-            )
-
-            state = (
-                venue_info
-                .get("state", {})
-                .get("stateCode", "")
-            )
-
-            country = (
-                venue_info
-                .get("country", {})
-                .get("countryCode", "")
-            )
+            venue = venue_info.get("name", "")
+            city = venue_info.get("city", {}).get("name", "")
+            state = venue_info.get("state", {}).get("stateCode", "")
+            country = venue_info.get("country", {}).get("countryCode", "")
 
         poster = ""
 
-        images = event.get(
-            "images",
-            []
-        )
+        images = event.get("images", [])
 
         if images:
 
             ranked = sorted(
                 images,
                 key=lambda img: (
-                    "16_9" in img.get(
-                        "url",
-                        ""
-                    ),
-                    img.get(
-                        "width",
-                        0,
-                    ),
+                    "16_9" in img.get("url", ""),
+                    img.get("width", 0),
                 ),
                 reverse=True,
             )
 
-            poster = ranked[0].get(
-                "url",
-                ""
-            )
+            poster = ranked[0].get("url", "")
 
         classification = ""
 
-        classes = event.get(
-            "classifications",
-            []
-        )
+        classes = event.get("classifications", [])
 
         if classes:
 
             classification = (
                 classes[0]
-                .get(
-                    "segment",
-                    {}
-                )
-                .get(
-                    "name",
-                    ""
-                )
+                .get("segment", {})
+                .get("name", "")
             )
+
+        event_date = format_date(
+            start.get("localDate", "")
+        )
+
+        duplicate_key = (
+            artist.strip().lower(),
+            event_date,
+            venue.strip().lower(),
+            city.strip().lower(),
+            state.strip().lower(),
+        )
+
+        if duplicate_key in seen:
+            continue
+
+        seen.add(duplicate_key)
 
         items.append(
             {
-                "id": event.get(
-                    "id",
-                    ""
-                ),
+                "id": event.get("id", ""),
                 "title": title,
                 "artist": artist,
                 "artist_id": artist_id,
-                "event_date": format_date(
-                    start.get(
-                        "localDate",
-                        ""
-                    )
-                ),
+                "event_date": event_date,
                 "venue": venue,
                 "city": city,
                 "state": state,
                 "country": country,
                 "classification": classification,
                 "poster": poster,
-                "url": event.get(
-                    "url",
-                    ""
-                ),
+                "url": event.get("url", ""),
                 "overview": venue,
             }
         )

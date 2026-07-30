@@ -283,6 +283,11 @@ def find_trailer(
     automatically search TMDb.
     """
 
+    print(
+        f">>> find_trailer(): title={title!r}, movie_id={movie_id}, media_type={media_type}",
+        flush=True,
+    )
+
     if not movie_id and title:
 
         media = find_media(title)
@@ -357,6 +362,6 @@ if __name__ == "__main__":
 
     print(
         find_trailer(
-            title="Clayface",
+            title="Jumanji: Open World",
         )
     )    

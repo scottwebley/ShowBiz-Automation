@@ -47,6 +47,13 @@ def rank_candidates(story, candidates):
             candidate,
         )
 
+        print(
+            f"RANK DEBUG: {candidate.get('title', '')}\n"
+            f"    Search Score : {candidate.get('score', 0)}\n"
+            f"    Final Score  : {score}\n"
+            f"    Reasons      : {reasons}"
+        )
+
         candidate["ranking_score"] = score
         candidate["ranking_reason"] = reasons
 

@@ -191,13 +191,23 @@ def find_best_images(
             words,
         )
 
+        if score > 0:
+            print(
+                f"SCORE {score:5d} | "
+                f"{item.get('id')} | "
+                f"{item.get('filename','')[:40]} | "
+                f"{reasons}"
+            )
 
         if not valid_candidate(
             item,
             score,
             reasons,
         ):
-
+            print(
+                f"REJECTED {item.get('id')} "
+                f"score={score} reasons={reasons}"
+            )
             continue
 
 

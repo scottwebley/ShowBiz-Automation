@@ -233,12 +233,6 @@ def build_search_queries(
         )
     )
 
-    has_primary_subject = any([
-        primary_titles,
-        people,
-        entities.get("events"),
-    ])
-
     #
     # 4. Person + title combinations.
     #
@@ -258,32 +252,26 @@ def build_search_queries(
                 f"{title} {person}"
             )
 
-        #
+    #
     # 5. Organizations.
     #
-    # Only search companies if we don't
-    # already have a better visual subject.
+    # Entertainment companies frequently have
+    # official promotional artwork in the Media
+    # Library, so always search them.
     #
 
-    if not has_primary_subject:
+    organizations = _unique(
+        entities.get("organizations", [])
+        + _organizations_from_headline(headline)
+    )
 
-        organizations = _unique(
-            entities.get("organizations", [])
-            + _organizations_from_headline(headline)
+    if len(organizations) >= 2:
+
+        queries.append(
+            f"{organizations[0]} {organizations[1]}"
         )
 
-        #
-        # If two major organizations appear together,
-        # search the combined phrase first.
-        #
-
-        if len(organizations) >= 2:
-
-            queries.append(
-                f"{organizations[0]} {organizations[1]}"
-            )
-
-        queries.extend(organizations)
+    queries.extend(organizations)
 
     #
     # 6. People.

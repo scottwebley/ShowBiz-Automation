@@ -8,7 +8,6 @@ from engine.image_selector import get_featured_image
 from engine.wordpress import publish_post
 from engine.story_consolidator import analyze_story_duplicates
 from engine.trailer_enricher import enrich_article
-from engine.link_enricher import enrich_links
 
 from engine.pending_story import (
     save_pending_story,
@@ -23,14 +22,6 @@ from engine.top_story_manager import (
 
 
 def main():
-    import os
-    print(f"RUNNING NEWSROOM: {os.path.abspath(__file__)}", flush=True)
-
-    # ==========================================================
-    # DEBUG SETTINGS
-    # ==========================================================
-
-    DEBUG_FORCE_PUBLISH = True
 
     print("\n==============================")
     print("   SHOWBIZ AI NEWSROOM")
@@ -74,6 +65,7 @@ def main():
             print("Top Homepage Rankings:")
 
             for story in ranked[:11]:
+
                 print(
                     f"#{story['homepage_rank']:>2} "
                     f"[{story.get('category', 'Unknown')}] "
@@ -102,6 +94,7 @@ def main():
                 story = select_local_story(stories)
 
                 if story is None:
+
                     print("No valid stories available.")
                     return
 
@@ -116,25 +109,19 @@ def main():
 
             print("\nCurrent Top Story remains the best story.")
             print("Nothing will be published.\n")
+
             return
 
         print("✓ Editorial approval granted.\n")
 
-        if DEBUG_FORCE_PUBLISH:
+        if not should_replace_top_story(story):
 
-            print("⚠ DEBUG MODE ENABLED")
-            print("⚠ Bypassing Top Story Manager.")
-            print("⚠ Article will always publish.\n")
+            print("\nCurrent published Top Story remains the best story.")
+            print("Publishing skipped.\n")
 
-        else:
+            return
 
-            if not should_replace_top_story(story):
-
-                print("\nCurrent published Top Story remains the best story.")
-                print("Publishing skipped.\n")
-                return
-
-            print("✓ Top Story Manager approved replacement.\n")
+        print("✓ Top Story Manager approved replacement.\n")
 
     else:
 
@@ -144,12 +131,8 @@ def main():
 
     article = write_article(story)
 
-    print("ARTICLE TYPE:", type(article), flush=True)
-    print("ARTICLE VALUE:", repr(article)[:500], flush=True)
-
     if article is not None:
         article = enrich_article(article, story)
-        article["content"] = enrich_links(article["content"])
 
     if article is None:
 
@@ -166,18 +149,9 @@ def main():
 
     print("✓ Article complete.\n")
 
-    print("STEP 5: Finding featured image...")
+    print("STEP 5: Generating featured image...")
 
     article["image"] = get_featured_image(story)
-
-    if not article["image"]:
-
-        print("\nNo approved featured image found.")
-        print("Generating AI editorial image...\n")
-
-        from engine.image_generator import generate_image
-
-        article["image"] = generate_image(story)
 
     if not article["image"]:
 
@@ -189,15 +163,15 @@ def main():
         print("TOP STORY NOT PUBLISHED")
         print(f"Headline: {story['headline']}")
         print(f"Category: {story['category']}")
-        print("Reason: AI image generation failed.")
-        print("The article has been saved for retry.")
+        print("Reason: No approved featured image found.")
+        print("The article has been saved for retry/manual publication.")
         print("Publishing skipped.\n")
 
         raise RuntimeError(
-            f"Top Story aborted: AI image generation failed for '{story['headline']}'"
+            f"Top Story aborted: no featured image for '{story['headline']}'"
         )
 
-    print("✓ Featured image ready.\n")
+    print("✓ Featured image generated.\n")
 
     print("STEP 6: Publishing to WordPress...")
 
@@ -206,6 +180,7 @@ def main():
     if not post:
 
         print("\nPublishing failed.\n")
+
         return
 
     retire_previous_top_stories(post["id"])

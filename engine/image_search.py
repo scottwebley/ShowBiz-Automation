@@ -243,11 +243,10 @@ def search_media_library(story):
             {
                 "media_id": result.media_id,
                 "title": result.title,
-                "caption": result.raw.get(
-                    "caption",
-                    "",
-                ),
+                "caption": result.raw.get("caption", ""),
                 "filename": result.filename,
+                "score": result.score,
+                "reason": result.reason,
             }
         )
 
@@ -301,20 +300,31 @@ def search_media_library(story):
 
 
 def main():
+    import sys
+
+    if len(sys.argv) > 1:
+        headline = " ".join(sys.argv[1:])
+    else:
+        headline = input("Headline: ").strip()
 
     story = {
-        "headline": (
-            "Taylor Swift and Travis Kelce's "
-            "expected wedding celebrations "
-            "approach"
-        ),
+        "headline": headline,
         "summary": "",
         "category": "Celebrity",
     }
 
-    results = search_media_library(
-        story
-    )
+    results = search_media_library(story)
+
+    print()
+
+    if results:
+        print("MATCHES FOUND")
+        print(f"Candidates : {len(results)}")
+
+        for image in results:
+            print(f"- {image['media_id']}: {image['title']}")
+    else:
+        print("NO MATCH")
 
     print()
 

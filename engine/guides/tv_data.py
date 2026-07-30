@@ -98,6 +98,22 @@ def request_tmdb(endpoint, params=None):
 
         return {}
 
+def search_tv(query, limit=10):
+    """
+    Search TV shows by title.
+    """
+
+    data = request_tmdb(
+        "search/tv",
+        {
+            "query": query,
+        },
+    )
+
+    return normalize_results(
+        data.get("results", []),
+        limit,
+    )    
 
 def normalize_results(
     results,

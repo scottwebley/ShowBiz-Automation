@@ -235,54 +235,52 @@ Editor's Pick
 
 
 /*
-===========================================
-Mobile
-===========================================
-*/
+/* ===========================================
+   Mobile
+=========================================== */
 
 @media (max-width:768px){
 
     .showbiz-guide{
-
         padding:20px;
-
     }
-
 
     .showbiz-movie-card{
-
         display:block;
-
-        padding:25px;
-
+        padding:20px;
     }
-
 
     .showbiz-movie-poster{
-
-        margin-bottom:30px;
-
+        width:100%;
+        margin:0 0 30px 0;
     }
-
 
     .showbiz-movie-poster img{
-
-        width:180px;
-
+        display:block;
+        width:100%;
+        max-width:none;
+        height:auto;
+        border-radius:14px;
     }
 
+    .showbiz-movie-content{
+        width:100%;
+    }
 
     .showbiz-guide h2{
-
         font-size:26px;
-
     }
 
-
     .showbiz-guide h3{
-
         font-size:24px;
+    }
 
+    .showbiz-ticket-button,
+    .showbiz-trailer-button{
+        display:block;
+        width:100%;
+        text-align:center;
+        box-sizing:border-box;
     }
 
 }

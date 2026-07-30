@@ -23,14 +23,6 @@ from engine.top_story_manager import (
 
 
 def main():
-    import os
-    print(f"RUNNING NEWSROOM: {os.path.abspath(__file__)}", flush=True)
-
-    # ==========================================================
-    # DEBUG SETTINGS
-    # ==========================================================
-
-    DEBUG_FORCE_PUBLISH = True
 
     print("\n==============================")
     print("   SHOWBIZ AI NEWSROOM")
@@ -120,21 +112,13 @@ def main():
 
         print("✓ Editorial approval granted.\n")
 
-        if DEBUG_FORCE_PUBLISH:
+        if not should_replace_top_story(story):
 
-            print("⚠ DEBUG MODE ENABLED")
-            print("⚠ Bypassing Top Story Manager.")
-            print("⚠ Article will always publish.\n")
+            print("\nCurrent published Top Story remains the best story.")
+            print("Publishing skipped.\n")
+            return
 
-        else:
-
-            if not should_replace_top_story(story):
-
-                print("\nCurrent published Top Story remains the best story.")
-                print("Publishing skipped.\n")
-                return
-
-            print("✓ Top Story Manager approved replacement.\n")
+        print("✓ Top Story Manager approved replacement.\n")
 
     else:
 
@@ -143,9 +127,6 @@ def main():
     print("STEP 4: Writing article...")
 
     article = write_article(story)
-
-    print("ARTICLE TYPE:", type(article), flush=True)
-    print("ARTICLE VALUE:", repr(article)[:500], flush=True)
 
     if article is not None:
         article = enrich_article(article, story)

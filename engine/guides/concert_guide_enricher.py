@@ -11,6 +11,7 @@ Purpose:
 Author:
     ShowBiz Automation
 """
+from urllib.parse import quote
 
 import re
 from datetime import datetime
@@ -139,41 +140,47 @@ def concert_poster(
         f'alt="{title}">'
     )
 
+from urllib.parse import quote
+
+def affiliate_ticket_url(url):
+    """
+    Convert a Ticketmaster URL into an Impact affiliate deep link.
+    """
+
+    if not url:
+        return ""
+
+    encoded = quote(url, safe="")
+
+    result = (
+        "https://ticketmaster.evyy.net/"
+        "c/6787125/264167/4272"
+        f"?subId1={encoded}"
+        f"&subId2={encoded}"
+        f"&u={encoded}"
+    )
+
+    print("DEBUG affiliate:", encoded)
+    print("DEBUG result:", result)
+
+    return result
+
 
 def build_tour_information(concert):
 
     if not concert:
-
         return ""
 
     rows = []
 
     if concert.get("artist"):
-
-        rows.append(
-            (
-                "Artist",
-                concert["artist"],
-            )
-        )
+        rows.append(("Artist", concert["artist"]))
 
     if concert.get("event_date"):
-
-        rows.append(
-            (
-                "Next Show",
-                concert["event_date"],
-            )
-        )
+        rows.append(("Next Show", concert["event_date"]))
 
     if concert.get("venue"):
-
-        rows.append(
-            (
-                "Venue",
-                concert["venue"],
-            )
-        )
+        rows.append(("Venue", concert["venue"]))
 
     location = ", ".join(
         part
@@ -185,16 +192,9 @@ def build_tour_information(concert):
     )
 
     if location:
-
-        rows.append(
-            (
-                "Location",
-                location,
-            )
-        )
+        rows.append(("Location", location))
 
     if not rows:
-
         return ""
 
     info_html = """
@@ -204,23 +204,16 @@ def build_tour_information(concert):
 """
 
     for label, value in rows:
-
         info_html += (
             f"<li><strong>{label}:</strong> "
             f"{value}</li>\n"
         )
 
-    info_html += """
-</ul>
-"""
-
-    ticket_url = concert.get(
-        "url",
-        "",
-    ).strip()
+    ticket_url = affiliate_ticket_url(
+        concert.get("url", "").strip()
+    )
 
     if ticket_url:
-
         info_html += f"""
 <div class="showbiz-ticket-buttons">
     <a
@@ -238,6 +231,7 @@ def build_tour_information(concert):
 """
 
     return info_html
+
 def extract_content(block):
 
     block = re.sub(

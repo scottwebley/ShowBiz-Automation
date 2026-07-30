@@ -29,9 +29,6 @@ def publish_post(article):
             Uploads a new image and uses it as the featured image.
     """
 
-    import re
-    import urllib.parse
-
     auth = HTTPBasicAuth(
         WP_USERNAME,
         WP_APP_PASSWORD,
@@ -90,42 +87,6 @@ def publish_post(article):
     article["content"] = enrich_links(
         article["content"]
     )
-
-    # -----------------------------------------
-    # Trailer Button
-    # -----------------------------------------
-
-    title = article.get("title", "")
-
-    if re.search(r"\b(trailer|teaser|first look)\b", title, re.IGNORECASE):
-
-        if "showbiz-trailer-button" not in article["content"]:
-
-            query = urllib.parse.quote_plus(title)
-
-            button = f"""
-<h3>🎬 Watch the Trailer</h3>
-
-<p>
-<a class="showbiz-trailer-button"
-   href="https://www.youtube.com/results?search_query={query}"
-   target="_blank"
-   rel="noopener">
-▶ Watch Trailer on YouTube
-</a>
-</p>
-"""
-
-            if "</p>" in article["content"]:
-                article["content"] = article["content"].replace(
-                    "</p>",
-                    "</p>" + button,
-                    1,
-                )
-            else:
-                article["content"] += button
-
-            print("✓ Trailer button added.")
 
     # -----------------------------------------
     # Build WordPress post
@@ -245,3 +206,8 @@ def publish_post(article):
         print("Featured Image :", featured_media)
 
     return post
+
+
+if __name__ == "__main__":
+
+    print("wordpress.py is ready.")

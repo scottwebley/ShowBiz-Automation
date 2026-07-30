@@ -61,7 +61,8 @@ def score_candidate(story, candidate):
 
     searchable = f"{title} {filename}"
 
-    score = 0
+    # Preserve the Media Library search score.
+    score = candidate.get("score", 0)
     reasons = []
 
     #
@@ -73,18 +74,35 @@ def score_candidate(story, candidate):
         entities["people"],
     )
 
+    # Person-centric stories deserve a much stronger preference
+    # for images matching the headline person.
+    is_person_story = (
+        len(entities["people"]) > 0
+        and not entities["movies"]
+        and not entities["tv_shows"]
+        and not entities["organizations"]
+    )
+
     if people_matches >= 2:
-        score += MULTI_PERSON_MATCH
+        bonus = MULTI_PERSON_MATCH
+
+        if is_person_story:
+            bonus += 150
+
+        score += bonus
         reasons.append(
-            f"Matched {people_matches} people "
-            f"(+{MULTI_PERSON_MATCH})"
+            f"Matched {people_matches} people (+{bonus})"
         )
 
     elif people_matches == 1:
-        score += PERSON_MATCH
+        bonus = PERSON_MATCH
+
+        if is_person_story:
+            bonus += 100
+
+        score += bonus
         reasons.append(
-            f"Matched headline person "
-            f"(+{PERSON_MATCH})"
+            f"Matched headline person (+{bonus})"
         )
 
     #
@@ -128,8 +146,7 @@ def score_candidate(story, candidate):
         if _contains(searchable, organization):
             score += ORGANIZATION_MATCH
             reasons.append(
-                f"Organization match "
-                f"(+{ORGANIZATION_MATCH})"
+                f"Organization match (+{ORGANIZATION_MATCH})"
             )
 
     #
@@ -144,8 +161,7 @@ def score_candidate(story, candidate):
     ):
         score -= GENERIC_TITLE_PENALTY
         reasons.append(
-            f"Generic title "
-            f"(-{GENERIC_TITLE_PENALTY})"
+            f"Generic title (-{GENERIC_TITLE_PENALTY})"
         )
 
     return score, reasons

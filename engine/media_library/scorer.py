@@ -37,7 +37,7 @@ from engine.media_library.normalize import (
     normalize,
     safe,
 )
-
+print("USING SCORER:", __file__)
 
 STOP_WORDS = {
     "the",
@@ -149,196 +149,109 @@ def _filename(
     )
 
 
-def score_item(
-    item,
-    query,
-    words=None,
-):
-
-    reasons = []
-
-    query_phrase = normalize(
-        query
-    )
-
-    query_words = _clean_words(
-        query
-    )
-
-    if not query_words:
-        return 0, reasons
-
-    metadata_title = _metadata_field(
-        item,
-        "title",
-    )
-
-    metadata_caption = _metadata_field(
-        item,
-        "caption",
-    )
-
-    filename = _filename(
-        item
-    )
-
-    wp_title = _wordpress_title(
-        item
-    )
-
-    #
-    # Exact metadata matches
-    #
-
-    if metadata_title == query_phrase:
-
-        return (
-            10000,
-            [
-                "metadata_title:exact"
-            ],
-        )
-
-    if metadata_caption == query_phrase:
-
-        return (
-            9000,
-            [
-                "metadata_caption:exact"
-            ],
-        )
+def score_item(item, query, query_words):
+    print(">>> SCORE_ITEM CALLED <<<")
 
     score = 0
+    reasons = []
 
-    #
-    # Strong full-name matching.
-    #
-    # Only award these bonuses when the
-    # query contains TWO OR MORE meaningful words.
-    #
+    try:
+        title = _metadata_field(item, "title")
+        caption = _metadata_field(item, "caption")
+        filename = _filename(item)
+        wp_title = _wordpress_title(item)
 
-    if len(query_words) >= 2:
+        parent_title = normalize(
+            safe(item.get("parent_post_title"))
+        )
 
-        for field_name, value, weight in (
+        parent_slug = normalize(
+            safe(item.get("parent_post_slug"))
+        )
 
-            (
-                "metadata_title",
-                metadata_title,
-                7000,
-            ),
+        parent_excerpt = normalize(
+            safe(item.get("parent_post_excerpt"))
+        )
 
-            (
-                "metadata_caption",
-                metadata_caption,
-                6000,
-            ),
+        print(f"ITEM {item.get('id')}")
+        print(f"  query        : {query}")
+        print(f"  title        : {title}")
+        print(f"  caption      : {caption}")
+        print(f"  filename     : {filename}")
+        print(f"  wp_title     : {wp_title}")
+        print(f"  parent_title : {parent_title}")
+        print(f"  parent_slug  : {parent_slug}")
 
-        ):
+        query_words = [w.lower() for w in query_words if w]
 
-            tokens = set(
-                _clean_words(
-                    value
-                )
-            )
+        title_tokens = set(_clean_words(title))
+        caption_tokens = set(_clean_words(caption))
+        filename_tokens = set(_clean_words(filename))
+        wp_tokens = set(_clean_words(wp_title))
 
-            if all(
-                word in tokens
-                for word in query_words
-            ):
+        parent_title_tokens = set(_clean_words(parent_title))
+        parent_slug_tokens = set(_clean_words(parent_slug))
+        parent_excerpt_tokens = set(_clean_words(parent_excerpt))
 
-                score += weight
+        # Exact matches
 
-                reasons.append(
-                    f"{field_name}:full_name"
-                )
+        if query_words and all(w in title_tokens for w in query_words):
+            score += 500
+            reasons.append("meta_title")
 
-    #
-    # Partial metadata matching.
-    #
-    # Multi-word searches behave exactly as before.
-    # Single-word searches only trust metadata titles.
-    #
+        if query_words and all(w in caption_tokens for w in query_words):
+            score += 400
+            reasons.append("meta_caption")
 
-    if len(query_words) >= 2:
-
-        if query_phrase in metadata_title:
-
-            score += 1000
-
-            reasons.append(
-                "metadata_title:contains"
-            )
-
-        if query_phrase in metadata_caption:
-
-            score += 800
-
-            reasons.append(
-                "metadata_caption:contains"
-            )
-
-    else:
-
-        #
-        # Ignore caption-only matches for broad
-        # one-word searches like Disney or Pixar.
-        #
-
-        if query_phrase in metadata_title:
-
+        if query_words and all(w in filename_tokens for w in query_words):
             score += 300
+            reasons.append("filename")
 
-            reasons.append(
-                "metadata_title:contains"
-            )
+        if query_words and all(w in wp_tokens for w in query_words):
+            score += 200
+            reasons.append("wp_title")
 
-    #
-    # Filename fallback
-    #
+        if query_words and all(w in parent_title_tokens for w in query_words):
+            score += 450
+            reasons.append("parent_title")
 
-    filename_tokens = set(
-        _clean_words(
-            filename
-        )
-    )
+        if query_words and all(w in parent_slug_tokens for w in query_words):
+            score += 425
+            reasons.append("parent_slug")
 
-    if all(
-        word in filename_tokens
-        for word in query_words
-    ):
+        if query_words and all(w in parent_excerpt_tokens for w in query_words):
+            score += 150
+            reasons.append("parent_excerpt")
 
-        score += 500
+        # Partial matches
 
-        reasons.append(
-            "filename:match"
-        )
+        for word in query_words:
 
-    #
-    # WordPress title fallback
-    #
+            if word in filename_tokens:
+                score += 50
 
-    wp_tokens = set(
-        _clean_words(
-            wp_title
-        )
-    )
+            if word in title_tokens:
+                score += 40
 
-    if (
-        "aggregator downloaded"
-        not in wp_title
-        and all(
-            word in wp_tokens
-            for word in query_words
-        )
-    ):
+            if word in caption_tokens:
+                score += 30
 
-        score += 300
+            if word in wp_tokens:
+                score += 20
 
-        reasons.append(
-            "wordpress_title:match"
-        )
+            if word in parent_title_tokens:
+                score += 60
 
-    if score <= 0:
-        return 0, reasons
+            if word in parent_slug_tokens:
+                score += 50
 
-    return score, reasons
+            if word in parent_excerpt_tokens:
+                score += 10
+
+        print(f"  SCORE={score} REASONS={reasons}")
+
+        return score, reasons
+
+    except Exception as e:
+        print(f"SCORE ERROR: {e}")
+        return 0, []

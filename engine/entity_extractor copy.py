@@ -1075,10 +1075,6 @@ def extract_entities(
     # NEW: Prevent organization words from becoming
     # generic keyword searches.
     excluded.update(matched_org_words)
-    # Prevent words from recognized music artists
-    # becoming generic keyword searches.
-    for token in matched_music_words:
-        excluded.add(token.lower())
 
     for value in (
 

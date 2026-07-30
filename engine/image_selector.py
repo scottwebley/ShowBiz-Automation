@@ -89,7 +89,7 @@ def get_featured_image(story):
             print(
                 f"{i:2d}. "
                 f"{candidate.get('title', '(no title)')} "
-                f"(ID: {candidate.get('id', '?')})"
+                f"(ID: {candidate.get('media_id', '?')})"
             )
 
     candidates = [
@@ -102,10 +102,24 @@ def get_featured_image(story):
 
     #
     # First choice:
-    # AI-approved Media Library image.
+    # High-confidence Media Library match.
     #
 
     if candidates:
+
+        top = candidates[0]
+        score = top.get("score", 0)
+
+        if score >= 400:
+
+            print("\n========================================")
+            print("HIGH CONFIDENCE MEDIA MATCH")
+            print("========================================")
+            print(f"Media ID : {top['media_id']}")
+            print(f"Score    : {score}")
+            print("Using Media Library image without AI verification.")
+
+            return f"media:{top['media_id']}"
 
         print("\n========================================")
         print("IMAGE VERIFICATION")
@@ -127,10 +141,6 @@ def get_featured_image(story):
             )
 
             return f"media:{decision['media_id']}"
-
-        #
-        # No Media Library image was approved.
-        #
 
         print("\n⚠ Verifier rejected all Media Library candidates.")
         print("Continuing to other providers...\n")
