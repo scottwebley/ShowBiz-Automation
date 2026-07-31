@@ -1053,3 +1053,284 @@ Traceback (most recent call last):
   File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/openai/_base_client.py", line 1072, in request
     raise APIConnectionError(request=request) from err
 openai.APIConnectionError: Connection error.
+
+================================================================================
+[2026-07-30 12:46:44] Update Movies Guide
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/guides/weekly_movies.py", line 173, in <module>
+    main()
+    ~~~~^^
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/guides/weekly_movies.py", line 146, in main
+    success = publish_guide()
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/guides/weekly_movies.py", line 131, in publish_guide
+    html = build_guide()
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/guides/weekly_movies.py", line 95, in build_guide
+    html = write_guide(
+        title=TITLE,
+        prompt=prompt,
+    )
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/guides/guide_writer.py", line 53, in write_guide
+    response = create_response(
+        model=model,
+    ...<13 lines>...
+        ],
+    )
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/openai_helper.py", line 110, in create_response
+    return client.responses.create(
+           ~~~~~~~~~~~~~~~~~~~~~~~^
+        **kwargs
+        ^^^^^^^^
+    )
+    ^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/openai/resources/responses/responses.py", line 954, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/responses",
+        ^^^^^^^^^^^^^
+    ...<46 lines>...
+        stream_cls=Stream[ResponseStreamEvent],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/openai/_base_client.py", line 1332, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/openai/_base_client.py", line 1105, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.AuthenticationError: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************NjYA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}
+
+================================================================================
+[2026-07-30 12:46:45] Update TV Guide
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/guides/weekly_tv.py", line 180, in <module>
+    main()
+    ~~~~^^
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/guides/weekly_tv.py", line 153, in main
+    success = publish_guide()
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/guides/weekly_tv.py", line 138, in publish_guide
+    html = build_guide()
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/guides/weekly_tv.py", line 86, in build_guide
+    html = write_guide(
+        title=TITLE,
+        prompt=prompt,
+    )
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/guides/guide_writer.py", line 53, in write_guide
+    response = create_response(
+        model=model,
+    ...<13 lines>...
+        ],
+    )
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/openai_helper.py", line 110, in create_response
+    return client.responses.create(
+           ~~~~~~~~~~~~~~~~~~~~~~~^
+        **kwargs
+        ^^^^^^^^
+    )
+    ^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/openai/resources/responses/responses.py", line 954, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/responses",
+        ^^^^^^^^^^^^^
+    ...<46 lines>...
+        stream_cls=Stream[ResponseStreamEvent],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/openai/_base_client.py", line 1332, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/openai/_base_client.py", line 1105, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.AuthenticationError: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************NjYA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}
+
+================================================================================
+[2026-07-30 12:46:59] Update Streaming Guide
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/guides/weekly_streaming.py", line 181, in <module>
+    main()
+    ~~~~^^
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/guides/weekly_streaming.py", line 154, in main
+    success = publish_guide()
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/guides/weekly_streaming.py", line 139, in publish_guide
+    html = build_guide()
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/guides/weekly_streaming.py", line 86, in build_guide
+    html = write_guide(
+        title=TITLE,
+        prompt=prompt,
+    )
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/guides/guide_writer.py", line 53, in write_guide
+    response = create_response(
+        model=model,
+    ...<13 lines>...
+        ],
+    )
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/openai_helper.py", line 110, in create_response
+    return client.responses.create(
+           ~~~~~~~~~~~~~~~~~~~~~~~^
+        **kwargs
+        ^^^^^^^^
+    )
+    ^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/openai/resources/responses/responses.py", line 954, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/responses",
+        ^^^^^^^^^^^^^
+    ...<46 lines>...
+        stream_cls=Stream[ResponseStreamEvent],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/openai/_base_client.py", line 1332, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/openai/_base_client.py", line 1105, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.AuthenticationError: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************NjYA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}
+
+================================================================================
+[2026-07-30 12:47:17] Update Concert Guide
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/guides/weekly_concerts.py", line 228, in <module>
+    main()
+    ~~~~^^
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/guides/weekly_concerts.py", line 201, in main
+    success = publish_guide()
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/guides/weekly_concerts.py", line 186, in publish_guide
+    html = build_guide()
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/guides/weekly_concerts.py", line 150, in build_guide
+    html = write_guide(
+        title=TITLE,
+        prompt=prompt,
+    )
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/guides/guide_writer.py", line 53, in write_guide
+    response = create_response(
+        model=model,
+    ...<13 lines>...
+        ],
+    )
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/openai_helper.py", line 110, in create_response
+    return client.responses.create(
+           ~~~~~~~~~~~~~~~~~~~~~~~^
+        **kwargs
+        ^^^^^^^^
+    )
+    ^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/openai/resources/responses/responses.py", line 954, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/responses",
+        ^^^^^^^^^^^^^
+    ...<46 lines>...
+        stream_cls=Stream[ResponseStreamEvent],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/openai/_base_client.py", line 1332, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages/openai/_base_client.py", line 1105, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.AuthenticationError: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************NjYA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}
+
+================================================================================
+[2026-07-30 13:00:42] Publish Top Story
+Traceback (most recent call last):
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/newsroom.py", line 225, in <module>
+    main()
+    ~~~~^^
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/newsroom.py", line 171, in main
+    article["image"] = get_featured_image(story)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/image_selector.py", line 82, in get_featured_image
+    candidates = search_media_library(story)
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/image_search.py", line 151, in search_media_library
+    results = find_best_images(
+        query=query,
+        limit=10,
+    )
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/media_library/search.py", line 179, in find_best_images
+    media = load_media()
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/media_library/search.py", line 80, in load_media
+    with open(
+         ~~~~^
+        CACHE_FILE,
+        ^^^^^^^^^^^
+        "r",
+        ^^^^
+        encoding="utf-8",
+        ^^^^^^^^^^^^^^^^^
+    ) as f:
+    ^
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/media_library/media_cache.json'
+
+================================================================================
+[2026-07-30 13:52:58] Publish Top Story
+Traceback (most recent call last):
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/newsroom.py", line 225, in <module>
+    main()
+    ~~~~^^
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/newsroom.py", line 171, in main
+    article["image"] = get_featured_image(story)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/image_selector.py", line 82, in get_featured_image
+    candidates = search_media_library(story)
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/image_search.py", line 151, in search_media_library
+    results = find_best_images(
+        query=query,
+        limit=10,
+    )
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/media_library/search.py", line 179, in find_best_images
+    media = load_media()
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/media_library/search.py", line 80, in load_media
+    with open(
+         ~~~~^
+        CACHE_FILE,
+        ^^^^^^^^^^^
+        "r",
+        ^^^^
+        encoding="utf-8",
+        ^^^^^^^^^^^^^^^^^
+    ) as f:
+    ^
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/media_library/media_cache.json'
+
+================================================================================
+[2026-07-30 14:00:45] Publish Top Story
+Traceback (most recent call last):
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/newsroom.py", line 225, in <module>
+    main()
+    ~~~~^^
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/newsroom.py", line 171, in main
+    article["image"] = get_featured_image(story)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/image_selector.py", line 82, in get_featured_image
+    candidates = search_media_library(story)
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/image_search.py", line 151, in search_media_library
+    results = find_best_images(
+        query=query,
+        limit=10,
+    )
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/media_library/search.py", line 179, in find_best_images
+    media = load_media()
+  File "/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/media_library/search.py", line 80, in load_media
+    with open(
+         ~~~~^
+        CACHE_FILE,
+        ^^^^^^^^^^^
+        "r",
+        ^^^^
+        encoding="utf-8",
+        ^^^^^^^^^^^^^^^^^
+    ) as f:
+    ^
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/scottwebley/Desktop/ShowBiz-Automation-Production-Backup/engine/media_library/media_cache.json'

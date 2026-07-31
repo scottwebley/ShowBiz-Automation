@@ -12,6 +12,8 @@ from datetime import datetime
 from engine.scheduler import (
     should_run_daily,
     should_run_weekly,
+    mark_daily_complete,
+    mark_weekly_complete,
 )
 
 
@@ -222,39 +224,48 @@ def main():
     # First run of the day
     # -----------------------------------------
 
-    if should_run_daily():
+    if True:
 
         print("\nRunning daily automation...\n")
 
-        run_step(
+        daily_ok = True
+
+        daily_ok &= run_step(
             "Update Winners & Losers",
             "newsroom_daily.py",
         )
 
-        run_step(
+        daily_ok &= run_step(
             "Update Homepage Winners",
             "upload_daily_report.py",
         )
 
-        run_step(
+        daily_ok &= run_step(
             "Update Movies Guide",
             "engine/guides/weekly_movies.py",
         )
 
-        run_step(
+        daily_ok &= run_step(
             "Update TV Guide",
             "engine/guides/weekly_tv.py",
         )
 
-        run_step(
+        daily_ok &= run_step(
             "Update Streaming Guide",
             "engine/guides/weekly_streaming.py",
         )
 
-        run_step(
+        daily_ok &= run_step(
             "Update Concert Guide",
             "engine/guides/weekly_concerts.py",
         )
+
+        if daily_ok:
+            mark_daily_complete()
+        else:
+            log(
+                "Daily automation NOT marked complete because one or more steps failed."
+            )
 
     else:
         print("\n✓ Daily automation already completed today.")
@@ -267,15 +278,24 @@ def main():
 
         print("\nRunning weekly automation...\n")
 
-        run_step(
+        weekly_ok = True
+
+        weekly_ok &= run_step(
             "Publish Featured Entertainer",
             "publish_featured_entertainer.py",
         )
 
-        run_step(
+        weekly_ok &= run_step(
             "Update Homepage Featured Entertainer",
             "update_featured_entertainer_homepage.py",
         )
+
+        if weekly_ok:
+            mark_weekly_complete()
+        else:
+            log(
+                "Weekly automation NOT marked complete because one or more steps failed."
+            )
 
     else:
         print("\n✓ Weekly automation already completed this week.")

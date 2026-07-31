@@ -112,6 +112,10 @@ def load_media():
 
         print(f"Downloading page {page}...")
 
+        print("WP_URL:", WP_URL)
+        print("WP_USERNAME:", WP_USERNAME)
+        print("APP PASSWORD PRESENT:", bool(WP_APP_PASSWORD))
+
         response = requests.get(
             f"{WP_URL}/wp-json/wp/v2/media",
             params={

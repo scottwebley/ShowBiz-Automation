@@ -88,44 +88,52 @@ def normalize_title(title: str) -> str:
 
 def find_tmdb_poster(title, movies):
     if not movies:
+        print(f"[POSTER] No movie list supplied for: {title}")
         return ""
 
-    normalized_title = normalize_title(
-        title
-    )
+    normalized_title = normalize_title(title)
 
     for movie in movies:
-
         movie_title = normalize_title(
-            movie.get(
-                "title",
-                "",
-            )
+            movie.get("title", "")
         )
 
         if movie_title == normalized_title:
+            print(f"[POSTER] MATCH: {title} -> {movie.get('title')}")
+            return movie.get("poster", "")
 
-            return movie.get(
-                "poster",
-                "",
-            )
+    print(f"[POSTER] NO MATCH: {title}")
+    print(f"[POSTER] Normalized: {normalized_title}")
+
+    print("[POSTER] Available titles:")
+    for movie in movies:
+        print(f"    - {movie.get('title', '')}")
 
     return ""
+
 def movie_poster(title, movies=None):
+    print(f"[ENTER movie_poster] {title}")
 
-    poster = find_tmdb_poster(
-        title,
-        movies,
-    )
+    if movies:
+        for movie in movies:
+            if normalize_title(movie.get("title", "")) == normalize_title(title):
 
-    if poster:
+                print(f"[POSTER DATA] title={movie.get('title')}")
+                print(f"[POSTER DATA] id={movie.get('id')}")
+                print(f"[POSTER DATA] poster={repr(movie.get('poster'))}")
 
-        return (
-            '<img '
-            f'src="{poster}" '
-            f'alt="{title}">'
-        )
+                poster = movie.get("poster", "")
 
+                if poster:
+                    return (
+                        '<img '
+                        f'src="{poster}" '
+                        f'alt="{title}">'
+                    )
+
+                break
+
+    print(f"[POSTER DATA] No TMDb poster for {title}")
     return poster_html(title)
 
 
@@ -192,47 +200,46 @@ def enrich_movie_blocks(
     guide_type="movie",
 ) -> str:
     """
-    Convert movie-item blocks into
-    ShowBiz movie cards.
+    Convert every movie-item block into a ShowBiz movie card.
     """
 
+    print("[ENRICH] enrich_movie_blocks called")
+    print(f"[ENRICH] guide_type={guide_type}")
+    print(f"[ENRICH] movies={len(movies) if movies else 0}")
+
     start_tag = '<div class="movie-item">'
+    replacements = []
 
-    while start_tag in html:
+    search_pos = 0
 
-        start = html.find(start_tag)
+    while True:
+
+        start = html.find(start_tag, search_pos)
+
+        if start == -1:
+            break
 
         depth = 0
+        pos = start
         end = None
-        position = start
 
-        while position < len(html):
+        while pos < len(html):
 
-            open_div = html.find(
-                "<div",
-                position,
-            )
-
-            close_div = html.find(
-                "</div>",
-                position,
-            )
+            open_div = html.find("<div", pos)
+            close_div = html.find("</div>", pos)
 
             if close_div == -1:
                 break
 
             if open_div != -1 and open_div < close_div:
-
                 depth += 1
-                position = open_div + 4
-
+                pos = open_div + 4
             else:
-
                 depth -= 1
-                position = close_div + 6
+                pos = close_div + 6
 
                 if depth == 0:
-                    end = position
+                    end = pos
                     break
 
         if end is None:
@@ -247,7 +254,8 @@ def enrich_movie_blocks(
         )
 
         if not title_match:
-            break
+            search_pos = end
+            continue
 
         title = re.sub(
             "<.*?>",
@@ -255,9 +263,9 @@ def enrich_movie_blocks(
             title_match.group(1),
         ).strip()
 
-        content = extract_content(
-            block
-        )
+        print(f"[ENRICH] Processing: {title}")
+
+        content = extract_content(block)
 
         poster = movie_poster(
             title,
@@ -269,15 +277,15 @@ def enrich_movie_blocks(
             movies,
         )
 
-        if guide_type == "tv":
+        print(f"[ENRICH] movie_id={movie_id}")
+        print(f"[ENRICH] poster={'YES' if poster else 'NO'}")
 
+        if guide_type == "tv":
             trailer = tv_trailer_button(
                 movie_id,
                 title,
             )
-
         else:
-
             trailer = trailer_button(
                 movie_id,
                 title,
@@ -290,11 +298,11 @@ def enrich_movie_blocks(
             trailer=trailer,
         )
 
-        html = (
-            html[:start]
-            + replacement
-            + html[end:]
-        )
+        replacements.append((start, end, replacement))
+        search_pos = end
+
+    for start, end, replacement in reversed(replacements):
+        html = html[:start] + replacement + html[end:]
 
     return html
 
