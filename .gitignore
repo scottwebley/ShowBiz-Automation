@@ -24,3 +24,14 @@ images/*.webp
 
 # ZIP archives
 *.zip
+
+# Generated HTML
+*_ai_output.html
+*_enriched_output.html
+
+# Logs
+*.log
+
+# Temporary investigation files
+* copy.py
+movies.html
