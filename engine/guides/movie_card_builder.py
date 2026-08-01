@@ -20,14 +20,11 @@ def build_movie_card(
 
             platform_html = f"""
         <div class="showbiz-streaming-platform">
-
             <img
                 src="{platform_logo}"
                 alt="{platform}"
                 class="showbiz-streaming-platform-logo">
-
             <span>{platform}</span>
-
         </div>
 """
 
@@ -35,9 +32,7 @@ def build_movie_card(
 
             platform_html = f"""
         <div class="showbiz-streaming-platform">
-
             <strong>Streaming on:</strong> {platform}
-
         </div>
 """
 
@@ -81,9 +76,7 @@ def build_movie_card(
 <div class="showbiz-movie-card">
 
     <div class="showbiz-movie-poster">
-
         {poster}
-
     </div>
 
     <div class="showbiz-movie-info">
@@ -93,21 +86,14 @@ def build_movie_card(
 {platform_html}
 
         <div class="showbiz-movie-content">
-
             {content}
-
         </div>
 
         <div class="showbiz-movie-trailer">
-
             {trailer}
-
         </div>
 
 {links_html}
-
-        <br>
-        <br>
 
     </div>
 
