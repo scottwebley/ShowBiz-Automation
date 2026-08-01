@@ -4,12 +4,12 @@ ShowBiz Weekly Movies Guide
 Version 1.3 DEBUG v2
 ===========================================
 
-Generate and publish the
+Generate a local preview of the
 "What Movies To See Right Now" guide.
 
 Debug version:
     - Saves AI output before enrichment.
-    - Saves enriched output before publishing.
+    - Saves enriched output before preview.
 
 Author:
     ShowBiz Automation
@@ -25,10 +25,7 @@ from engine.guides.movie_data import (
     get_now_playing,
     get_upcoming_movies,
 )
-from engine.publisher import publish_html
-
-
-PAGE_ID = 23240
+from engine.guides.preview import Preview
 
 
 def get_movies():
@@ -126,46 +123,43 @@ def build_guide():
     return enriched_html
 
 
-def publish_guide():
+def preview_guide():
 
     html = build_guide()
 
-    return publish_html(
-        page_id=PAGE_ID,
-        html=html,
+    preview = Preview()
+
+    preview.preview(
+        title=TITLE,
+        body_html=html,
+        filename="test_movies.html",
     )
+
+    return True
 
 
 def main():
 
     print()
     print("========================================")
-    print("UPDATING MOVIES GUIDE (DEBUG v2)")
+    print("GENERATING MOVIES PREVIEW")
     print("========================================")
 
-    success = publish_guide()
+    success = preview_guide()
 
     print()
 
     if success:
 
-        print(
-            "✓ Movies Guide updated."
-        )
-
-        print(
-            "✓ Saved movie_ai_output.html"
-        )
-
-        print(
-            "✓ Saved movie_enriched_output.html"
-        )
+        print("✓ Preview created.")
+        print("✓ Saved movie_ai_output.html")
+        print("✓ Saved movie_enriched_output.html")
+        print("✓ Saved test_movies.html")
+        print("✓ Opened preview in Safari")
 
     else:
 
-        print(
-            "✗ Movies Guide failed."
-        )
+        print("✗ Preview failed.")
 
 
 if __name__ == "__main__":
