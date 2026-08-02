@@ -235,6 +235,20 @@ Editor's Pick
 
 
 /* ===========================================
+   Concert Guide Only
+=========================================== */
+
+.showbiz-concert-guide .showbiz-movie-poster{
+    flex:0 0 260px;
+}
+
+.showbiz-concert-guide .showbiz-movie-poster img{
+    width:260px;
+    max-width:260px;
+    height:auto;
+}
+
+/* ===========================================
    Mobile
 =========================================== */
 
@@ -254,12 +268,22 @@ Editor's Pick
         margin:0 0 30px 0;
     }
 
-    .showbiz-movie-poster img{
+    /* Concert Guide: full-width image */
+    .showbiz-concert-guide .showbiz-movie-poster img{
         display:block;
         width:100%;
         max-width:none;
         height:auto;
         border-radius:14px;
+    }
+
+    /* Other guides keep their existing poster size */
+    .showbiz-guide:not(.showbiz-concert-guide) .showbiz-movie-poster img{
+        display:block;
+        width:180px;
+        max-width:180px;
+        height:auto;
+        border-radius:12px;
     }
 
     .showbiz-movie-content{

@@ -381,11 +381,22 @@ def enrich_guide(
         concerts,
     )
 
-    return build_page(
+    page = build_page(
         title=title,
         body=html,
         updated=current_date(),
     )
+
+    # Concert Guide gets its own CSS class so we can
+    # customize image sizes without affecting Movies,
+    # TV or Streaming.
+    page = page.replace(
+        '<section class="showbiz-guide">',
+        '<section class="showbiz-guide showbiz-concert-guide">',
+        1,
+    )
+
+    return page
 
 
 if __name__ == "__main__":

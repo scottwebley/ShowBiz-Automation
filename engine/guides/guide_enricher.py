@@ -164,6 +164,11 @@ def extract_content(block: str) -> str:
         flags=re.IGNORECASE | re.DOTALL,
     )
 
+    block = block.replace(
+    "</div>",
+    "",
+    )
+     
     return block.strip()
 
 

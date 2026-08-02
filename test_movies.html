@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+<title>ShowBiz Movies Preview</title>
+
+<style>
+
+:root {
+    --background: #10061b;
+    --surface: #1b1328;
+    --surface-hover: #241735;
+
+    --primary: #ff2ea6;
+    --primary-hover: #ff4db6;
+
+    --text: #ffffff;
+    --muted: #b8b8c5;
+
+    --border: rgba(255,255,255,.08);
+
+    --shadow:
+        0 10px 30px rgba(0,0,0,.35);
+
+    --radius: 18px;
+
+    --content-width: 1280px;
+
+    --poster-width: 190px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 40px;
+    background: var(--background);
+    color: var(--text);
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Helvetica,
+        Arial,
+        sans-serif;
+}
+
+.showbiz-guide {
+    width: 100%;
+    max-width: var(--content-width);
+    margin: auto;
+}
+
+.showbiz-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.showbiz-header h1 {
+    margin: 0;
+    font-size: 42px;
+    font-weight: 700;
+}
+
+.updated {
+    color: var(--muted);
+    margin-top: 12px;
+}
+
+.movie-card {
+
+    display: flex;
+
+    gap: 30px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    overflow: hidden;
+
+    padding: 26px;
+
+    margin-bottom: 28px;
+
+    box-shadow: var(--shadow);
+
+    transition:
+        transform .2s,
+        background .2s;
+}
+
+.movie-card:hover {
+
+    background: var(--surface-hover);
+
+    transform: translateY(-3px);
+}
+
+.movie-poster {
+
+    flex: 0 0 var(--poster-width);
+}
+
+.movie-poster img {
+
+    width: 100%;
+
+    display: block;
+
+    border-radius: 12px;
+}
+
+.movie-info {
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+.movie-info h2 {
+
+    margin: 0 0 12px;
+
+    font-size: 34px;
+
+    line-height: 1.2;
+}
+
+.release-date {
+
+    color: var(--muted);
+
+    font-weight: 600;
+
+    margin-bottom: 20px;
+}
+
+.movie-description {
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    flex: 1;
+}
+
+.movie-buttons {
+
+    margin-top: 28px;
+}
+
+.button {
+
+    display: inline-block;
+
+    padding: 14px 28px;
+
+    border-radius: 999px;
+
+    background: var(--primary);
+
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    transition:
+        background .2s,
+        transform .2s;
+}
+
+.button:hover {
+
+    background: var(--primary-hover);
+
+    transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+
+    body {
+        padding: 20px;
+    }
+
+    .movie-card {
+
+        flex-direction: column;
+    }
+
+    .movie-poster {
+
+        width: 220px;
+
+        max-width: 100%;
+
+        margin: auto;
+    }
+
+    .movie-info h2 {
+
+        font-size: 28px;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="showbiz-header">
+
+    <h1>🎬 ShowBiz Movies</h1>
+
+    <p class="updated">
+
+        Preview Renderer
+
+    </p>
+
+</header>
+
+<main class="showbiz-guide">
+
+
+<style>
+
+.showbiz-guide{
+    max-width:1100px;
+    margin:0 auto;
+    padding:30px;
+    line-height:1.8;
+}
+
+
+.showbiz-updated{
+    color:#8d8d8d;
+    font-size:14px;
+    margin-bottom:40px;
+}
+
+
+/*
+===========================================
+Global Images
+===========================================
+*/
+
+.showbiz-guide img{
+    max-width:180px;
+    height:auto;
+}
+
+
+/*
+===========================================
+Headings
+===========================================
+*/
+
+.showbiz-guide h2{
+
+    color:#ff4fc4;
+
+    font-size:30px;
+
+    margin-top:55px;
+
+    margin-bottom:35px;
+
+    padding-bottom:12px;
+
+    border-bottom:2px solid rgba(255,79,196,.30);
+
+}
+
+
+.showbiz-guide h3{
+
+    font-size:26px;
+
+    margin:0 0 20px;
+
+}
+
+
+.showbiz-guide p{
+
+    margin-bottom:18px;
+
+}
+
+
+/*
+===========================================
+Movie Card Component
+===========================================
+*/
+
+.showbiz-movie-card{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:25px;
+
+    margin:35px 0;
+
+    padding:25px;
+
+    border-radius:18px;
+
+    border:1px solid rgba(255,255,255,.15);
+
+    background:rgba(255,255,255,.04);
+
+}
+
+
+.showbiz-movie-poster{
+
+    flex:0 0 180px;
+
+}
+
+
+.showbiz-movie-poster img{
+
+    display:block;
+
+    width:180px;
+
+    height:auto;
+
+    border-radius:12px;
+
+    box-shadow:0 10px 24px rgba(0,0,0,.30);
+
+}
+
+
+.showbiz-movie-info{
+
+    flex:1;
+
+    max-width:none;
+
+}
+
+
+.showbiz-movie-content p{
+
+    margin-bottom:18px;
+
+}
+
+
+.showbiz-movie-trailer{
+
+    margin-top:20px;
+
+}
+
+
+/*
+===========================================
+Movie Divider
+===========================================
+*/
+
+.showbiz-movie-divider{
+
+    height:1px;
+
+    margin:40px 0;
+
+    background:rgba(255,255,255,.10);
+
+}
+
+
+/*
+===========================================
+Buttons
+===========================================
+*/
+
+.showbiz-trailer-button,
+.showbiz-ticket-button{
+
+    display:inline-block;
+
+    margin-top:15px;
+
+    padding:12px 22px;
+
+    background:#ff4fc4;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    border-radius:8px;
+
+}
+
+.showbiz-trailer-button:hover,
+.showbiz-ticket-button:hover{
+
+    opacity:.90;
+
+}
+
+.showbiz-ticket-buttons{
+
+    margin-top:18px;
+
+}
+
+
+/*
+===========================================
+Editor's Pick
+===========================================
+*/
+
+.showbiz-editors-pick{
+
+    display:inline-block;
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
+    background:#ff4fc4;
+
+    color:#fff;
+
+    font-weight:700;
+
+    margin-bottom:30px;
+
+}
+
+
+/* ===========================================
+   Mobile
+=========================================== */
+
+@media (max-width:768px){
+
+    .showbiz-guide{
+        padding:20px;
+    }
+
+    .showbiz-movie-card{
+        display:block;
+        padding:20px;
+    }
+
+    .showbiz-movie-poster{
+        width:100%;
+        margin:0 0 30px 0;
+    }
+
+    .showbiz-movie-poster img{
+        display:block;
+        width:100%;
+        max-width:none;
+        height:auto;
+        border-radius:14px;
+    }
+
+    .showbiz-movie-content{
+        width:100%;
+    }
+
+    .showbiz-guide h2{
+        font-size:26px;
+    }
+
+    .showbiz-guide h3{
+        font-size:24px;
+    }
+
+    .showbiz-ticket-button,
+    .showbiz-trailer-button{
+        display:block;
+        width:100%;
+        text-align:center;
+        box-sizing:border-box;
+    }
+
+}
+
+</style>
+
+<section class="showbiz-guide">
+<p class="showbiz-updated"><strong>Updated:</strong> August 01, 2026</p>
+<p>
+From superhero spectacle to mythic adventure and high-concept horror, the current movie slate is built for big-screen viewing. Here are the standouts to prioritize now, plus the upcoming releases worth tracking.
+</p>
+
+<h2>🎬 Editor's Pick</h2>
+
+
+<div class="showbiz-movie-card">
+
+    <div class="showbiz-movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500/iPOn6DinuVyLY17YM9mKuPofV08.jpg" alt="Spider-Man: Brand New Day">
+    </div>
+
+    <div class="showbiz-movie-info">
+
+        <h3>Spider-Man: Brand New Day</h3>
+
+
+
+        <div class="showbiz-movie-content">
+            <p><strong>Genre:</strong> Superhero Action</p>
+
+<p>
+Peter Parker’s latest chapter brings emotional pressure, citywide stakes, and a mysterious threat that pushes Spider-Man into darker, more unpredictable territory. As a major theatrical release with serious momentum, it is the most essential big-screen choice right now.
+</p>
+
+</div>
+        </div>
+
+        <div class="showbiz-movie-trailer">
+            <p><a class="showbiz-trailer-button" href="https://www.youtube.com/watch?v=8TZMtslA3UY" target="_blank" rel="noopener noreferrer">▶ Watch Official Trailer</a></p>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<div class="showbiz-movie-divider"></div>
+
+
+<h2>🍿 Best Movies Right Now</h2>
+
+
+<div class="showbiz-movie-card">
+
+    <div class="showbiz-movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500/5rhTDKUhPYvpdQIijFIs5VoWsON.jpg" alt="The Odyssey">
+    </div>
+
+    <div class="showbiz-movie-info">
+
+        <h3>The Odyssey</h3>
+
+
+
+        <div class="showbiz-movie-content">
+            <p><strong>Genre:</strong> Mythological Adventure</p>
+
+<p>
+This sweeping journey follows Odysseus through gods, monsters, and impossible trials, making it ideal for viewers who want large-scale spectacle with a classical edge. Its mythic scope gives it the feel of a true theatrical event.
+</p>
+
+
+
+</div>
+        </div>
+
+        <div class="showbiz-movie-trailer">
+            <p><a class="showbiz-trailer-button" href="https://www.youtube.com/watch?v=Mzw2ttJD2qQ" target="_blank" rel="noopener noreferrer">▶ Watch Official Trailer</a></p>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<div class="showbiz-movie-divider"></div>
+
+
+
+<div class="showbiz-movie-card">
+
+    <div class="showbiz-movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500/3sgnSfNT27Bx5O5ukr7B26mhEQq.jpg" alt="Avatar Aang: The Last Airbender">
+    </div>
+
+    <div class="showbiz-movie-info">
+
+        <h3>Avatar Aang: The Last Airbender</h3>
+
+
+
+        <div class="showbiz-movie-content">
+            <p><strong>Genre:</strong> Fantasy Adventure</p>
+
+<p>
+Aang’s quest for an ancient power blends friendship, world-saving stakes, and elemental fantasy. Fans of expansive adventure stories should find plenty to love in its mix of heart, mythology, and action.
+</p>
+
+
+
+</div>
+        </div>
+
+        <div class="showbiz-movie-trailer">
+            <p><a class="showbiz-trailer-button" href="https://www.youtube.com/watch?v=7b20GRFZBFE" target="_blank" rel="noopener noreferrer">▶ Watch Official Trailer</a></p>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<div class="showbiz-movie-divider"></div>
+
+
+
+<div class="showbiz-movie-card">
+
+    <div class="showbiz-movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500/1QCWdqzTfh2x9UylVpspIU6QTuM.jpg" alt="Supergirl">
+    </div>
+
+    <div class="showbiz-movie-info">
+
+        <h3>Supergirl</h3>
+
+
+
+        <div class="showbiz-movie-content">
+            <p><strong>Genre:</strong> Superhero Sci-Fi</p>
+
+<p>
+Kara Zor-El’s interstellar mission gives this superhero entry a strong cosmic charge. It is a smart pick for audiences looking for vengeance, justice, and a heroine tested far beyond familiar ground.
+</p>
+
+
+
+</div>
+        </div>
+
+        <div class="showbiz-movie-trailer">
+            <p><a class="showbiz-trailer-button" href="https://www.youtube.com/watch?v=s1-pfiVMKAs" target="_blank" rel="noopener noreferrer">▶ Watch Official Trailer</a></p>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<div class="showbiz-movie-divider"></div>
+
+
+
+<div class="showbiz-movie-card">
+
+    <div class="showbiz-movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500/zKVgiv5qHCvCLT4A2ymJi5QeXDH.jpg" alt="Moana">
+    </div>
+
+    <div class="showbiz-movie-info">
+
+        <h3>Moana</h3>
+
+
+
+        <div class="showbiz-movie-content">
+            <p><strong>Genre:</strong> Family Adventure</p>
+
+<p>
+Moana’s voyage beyond the reef offers a bright, crowd-pleasing adventure built around courage, destiny, and the pull of the ocean. Families and animation fans should respond to its sense of wonder and island spirit.
+</p>
+
+
+
+</div>
+        </div>
+
+        <div class="showbiz-movie-trailer">
+            <p><a class="showbiz-trailer-button" href="https://www.youtube.com/watch?v=n7f6hlKsxxo" target="_blank" rel="noopener noreferrer">▶ Watch Official Trailer</a></p>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<div class="showbiz-movie-divider"></div>
+
+
+
+<div class="showbiz-movie-card">
+
+    <div class="showbiz-movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500/rhGx6E3qRNMgj3i5su2oukNHwIQ.jpg" alt="Backrooms">
+    </div>
+
+    <div class="showbiz-movie-info">
+
+        <h3>Backrooms</h3>
+
+
+
+        <div class="showbiz-movie-content">
+            <p><strong>Genre:</strong> Horror Mystery</p>
+
+<p>
+With a strange doorway in a furniture showroom basement, this horror setup turns the ordinary into something deeply unsettling. Viewers who like minimalist, uncanny premises should keep this one high on the list.
+</p>
+
+
+
+</div>
+        </div>
+
+        <div class="showbiz-movie-trailer">
+            <p><a class="showbiz-trailer-button" href="https://www.youtube.com/watch?v=0HjdiohVOik" target="_blank" rel="noopener noreferrer">▶ Watch Official Trailer</a></p>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<div class="showbiz-movie-divider"></div>
+
+
+
+<div class="showbiz-movie-card">
+
+    <div class="showbiz-movie-poster">
+        
+    </div>
+
+    <div class="showbiz-movie-info">
+
+        <h3>Minions &amp; Monsters</h3>
+
+
+
+        <div class="showbiz-movie-content">
+            <p><strong>Genre:</strong> Animated Comedy</p>
+
+<p>
+This chaotic Minions tale leans into absurdity, monster mayhem, and Hollywood-sized trouble. It is best suited for audiences who want fast, goofy, brightly animated escapism with a disaster-comedy twist.
+</p>
+
+
+
+</div>
+        </div>
+
+        <div class="showbiz-movie-trailer">
+            
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<div class="showbiz-movie-divider"></div>
+
+
+
+<div class="showbiz-movie-card">
+
+    <div class="showbiz-movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500/sAA2mjpYJFAKydtzG4P4aHC4mZk.jpg" alt="Borderline">
+    </div>
+
+    <div class="showbiz-movie-info">
+
+        <h3>Borderline</h3>
+
+
+
+        <div class="showbiz-movie-content">
+            <p><strong>Genre:</strong> Political Thriller</p>
+
+<p>
+A conspiracy involving rogue operatives, criminal chaos, and democratic instability gives this thriller sharp urgency. It is a strong choice for viewers who prefer tense, topical stories with escalating stakes.
+</p>
+
+
+
+</div>
+        </div>
+
+        <div class="showbiz-movie-trailer">
+            <p><a class="showbiz-trailer-button" href="https://www.youtube.com/watch?v=ORHBgSvX_24" target="_blank" rel="noopener noreferrer">▶ Watch Official Trailer</a></p>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<div class="showbiz-movie-divider"></div>
+
+
+
+<div class="showbiz-movie-card">
+
+    <div class="showbiz-movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500/8wnVNRLVZo9T258sb9KYMwizTCE.jpg" alt="Her Private Hell">
+    </div>
+
+    <div class="showbiz-movie-info">
+
+        <h3>Her Private Hell</h3>
+
+
+
+        <div class="showbiz-movie-content">
+            <p><strong>Genre:</strong> Sci-Fi Horror</p>
+
+<p>
+A deadly mist, a futuristic metropolis, and a desperate search for family give this film a grim survival pulse. Horror fans drawn to strange worlds and personal stakes should find its apocalyptic atmosphere compelling.
+</p>
+
+
+
+</div>
+        </div>
+
+        <div class="showbiz-movie-trailer">
+            <p><a class="showbiz-trailer-button" href="https://www.youtube.com/watch?v=C7E-0t1TfzM" target="_blank" rel="noopener noreferrer">▶ Watch Official Trailer</a></p>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<div class="showbiz-movie-divider"></div>
+
+
+
+<div class="showbiz-movie-card">
+
+    <div class="showbiz-movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500/jt8pfSIdi47YpFMMWVRr8w5u2S0.jpg" alt="Jana Nayagan">
+    </div>
+
+    <div class="showbiz-movie-info">
+
+        <h3>Jana Nayagan</h3>
+
+
+
+        <div class="showbiz-movie-content">
+            <p><strong>Genre:</strong> Action Drama</p>
+
+<p>
+Built around ideology, control, and a former police officer pulled back into conflict, this film promises a dramatic collision of personal revenge and larger social stakes. It is for viewers who like action with a moral charge.
+</p>
+
+
+
+</div>
+        </div>
+
+        <div class="showbiz-movie-trailer">
+            
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<div class="showbiz-movie-divider"></div>
+
+
+
+<div class="showbiz-movie-card">
+
+    <div class="showbiz-movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500/vNVFt6dtcqnI7hqa6LFBUibuFiw.jpg" alt="Train to Busan">
+    </div>
+
+    <div class="showbiz-movie-info">
+
+        <h3>Train to Busan</h3>
+
+
+
+        <div class="showbiz-movie-content">
+            <p><strong>Genre:</strong> Zombie Thriller</p>
+
+<p>
+This high-pressure survival story traps passengers on an express train during a zombie outbreak, delivering relentless momentum and emotional tension. It remains a gripping choice for horror fans who want action, dread, and human stakes in one ride.
+</p>
+
+
+
+</div>
+        </div>
+
+        <div class="showbiz-movie-trailer">
+            <p><a class="showbiz-trailer-button" href="https://www.youtube.com/watch?v=2sAe-x2XBH0" target="_blank" rel="noopener noreferrer">▶ Watch Official Trailer</a></p>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<div class="showbiz-movie-divider"></div>
+
+
+<h2>🎥 Coming Soon</h2>
+
+
+<div class="showbiz-movie-card">
+
+    <div class="showbiz-movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500/7IqDtlkUNDnnR3wsXScEGSDV4RM.jpg" alt="DC">
+    </div>
+
+    <div class="showbiz-movie-info">
+
+        <h3>DC</h3>
+
+
+
+        <div class="showbiz-movie-content">
+            <p>
+<strong>In theaters:</strong> August 07, 2026
+</p>
+
+<p>
+A dangerous alliance between Rebel Devadas and Chandra sets up a volatile mix of passion, peril, and shifting loyalties. Watch for a survival-driven story where every choice carries a cost.
+</p>
+
+</div>
+        </div>
+
+        <div class="showbiz-movie-trailer">
+            
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<div class="showbiz-movie-divider"></div>
+
+
+
+<div class="showbiz-movie-card">
+
+    <div class="showbiz-movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500/c987gxFjXqYOxZEZKcTkS1ONTWH.jpg" alt="Ice Cream Man">
+    </div>
+
+    <div class="showbiz-movie-info">
+
+        <h3>Ice Cream Man</h3>
+
+
+
+        <div class="showbiz-movie-content">
+            <p>
+<strong>In theaters:</strong> August 07, 2026
+</p>
+
+<p>
+An idyllic summer town curdles into horror when sweet treats bring terrifying consequences. The premise alone makes this one to watch for fans of dark, small-town nightmares.
+</p>
+
+</div>
+        </div>
+
+        <div class="showbiz-movie-trailer">
+            <p><a class="showbiz-trailer-button" href="https://www.youtube.com/watch?v=BjtVXWa3tWI" target="_blank" rel="noopener noreferrer">▶ Watch Official Trailer</a></p>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<div class="showbiz-movie-divider"></div>
+
+
+
+<div class="showbiz-movie-card">
+
+    <div class="showbiz-movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500/9LGEqZvzI7Tsosf8srwEY48rZsD.jpg" alt="One Night Only">
+    </div>
+
+    <div class="showbiz-movie-info">
+
+        <h3>One Night Only</h3>
+
+
+
+        <div class="showbiz-movie-content">
+            <p>
+<strong>In theaters:</strong> August 07, 2026
+</p>
+
+<p>
+Two strangers collide on the one night when desire is suddenly allowed to break all the rules. Expect a provocative romantic setup built around loneliness, impulse, and connection.
+</p>
+
+</div>
+        </div>
+
+        <div class="showbiz-movie-trailer">
+            <p><a class="showbiz-trailer-button" href="https://www.youtube.com/watch?v=AvKoSR3O4NQ" target="_blank" rel="noopener noreferrer">▶ Watch Official Trailer</a></p>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<div class="showbiz-movie-divider"></div>
+
+
+
+<div class="showbiz-movie-card">
+
+    <div class="showbiz-movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500/3SifFCwwFzXdU1Ew0nA4Z92Bs15.jpg" alt="The End of Oak Street">
+    </div>
+
+    <div class="showbiz-movie-info">
+
+        <h3>The End of Oak Street</h3>
+
+
+
+        <div class="showbiz-movie-content">
+            <p>
+<strong>In theaters:</strong> August 14, 2026
+</p>
+
+<p>
+A suburban street torn from reality by a cosmic event gives this survival story an eerie hook. Its family-centered premise could make the strange surroundings feel even more urgent.
+</p>
+
+</div>
+        </div>
+
+        <div class="showbiz-movie-trailer">
+            <p><a class="showbiz-trailer-button" href="https://www.youtube.com/watch?v=3oB9AxspVow" target="_blank" rel="noopener noreferrer">▶ Watch Official Trailer</a></p>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<div class="showbiz-movie-divider"></div>
+
+
+
+<div class="showbiz-movie-card">
+
+    <div class="showbiz-movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500/4tTrW9dXCByS5wt2pXVWb58zNjz.jpg" alt="Insidious: Out of the Further">
+    </div>
+
+    <div class="showbiz-movie-info">
+
+        <h3>Insidious: Out of the Further</h3>
+
+
+
+        <div class="showbiz-movie-content">
+            <p>
+<strong>In theaters:</strong> August 21, 2026
+</p>
+
+<p>
+The next trip into The Further centers on a young mother who discovers she can bring its horrors into the real world. Franchise fans should expect a fresh supernatural threat with personal consequences.
+</p>
+
+</div>
+        </div>
+
+        <div class="showbiz-movie-trailer">
+            <p><a class="showbiz-trailer-button" href="https://www.youtube.com/watch?v=jxU8FU3o75A" target="_blank" rel="noopener noreferrer">▶ Watch Official Trailer</a></p>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<div class="showbiz-movie-divider"></div>
+
+
+<p>
+Whether you want spectacle, suspense, family adventure, or horror, the strongest picks right now reward the theatrical experience—and the next wave is already close behind.
+</p>
+</section>
+
+</main>
+
+</body>
+
+</html>
